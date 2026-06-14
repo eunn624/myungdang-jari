@@ -1,5 +1,6 @@
 import type { ParsedUrlQuery } from 'querystring';
-import { analyzeSaju, type BirthInfo, type Ohang, type SajuResult } from './saju';
+import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
+import type { Ohang } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
 
 type Gender = '여성' | '남성';
@@ -177,6 +178,8 @@ function getTodayMission(deficit: Ohang): string {
       return '침실 주변을 비우고 베이지 톤 패브릭 정리하기';
     case '金':
       return '금속 프레임이나 화이트 정리 수납 추가하기';
+    default:
+      return '자주 머무는 공간을 차분하게 정리하기';
   }
 }
 
@@ -222,6 +225,8 @@ function getTendencyLabel(ohang: Ohang): string {
       return '판단력과 정리력';
     case '水':
       return '관찰력과 순환 감각';
+    default:
+      return '또렷한 중심감';
   }
 }
 
@@ -237,6 +242,8 @@ function getRoomTip(deficit: Ohang): string {
       return '화이트, 메탈 프레임, 직선적인 정리';
     case '水':
       return '물성 있는 블루톤, 유리, 차분한 수변 감각';
+    default:
+      return '정리된 동선과 편안한 휴식 공간';
   }
 }
 
