@@ -4,6 +4,7 @@ import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { getReportFromQuery } from '../lib/app-report';
 import type { Ohang } from '../lib/saju/types';
+import { getItemsByOhang } from '../data/store-items';
 
 const OHANG_COLOR: Record<Ohang, string> = {
   木: '#5cb85c', 火: '#e85d3f', 土: '#d4a574', 金: '#b8a88a', 水: '#4a90e2',
@@ -78,6 +79,8 @@ export default function PlacePage() {
   const seWoon = report.saju.seWoon;
   const currentDaeWoon = report.saju.currentDaeWoon;
   const sinsal = report.saju.sinsal;
+
+  const biboItems = getItemsByOhang(deficit as Ohang).slice(0, 2);
 
   const hasDohwa = sinsal.some((s) => s.name === '도화살');
   const hasYeokma = sinsal.some((s) => s.name === '역마살');
@@ -339,9 +342,26 @@ export default function PlacePage() {
             <p className={styles.sectionSubtitle}>{deficit} 기운을 생활 안에서 보완할 색상, 소재, 식물 중심 가이드예요.</p>
           </div>
           <div className={styles.column} style={{ gap: 10 }}>
-            <div className={styles.softCard}>
-              <p className={styles.caption}>{deficit} 기운을 보완하는 소품 큐레이션</p>
-            </div>
+            {biboItems.map((item) => (
+              <div key={item.id} className={styles.softCard}>
+                <div className={styles.row} style={{ justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
+                  <div>
+                    <p className={styles.label}>{item.name}</p>
+                    <p className={styles.caption} style={{ marginTop: 2, color: '#8c7a6e' }}>{item.subtitle} · {item.priceRange}</p>
+                  </div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.secondaryButton}
+                    style={{ fontSize: 12, padding: '6px 12px', whiteSpace: 'nowrap', textDecoration: 'none' }}
+                  >
+                    {item.source} 보기
+                  </a>
+                </div>
+                <p className={styles.caption} style={{ color: '#c0b4ac', fontSize: 11, marginTop: 6 }}>*광고·제휴 링크</p>
+              </div>
+            ))}
 
             <div className={styles.card}>
               <span className={styles.label}>🎨 색상</span>

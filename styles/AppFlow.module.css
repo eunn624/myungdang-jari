@@ -1419,7 +1419,8 @@
   z-index: 8;
   margin: -2px 0 2px;
   padding: 8px 0 10px;
-  background: linear-gradient(180deg, rgba(242,246,255,0.98), rgba(242,246,255,0.88));
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid #f0f0f0;
   backdrop-filter: blur(10px);
 }
 
@@ -1432,6 +1433,422 @@
 
 .slideEnter {
   animation: slideUp 0.55s cubic-bezier(.22, 1, .36, 1);
+}
+
+.cleanPage {
+  min-height: 100%;
+  padding: 16px 18px 28px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cleanProfileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.cleanProfileHeader h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #141414;
+}
+
+.cleanProfileHeader p {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.cleanAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #f0f0f0;
+  border: 1px solid #e7e7e7;
+}
+
+.cleanInfoPanel {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f8f8f8;
+  display: grid;
+  gap: 8px;
+}
+
+.cleanInfoPanel div {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.cleanInfoPanel span {
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+.cleanInfoPanel strong {
+  font-size: 14px;
+  color: #222;
+  font-weight: 600;
+}
+
+.cleanTab,
+.cleanTabActive {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 10px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #a2a2a2;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: max-content;
+}
+
+.cleanTabActive {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+
+.cleanSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #efefef;
+}
+
+.cleanSectionTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cleanSectionTitleRow h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+.cleanSectionTitleRow span {
+  color: #8d8d8d;
+  font-size: 14px;
+}
+
+.cleanOriginGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cleanOriginHeader,
+.cleanOriginRow,
+.cleanPillarRow,
+.cleanRelationHeadRow,
+.cleanRelationTiles,
+.cleanFortuneGrid,
+.cleanFortuneGridSingle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.cleanOriginHeader span,
+.cleanRelationHeadRow span {
+  font-size: 12px;
+  color: #b2b2b2;
+  text-align: center;
+}
+
+.cleanOriginSide {
+  text-align: left;
+  color: #b2b2b2;
+}
+
+.cleanOriginRow {
+  grid-template-columns: 46px repeat(4, 1fr);
+  align-items: center;
+}
+
+.cleanOriginRow span {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.cleanPillarColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cleanPillarTop {
+  font-size: 11px;
+  color: #b0b0b0;
+  min-height: 16px;
+}
+
+.cleanPillarTile,
+.cleanMiniTile,
+.cleanMiniTileWide {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cleanMiniTile,
+.cleanMiniTileWide {
+  min-height: 40px;
+  font-size: 24px;
+}
+
+.cleanMiniTileWide {
+  min-width: 0;
+}
+
+.cleanPillarSub {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.cleanBlue {
+  background: #4f8ff7;
+}
+
+.cleanRed {
+  background: #f25f5c;
+}
+
+.cleanYellow {
+  background: #f2c94c;
+  color: #202020;
+}
+
+.cleanBlack {
+  background: #2e3138;
+}
+
+.cleanInlineTabs {
+  display: flex;
+  gap: 18px;
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 8px;
+}
+
+.cleanInlineTab,
+.cleanInlineTabActive {
+  font-size: 13px;
+  color: #b0b0b0;
+}
+
+.cleanInlineTabActive {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.cleanRelationBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cleanRelationGuide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cleanRelationGuide p,
+.cleanMutedParagraph {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #666;
+}
+
+.cleanRelationLine {
+  height: 24px;
+  width: 1px;
+  background: #d8d8d8;
+  margin-left: 12px;
+}
+
+.cleanOhangArea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cleanRadarWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.cleanRadarSvg {
+  overflow: visible;
+}
+
+.cleanRadarLabel {
+  fill: #555;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cleanRadarCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cleanRadarCenter strong {
+  font-size: 22px;
+  color: #f25f5c;
+  font-weight: 700;
+}
+
+.cleanLegendList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cleanLegendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.cleanLegendItem strong {
+  font-size: 14px;
+  color: #333;
+}
+
+.cleanLegendLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #444;
+}
+
+.cleanLegendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.cleanGaugeWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 130px;
+}
+
+.cleanGaugeCenter {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cleanGaugeCenter strong {
+  font-size: 34px;
+  line-height: 1;
+  color: #222;
+}
+
+.cleanGaugeCenter span {
+  font-size: 12px;
+  color: #8b8b8b;
+}
+
+.cleanGaugeLegend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cleanGaugeLegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #8b8b8b;
+}
+
+.cleanGaugeLegend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.cleanFortuneBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cleanFortuneBlock h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #222;
+}
+
+.cleanFortuneColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cleanFortuneColumn span {
+  font-size: 11px;
+  color: #999;
+}
+
+.cleanFortuneCurrent {
+  outline: 1px dashed #cfcfcf;
+  outline-offset: 6px;
+  border-radius: 10px;
 }
 
 @keyframes popUp {

@@ -5,32 +5,169 @@ import styles from '../styles/AppFlow.module.css';
 import { getReportFromQuery } from '../lib/app-report';
 import { STEM_PROFILES, BRANCH_PROFILES } from '../data/ilju-content';
 
-const OHANG_COLOR: Record<string, string> = {
-  木: '#5cb85c', 火: '#e85d3f', 土: '#d4a574', 金: '#b8a88a', 水: '#4a90e2',
+const OHANG_COLORS = {
+  木: '#4a90e2',
+  火: '#f25f5c',
+  土: '#f4c84b',
+  金: '#2f3137',
+  水: '#4f7cff',
+} as const;
+
+// ─── 십성 계산 (일간 기준 동적 계산) ───────────────────────────────
+const STEM_OHANG_MAP: Record<string, { ohang: string; yin: boolean }> = {
+  甲: { ohang: '木', yin: false }, 乙: { ohang: '木', yin: true },
+  丙: { ohang: '火', yin: false }, 丁: { ohang: '火', yin: true },
+  戊: { ohang: '土', yin: false }, 己: { ohang: '土', yin: true },
+  庚: { ohang: '金', yin: false }, 辛: { ohang: '金', yin: true },
+  壬: { ohang: '水', yin: false }, 癸: { ohang: '水', yin: true },
+};
+const SS = [['木','火'],['火','土'],['土','金'],['金','水'],['水','木']];
+const SG = [['木','土'],['土','水'],['水','火'],['火','金'],['金','木']];
+
+function getSipsong(ilgan: string, target: string): string {
+  if (!ilgan || !target) return '';
+  if (ilgan === target) return '일원';
+  const il = STEM_OHANG_MAP[ilgan];
+  const tg = STEM_OHANG_MAP[target];
+  if (!il || !tg) return '';
+  const sy = il.yin === tg.yin;
+  if (il.ohang === tg.ohang) return sy ? '비견' : '겁재';
+  if (SS.some(([a, b]) => a === il.ohang && b === tg.ohang)) return sy ? '식신' : '상관';
+  if (SG.some(([a, b]) => a === il.ohang && b === tg.ohang)) return sy ? '편재' : '정재';
+  if (SS.some(([a, b]) => a === tg.ohang && b === il.ohang)) return sy ? '편인' : '정인';
+  if (SG.some(([a, b]) => a === tg.ohang && b === il.ohang)) return sy ? '편관' : '정관';
+  return '';
+}
+
+// 지지 → 장간 주기(主氣)
+const BRANCH_MAIN_STEM: Record<string, string> = {
+  子: '癸', 丑: '己', 寅: '甲', 卯: '乙', 辰: '戊',
+  巳: '丙', 午: '丁', 未: '己', 申: '庚', 酉: '辛', 戌: '戊', 亥: '壬',
 };
 
-const DAEWOON_COLOR: Record<string, string> = {
-  木: '#5cb85c', 火: '#e85d3f', 土: '#d4a574', 金: '#b8a88a', 水: '#4a90e2',
-};
-
-const SAJU_TABS = ['원국', '일주', '오행', '신살', '대운'] as const;
+const SAJU_TABS = ['사주원국', '사주관계', '오행과 십성', '신강신약', '대운/세운'] as const;
 type SajuTab = typeof SAJU_TABS[number];
 
-function SajuCell({
-  label, hanja, ko, tone,
+function getToneClass(symbol?: string) {
+  if (!symbol) return '';
+  if (['甲', '乙', '寅', '卯'].includes(symbol)) return styles.cleanBlue;
+  if (['丙', '丁', '巳', '午'].includes(symbol)) return styles.cleanRed;
+  if (['戊', '己', '丑', '辰', '未', '戌'].includes(symbol)) return styles.cleanYellow;
+  if (['庚', '辛', '申', '酉'].includes(symbol)) return styles.cleanBlack;
+  return styles.cleanBlue;
+}
+
+function PillarTile({
+  symbol,
+  label,
+  sublabel,
 }: {
-  label?: string; hanja?: string; ko?: string; tone?: string;
+  symbol: string;
+  label: string;
+  sublabel: string;
 }) {
   return (
-    <div className={`${styles.sajuCell} ${label ? styles.sajuLabelCell : ''} ${tone ? styles[tone] : ''}`}>
-      {label ? (
-        <span>{label}</span>
-      ) : (
-        <>
-          <span className={styles.hanja}>{hanja}</span>
-          <span className={styles.ko}>{ko}</span>
-        </>
-      )}
+    <div className={styles.cleanPillarColumn}>
+      <div className={styles.cleanPillarTop}>{label}</div>
+      <div className={`${styles.cleanPillarTile} ${getToneClass(symbol)}`}>{symbol}</div>
+      <div className={styles.cleanPillarSub}>{sublabel}</div>
+    </div>
+  );
+}
+
+function RadarChart({ values }: { values: { label: string; value: number; color: string }[] }) {
+  const size = 190;
+  const center = size / 2;
+  const radius = 62;
+  const angleStep = (Math.PI * 2) / values.length;
+
+  const ring = (scale: number) =>
+    values.map((_, index) => {
+      const angle = -Math.PI / 2 + angleStep * index;
+      const x = center + Math.cos(angle) * radius * scale;
+      const y = center + Math.sin(angle) * radius * scale;
+      return `${x},${y}`;
+    }).join(' ');
+
+  const polygon = values.map((item, index) => {
+    const angle = -Math.PI / 2 + angleStep * index;
+    const x = center + Math.cos(angle) * radius * (item.value / 100);
+    const y = center + Math.sin(angle) * radius * (item.value / 100);
+    return `${x},${y}`;
+  }).join(' ');
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={styles.cleanRadarSvg}>
+      {[0.25, 0.5, 0.75, 1].map((scale) => (
+        <polygon
+          key={scale}
+          points={ring(scale)}
+          fill="none"
+          stroke="#e8ebf2"
+          strokeWidth="1"
+        />
+      ))}
+      {values.map((item, index) => {
+        const angle = -Math.PI / 2 + angleStep * index;
+        const x = center + Math.cos(angle) * radius;
+        const y = center + Math.sin(angle) * radius;
+        return (
+          <line
+            key={item.label}
+            x1={center}
+            y1={center}
+            x2={x}
+            y2={y}
+            stroke="#eceff5"
+            strokeWidth="1"
+          />
+        );
+      })}
+      <polygon
+        points={polygon}
+        fill="rgba(242,95,92,0.14)"
+        stroke="#f25f5c"
+        strokeWidth="2"
+      />
+      {values.map((item, index) => {
+        const angle = -Math.PI / 2 + angleStep * index;
+        const valueX = center + Math.cos(angle) * radius * (item.value / 100);
+        const valueY = center + Math.sin(angle) * radius * (item.value / 100);
+        const labelX = center + Math.cos(angle) * (radius + 26);
+        const labelY = center + Math.sin(angle) * (radius + 26);
+        return (
+          <g key={`${item.label}-point`}>
+            <circle cx={valueX} cy={valueY} r="4" fill={item.color} />
+            <text x={labelX} y={labelY} textAnchor="middle" className={styles.cleanRadarLabel}>
+              {item.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function StrengthGauge({ score, label }: { score: number; label: string }) {
+  const progress = (score / 100) * 220;
+
+  return (
+    <div className={styles.cleanGaugeWrap}>
+      <svg width="180" height="110" viewBox="0 0 180 110">
+        <path d="M20 90 A70 70 0 0 1 160 90" fill="none" stroke="#eef1f5" strokeWidth="10" strokeLinecap="round" />
+        <path d="M20 90 A70 70 0 0 1 160 90" fill="none" stroke="url(#gauge)" strokeWidth="10" strokeLinecap="round" strokeDasharray={`${progress} 220`} />
+        <defs>
+          <linearGradient id="gauge" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#f3c74c" />
+            <stop offset="60%" stopColor="#f08b3d" />
+            <stop offset="100%" stopColor="#5a7cff" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div className={styles.cleanGaugeCenter}>
+        <strong>{score}</strong>
+        <span>{label}예요</span>
+      </div>
     </div>
   );
 }
@@ -38,20 +175,21 @@ function SajuCell({
 export default function SajuPage() {
   const router = useRouter();
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
-  const [activeTab, setActiveTab] = useState<SajuTab>('원국');
+  const [activeTab, setActiveTab] = useState<SajuTab>('사주원국');
+  const [relationTab, setRelationTab] = useState<'천간과 지지' | '신살과 길성'>('천간과 지지');
 
   const originalRef = useRef<HTMLDivElement | null>(null);
-  const iljuRef = useRef<HTMLDivElement | null>(null);
+  const relationRef = useRef<HTMLDivElement | null>(null);
   const ohangRef = useRef<HTMLDivElement | null>(null);
-  const sinsalRef = useRef<HTMLDivElement | null>(null);
-  const daewoonRef = useRef<HTMLDivElement | null>(null);
+  const strengthRef = useRef<HTMLDivElement | null>(null);
+  const fortuneRef = useRef<HTMLDivElement | null>(null);
 
   const sectionRefs: Record<SajuTab, RefObject<HTMLDivElement>> = {
-    원국: originalRef,
-    일주: iljuRef,
-    오행: ohangRef,
-    신살: sinsalRef,
-    대운: daewoonRef,
+    사주원국: originalRef,
+    사주관계: relationRef,
+    '오행과 십성': ohangRef,
+    신강신약: strengthRef,
+    '대운/세운': fortuneRef,
   };
 
   const { year, month, day, hour } = report.saju.pillars;
@@ -60,35 +198,24 @@ export default function SajuPage() {
   const dayBranch = day.branch;
   const stemProfile = STEM_PROFILES[dayStem];
   const branchProfile = BRANCH_PROFILES[dayBranch];
+  const currentDaeWoon = report.saju.currentDaeWoon;
 
-  const bars = [
-    { label: '木', value: report.saju.ohang.wood, color: '#5cb85c' },
-    { label: '火', value: report.saju.ohang.fire, color: '#e85d3f' },
-    { label: '土', value: report.saju.ohang.earth, color: '#d4a574' },
-    { label: '金', value: report.saju.ohang.metal, color: '#e8d4a8' },
-    { label: '水', value: report.saju.ohang.water, color: '#4a90e2' },
+  const radarValues = [
+    { label: '화', value: report.saju.ohang.fire, color: OHANG_COLORS.火 },
+    { label: '토', value: report.saju.ohang.earth, color: OHANG_COLORS.土 },
+    { label: '금', value: report.saju.ohang.metal, color: OHANG_COLORS.金 },
+    { label: '수', value: report.saju.ohang.water, color: OHANG_COLORS.水 },
+    { label: '목', value: report.saju.ohang.wood, color: OHANG_COLORS.木 },
   ];
 
-  const rows = [
-    {
-      label: '천간',
-      cells: [
-        hour ? { hanja: hour.stem, ko: hour.stemKor, tone: 'wood' } : { hanja: '—', ko: '시 모름', tone: '' },
-        { hanja: day.stem, ko: `${day.stemKor} · 일간`, tone: 'fire' },
-        { hanja: month.stem, ko: month.stemKor, tone: 'fire' },
-        { hanja: year.stem, ko: year.stemKor, tone: 'fire' },
-      ],
-    },
-    {
-      label: '지지',
-      cells: [
-        hour ? { hanja: hour.branch, ko: hour.branchKor, tone: 'fire' } : { hanja: '—', ko: '시 모름', tone: '' },
-        { hanja: day.branch, ko: day.branchKor, tone: 'metal' },
-        { hanja: month.branch, ko: month.branchKor, tone: 'fire' },
-        { hanja: year.branch, ko: year.branchKor, tone: 'earth' },
-      ],
-    },
-  ];
+  const strengthScore = Math.max(
+    38,
+    Math.min(
+      82,
+      Math.round(52 + (Math.max(...radarValues.map((item) => item.value)) - Math.min(...radarValues.map((item) => item.value))) / 1.8),
+    ),
+  );
+  const strengthLabel = strengthScore >= 62 ? '신강 사주' : strengthScore <= 48 ? '신약 사주' : '중화 사주';
 
   useEffect(() => {
     const scrollRoot = document.getElementById('app-main-scroll');
@@ -99,12 +226,10 @@ export default function SajuPage() {
       .filter((item): item is { key: SajuTab; node: HTMLDivElement } => Boolean(item.node));
 
     const onScroll = () => {
-      let current: SajuTab = '원국';
+      let current: SajuTab = '사주원국';
       for (const section of sections) {
         const top = section.node.offsetTop - scrollRoot.scrollTop;
-        if (top <= 180) {
-          current = section.key;
-        }
+        if (top <= 180) current = section.key;
       }
       setActiveTab(current);
     };
@@ -117,41 +242,24 @@ export default function SajuPage() {
   const scrollToSection = (tab: SajuTab) => {
     setActiveTab(tab);
     const node = sectionRefs[tab].current;
-    if (!node) return;
-
     const scrollRoot = document.getElementById('app-main-scroll');
-    if (!scrollRoot) return;
-
-    const headerOffset = 116;
-    const top = node.offsetTop - headerOffset;
-    scrollRoot.scrollTo({ top, behavior: 'smooth' });
+    if (!node || !scrollRoot) return;
+    scrollRoot.scrollTo({ top: node.offsetTop - 116, behavior: 'smooth' });
   };
 
   return (
-    <Layout showTabBar activeTab="saju" headerTitle="사주원국" showBackButton>
-      <div className={styles.screen}>
-        <div className={styles.pageIntroCard}>
-          <div className={styles.sectionHeader}>
-            <span className={styles.badge}>만세력</span>
-            <h2 className={styles.sectionTitle}>{report.profile.name}</h2>
-            <p className={styles.sectionSubtitle}>
-              {report.formattedBirth} · {report.profile.gender} · 일간 {dayStem} · 일주 {dayStem}{dayBranch}
-            </p>
-          </div>
-          <div className={styles.statsGrid} style={{ marginTop: 14 }}>
-            <div className={styles.statCard}>
-              <strong className={styles.statValue}>{report.saju.pillars.day.stem}{report.saju.pillars.day.branch}</strong>
-              <span className={styles.statLabel}>일주</span>
-            </div>
-            <div className={styles.statCard}>
-              <strong className={styles.statValue}>{report.saju.yongsin}</strong>
-              <span className={styles.statLabel}>용신</span>
-            </div>
-            <div className={styles.statCard}>
-              <strong className={styles.statValue}>{report.saju.gilbang}</strong>
-              <span className={styles.statLabel}>길방</span>
-            </div>
-          </div>
+    <Layout showTabBar activeTab="saju" headerTitle="만세력" showBackButton>
+      <div className={styles.cleanPage}>
+        <div className={styles.cleanProfileHeader}>
+          <div className={styles.cleanAvatar}></div>
+          <h2>{report.profile.name}</h2>
+          <p>{report.saju.pillars.day.stem}{report.saju.pillars.day.branch} · {report.profile.gender}</p>
+        </div>
+
+        <div className={styles.cleanInfoPanel}>
+          <div><span>양력</span><strong>{report.formattedBirth}</strong></div>
+          <div><span>용신</span><strong>{report.saju.yongsin}</strong></div>
+          <div><span>길방</span><strong>{report.saju.gilbang}</strong></div>
         </div>
 
         <div className={styles.stickySectionTabs}>
@@ -163,293 +271,218 @@ export default function SajuPage() {
                 onClick={() => scrollToSection(tab)}
                 style={{ cursor: 'pointer', border: 'none', padding: 0, font: 'inherit', background: 'none' }}
               >
-                <span className={activeTab === tab ? styles.badgeFill : styles.badge}>{tab}</span>
+                <span className={activeTab === tab ? styles.cleanTabActive : styles.cleanTab}>{tab}</span>
               </button>
             ))}
           </div>
         </div>
 
-        <div ref={originalRef} className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>사주원국</h3>
-            <p className={styles.sectionSubtitle}>사주팔자 네 기둥을 한 화면에서 바로 읽을 수 있게 정리했어요.</p>
+        <section ref={originalRef} className={styles.cleanSection}>
+          <div className={styles.cleanSectionTitleRow}>
+            <h3>사주원국</h3>
+            <span>?</span>
           </div>
 
-          <div className={styles.sajuTable}>
-            <div className={styles.sajuRow}>
-              <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}></div>
-              <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>시주</div>
-              <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>일주</div>
-              <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>월주</div>
-              <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>년주</div>
+          <div className={styles.cleanOriginGrid}>
+            <div className={styles.cleanOriginHeader}>
+              <span>시주</span>
+              <span>일주</span>
+              <span>월주</span>
+              <span>년주</span>
             </div>
-            {rows.map((row) => (
-              <div className={styles.sajuRow} key={row.label}>
-                <SajuCell label={row.label} />
-                {row.cells.map((cell, index) => (
-                  <SajuCell key={`${row.label}-${index}`} hanja={cell.hanja} ko={cell.ko} tone={cell.tone} />
-                ))}
-              </div>
-            ))}
+
+            <div className={styles.cleanOriginRow}>
+              <span className={styles.cleanOriginSide}>십성</span>
+              <span>{hour ? getSipsong(dayStem, hour.stem) : '시 모름'}</span>
+              <span>{getSipsong(dayStem, day.stem)}</span>
+              <span>{getSipsong(dayStem, month.stem)}</span>
+              <span>{getSipsong(dayStem, year.stem)}</span>
+            </div>
+
+            <div className={styles.cleanPillarRow}>
+              <PillarTile symbol={hour?.stem ?? '—'} label={hour ? hour.stemKor : '시 모름'} sublabel={hour ? hour.stemKor : ''} />
+              <PillarTile symbol={day.stem} label={day.stemKor} sublabel="일간" />
+              <PillarTile symbol={month.stem} label={month.stemKor} sublabel={month.stemKor} />
+              <PillarTile symbol={year.stem} label={year.stemKor} sublabel={year.stemKor} />
+            </div>
+
+            <div className={styles.cleanPillarRow}>
+              <PillarTile symbol={hour?.branch ?? '—'} label={hour ? hour.branchKor : '시 모름'} sublabel={hour ? getSipsong(dayStem, BRANCH_MAIN_STEM[hour.branch] ?? '') : ''} />
+              <PillarTile symbol={day.branch} label={day.branchKor} sublabel={getSipsong(dayStem, BRANCH_MAIN_STEM[dayBranch] ?? '')} />
+              <PillarTile symbol={month.branch} label={month.branchKor} sublabel={getSipsong(dayStem, BRANCH_MAIN_STEM[month.branch] ?? '')} />
+              <PillarTile symbol={year.branch} label={year.branchKor} sublabel={getSipsong(dayStem, BRANCH_MAIN_STEM[year.branch] ?? '')} />
+            </div>
+          </div>
+        </section>
+
+        <section ref={relationRef} className={styles.cleanSection}>
+          <div className={styles.cleanSectionTitleRow}>
+            <h3>사주관계</h3>
+            <span>?</span>
+          </div>
+          <div className={styles.cleanInlineTabs}>
+            <button
+              type="button"
+              className={relationTab === '천간과 지지' ? styles.cleanInlineTabActive : styles.cleanInlineTab}
+              onClick={() => setRelationTab('천간과 지지')}
+              style={{ cursor: 'pointer', border: 'none', background: 'none', font: 'inherit', padding: 0 }}
+            >천간과 지지</button>
+            <button
+              type="button"
+              className={relationTab === '신살과 길성' ? styles.cleanInlineTabActive : styles.cleanInlineTab}
+              onClick={() => setRelationTab('신살과 길성')}
+              style={{ cursor: 'pointer', border: 'none', background: 'none', font: 'inherit', padding: 0 }}
+            >신살과 길성</button>
           </div>
 
-          {ilju ? (
-            <div className={styles.card}>
-              <div className={styles.stackVertical}>
-                <div className={styles.badgeWrap}>
-                  <span className={styles.badgeFill}>{dayStem}{dayBranch} 일주</span>
-                  <span className={styles.badge}>{ilju.korean}</span>
-                  <span className={styles.badgeSoft}>{ilju.animal}</span>
-                </div>
-                <p className={styles.bodyText}>{ilju.identitySummary}</p>
-                <div className={styles.badgeWrap}>
-                  <span className={styles.badge}>일간 {ilju.stemElement}</span>
-                  <span className={styles.badge}>일지 {ilju.branchElement}</span>
-                  {ilju.favorableTerrains.map((t) => (
-                    <span key={t} className={styles.badgeSoft}>{t}</span>
-                  ))}
-                </div>
+          {relationTab === '천간과 지지' && (
+            <div className={styles.cleanRelationBox}>
+              <div className={styles.cleanRelationHeadRow}>
+                <span>시간</span>
+                <span>일간</span>
+                <span>월간</span>
+                <span>년간</span>
               </div>
-            </div>
-          ) : (
-            <div className={styles.softCard}>
-              <p className={styles.caption}>생년월일을 입력하면 일주 분석을 볼 수 있어요.</p>
+              <div className={styles.cleanRelationTiles}>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(hour?.stem)}`}>{hour?.stem ?? '—'}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(day.stem)}`}>{day.stem}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(month.stem)}`}>{month.stem}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(year.stem)}`}>{year.stem}</div>
+              </div>
+              <div className={styles.cleanRelationTiles}>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(hour?.branch)}`}>{hour?.branch ?? '—'}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(day.branch)}`}>{day.branch}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(month.branch)}`}>{month.branch}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(year.branch)}`}>{year.branch}</div>
+              </div>
+              <div className={styles.cleanRelationGuide}>
+                <div className={styles.cleanRelationLine}></div>
+                <p>{ilju?.interpretation[0] || `${report.profile.name}님은 일간 ${day.stem}과 일지 ${day.branch}의 결이 또렷해서, 자기 기준과 감정 리듬이 분명한 편으로 읽힙니다.`}</p>
+              </div>
             </div>
           )}
-        </div>
 
-        <div ref={iljuRef} className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>일주</h3>
-            <p className={styles.sectionSubtitle}>일간과 일지를 중심으로 성향, 관계, 공간 감각을 읽습니다.</p>
-          </div>
-
-          <div className={styles.column} style={{ gap: 10 }}>
-            <div className={styles.card}>
-              <div className={styles.stackVertical}>
-                <div className={styles.badgeWrap}>
-                  <span className={styles.badge}>일간 (천간)</span>
-                  <span className={styles.badgeFill} style={{ background: OHANG_COLOR[report.saju.yongsin] }}>
-                    {dayStem} · {ilju?.stemElement ?? report.saju.yongsin}
-                  </span>
-                </div>
-                <p className={styles.bodyText} style={{ fontWeight: 600 }}>{stemProfile.title}</p>
-                <p className={styles.caption}>{stemProfile.metaphor}</p>
-                <div className={styles.column} style={{ gap: 4 }}>
-                  <p className={styles.caption}>• 성향: {stemProfile.temperament}</p>
-                  <p className={styles.caption}>• 강점: {stemProfile.strength}</p>
-                  <p className={styles.caption}>• 관계: {stemProfile.relationship}</p>
-                  <p className={styles.caption}>• 공간: {stemProfile.space}</p>
-                  <p className={styles.caption}>• 균형 포인트: {stemProfile.balance}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <div className={styles.stackVertical}>
-                <div className={styles.badgeWrap}>
-                  <span className={styles.badge}>일지 (지지)</span>
-                  <span className={styles.badgeSoft}>{dayBranch} · {branchProfile.animal}</span>
-                </div>
-                <p className={styles.caption} style={{ fontStyle: 'italic' }}>{branchProfile.scene}</p>
-                <p className={styles.bodyText}>{branchProfile.placeMood}</p>
-                <div className={styles.column} style={{ gap: 4 }}>
-                  <p className={styles.caption}>• 지형: {branchProfile.terrain.join(' · ')}</p>
-                  <p className={styles.caption}>• 기후 흐름: {branchProfile.climate}</p>
-                  <p className={styles.caption}>• 주의: {branchProfile.caution}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <span className={styles.label}>일상 루틴 개운법</span>
-              <p className={styles.caption} style={{ marginTop: 8 }}>{stemProfile.ritual}</p>
-            </div>
-
-            {ilju && (
-              <div className={styles.card}>
-                <span className={styles.label}>사주관계 리딩</span>
-                <p className={styles.bodyText} style={{ marginTop: 8, whiteSpace: 'pre-line' }}>
-                  {ilju.interpretation[0]}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div ref={ohangRef} className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>오행</h3>
-            <p className={styles.sectionSubtitle}>오행 분포, 부족한 기운, 용신과 길방을 한 번에 봅니다.</p>
-          </div>
-
-          <div className={styles.column} style={{ gap: 10 }}>
-            <div className={styles.card}>
-              <div className={styles.stackVertical}>
-                <div className={styles.row} style={{ justifyContent: 'space-between', gap: 10, alignItems: 'flex-start' }}>
-                  <span className={styles.label}>오행 분포</span>
-                  <span className={styles.caption}>
-                    {report.saju.deficitOhang[0] || report.saju.yongsin} 보완 필요
-                  </span>
-                </div>
-                <div className={styles.bars}>
-                  {bars.map(({ label, value, color }) => (
-                    <div key={label} className={styles.barRow}>
-                      <span>{label}</span>
-                      <div className={styles.barTrack}>
-                        <div className={styles.barFill} style={{ width: `${Math.max(value, 6)}%`, background: color }}></div>
-                      </div>
-                      <span>{value}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.card}>
-              <span className={styles.label}>용신 · 길방</span>
-              <div className={styles.badgeWrap} style={{ marginTop: 8 }}>
-                <span className={styles.badgeFill} style={{ background: OHANG_COLOR[report.saju.yongsin] }}>
-                  용신 {report.saju.yongsin}
-                </span>
-                <span className={styles.badge}>길방 {report.saju.gilbang}</span>
-                {report.saju.deficitOhang.map((o) => (
-                  <span key={o} className={styles.badgeSoft}>{o} 부족</span>
+          {relationTab === '신살과 길성' && (
+            <div className={styles.cleanRelationBox}>
+              <div className={styles.cleanRelationTiles}>
+                {[year.stem, month.stem, day.stem, hour?.stem ?? '—'].map((symbol, index) => (
+                  <div key={`${symbol}-${index}`} className={`${styles.cleanMiniTileWide} ${getToneClass(symbol)}`}>{symbol}</div>
                 ))}
               </div>
-            </div>
-
-            {ilju && (
-              <>
-                <div className={styles.card}>
-                  <span className={styles.label}>지형 · 공간 성향</span>
-                  <div className={styles.badgeWrap} style={{ marginTop: 8 }}>
-                    {ilju.favorableTerrains.map((t) => (
-                      <span key={t} className={styles.badge}>{t}</span>
-                    ))}
-                    {ilju.favorableDirections.map((d) => (
-                      <span key={d} className={styles.badge}>{d}쪽</span>
-                    ))}
-                  </div>
-                  <div className={styles.column} style={{ gap: 4, marginTop: 10 }}>
-                    {ilju.spaceKeywords.map((k) => (
-                      <p key={k} className={styles.caption}>• {k}</p>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={styles.card}>
-                  <span className={styles.label}>추천 동네 타입</span>
-                  <div className={styles.column} style={{ gap: 4, marginTop: 8 }}>
-                    {ilju.recommendedPlaces.map((p) => (
-                      <p key={p} className={styles.caption}>• {p}</p>
-                    ))}
-                  </div>
-                  <p className={styles.bodyText} style={{ marginTop: 10, whiteSpace: 'pre-line' }}>
-                    {ilju.interpretation[1]}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div ref={sinsalRef} className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>신살</h3>
-            <p className={styles.sectionSubtitle}>현재 사주에서 두드러지는 신살과 공간 힌트를 정리했습니다.</p>
-          </div>
-
-          <div className={styles.column} style={{ gap: 8 }}>
-            {report.saju.sinsal.length > 0 ? (
-              report.saju.sinsal.map((s) => (
-                <div key={s.name} className={styles.card}>
-                  <div className={styles.row} style={{ gap: 8, alignItems: 'center', marginBottom: 6, flexWrap: 'wrap' }}>
-                    <span className={s.category === 'guiin' ? styles.badgeFill : styles.badgeSoft}>{s.name}</span>
-                    <span className={styles.caption}>{s.hanja} · {s.activePillar}</span>
-                  </div>
-                  <p className={styles.bodyText}>{s.description}</p>
-                  <div className={styles.softCard} style={{ marginTop: 8 }}>
-                    <p className={styles.caption} style={{ color: '#6b5e56' }}>공간 팁: {s.spaceTag}</p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className={styles.softCard}>
-                <p className={styles.caption}>이 사주에서 주요 신살이 감지되지 않았습니다.</p>
-                <p className={styles.caption} style={{ marginTop: 4 }}>오행 분포와 일간 중심으로 읽어볼 수 있어요.</p>
-              </div>
-            )}
-
-            {ilju && ilju.spaceKeywords.length > 0 && (
-              <div className={styles.card}>
-                <span className={styles.label}>길성 공간 키워드</span>
-                <div className={styles.badgeWrap} style={{ marginTop: 8 }}>
-                  {ilju.spaceKeywords.map((k) => (
-                    <span key={k} className={styles.badge}>{k}</span>
+              <p className={styles.cleanMutedParagraph}>
+                {report.saju.sinsal.length > 0
+                  ? report.saju.sinsal.map((item) => `${item.name}(${item.hanja})`).join(' · ')
+                  : '현재 강하게 드러난 신살은 많지 않아서 오행 균형과 일주 해석 중심으로 읽는 편이 자연스럽습니다.'}
+              </p>
+              {report.saju.sinsal.length > 0 && (
+                <div className={styles.column} style={{ gap: 8, marginTop: 8 }}>
+                  {report.saju.sinsal.map((s) => (
+                    <div key={s.name} className={styles.softCard}>
+                      <div className={styles.row} style={{ gap: 6, marginBottom: 4 }}>
+                        <span className={styles.badge}>{s.name}</span>
+                        <span className={styles.caption} style={{ color: '#8c7a6e' }}>{s.hanja}</span>
+                      </div>
+                      <p className={styles.caption}>{s.description}</p>
+                    </div>
                   ))}
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div ref={daewoonRef} className={styles.sectionBlock}>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>대운</h3>
-            <p className={styles.sectionSubtitle}>대운과 세운 흐름을 아래로 이어서 볼 수 있게 붙였습니다.</p>
-          </div>
-
-          <div className={styles.column} style={{ gap: 10 }}>
-            <div className={styles.card}>
-              <span className={styles.label}>대운 흐름</span>
-              {report.saju.daeWoon.length > 0 ? (
-                <>
-                  <div className={styles.timeline} style={{ marginTop: 12 }}>
-                    {report.saju.daeWoon.slice(0, 7).map((dw) => (
-                      <div key={`${dw.ganJi.stem}${dw.ganJi.branch}-${dw.startAge}`} className={styles.timelineNode}>
-                        <span
-                          className={`${styles.timelineCircle} ${dw.isCurrent ? styles.timelineCircleActive : ''}`}
-                          style={dw.isCurrent ? { background: DAEWOON_COLOR[dw.ohang] } : {}}
-                        >
-                          {dw.startAge}
-                        </span>
-                        <span className={styles.timelineLabel}>{dw.ganJi.stem}{dw.ganJi.branch}</span>
-                        <span className={styles.caption} style={{ fontSize: 10, color: DAEWOON_COLOR[dw.ohang] }}>
-                          {dw.ohang}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  {report.saju.currentDaeWoon && (
-                    <div className={styles.softCard} style={{ marginTop: 12 }}>
-                      <p className={styles.bodyText}>
-                        현재 {report.saju.currentDaeWoon.ganJi.stem}{report.saju.currentDaeWoon.ganJi.branch} 대운
-                        ({report.saju.currentDaeWoon.startAge}~{report.saju.currentDaeWoon.endAge}세)
-                      </p>
-                      <p className={styles.caption}>{report.saju.currentDaeWoon.ohang} 기운의 시기</p>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <p className={styles.caption} style={{ marginTop: 8 }}>생년월일을 입력하면 대운 흐름을 볼 수 있어요.</p>
               )}
             </div>
+          )}
+        </section>
 
-            <div className={styles.card}>
-              <div className={styles.row} style={{ justifyContent: 'space-between', gap: 10, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                <span className={styles.label}>세운 ({report.saju.seWoon.year}년)</span>
-                <span className={styles.badgeFill}>
-                  {report.saju.seWoon.ganJi.stem}{report.saju.seWoon.ganJi.branch} · {report.saju.seWoon.ohang}
-                </span>
+        <section ref={ohangRef} className={styles.cleanSection}>
+          <div className={styles.cleanSectionTitleRow}>
+            <h3>오행과 십성</h3>
+            <span>?</span>
+          </div>
+
+          <div className={styles.cleanOhangArea}>
+            <div className={styles.cleanRadarWrap}>
+              <RadarChart values={radarValues} />
+              <div className={styles.cleanRadarCenter}>
+                <strong>{Math.max(...radarValues.map((item) => item.value))}%</strong>
               </div>
-              <p className={styles.caption} style={{ marginTop: 8 }}>
-                {report.saju.seWoon.ganJi.stemKor}{report.saju.seWoon.ganJi.branchKor}년 · {report.saju.seWoon.ohang} 기운이 강하게 흐르는 해
-              </p>
+            </div>
+
+            <div className={styles.cleanLegendList}>
+              {radarValues.map((item) => (
+                <div key={item.label} className={styles.cleanLegendItem}>
+                  <div className={styles.cleanLegendLeft}>
+                    <span className={styles.cleanLegendDot} style={{ background: item.color }}></span>
+                    <span>{item.label}기운</span>
+                  </div>
+                  <strong>{item.value}%</strong>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+
+          <div className={styles.cleanMutedParagraph}>
+            {ilju?.interpretation[1] || `${stemProfile.space} 같은 환경이 잘 맞고, ${branchProfile.terrain.join(', ')} 성향의 장소에서 기운이 정리되기 쉽습니다.`}
+          </div>
+        </section>
+
+        <section ref={strengthRef} className={styles.cleanSection}>
+          <div className={styles.cleanSectionTitleRow}>
+            <h3>신강신약</h3>
+            <span>?</span>
+          </div>
+          <StrengthGauge score={strengthScore} label={strengthLabel} />
+          <div className={styles.cleanGaugeLegend}>
+            <span><i style={{ background: '#f3c74c' }}></i>목적성</span>
+            <span><i style={{ background: '#f08b3d' }}></i>주도성</span>
+            <span><i style={{ background: '#5a7cff' }}></i>회복력</span>
+          </div>
+        </section>
+
+        <section ref={fortuneRef} className={styles.cleanSection}>
+          <div className={styles.cleanSectionTitleRow}>
+            <h3>대운/세운</h3>
+            <span>?</span>
+          </div>
+
+          <div className={styles.cleanFortuneBlock}>
+            <h4>대운 (10년)</h4>
+            <div className={styles.cleanFortuneGrid}>
+              {report.saju.daeWoon.slice(0, 7).map((dw) => (
+                <div key={`${dw.ganJi.stem}${dw.ganJi.branch}-${dw.startAge}`} className={`${styles.cleanFortuneColumn} ${dw.isCurrent ? styles.cleanFortuneCurrent : ''}`}>
+                  <span>{dw.startAge}</span>
+                  <div className={`${styles.cleanMiniTile} ${getToneClass(dw.ganJi.stem)}`}>{dw.ganJi.stem}</div>
+                  <div className={`${styles.cleanMiniTile} ${getToneClass(dw.ganJi.branch)}`}>{dw.ganJi.branch}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.cleanFortuneBlock}>
+            <h4>세운</h4>
+            <div className={styles.cleanFortuneGridSingle}>
+              <div className={styles.cleanFortuneColumn}>
+                <span>{report.saju.seWoon.year}</span>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(report.saju.seWoon.ganJi.stem)}`}>{report.saju.seWoon.ganJi.stem}</div>
+                <div className={`${styles.cleanMiniTile} ${getToneClass(report.saju.seWoon.ganJi.branch)}`}>{report.saju.seWoon.ganJi.branch}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.cleanMutedParagraph}>
+            {currentDaeWoon
+              ? `${currentDaeWoon.ganJi.stem}${currentDaeWoon.ganJi.branch} 대운은 ${currentDaeWoon.ohang} 기운이 강한 시기예요. ${DAE_WOON_LABEL(currentDaeWoon.ohang)}`
+              : `${report.saju.seWoon.year}년은 ${report.saju.seWoon.ganJi.stem}${report.saju.seWoon.ganJi.branch} 세운으로 ${report.saju.seWoon.ohang} 기운이 강조됩니다.`}
+          </div>
+        </section>
       </div>
     </Layout>
   );
+}
+
+function DAE_WOON_LABEL(ohang: string) {
+  return ({
+    木: '확장과 성장의 흐름이 강합니다.',
+    火: '표현과 추진의 흐름이 강합니다.',
+    土: '정착과 안정의 흐름이 강합니다.',
+    金: '정리와 결실의 흐름이 강합니다.',
+    水: '회복과 순환의 흐름이 강합니다.',
+  } as Record<string, string>)[ohang] || '';
 }
