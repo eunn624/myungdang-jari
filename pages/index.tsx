@@ -22,6 +22,39 @@ const PILLAR_LABELS = [
   ['hour', '시주'],
 ] as const;
 
+const SPACE_GUIDE: Record<Ohang, { keyword: string; description: string; mission: string; avoid: string }> = {
+  木: {
+    keyword: '녹지와 생장감',
+    description: '공간에서는 식물, 나무 소재, 초록 계열처럼 천천히 자라는 감각을 참고해볼 수 있어요.',
+    mission: '책상이나 창가에 작은 식물 하나를 두고 주변을 비워보세요.',
+    avoid: '너무 건조하거나 생기 없는 빈 공간은 잠시 덜어내는 쪽이 좋아요.',
+  },
+  火: {
+    keyword: '빛과 온기',
+    description: '공간에서는 조명, 따뜻한 색감, 햇빛이 드는 자리처럼 밝은 움직임을 참고해볼 수 있어요.',
+    mission: '자주 머무는 곳에 따뜻한 조명이나 코랄 계열 포인트를 하나 더해보세요.',
+    avoid: '이미 강한 자극이 많은 공간이라면 붉은 계열을 과하게 늘리지 않는 편이 좋아요.',
+  },
+  土: {
+    keyword: '안정감과 중심',
+    description: '공간에서는 돌, 흙, 세라믹, 낮고 안정적인 가구처럼 중심을 잡는 요소를 참고해볼 수 있어요.',
+    mission: '침대 옆이나 현관 근처에 세라믹 오브제처럼 무게감 있는 소품을 놓아보세요.',
+    avoid: '물건이 떠다니듯 흩어진 공간은 한 구역부터 차분히 정리해보세요.',
+  },
+  金: {
+    keyword: '정돈과 결',
+    description: '공간에서는 금속, 화이트, 깔끔한 수납처럼 선명하고 정돈된 감각을 참고해볼 수 있어요.',
+    mission: '자주 쓰는 물건을 메탈 트레이나 흰 수납함에 모아 동선을 정리해보세요.',
+    avoid: '장식이 지나치게 많으면 핵심 물건만 남기는 쪽이 더 잘 맞을 수 있어요.',
+  },
+  水: {
+    keyword: '물길과 흐름',
+    description: '공간에서는 수변, 북쪽, 블루 계열, 유리 소재처럼 흐름이 생기는 요소를 참고해볼 수 있어요.',
+    mission: '북쪽 방향이나 책상 위에 투명한 유리컵, 블루 패브릭, 물결 모티프 중 하나를 놓아보세요.',
+    avoid: '뜨겁고 건조한 인상이 강한 공간은 차분한 색과 비우는 동선으로 균형을 맞춰보세요.',
+  },
+};
+
 interface AnalysisView {
   result: SajuResult;
   districts: MatchResult[];
@@ -46,6 +79,10 @@ function formatPillar(stem: string, branch: string, stemKor: string, branchKor: 
   return `${stem}${branch} · ${stemKor}${branchKor}`;
 }
 
+function getOhangValue(result: SajuResult, ohang: Ohang) {
+  return result.ohang[OHANG_META[ohang].key];
+}
+
 export default function Home() {
   const [birthDate, setBirthDate] = useState('');
   const [birthTime, setBirthTime] = useState('');
@@ -57,6 +94,8 @@ export default function Home() {
   const strongestOhang = useMemo(() => {
     return analysis ? getStrongestOhang(analysis.result) : null;
   }, [analysis]);
+
+  const yongsinGuide = analysis ? SPACE_GUIDE[analysis.result.yongsin] : null;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -152,24 +191,44 @@ export default function Home() {
           </button>
         </form>
 
-        {analysis && strongestOhang && (
+        {analysis && strongestOhang && yongsinGuide && (
           <section className={styles.results} aria-live="polite">
-            <div className={styles.resultSummary}>
-              <p className={styles.eyebrow}>분석 요약</p>
-              <h2>
-                {strongestOhang}가 강하고 {analysis.result.yongsin} 보완을 참고해볼 수 있어요.
-              </h2>
-              <p>
-                머리 방향은 {analysis.result.bedDirection}쪽, {analysis.result.yongsin} 보완 기준 길방은{' '}
-                {analysis.result.gilbang}쪽으로 안내됩니다.
-              </p>
+            <div className={styles.storyTopper}>
+              <p>공간 리딩</p>
+              <div className={styles.storyProgress} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
             </div>
+
+            <section className={styles.resultHero}>
+              <div className={styles.elementSigil} style={{ borderColor: OHANG_META[analysis.result.yongsin].color }}>
+                <span style={{ color: OHANG_META[analysis.result.yongsin].color }}>{analysis.result.yongsin}</span>
+              </div>
+              <p className={styles.darkEyebrow}>오늘의 공간 키워드</p>
+              <h2>{analysis.result.yongsin} 보완</h2>
+              <strong>{yongsinGuide.keyword}</strong>
+              <p>
+                {strongestOhang} 기운이 가장 두드러지고 {analysis.result.yongsin} 기운은 보완 여지가 있어요.
+                {' '}
+                {yongsinGuide.description}
+              </p>
+              <div className={styles.insightChips}>
+                <span>{strongestOhang} {getOhangValue(analysis.result, strongestOhang)}%</span>
+                <span>{analysis.result.yongsin} {getOhangValue(analysis.result, analysis.result.yongsin)}%</span>
+                <span>길방 {analysis.result.gilbang}</span>
+                <span>침대 {analysis.result.bedDirection}</span>
+              </div>
+            </section>
 
             {analysis.timeUnknown && (
               <p className={styles.notice}>시주를 제외한 3주 기준 분석입니다. 실제 결과와 차이가 있을 수 있어요.</p>
             )}
 
-            <section className={styles.resultBlock}>
+            <section className={styles.storySection}>
               <div className={styles.sectionHeader}>
                 <span>02</span>
                 <h2>사주팔자</h2>
@@ -189,11 +248,14 @@ export default function Home() {
               </div>
             </section>
 
-            <section className={styles.resultBlock}>
+            <section className={styles.balancePanel}>
               <div className={styles.sectionHeader}>
                 <span>03</span>
-                <h2>오행 비중</h2>
+                <h2>오행 균형</h2>
               </div>
+              <p className={styles.panelLead}>
+                가장 낮은 오행부터 공간에서 가볍게 보완해보는 흐름으로 읽습니다.
+              </p>
               <div className={styles.ohangList}>
                 {(Object.keys(OHANG_META) as Ohang[]).map((ohang) => {
                   const meta = OHANG_META[ohang];
@@ -220,11 +282,14 @@ export default function Home() {
               </p>
             </section>
 
-            <section className={styles.resultBlock}>
+            <section className={styles.storySection}>
               <div className={styles.sectionHeader}>
                 <span>04</span>
                 <h2>참고해볼 동네</h2>
               </div>
+              <p className={styles.panelLead}>
+                점수나 순위가 아니라, 지명 한자와 지형 속성을 함께 참고하는 후보예요.
+              </p>
               <div className={styles.districtList}>
                 {analysis.districts.map((match) => {
                   const terrain = classifyDistrictTerrain(match.district);
@@ -238,7 +303,9 @@ export default function Home() {
                         <p className={styles.hanjaText}>{match.district.hanja}</p>
                       </div>
                       <div className={styles.chipRow}>
-                        <span>{TERRAIN_LABELS[terrain.primary]}</span>
+                        {terrain.tags.map((tag) => (
+                          <span key={tag}>{TERRAIN_LABELS[tag]}</span>
+                        ))}
                         {match.district.ohang.map((ohang) => (
                           <span key={ohang}>{ohang} 보완</span>
                         ))}
@@ -255,7 +322,7 @@ export default function Home() {
               <article className={styles.guidanceCard}>
                 <span>침대 방향</span>
                 <h3>{analysis.result.bedDirection}</h3>
-                <p>머리는 {analysis.result.bedDirection}쪽을 참고해볼 수 있어요. 구조상 어렵다면 같은 방향에 작은 정리 공간을 두는 방식도 괜찮습니다.</p>
+                <p>머리는 {analysis.result.bedDirection}쪽을 참고해볼 수 있어요. 구조상 어렵다면 같은 방향의 벽면을 정리하거나 작은 조명을 두는 방식도 괜찮습니다.</p>
               </article>
               <article className={styles.guidanceCard}>
                 <span>길방 안내</span>
@@ -264,11 +331,13 @@ export default function Home() {
               </article>
             </section>
 
-            <section className={styles.resultBlock}>
+            <section className={styles.missionPanel}>
               <div className={styles.sectionHeader}>
                 <span>05</span>
-                <h2>보완 소품 예시</h2>
+                <h2>오늘의 공간 미션</h2>
               </div>
+              <p className={styles.missionText}>{yongsinGuide.mission}</p>
+              <p className={styles.avoidText}>{yongsinGuide.avoid}</p>
               <div className={styles.itemList}>
                 {OHANG_META[analysis.result.yongsin].items.map((item) => (
                   <span key={item}>{item}</span>

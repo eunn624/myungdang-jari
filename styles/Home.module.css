@@ -52,8 +52,10 @@
 }
 
 .inputPanel,
-.resultBlock,
-.resultSummary,
+.storySection,
+.balancePanel,
+.resultHero,
+.missionPanel,
 .guidanceCard,
 .districtCard {
   background: rgba(255, 252, 247, 0.82);
@@ -195,32 +197,143 @@
 
 .results {
   display: grid;
-  gap: 14px;
-  margin-top: 16px;
-  padding-bottom: 28px;
+  gap: 18px;
+  margin-top: 18px;
+  padding-bottom: 34px;
 }
 
-.resultSummary {
-  padding: 20px;
+.storyTopper {
+  display: grid;
+  gap: 10px;
+  padding: 8px 2px 0;
+}
+
+.storyTopper p {
+  margin: 0;
+  color: #6f756f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.storyProgress {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+}
+
+.storyProgress span {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(31, 37, 34, 0.14);
+}
+
+.storyProgress span:first-child {
   background: #1f2522;
+}
+
+.resultHero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 14px;
+  min-height: 430px;
+  align-content: center;
+  padding: 34px 22px;
+  background:
+    radial-gradient(circle at 50% 7%, rgba(255, 253, 249, 0.18), transparent 15rem),
+    linear-gradient(180deg, #1f2522 0%, #262432 64%, #302c45 100%);
   color: #fffdf9;
 }
 
-.resultSummary h2 {
+.resultHero::after {
+  content: "";
+  position: absolute;
+  right: -52px;
+  bottom: -74px;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(255, 253, 249, 0.12);
+  border-radius: 999px;
+}
+
+.elementSigil {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  height: 86px;
+  margin: 0 auto 4px;
+  border: 2px solid;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.08);
+}
+
+.elementSigil span {
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.darkEyebrow {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  font-size: 24px;
-  line-height: 1.3;
+  color: rgba(255, 253, 249, 0.58);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.resultHero h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.05;
   letter-spacing: 0;
+  text-align: center;
 }
 
-.resultSummary p {
-  margin: 12px 0 0;
-  color: rgba(255, 253, 249, 0.78);
+.resultHero strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: rgba(255, 253, 249, 0.92);
+  font-size: 19px;
+  text-align: center;
+}
+
+.resultHero p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: rgba(255, 253, 249, 0.74);
   line-height: 1.65;
+  text-align: center;
 }
 
-.resultSummary .eyebrow {
-  color: rgba(255, 253, 249, 0.62);
+.insightChips {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.insightChips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border: 1px solid rgba(255, 253, 249, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.08);
+  color: rgba(255, 253, 249, 0.86);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 10px;
 }
 
 .notice {
@@ -231,10 +344,30 @@
   background: rgba(62, 111, 143, 0.08);
 }
 
-.resultBlock {
+.storySection,
+.balancePanel,
+.missionPanel {
   display: grid;
   gap: 16px;
   padding: 18px;
+}
+
+.storySection {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 4px 0;
+}
+
+.balancePanel {
+  background: rgba(255, 252, 247, 0.88);
+}
+
+.panelLead {
+  margin: 0;
+  color: #6f756f;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .pillarGrid {
@@ -315,14 +448,14 @@
 
 .districtList {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .districtCard {
   display: grid;
   gap: 12px;
-  padding: 15px;
-  box-shadow: none;
+  padding: 17px;
+  background: #fffdf9;
 }
 
 .districtMeta,
@@ -340,7 +473,7 @@
 
 .districtCard h3 {
   margin: 4px 0 3px;
-  font-size: 21px;
+  font-size: 24px;
   line-height: 1.25;
 }
 
@@ -385,11 +518,15 @@
 .guidanceGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .guidanceCard {
-  padding: 16px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 18px;
+  background: #fffdf9;
 }
 
 .guidanceCard span {
@@ -399,8 +536,8 @@
 }
 
 .guidanceCard h3 {
-  margin: 9px 0;
-  font-size: 30px;
+  margin: 0;
+  font-size: 34px;
   line-height: 1;
 }
 
@@ -409,6 +546,28 @@
   color: #424941;
   font-size: 13px;
   line-height: 1.6;
+}
+
+.missionPanel {
+  background:
+    radial-gradient(circle at top right, rgba(62, 111, 143, 0.13), transparent 12rem),
+    #fffdf9;
+}
+
+.missionText {
+  margin: 0;
+  color: #1f2522;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.38;
+  word-break: keep-all;
+}
+
+.avoidText {
+  margin: 0;
+  color: #6f756f;
+  font-size: 13px;
+  line-height: 1.65;
 }
 
 @keyframes pulse {
