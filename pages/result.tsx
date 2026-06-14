@@ -55,12 +55,16 @@ export default function ResultScreen() {
     {
       number: '04',
       title: '신살 · 길성과 사주관계',
-      body: report.sinsal.join(' · '),
+      body: report.saju.sinsal.length > 0
+        ? report.saju.sinsal.map(s => `${s.name}(${s.hanja}): ${s.description}`).join('\n\n')
+        : '사주에서 주요 신살이 감지되지 않았습니다. 오행 분포와 일간 중심으로 읽어볼 수 있어요.',
     },
     {
       number: '05',
       title: '대운 · 세운 흐름',
-      body: '개발 중...',
+      body: report.saju.currentDaeWoon
+        ? `현재 ${report.saju.currentDaeWoon.ganJi.stem}${report.saju.currentDaeWoon.ganJi.branch} 대운 (${report.saju.currentDaeWoon.startAge}~${report.saju.currentDaeWoon.endAge}세) · ${report.saju.currentDaeWoon.ohang} 기운의 시기\n\n올해 ${report.saju.seWoon.year}년은 ${report.saju.seWoon.ganJi.stem}${report.saju.seWoon.ganJi.branch} 세운 · ${report.saju.seWoon.ohang} 기운이 흐릅니다.`
+        : `올해 ${report.saju.seWoon.year}년은 ${report.saju.seWoon.ganJi.stem}${report.saju.seWoon.ganJi.branch} 세운 · ${report.saju.seWoon.ohang} 기운의 해입니다.`,
     },
     {
       number: '06',
@@ -95,7 +99,7 @@ export default function ResultScreen() {
           <div className={styles.column} style={{ gap: 12, marginTop: 16 }}>
             <span className={styles.caption}>{report.profile.name} · {report.formattedBirth}</span>
             <h1 className={styles.resultTitle}>{card.title}</h1>
-            <p className={styles.bodyText}>{card.body}</p>
+            <p className={styles.bodyText} style={{ whiteSpace: 'pre-line' }}>{card.body}</p>
             {card.renderExtra}
             {currentCard === 2 && (
               <div className={styles.softCard}>

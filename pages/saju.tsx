@@ -115,13 +115,37 @@ export default function SajuPage() {
 
         <div className={styles.column} style={{ gap: 8 }}>
           <span className={styles.label}>신살 · 길성</span>
-          <div className={styles.badgeWrap}>
-            <span className={styles.badgeSoft}>도화살</span>
-            <span className={styles.badge}>반안살</span>
-            <span className={styles.badge}>천을귀인</span>
-            <span className={styles.badge}>문창귀인</span>
-          </div>
+          {report.saju.sinsal.length > 0 ? (
+            <div className={styles.column} style={{ gap: 8 }}>
+              {report.saju.sinsal.map(s => (
+                <div key={s.name} className={styles.softCard}>
+                  <div className={styles.row} style={{ gap: 8, alignItems: 'center', marginBottom: 4 }}>
+                    <span className={s.category === 'guiin' ? styles.badgeFill : styles.badgeSoft}>{s.name}</span>
+                    <span className={styles.caption}>{s.hanja} · {s.activePillar}</span>
+                  </div>
+                  <p className={styles.caption}>{s.description}</p>
+                  <p className={styles.caption} style={{ marginTop: 4, color: '#6b5e56' }}>공간: {s.spaceTag}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.softCard}>
+              <p className={styles.caption}>사주에서 주요 신살이 감지되지 않았습니다.</p>
+            </div>
+          )}
         </div>
+
+        {report.saju.currentDaeWoon && (
+          <div className={styles.card}>
+            <div className={`${styles.row} ${styles.between}`}>
+              <span className={styles.label}>현재 대운</span>
+              <span className={styles.badgeFill}>{report.saju.currentDaeWoon.ganJi.stem}{report.saju.currentDaeWoon.ganJi.branch} 대운</span>
+            </div>
+            <p className={styles.caption} style={{ marginTop: 8 }}>
+              {report.saju.currentDaeWoon.startAge}세 ~ {report.saju.currentDaeWoon.endAge}세 · {report.saju.currentDaeWoon.ohang} 기운의 시기
+            </p>
+          </div>
+        )}
       </div>
     </Layout>
   );

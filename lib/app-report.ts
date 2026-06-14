@@ -2,6 +2,7 @@ import type { ParsedUrlQuery } from 'querystring';
 import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
 import type { Ohang } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
+import { getIljuContent } from '../data/ilju-content';
 
 type Gender = '여성' | '남성';
 type CalendarType = '양력' | '음력';
@@ -62,7 +63,7 @@ export function getReportFromQuery(query: ParsedUrlQuery): AppReport {
 
 export function buildReport(profile: AppProfile): AppReport {
   const birth = getBirthInfo(profile);
-  const saju = analyzeSaju(birth);
+  const saju = analyzeSaju(birth, profile.gender);
   const terrainPreference = saju.deficitOhang[0]
     ? getTerrainPreference(saju.deficitOhang[0])
     : undefined;
@@ -79,6 +80,9 @@ export function buildReport(profile: AppProfile): AppReport {
   const dayAnimal = getDayAnimal(saju.pillars.day.branch);
   const tendency = getTendencyLabel(dominant);
   const roomTip = getRoomTip(deficit);
+  const iljuContent = getIljuContent(saju.pillars.day);
+  const iljuParagraphs = iljuContent?.interpretation;
+  const iljuSummary = iljuContent?.identitySummary;
 
   return {
     profile,
@@ -90,21 +94,26 @@ export function buildReport(profile: AppProfile): AppReport {
     dailyEnergyTitle: `${dominant}가 잘 도는 날`,
     dailyEnergyDescription: `${OHANG_LABELS[dominant]}이 드러나고 ${deficit} 보완을 의식하면 더 편안한 흐름을 만들 수 있어요.`,
     summaryTitle: `${dominant} 기운이 먼저 보이고 ${deficit} 보완이 필요한 흐름`,
-    summaryDescription: `${profileName}은 ${dayAnimal}처럼 자기 감각이 분명하고 ${tendency}이 살아 있는 편이에요. 다만 사주 안에서 ${deficit}의 여유가 부족하게 보이기 때문에, 생활 공간에서는 차분함과 순환감을 더해주는 선택이 균형에 도움이 됩니다.`,
+    summaryDescription: iljuSummary
+      ? `${profileName}은 ${iljuSummary}로 볼 수 있어요. 다만 사주 안에서 ${deficit}의 여유가 부족하게 보이기 때문에, 생활 공간에서는 차분함과 순환감을 더해주는 선택이 균형에 도움이 됩니다.`
+      : `${profileName}은 ${dayAnimal}처럼 자기 감각이 분명하고 ${tendency}이 살아 있는 편이에요. 다만 사주 안에서 ${deficit}의 여유가 부족하게 보이기 때문에, 생활 공간에서는 차분함과 순환감을 더해주는 선택이 균형에 도움이 됩니다.`,
     longReading: [
-      `${profileName}은 자신의 감각과 기준이 분명한 사람이에요. 한번 마음이 움직이면 집중력이 붙고, 좋아하는 대상이나 일에는 정성을 오래 들이는 편입니다. ${saju.pillars.day.stem}${saju.pillars.day.branch} 일주를 중심으로 보면, 겉으로는 또렷하고 밝아 보여도 실제로는 분위기와 관계의 온도 차를 세심하게 느끼는 편에 가까워요.`,
-      `사주의 중심 흐름은 ${dominant} 쪽에 힘이 실려 있고, 보완 포인트는 ${deficit}에 있어요. ${roomTip} 같은 선택이 특히 잘 맞는 편으로 읽혀요. 공간이 정리되어 있을수록 생각이 맑아지고 감정 기복도 부드러워지는 쪽으로 흘러갑니다.`,
-      `${profileName}에게 잘 맞는 개운 방식은 생활의 결을 조금씩 바꾸는 방식이에요. 특히 ${saju.bedDirection} 방향 정리, ${districts[0]?.district.name || '수변 동네'} 같은 생활권 참고, ${getTodayMission(deficit)} 같은 루틴은 반복할수록 체감이 잘 오는 편입니다.`,
+      iljuParagraphs?.[0] || `${profileName}은 자신의 감각과 기준이 분명한 사람이에요. 한번 마음이 움직이면 집중력이 붙고, 좋아하는 대상이나 일에는 정성을 오래 들이는 편입니다. ${saju.pillars.day.stem}${saju.pillars.day.branch} 일주를 중심으로 보면, 겉으로는 또렷하고 밝아 보여도 실제로는 분위기와 관계의 온도 차를 세심하게 느끼는 편에 가까워요.`,
+      iljuParagraphs?.[1] || `사주의 중심 흐름은 ${dominant} 쪽에 힘이 실려 있고, 보완 포인트는 ${deficit}에 있어요. ${roomTip} 같은 선택이 특히 잘 맞는 편으로 읽혀요. 공간이 정리되어 있을수록 생각이 맑아지고 감정 기복도 부드러워지는 쪽으로 흘러갑니다.`,
+      iljuParagraphs?.[2]
+        ? `${iljuParagraphs[2]} 또한 ${saju.bedDirection} 방향 정리와 ${districts[0]?.district.name || '수변 동네'} 같은 생활권 참고를 함께 보면 실사용 가이드로 연결하기 좋습니다.`
+        : `${profileName}에게 잘 맞는 개운 방식은 생활의 결을 조금씩 바꾸는 방식이에요. 특히 ${saju.bedDirection} 방향 정리, ${districts[0]?.district.name || '수변 동네'} 같은 생활권 참고, ${getTodayMission(deficit)} 같은 루틴은 반복할수록 체감이 잘 오는 편입니다.`,
     ],
     cautionReading: `${dominant} 기운이 강하게 올라오는 시기에는 서두르거나 감정적으로 결론을 내리기 쉬워요. 중요한 선택은 하루 정도 텀을 두고, 공간의 열감과 소음을 낮춘 뒤 다시 보는 편이 좋습니다.`,
     positiveReading: `${deficit}를 보완하는 생활 습관을 붙이면 집중력과 관계 감각이 동시에 안정되기 쉬워요. 차분한 조명, 정돈된 침실, 물성 있는 소품처럼 작지만 반복 가능한 방식이 특히 잘 맞습니다.`,
-    sinsal: ['도화살', '반안살', '천을귀인', '문창귀인'],
+    sinsal: saju.sinsal.map(s => s.name),
     flowCards: ['사주팔자', '일간 중심', '오행 균형', '신살·길성', '대운·세운', '명당 추천', '개운법'],
   };
 }
 
 // 입력값 없을 때 — 타입에 맞는 유효한 값으로 채움
 function getEmptyReport(profile: AppProfile): AppReport {
+  const currentYear = new Date().getFullYear();
   const emptySaju: SajuResult = {
     pillars: {
       year: { stem: '甲', branch: '子', stemKor: '-', branchKor: '-' },
@@ -117,6 +126,10 @@ function getEmptyReport(profile: AppProfile): AppReport {
     bedDirection: '북',
     gilbang: '북',
     yongsin: '木',
+    sinsal: [],
+    daeWoon: [],
+    currentDaeWoon: null,
+    seWoon: { year: currentYear, ganJi: { stem: '甲', branch: '子', stemKor: '갑', branchKor: '자' }, ohang: '木' },
   };
 
   return {
