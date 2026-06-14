@@ -4,7 +4,7 @@
     "source": "공공데이터포털 전국 행정동 DB 기반 + 한자명 수작업 보완",
     "dataPortalUrl": "https://www.data.go.kr (전국 행정동코드 목록)",
     "version": "1.0.0-mvp",
-    "totalCount": 72,
+    "totalCount": 69,
     "hanjaReviewNeeded": 8,
     "note": "한자 동음이의 오매칭 방지를 위해 hanja 필드에 정자(正字) 사용. terrain은 MVP 수작업 분류 — Phase 2에서 GIS 데이터로 보완 예정"
   },

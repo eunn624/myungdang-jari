@@ -2,6 +2,7 @@ import type { Ohang } from '../saju/types';
 
 export type Terrain = 'highland' | 'waterfront' | 'flatland' | 'green';
 export type HanjaStatus = 'confirmed' | 'manual_review';
+export type TerrainConfidence = 'high' | 'medium' | 'low';
 
 export interface District {
   code: string;
@@ -12,10 +13,19 @@ export interface District {
   ohangChars: string[];
   ohang: Ohang[];
   terrain: Terrain;
+  terrainTags?: Terrain[];
   terrainNote: string;
   hanjaStatus: HanjaStatus;
   hanjaNote?: string;
   manualNote?: string;
+}
+
+export interface TerrainClassification {
+  primary: Terrain;
+  tags: Terrain[];
+  label: string;
+  note: string;
+  confidence: TerrainConfidence;
 }
 
 export interface MatchResult {
