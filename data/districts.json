@@ -1,0 +1,509 @@
+{
+  "_meta": {
+    "description": "행정동 DB — 오행·지형 속성 포함 (MVP 수작업 정제본)",
+    "source": "공공데이터포털 전국 행정동 DB 기반 + 한자명 수작업 보완",
+    "dataPortalUrl": "https://www.data.go.kr (전국 행정동코드 목록)",
+    "version": "1.0.0-mvp",
+    "totalCount": 72,
+    "hanjaReviewNeeded": 8,
+    "note": "한자 동음이의 오매칭 방지를 위해 hanja 필드에 정자(正字) 사용. terrain은 MVP 수작업 분류 — Phase 2에서 GIS 데이터로 보완 예정"
+  },
+  "districts": [
+    {
+      "code": "1111010100", "name": "청운효자동", "hanja": "淸雲孝子洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["淸"], "ohang": ["水"],
+      "terrain": "highland", "terrainNote": "인왕산 기슭 고지대",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010200", "name": "사직동", "hanja": "社稷洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": [], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "평지, 사직공원 인접 녹지",
+      "hanjaStatus": "manual_review",
+      "manualNote": "社稷은 토지신·곡식신 → 土 오행 배정"
+    },
+    {
+      "code": "1111010300", "name": "삼청동", "hanja": "三淸洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["淸"], "ohang": ["水"],
+      "terrain": "green", "terrainNote": "북악산 자락, 삼청공원 녹지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010400", "name": "부암동", "hanja": "付岩洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["岩"], "ohang": ["土"],
+      "terrain": "highland", "terrainNote": "북악산·인왕산 사이 고지대",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010500", "name": "평창동", "hanja": "平倉洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["平"], "ohang": ["土"],
+      "terrain": "highland", "terrainNote": "북한산 자락 고지대 주거지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010600", "name": "무악동", "hanja": "毋岳洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["岳"], "ohang": ["土"],
+      "terrain": "highland", "terrainNote": "인왕산(毋岳山) 동편",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010700", "name": "이화동", "hanja": "梨花洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["花"], "ohang": ["木"],
+      "terrain": "highland", "terrainNote": "낙산 동편 경사지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111010800", "name": "혜화동", "hanja": "惠化洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "flatland", "terrainNote": "대학로 평지",
+      "hanjaStatus": "manual_review",
+      "manualNote": "惠化 — 오행 매핑 불명확, 추가 자문 필요"
+    },
+    {
+      "code": "1111010900", "name": "명륜·혜화동", "hanja": "明倫洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["明"], "ohang": ["火"],
+      "terrain": "flatland", "terrainNote": "성균관대 주변 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111011000", "name": "동숭동", "hanja": "東崇洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["東"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "대학로 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1111011100", "name": "수송동", "hanja": "壽松洞",
+      "siDo": "서울", "siGunGu": "종로구",
+      "ohangChars": ["松"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "도심 평지",
+      "hanjaStatus": "confirmed",
+      "hanjaNote": "壽(목숨 수)는 水 아님 — 壽松에서 松(목)이 오행 주도"
+    },
+    {
+      "code": "1114010100", "name": "한강로동", "hanja": "漢江路洞",
+      "siDo": "서울", "siGunGu": "용산구",
+      "ohangChars": ["漢","江"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접 수변지역",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1114010200", "name": "이촌동", "hanja": "二村洞",
+      "siDo": "서울", "siGunGu": "용산구",
+      "ohangChars": [], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강변 수변지역",
+      "hanjaStatus": "manual_review",
+      "manualNote": "한자에 水 없으나 한강 직접 인접 → 지형 기반 水 배정"
+    },
+    {
+      "code": "1114010300", "name": "보광동", "hanja": "普光洞",
+      "siDo": "서울", "siGunGu": "용산구",
+      "ohangChars": ["光"], "ohang": ["火"],
+      "terrain": "flatland", "terrainNote": "남산 동편 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1120010100", "name": "금호동", "hanja": "金湖洞",
+      "siDo": "서울", "siGunGu": "성동구",
+      "ohangChars": ["金","湖"], "ohang": ["金","水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접, 금호산 근처",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1120010200", "name": "옥수동", "hanja": "玉水洞",
+      "siDo": "서울", "siGunGu": "성동구",
+      "ohangChars": ["玉","水"], "ohang": ["金","水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접 수변지역",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1121010100", "name": "자양동", "hanja": "紫陽洞",
+      "siDo": "서울", "siGunGu": "광진구",
+      "ohangChars": ["陽"], "ohang": ["火"],
+      "terrain": "waterfront", "terrainNote": "한강변 수변, 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1123010100", "name": "청량리동", "hanja": "淸凉里洞",
+      "siDo": "서울", "siGunGu": "동대문구",
+      "ohangChars": ["淸"], "ohang": ["水"],
+      "terrain": "flatland", "terrainNote": "도심 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1126010100", "name": "수유동", "hanja": "水踰洞",
+      "siDo": "서울", "siGunGu": "강북구",
+      "ohangChars": ["水"], "ohang": ["水"],
+      "terrain": "green", "terrainNote": "북한산 자락, 수유리 계곡",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1127010100", "name": "방학동", "hanja": "放鶴洞",
+      "siDo": "서울", "siGunGu": "도봉구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "highland", "terrainNote": "도봉산 기슭 고지대",
+      "hanjaStatus": "manual_review",
+      "manualNote": "放鶴 — 학을 놓아줌, 오행 불명확. 지형(고지대) 기반 안내"
+    },
+    {
+      "code": "1129010100", "name": "월계동", "hanja": "月溪洞",
+      "siDo": "서울", "siGunGu": "노원구",
+      "ohangChars": ["溪"], "ohang": ["水"],
+      "terrain": "flatland", "terrainNote": "중랑천 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1129010200", "name": "상계동", "hanja": "上溪洞",
+      "siDo": "서울", "siGunGu": "노원구",
+      "ohangChars": ["溪"], "ohang": ["水"],
+      "terrain": "flatland", "terrainNote": "수락산 서편 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1131010100", "name": "수색동", "hanja": "水色洞",
+      "siDo": "서울", "siGunGu": "은평구",
+      "ohangChars": ["水"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강·불광천 합류점 인근",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1131010200", "name": "진관동", "hanja": "津寬洞",
+      "siDo": "서울", "siGunGu": "은평구",
+      "ohangChars": ["津"], "ohang": ["水"],
+      "terrain": "green", "terrainNote": "북한산국립공원 인접 녹지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1132010100", "name": "홍제동", "hanja": "弘濟洞",
+      "siDo": "서울", "siGunGu": "서대문구",
+      "ohangChars": ["濟"], "ohang": ["水"],
+      "terrain": "highland", "terrainNote": "인왕산 서편 경사지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1144010100", "name": "합정동", "hanja": "合井洞",
+      "siDo": "서울", "siGunGu": "마포구",
+      "ohangChars": ["井"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1144010200", "name": "서교동", "hanja": "西橋洞",
+      "siDo": "서울", "siGunGu": "마포구",
+      "ohangChars": ["西"], "ohang": ["金"],
+      "terrain": "flatland", "terrainNote": "홍대 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1144010300", "name": "연남동", "hanja": "延南洞",
+      "siDo": "서울", "siGunGu": "마포구",
+      "ohangChars": ["南"], "ohang": ["火"],
+      "terrain": "flatland", "terrainNote": "경의선숲길 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1144010400", "name": "상암동", "hanja": "上岩洞",
+      "siDo": "서울", "siGunGu": "마포구",
+      "ohangChars": ["岩"], "ohang": ["土"],
+      "terrain": "waterfront", "terrainNote": "한강·난지도 인근 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1144010500", "name": "성산동", "hanja": "城山洞",
+      "siDo": "서울", "siGunGu": "마포구",
+      "ohangChars": ["山"], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "성산대교 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1147010100", "name": "목동", "hanja": "木洞",
+      "siDo": "서울", "siGunGu": "양천구",
+      "ohangChars": ["木"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "안양천 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1150010100", "name": "화곡동", "hanja": "禾谷洞",
+      "siDo": "서울", "siGunGu": "강서구",
+      "ohangChars": ["禾"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1153010100", "name": "개봉동", "hanja": "開峰洞",
+      "siDo": "서울", "siGunGu": "구로구",
+      "ohangChars": ["峰"], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1154010100", "name": "독산동", "hanja": "禿山洞",
+      "siDo": "서울", "siGunGu": "금천구",
+      "ohangChars": ["山"], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "독산 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1156010100", "name": "여의도동", "hanja": "汝矣島洞",
+      "siDo": "서울", "siGunGu": "영등포구",
+      "ohangChars": ["汝"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강 중 섬, 사방 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1156010200", "name": "당산동", "hanja": "堂山洞",
+      "siDo": "서울", "siGunGu": "영등포구",
+      "ohangChars": ["山"], "ohang": ["土"],
+      "terrain": "waterfront", "terrainNote": "한강변 수변지역",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1159010100", "name": "흑석동", "hanja": "黑石洞",
+      "siDo": "서울", "siGunGu": "동작구",
+      "ohangChars": ["黑","石"], "ohang": ["水","金"],
+      "terrain": "waterfront", "terrainNote": "한강변, 국사봉 기슭",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1159010200", "name": "노량진동", "hanja": "鷺梁津洞",
+      "siDo": "서울", "siGunGu": "동작구",
+      "ohangChars": ["津"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1162010100", "name": "신림동", "hanja": "新林洞",
+      "siDo": "서울", "siGunGu": "관악구",
+      "ohangChars": ["林"], "ohang": ["木"],
+      "terrain": "highland", "terrainNote": "관악산 자락 경사지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1165010100", "name": "서초동", "hanja": "瑞草洞",
+      "siDo": "서울", "siGunGu": "서초구",
+      "ohangChars": ["草"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "강남 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1165010200", "name": "반포동", "hanja": "盤浦洞",
+      "siDo": "서울", "siGunGu": "서초구",
+      "ohangChars": ["浦"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1168010100", "name": "청담동", "hanja": "淸潭洞",
+      "siDo": "서울", "siGunGu": "강남구",
+      "ohangChars": ["淸","潭"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "한강변 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1168010200", "name": "논현동", "hanja": "論峴洞",
+      "siDo": "서울", "siGunGu": "강남구",
+      "ohangChars": ["峴"], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "강남 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1171010100", "name": "잠실동", "hanja": "蠶室洞",
+      "siDo": "서울", "siGunGu": "송파구",
+      "ohangChars": ["蠶"], "ohang": ["木"],
+      "terrain": "waterfront", "terrainNote": "한강·석촌호수 인근",
+      "hanjaStatus": "confirmed",
+      "hanjaNote": "蠶(누에 잠) — 뽕잎을 먹는 蠶 → 木 오행"
+    },
+    {
+      "code": "1171010200", "name": "석촌동", "hanja": "石村洞",
+      "siDo": "서울", "siGunGu": "송파구",
+      "ohangChars": ["石"], "ohang": ["金"],
+      "terrain": "waterfront", "terrainNote": "석촌호수 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1171010300", "name": "송파동", "hanja": "松坡洞",
+      "siDo": "서울", "siGunGu": "송파구",
+      "ohangChars": ["松"], "ohang": ["木"],
+      "terrain": "flatland", "terrainNote": "평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1174010100", "name": "암사동", "hanja": "岩寺洞",
+      "siDo": "서울", "siGunGu": "강동구",
+      "ohangChars": ["岩"], "ohang": ["土"],
+      "terrain": "waterfront", "terrainNote": "한강 인접, 고덕천 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "1174010200", "name": "천호동", "hanja": "千戶洞",
+      "siDo": "서울", "siGunGu": "강동구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "waterfront", "terrainNote": "한강변 수변지역",
+      "hanjaStatus": "manual_review",
+      "manualNote": "千戶 — 오행 매핑 불명확, 지형(수변) 기반 안내"
+    },
+    {
+      "code": "2611010100", "name": "해운대동", "hanja": "海雲臺洞",
+      "siDo": "부산", "siGunGu": "해운대구",
+      "ohangChars": ["海"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "해운대 해수욕장, 바다 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2611010200", "name": "수영동", "hanja": "水營洞",
+      "siDo": "부산", "siGunGu": "수영구",
+      "ohangChars": ["水"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "수영강·바다 인접",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2611010300", "name": "남포동", "hanja": "南浦洞",
+      "siDo": "부산", "siGunGu": "중구",
+      "ohangChars": ["南","浦"], "ohang": ["火","水"],
+      "terrain": "waterfront", "terrainNote": "부산항 인근 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2611010400", "name": "금정동", "hanja": "金井洞",
+      "siDo": "부산", "siGunGu": "금정구",
+      "ohangChars": ["金","井"], "ohang": ["金","水"],
+      "terrain": "highland", "terrainNote": "금정산 자락 고지대",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2711010100", "name": "동촌동", "hanja": "東村洞",
+      "siDo": "대구", "siGunGu": "동구",
+      "ohangChars": ["東"], "ohang": ["木"],
+      "terrain": "waterfront", "terrainNote": "금호강 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2711010200", "name": "달서동", "hanja": "達西洞",
+      "siDo": "대구", "siGunGu": "달서구",
+      "ohangChars": ["西"], "ohang": ["金"],
+      "terrain": "flatland", "terrainNote": "평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "2811010100", "name": "청라동", "hanja": "靑羅洞",
+      "siDo": "인천", "siGunGu": "서구",
+      "ohangChars": ["靑"], "ohang": ["木"],
+      "terrain": "waterfront", "terrainNote": "서해 인근, 청라호수공원",
+      "hanjaStatus": "confirmed",
+      "hanjaNote": "靑(푸를 청) — 木 오행(청색·봄·생장)"
+    },
+    {
+      "code": "2811010200", "name": "송도동", "hanja": "松島洞",
+      "siDo": "인천", "siGunGu": "연수구",
+      "ohangChars": ["松"], "ohang": ["木"],
+      "terrain": "waterfront", "terrainNote": "송도만 해안 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4115010100", "name": "수원동", "hanja": "水原洞",
+      "siDo": "경기", "siGunGu": "수원시 팔달구",
+      "ohangChars": ["水"], "ohang": ["水"],
+      "terrain": "flatland", "terrainNote": "화성 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4115010200", "name": "일산동", "hanja": "一山洞",
+      "siDo": "경기", "siGunGu": "고양시 일산동구",
+      "ohangChars": ["山"], "ohang": ["土"],
+      "terrain": "flatland", "terrainNote": "한강 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4115010300", "name": "광교동", "hanja": "光敎洞",
+      "siDo": "경기", "siGunGu": "수원시 영통구",
+      "ohangChars": ["光"], "ohang": ["火"],
+      "terrain": "highland", "terrainNote": "광교산 자락 고지대",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4115010400", "name": "판교동", "hanja": "板橋洞",
+      "siDo": "경기", "siGunGu": "성남시 분당구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "flatland", "terrainNote": "탄천 인근 평지",
+      "hanjaStatus": "manual_review",
+      "manualNote": "板橋 — 板(널빤지)·橋(다리), 오행 불명확. 추가 자문 필요"
+    },
+    {
+      "code": "4115010500", "name": "분당동", "hanja": "盆唐洞",
+      "siDo": "경기", "siGunGu": "성남시 분당구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "flatland", "terrainNote": "탄천 인근 평지",
+      "hanjaStatus": "manual_review",
+      "manualNote": "盆唐 — 오행 매핑 불명확, 추가 자문 필요"
+    },
+    {
+      "code": "4415010100", "name": "유성동", "hanja": "儒城洞",
+      "siDo": "대전", "siGunGu": "유성구",
+      "ohangChars": [], "ohang": [],
+      "terrain": "green", "terrainNote": "계룡산·갑천 인근 녹지",
+      "hanjaStatus": "manual_review",
+      "manualNote": "儒城 — 유학 관련 지명, 오행 불명확"
+    },
+    {
+      "code": "4415010200", "name": "갑천동", "hanja": "甲川洞",
+      "siDo": "대전", "siGunGu": "서구",
+      "ohangChars": ["川"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "갑천(甲川) 수변",
+      "hanjaStatus": "confirmed",
+      "hanjaNote": "甲은 사주 천간이기도 하나, 여기서는 지명 일부로 川(水)이 오행 주도"
+    },
+    {
+      "code": "4715010100", "name": "해평동", "hanja": "海平洞",
+      "siDo": "경북", "siGunGu": "구미시",
+      "ohangChars": ["海"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "낙동강 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4815010100", "name": "진주동", "hanja": "晉州洞",
+      "siDo": "경남", "siGunGu": "진주시",
+      "ohangChars": ["州"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "남강(南江) 인접 수변",
+      "hanjaStatus": "confirmed",
+      "hanjaNote": "州(고을 주) — 물가에 형성된 고을의 의미, 水 배정"
+    },
+    {
+      "code": "4913010100", "name": "전주동", "hanja": "全州洞",
+      "siDo": "전북", "siGunGu": "전주시 완산구",
+      "ohangChars": ["州"], "ohang": ["水"],
+      "terrain": "flatland", "terrainNote": "전주천 인근 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "4613010100", "name": "광주동", "hanja": "光州洞",
+      "siDo": "광주", "siGunGu": "동구",
+      "ohangChars": ["光"], "ohang": ["火"],
+      "terrain": "flatland", "terrainNote": "무등산 서편 평지",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "5011010100", "name": "제주동", "hanja": "濟州洞",
+      "siDo": "제주", "siGunGu": "제주시",
+      "ohangChars": ["濟"], "ohang": ["水"],
+      "terrain": "waterfront", "terrainNote": "바다 인접 수변",
+      "hanjaStatus": "confirmed"
+    },
+    {
+      "code": "5011010200", "name": "서귀동", "hanja": "西歸洞",
+      "siDo": "제주", "siGunGu": "서귀포시",
+      "ohangChars": ["西"], "ohang": ["金"],
+      "terrain": "waterfront", "terrainNote": "남해 바다 수변",
+      "hanjaStatus": "confirmed"
+    }
+  ]
+}
