@@ -20,7 +20,7 @@ export interface IljuContent {
   caution: string;
 }
 
-interface StemProfile {
+export interface StemProfile {
   title: string;
   metaphor: string;
   temperament: string;
@@ -31,7 +31,7 @@ interface StemProfile {
   ritual: string;
 }
 
-interface BranchProfile {
+export interface BranchProfile {
   animal: string;
   scene: string;
   placeMood: string;
@@ -333,6 +333,7 @@ function createIljuContent(index: number): IljuContent {
 }
 
 export const ILJU_CONTENT: IljuContent[] = Array.from({ length: 60 }, (_, index) => createIljuContent(index));
+export { STEM_PROFILES, BRANCH_PROFILES };
 
 export function getIljuContent(dayPillar: { stem: HeavenlyStem; branch: EarthlyBranch }): IljuContent | undefined {
   return ILJU_CONTENT.find(item => item.ganji === `${dayPillar.stem}${dayPillar.branch}`);

@@ -2,7 +2,7 @@ import type { ParsedUrlQuery } from 'querystring';
 import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
 import type { Ohang } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
-import { getIljuContent } from '../data/ilju-content';
+import { getIljuContent, type IljuContent } from '../data/ilju-content';
 
 type Gender = '여성' | '남성';
 type CalendarType = '양력' | '음력';
@@ -32,6 +32,7 @@ export interface AppReport {
   positiveReading: string;
   sinsal: string[];
   flowCards: string[];
+  iljuContent: IljuContent | null;
 }
 
 const OHANG_LABELS: Record<Ohang, string> = {
@@ -108,6 +109,7 @@ export function buildReport(profile: AppProfile): AppReport {
     positiveReading: `${deficit}를 보완하는 생활 습관을 붙이면 집중력과 관계 감각이 동시에 안정되기 쉬워요. 차분한 조명, 정돈된 침실, 물성 있는 소품처럼 작지만 반복 가능한 방식이 특히 잘 맞습니다.`,
     sinsal: saju.sinsal.map(s => s.name),
     flowCards: ['사주팔자', '일간 중심', '오행 균형', '신살·길성', '대운·세운', '명당 추천', '개운법'],
+    iljuContent: iljuContent ?? null,
   };
 }
 
@@ -148,6 +150,7 @@ function getEmptyReport(profile: AppProfile): AppReport {
     positiveReading: '개발 중...',
     sinsal: [],
     flowCards: [],
+    iljuContent: null,
   };
 }
 
