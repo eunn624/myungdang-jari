@@ -2,23 +2,23 @@
   "name": "myungdang-jari",
   "version": "0.0.1",
   "description": "사주/풍수 기반 초개인화 명당 가이드 & 개운 앱",
-  "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "expo start",
-    "build": "expo export -p web",
-    "start": "expo start"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "keywords": ["사주", "풍수", "개운", "명당"],
   "author": "Gimseieun",
   "license": "MIT",
   "dependencies": {
     "react": "^18.2.0",
-    "react-native": "^0.72.0",
-    "expo": "^49.0.0",
-    "expo-splash-screen": "^0.20.0"
+    "react-dom": "^18.2.0",
+    "next": "^14.0.0"
   },
   "devDependencies": {
-    "expo-cli": "^6.0.0"
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
   }
 }
