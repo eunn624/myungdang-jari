@@ -32,15 +32,6 @@ export interface AppReport {
   flowCards: string[];
 }
 
-const DEFAULT_PROFILE: AppProfile = {
-  name: '시은',
-  gender: '여성',
-  calendar: '양력',
-  birthDate: '1997-06-24',
-  birthTime: '10:47',
-  unknownTime: false,
-};
-
 const OHANG_LABELS: Record<Ohang, string> = {
   木: '나무처럼 자라는 흐름',
   火: '따뜻하게 확산되는 흐름',
@@ -51,17 +42,23 @@ const OHANG_LABELS: Record<Ohang, string> = {
 
 export function getProfileFromQuery(query: ParsedUrlQuery): AppProfile {
   return {
-    name: getString(query.name) || DEFAULT_PROFILE.name,
+    name: getString(query.name) || '사용자',
     gender: normalizeGender(getString(query.gender)),
     calendar: normalizeCalendar(getString(query.calendar)),
-    birthDate: getString(query.birthDate) || DEFAULT_PROFILE.birthDate,
-    birthTime: getString(query.birthTime) || DEFAULT_PROFILE.birthTime,
+    birthDate: getString(query.birthDate) || '',
+    birthTime: getString(query.birthTime) || '',
     unknownTime: getString(query.unknownTime) === 'true',
   };
 }
 
 export function getReportFromQuery(query: ParsedUrlQuery): AppReport {
-  return buildReport(getProfileFromQuery(query));
+  const profile = getProfileFromQuery(query);
+  
+  if (!profile.birthDate) {
+    return getEmptyReport(profile);
+  }
+  
+  return buildReport(profile);
 }
 
 export function buildReport(profile: AppProfile): AppReport {
@@ -104,6 +101,38 @@ export function buildReport(profile: AppProfile): AppReport {
     positiveReading: `${deficit}를 보완하는 생활 습관을 붙이면 집중력과 관계 감각이 동시에 안정되기 쉬워요. 차분한 조명, 정돈된 침실, 물성 있는 소품처럼 작지만 반복 가능한 방식이 특히 잘 맞습니다.`,
     sinsal: ['도화살', '반안살', '천을귀인', '문창귀인'],
     flowCards: ['사주팔자', '일간 중심', '오행 균형', '신살·길성', '대운·세운', '명당 추천', '개운법'],
+  };
+}
+
+function getEmptyReport(profile: AppProfile): AppReport {
+  return {
+    profile,
+    saju: {
+      pillars: {
+        year: { stem: '개', branch: '발', stemKor: '개발', branchKor: '중' },
+        month: { stem: '.', branch: '.', stemKor: '..', branchKor: '..' },
+        day: { stem: '.', branch: '.', stemKor: '..', branchKor: '..' },
+        hour: null,
+      },
+      ohang: { wood: 0, fire: 0, earth: 0, metal: 0, water: 0 },
+      deficitOhang: [],
+      bedDirection: '북',
+      gilbang: '북',
+      yongsin: '木',
+    },
+    districts: [],
+    formattedBirth: '생년월일시를 입력하면 분석됩니다',
+    formattedToday: formatToday(),
+    todayMission: '개발 중...',
+    dailyEnergyTitle: '개발 중...',
+    dailyEnergyDescription: '생년월일시를 입력하면 당신의 기운을 분석합니다.',
+    summaryTitle: '개발 중...',
+    summaryDescription: '개발 중...',
+    longReading: ['개발 중...', '개발 중...', '개발 중...'],
+    cautionReading: '개발 중...',
+    positiveReading: '개발 중...',
+    sinsal: [],
+    flowCards: [],
   };
 }
 
@@ -152,6 +181,7 @@ function getTodayMission(deficit: Ohang): string {
 }
 
 function formatBirth(profile: AppProfile): string {
+  if (!profile.birthDate) return '';
   const date = profile.birthDate.replaceAll('-', '. ');
   return `${date}${profile.unknownTime ? ' (시 모름)' : ` (${profile.birthTime})`}`;
 }
