@@ -3,6 +3,8 @@ import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
 import type { Ohang } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
 import { getIljuContent, type IljuContent } from '../data/ilju-content';
+import { getTodayGanji, getMonthGanji, getDayInfo, getMonthTip, getTodayKey, type DayInfo, type MonthTip } from './saju/daily';
+import type { GanJi } from './saju/types';
 
 type Gender = '여성' | '남성';
 type CalendarType = '양력' | '음력';
@@ -33,6 +35,11 @@ export interface AppReport {
   sinsal: string[];
   flowCards: string[];
   iljuContent: IljuContent | null;
+  todayGanji: GanJi;
+  todayDayInfo: DayInfo;
+  monthGanji: GanJi;
+  monthTip: MonthTip;
+  todayKey: string;
 }
 
 const OHANG_LABELS: Record<Ohang, string> = {
@@ -110,6 +117,7 @@ export function buildReport(profile: AppProfile): AppReport {
     sinsal: saju.sinsal.map(s => s.name),
     flowCards: ['사주팔자', '일간 중심', '오행 균형', '신살·길성', '대운·세운', '명당 추천', '개운법'],
     iljuContent: iljuContent ?? null,
+    ...getDailyFields(),
   };
 }
 
@@ -151,6 +159,7 @@ function getEmptyReport(profile: AppProfile): AppReport {
     sinsal: [],
     flowCards: [],
     iljuContent: null,
+    ...getDailyFields(),
   };
 }
 
@@ -249,4 +258,16 @@ function normalizeGender(value: string): Gender {
 
 function normalizeCalendar(value: string): CalendarType {
   return value === '음력' ? '음력' : '양력';
+}
+
+function getDailyFields() {
+  const todayGanji = getTodayGanji();
+  const monthGanji = getMonthGanji();
+  return {
+    todayGanji,
+    todayDayInfo: getDayInfo(todayGanji.stem),
+    monthGanji,
+    monthTip: getMonthTip(monthGanji.branch),
+    todayKey: getTodayKey(),
+  };
 }

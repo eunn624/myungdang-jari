@@ -32,3 +32,5 @@ export { getOhangDistribution, getDeficitOhang, getYongsin } from './ohang';
 export { getBedDirection, getGilbang } from './directions';
 export { calcSinsal } from './sinsal';
 export { calcDaeWoon, calcSeWoon } from './daewoon';
+export { getTodayGanji, getMonthGanji, getDayInfo, getMonthTip, getTodayOhang, getMonthOhang, getTodayKey } from './daily';
+export type { DayInfo, MonthTip } from './daily';

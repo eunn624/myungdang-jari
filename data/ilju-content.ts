@@ -42,7 +42,7 @@ export interface BranchProfile {
   caution: string;
 }
 
-const STEM_PROFILES: Record<HeavenlyStem, StemProfile> = {
+export const STEM_PROFILES: Record<HeavenlyStem, StemProfile> = {
   甲: {
     title: '곧게 자라는 큰 나무형',
     metaphor: '큰 줄기를 세우듯 기준과 방향을 먼저 세우는 힘',
@@ -145,7 +145,7 @@ const STEM_PROFILES: Record<HeavenlyStem, StemProfile> = {
   },
 };
 
-const BRANCH_PROFILES: Record<EarthlyBranch, BranchProfile> = {
+export const BRANCH_PROFILES: Record<EarthlyBranch, BranchProfile> = {
   子: {
     animal: '쥐',
     scene: '한밤의 물길을 읽듯 조용히 흐름을 살피는 장면',

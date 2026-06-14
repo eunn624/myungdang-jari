@@ -1,68 +1,159 @@
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
+import FortuneMascot from '../components/FortuneMascot';
 
 export default function HomePage() {
   const router = useRouter();
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
   const query = createQueryFromProfile(report.profile);
+  const [missionDone, setMissionDone] = useState(false);
+
+  useEffect(() => {
+    const stored = typeof window !== 'undefined'
+      ? localStorage.getItem(`mission_${report.todayKey}`)
+      : null;
+    setMissionDone(stored === 'true');
+  }, [report.todayKey]);
+
+  const handleMissionComplete = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`mission_${report.todayKey}`, 'true');
+    }
+    setMissionDone(true);
+  };
 
   return (
     <Layout showTabBar activeTab="home">
       <div className={styles.screen}>
-        <div className={styles.headerBlock}>
-          <div className={styles.column} style={{ gap: 4 }}>
-            <span className={styles.caption}>{report.formattedToday}</span>
-            <h1 className={styles.sectionTitle}>{report.profile.name}님,<br />좋은 아침이에요</h1>
+        <div className={`${styles.heroPanel} ${styles.heroPanelBlue}`}>
+          <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
+          <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
+          <div className={styles.heroPanelHeader}>
+            <div className={styles.column} style={{ gap: 4 }}>
+              <span className={styles.heroPanelLabel}>{report.formattedToday}</span>
+              <h1 className={styles.heroTitle}>{report.profile.name}님,<br />오늘의 명당 흐름이에요</h1>
+            </div>
+            <FortuneMascot size="sm" mood="blue" />
           </div>
-          <div className={`${styles.mascot} ${styles.mascotSmall}`}>🐱</div>
-        </div>
 
-        <div className={styles.softCard}>
-          <span className={styles.badgeSoft}>오늘의 기운</span>
-          <h2 className={styles.sectionTitle} style={{ color: '#8f7ce0', marginTop: 10 }}>{report.dailyEnergyTitle}</h2>
-          <p className={styles.bodyText}>{report.dailyEnergyDescription}</p>
-          <div className={styles.badgeWrap} style={{ marginTop: 10 }}>
-            <span className={styles.badgeFill}>오늘 컬러 · 개발 중...</span>
-            <span className={styles.badge}>개발 중...</span>
-          </div>
-        </div>
+          <div className={styles.heroDeck}>
+            <div className={styles.heroInfoCard}>
+              <span className={styles.badgeFill}>오늘의 일진</span>
+              <h2 className={styles.heroInfoTitle} style={{ marginTop: 10 }}>{report.todayDayInfo.title}</h2>
+              <p className={styles.heroInfoBody}>{report.todayDayInfo.message}</p>
+            </div>
 
-        <div className={styles.cardStrong}>
-          <span className={styles.badgeFill}>오늘의 공간 미션</span>
-          <p className={styles.bodyText} style={{ marginTop: 10, fontWeight: 700 }}>{report.todayMission}</p>
-          <p className={styles.caption}>부족 오행 {report.saju.deficitOhang[0] || report.saju.yongsin} 보완 기준</p>
-          <button type="button" className={styles.secondaryButton} style={{ marginTop: 10 }}>
-            미션 완료 체크 ✓
-          </button>
-        </div>
-
-        <div className={styles.column} style={{ gap: 8 }}>
-          <span className={styles.label}>이어서 보기</span>
-          <Link href={{ pathname: '/result', query }} className={styles.card}>
-            <div className={styles.row} style={{ gap: 12 }}>
-              <div className={`${styles.mascot} ${styles.mascotTiny}`}>🐱</div>
-              <div className={styles.column} style={{ gap: 2 }}>
-                <span className={styles.label}>내 사주 다시 보기</span>
-                <span className={styles.caption}>{report.formattedBirth} · {report.saju.pillars.day.stem}{report.saju.pillars.day.branch}</span>
+            <div className={styles.heroStats}>
+              <div className={styles.heroStat}>
+                <strong>{report.todayDayInfo.ohang}</strong>
+                <span>오늘의 오행</span>
+              </div>
+              <div className={styles.heroStat}>
+                <strong>{report.todayDayInfo.colorName}</strong>
+                <span>추천 컬러</span>
+              </div>
+              <div className={styles.heroStat}>
+                <strong>{report.saju.gilbang}</strong>
+                <span>길방</span>
+              </div>
+              <div className={styles.heroStat}>
+                <strong>{report.saju.bedDirection}</strong>
+                <span>침대 머리</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className={styles.actionGrid}>
+          <div className={`${styles.actionCard} ${styles.actionCardYellow}`}>
+            <h2 className={styles.actionTitle}>오늘의 공간 미션</h2>
+            <p className={styles.actionBody}>{report.todayMission}</p>
+          </div>
+          <div className={`${styles.actionCard} ${styles.actionCardPurple}`}>
+            <h2 className={styles.actionTitle}>이번달 월운</h2>
+            <p className={styles.actionBody}>{report.monthTip.headline}</p>
+          </div>
+          <Link href={{ pathname: '/place', query }} className={`${styles.actionCard} ${styles.actionCardBlue}`}>
+            <h2 className={styles.actionTitle}>명당 후보 보기</h2>
+            <p className={styles.actionBody}>
+              {report.districts.length > 0
+                ? report.districts.slice(0, 2).map((item) => item.district.name).join(', ')
+                : '사주 입력 후 확인'}
+            </p>
+          </Link>
+          <Link href={{ pathname: '/share', query }} className={`${styles.actionCard} ${styles.actionCardMint}`}>
+            <h2 className={styles.actionTitle}>공유 카드 저장</h2>
+            <p className={styles.actionBody}>인스타와 카카오톡으로 보내기 좋은 한 장 카드</p>
           </Link>
         </div>
 
-        <span className={styles.label}>오늘 추천</span>
-        <div className={styles.homeGrid}>
-          <Link href={{ pathname: '/place', query }} className={styles.miniCard}>
-            <span className={styles.badge}>명당 후보</span>
-            <p className={styles.miniCardText}>{report.districts.slice(0, 2).map((item) => item.district.name).join(', ')}</p>
+        <div className={styles.quickPair}>
+          <button type="button" className={styles.secondaryButton} onClick={handleMissionComplete}>
+            {missionDone ? '오늘 미션 완료 ✓' : '미션 완료 체크'}
+          </button>
+          <Link href={{ pathname: '/result', query }} className={styles.ghostButton} style={{ minHeight: 46 }}>
+            리딩 카드 다시 보기
           </Link>
-          <Link href={{ pathname: '/share', query }} className={styles.miniCard}>
-            <span className={styles.badge}>공유 카드</span>
-            <p className={styles.miniCardText}>귀여운 9:16 요약 카드로 저장하고 보내기</p>
-          </Link>
+        </div>
+
+        <div className={styles.storyScroller}>
+          <div className={`${styles.storyCard} ${styles.storyCardPurple}`}>
+            <div className={styles.storyShapeA}></div>
+            <div className={styles.storyShapeB}></div>
+            <h2 className={styles.storyTitle}>오늘의 나를<br />한 줄로 요약하면</h2>
+            <p className={styles.storyCopy}>{report.summaryDescription}</p>
+          </div>
+
+          <div className={`${styles.storyCard} ${styles.storyCardMint}`}>
+            <div className={styles.storyShapeA}></div>
+            <div className={styles.storyShapeC}></div>
+            <h2 className={styles.storyTitle}>이번달 공간 팁</h2>
+            <p className={styles.storyCopy}>{report.monthTip.spaceTip}</p>
+          </div>
+
+          <div className={`${styles.storyCard} ${styles.storyCardPeach} ${styles.storyCardDarkText}`}>
+            <div className={styles.storyShapeB}></div>
+            <div className={styles.storyShapeC}></div>
+            <h2 className={styles.storyTitle}>오늘 추천 동선</h2>
+            <p className={styles.storyCopy}>{report.todayDayInfo.spaceAction}</p>
+          </div>
+        </div>
+
+        <div className={styles.statsGrid}>
+          <div className={styles.statCard}>
+            <strong className={styles.statValue}>{report.saju.deficitOhang[0] || report.saju.yongsin}</strong>
+            <span className={styles.statLabel}>보완 오행</span>
+          </div>
+          <div className={styles.statCard}>
+            <strong className={styles.statValue}>{report.todayGanji.stem}{report.todayGanji.branch}</strong>
+            <span className={styles.statLabel}>오늘 일진</span>
+          </div>
+          <div className={styles.statCard}>
+            <strong className={styles.statValue}>{report.monthGanji.stem}{report.monthGanji.branch}</strong>
+            <span className={styles.statLabel}>이번달 월운</span>
+          </div>
+        </div>
+
+        <div className={styles.column} style={{ gap: 10 }}>
+          <span className={styles.label}>빠른 메뉴</span>
+          <div className={styles.menuList}>
+            <Link href={{ pathname: '/saju', query }} className={styles.menuItem}>
+              <span>사주원국 · 오행 · 대운 보기</span>
+              <span>→</span>
+            </Link>
+            <Link href={{ pathname: '/read', query }} className={styles.menuItem}>
+              <span>긴 사주 풀이 읽기</span>
+              <span>→</span>
+            </Link>
+            <Link href={{ pathname: '/place', query }} className={styles.menuItem}>
+              <span>명당 · 방위 · 공간별 가이드</span>
+              <span>→</span>
+            </Link>
+          </div>
         </div>
       </div>
     </Layout>
