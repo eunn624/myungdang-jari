@@ -1,12 +1,22 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
-import { getReportFromQuery } from '../lib/app-report';
+import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
 
 export default function MyPage() {
   const router = useRouter();
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
+  const query = createQueryFromProfile(report.profile);
+  const [missionDone, setMissionDone] = useState(false);
+
+  useEffect(() => {
+    const stored = typeof window !== 'undefined'
+      ? localStorage.getItem(`mission_${report.todayKey}`)
+      : null;
+    setMissionDone(stored === 'true');
+  }, [report.todayKey]);
 
   return (
     <Layout showTabBar activeTab="my" headerTitle="마이" showBackButton>
@@ -27,19 +37,35 @@ export default function MyPage() {
         </div>
 
         <div className={styles.card}>
-          <span className={styles.label}>완료한 미션</span>
-          <div className={styles.column} style={{ gap: 8, marginTop: 10 }}>
-            <span className={styles.bodyText}>✓ {report.todayMission}</span>
-            <span className={styles.bodyText}>✓ 파란 포인트 소품 두기</span>
+          <span className={styles.label}>오늘의 미션</span>
+          <div className={styles.column} style={{ gap: 6, marginTop: 10 }}>
+            <span className={styles.bodyText}>
+              {missionDone ? '✓ ' : '○ '}{report.todayMission}
+            </span>
+            <span className={styles.caption} style={{ color: missionDone ? '#5cb85c' : '#8c7a6e' }}>
+              {missionDone ? '오늘 미션 완료!' : '홈 화면에서 완료 체크를 할 수 있어요'}
+            </span>
           </div>
         </div>
 
         <div className={styles.menuList}>
-          <div className={styles.menuItem}><span>입력 정보 수정</span><span>›</span></div>
-          <div className={styles.menuItem}><span>저장한 공유 카드</span><span>›</span></div>
-          <div className={styles.menuItem}><span>이용 안내</span><span>›</span></div>
-          <div className={styles.menuItem}><span>피드백 보내기</span><span>›</span></div>
+          <Link href={{ pathname: '/input', query }} className={styles.menuItem}>
+            <span>입력 정보 수정</span><span>›</span>
+          </Link>
+          <Link href={{ pathname: '/share', query }} className={styles.menuItem}>
+            <span>공유 카드 만들기</span><span>›</span>
+          </Link>
+          <Link href={{ pathname: '/store', query }} className={styles.menuItem}>
+            <span>오행 소품 추천 보기</span><span>›</span>
+          </Link>
+          <Link href={{ pathname: '/place', query }} className={styles.menuItem}>
+            <span>명당 · 방위 가이드</span><span>›</span>
+          </Link>
         </div>
+
+        <p className={styles.footerNote} style={{ textAlign: 'center' }}>
+          본 앱은 오락·참고 목적이며 풍수 효능을 보장하지 않습니다.
+        </p>
       </div>
     </Layout>
   );

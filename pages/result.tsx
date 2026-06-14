@@ -75,13 +75,15 @@ export default function ResultScreen() {
       number: '06',
       tone: `${styles.storyCardBlue}`,
       title: '참고해볼 지역 · 명당',
-      body: report.districts.slice(0, 3).map((item) => item.district.name).join(', '),
+      body: report.districts.length > 0
+        ? report.districts.slice(0, 3).map((item) => `${item.district.name} — ${item.district.terrainNote}`).join('\n\n')
+        : '생년월일을 입력하면 사주 기반 추천 생활권을 볼 수 있어요.',
     },
     {
       number: '07',
       tone: `${styles.storyCardMint}`,
-      title: '개운법 & 공유 카드',
-      body: '오늘의 공간 미션, 침대 방향, 공유 카드까지 한 번에 정리해둘 수 있어요.',
+      title: '오늘 바로 할 수 있는 개운',
+      body: `${report.todayMission}\n\n침대 ${report.saju.bedDirection}쪽 · 길방 ${report.saju.gilbang} 방향 공간 정돈\n\n공유 카드를 저장하면 카카오톡·인스타에 바로 보낼 수 있어요.`,
     },
   ];
 
