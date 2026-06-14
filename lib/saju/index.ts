@@ -14,7 +14,7 @@ export function analyzeSaju(birth: BirthInfo): SajuResult {
   return { pillars, ohang, deficitOhang, bedDirection, gilbang, yongsin };
 }
 
-export type { BirthInfo, SajuResult, FourPillars, OhangDistribution } from './types';
+export type { BirthInfo, SajuResult, FourPillars, OhangDistribution, Ohang } from './types';
 export { getFourPillars } from './manseryeok';
 export { getOhangDistribution, getDeficitOhang, getYongsin } from './ohang';
 export { getBedDirection, getGilbang } from './directions';
