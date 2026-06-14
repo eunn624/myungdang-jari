@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { type RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
@@ -61,37 +61,111 @@ export default function PlacePage() {
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
   const [activeTab, setActiveTab] = useState<SpaceTab>('지역 추천');
 
+  const regionRef = useRef<HTMLDivElement | null>(null);
+  const directionRef = useRef<HTMLDivElement | null>(null);
+  const roomRef = useRef<HTMLDivElement | null>(null);
+  const biboRef = useRef<HTMLDivElement | null>(null);
+
+  const sectionRefs: Record<SpaceTab, RefObject<HTMLDivElement>> = {
+    '지역 추천': regionRef,
+    '방위 가이드': directionRef,
+    공간별: roomRef,
+    '비보 소품': biboRef,
+  };
+
   const deficit = report.saju.deficitOhang[0] || report.saju.yongsin;
   const recommended = report.districts.slice(0, 3);
   const seWoon = report.saju.seWoon;
   const currentDaeWoon = report.saju.currentDaeWoon;
   const sinsal = report.saju.sinsal;
 
-  const hasDohwa = sinsal.some(s => s.name === '도화살');
-  const hasYeokma = sinsal.some(s => s.name === '역마살');
-  const hasMunchang = sinsal.some(s => s.name === '문창귀인');
+  const hasDohwa = sinsal.some((s) => s.name === '도화살');
+  const hasYeokma = sinsal.some((s) => s.name === '역마살');
+  const hasMunchang = sinsal.some((s) => s.name === '문창귀인');
+
+  useEffect(() => {
+    const scrollRoot = document.getElementById('app-main-scroll');
+    if (!scrollRoot) return undefined;
+
+    const sections = Object.entries(sectionRefs)
+      .map(([key, ref]) => ({ key: key as SpaceTab, node: ref.current }))
+      .filter((item): item is { key: SpaceTab; node: HTMLDivElement } => Boolean(item.node));
+
+    const onScroll = () => {
+      let current: SpaceTab = '지역 추천';
+      for (const section of sections) {
+        const top = section.node.offsetTop - scrollRoot.scrollTop;
+        if (top <= 180) {
+          current = section.key;
+        }
+      }
+      setActiveTab(current);
+    };
+
+    onScroll();
+    scrollRoot.addEventListener('scroll', onScroll, { passive: true });
+    return () => scrollRoot.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollToSection = (tab: SpaceTab) => {
+    setActiveTab(tab);
+    const node = sectionRefs[tab].current;
+    const scrollRoot = document.getElementById('app-main-scroll');
+    if (!node || !scrollRoot) return;
+
+    const headerOffset = 116;
+    const top = node.offsetTop - headerOffset;
+    scrollRoot.scrollTo({ top, behavior: 'smooth' });
+  };
 
   return (
     <Layout showTabBar activeTab="place" headerTitle="명당" showBackButton>
       <div className={styles.screen}>
-        <div className={styles.badgeWrap}>
-          {SPACE_TABS.map(tab => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => setActiveTab(tab)}
-              style={{
-                cursor: 'pointer', border: 'none', padding: 0, font: 'inherit', background: 'none',
-              }}
-            >
-              <span className={activeTab === tab ? styles.badgeFill : styles.badge}>{tab}</span>
-            </button>
-          ))}
+        <div className={styles.pageIntroCard}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.badge}>공간 리딩</span>
+            <h2 className={styles.sectionTitle}>{deficit} 기운 보완 가이드</h2>
+            <p className={styles.sectionSubtitle}>
+              지역 추천, 방위, 공간별 배치, 비보 소품까지 한 흐름으로 이어서 볼 수 있어요.
+            </p>
+          </div>
+          <div className={styles.statsGrid} style={{ marginTop: 14 }}>
+            <div className={styles.statCard}>
+              <strong className={styles.statValue}>{deficit}</strong>
+              <span className={styles.statLabel}>보완 오행</span>
+            </div>
+            <div className={styles.statCard}>
+              <strong className={styles.statValue}>{report.saju.bedDirection}</strong>
+              <span className={styles.statLabel}>침대 방향</span>
+            </div>
+            <div className={styles.statCard}>
+              <strong className={styles.statValue}>{report.saju.gilbang}</strong>
+              <span className={styles.statLabel}>길방</span>
+            </div>
+          </div>
         </div>
 
-        {activeTab === '지역 추천' && (
+        <div className={styles.stickySectionTabs}>
+          <div className={styles.badgeWrap}>
+            {SPACE_TABS.map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => scrollToSection(tab)}
+                style={{ cursor: 'pointer', border: 'none', padding: 0, font: 'inherit', background: 'none' }}
+              >
+                <span className={activeTab === tab ? styles.badgeFill : styles.badge}>{tab}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div ref={regionRef} className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>지역 추천</h3>
+            <p className={styles.sectionSubtitle}>{deficit} 기운을 보완할 생활권 후보를 우선순위로 정리했어요.</p>
+          </div>
           <div className={styles.column} style={{ gap: 10 }}>
-            <span className={styles.label}>{deficit} 기운을 보완할 지역</span>
             {recommended.length > 0 ? recommended.map((item, index) => (
               <div key={item.district.code} className={`${styles.placeCard} ${index === 0 ? styles.placeCardStrong : ''}`}>
                 <div className={styles.placeHeader}>
@@ -125,9 +199,13 @@ export default function PlacePage() {
               </div>
             )}
           </div>
-        )}
+        </div>
 
-        {activeTab === '방위 가이드' && (
+        <div ref={directionRef} className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>방위 가이드</h3>
+            <p className={styles.sectionSubtitle}>침대 방향, 길방, 올해와 대운의 방위 흐름을 같이 봅니다.</p>
+          </div>
           <div className={styles.column} style={{ gap: 10 }}>
             <div className={styles.card}>
               <span className={styles.label}>침대 머리 방향</span>
@@ -153,7 +231,7 @@ export default function PlacePage() {
             </div>
 
             <div className={styles.card}>
-              <div className={`${styles.row} ${styles.between}`}>
+              <div className={styles.row} style={{ justifyContent: 'space-between', gap: 10, alignItems: 'flex-start', flexWrap: 'wrap' }}>
                 <span className={styles.label}>올해 집중 방위</span>
                 <span className={styles.badgeFill}>{seWoon.year}년 세운</span>
               </div>
@@ -169,7 +247,7 @@ export default function PlacePage() {
 
             {currentDaeWoon && (
               <div className={styles.card}>
-                <div className={`${styles.row} ${styles.between}`}>
+                <div className={styles.row} style={{ justifyContent: 'space-between', gap: 10, alignItems: 'flex-start', flexWrap: 'wrap' }}>
                   <span className={styles.label}>현재 대운 공간 팁</span>
                   <span className={styles.badgeSoft}>{currentDaeWoon.ganJi.stem}{currentDaeWoon.ganJi.branch} 대운</span>
                 </div>
@@ -182,9 +260,13 @@ export default function PlacePage() {
               </div>
             )}
           </div>
-        )}
+        </div>
 
-        {activeTab === '공간별' && (
+        <div ref={roomRef} className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>공간별</h3>
+            <p className={styles.sectionSubtitle}>침실, 거실, 서재, 현관 기준으로 바로 적용할 수 있게 나눴어요.</p>
+          </div>
           <div className={styles.column} style={{ gap: 10 }}>
             <div className={styles.card}>
               <span className={styles.label}>🛏 침실</span>
@@ -249,9 +331,13 @@ export default function PlacePage() {
               </div>
             </div>
           </div>
-        )}
+        </div>
 
-        {activeTab === '비보 소품' && (
+        <div ref={biboRef} className={styles.sectionBlock}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>비보 소품</h3>
+            <p className={styles.sectionSubtitle}>{deficit} 기운을 생활 안에서 보완할 색상, 소재, 식물 중심 가이드예요.</p>
+          </div>
           <div className={styles.column} style={{ gap: 10 }}>
             <div className={styles.softCard}>
               <p className={styles.caption}>{deficit} 기운을 보완하는 소품 큐레이션</p>
@@ -260,7 +346,7 @@ export default function PlacePage() {
             <div className={styles.card}>
               <span className={styles.label}>🎨 색상</span>
               <div className={styles.badgeWrap} style={{ marginTop: 8 }}>
-                {OHANG_COLORS[deficit].map(c => (
+                {OHANG_COLORS[deficit].map((c) => (
                   <span key={c} className={styles.badgeFill} style={{ background: OHANG_COLOR[deficit] }}>{c}</span>
                 ))}
               </div>
@@ -272,7 +358,7 @@ export default function PlacePage() {
             <div className={styles.card}>
               <span className={styles.label}>🪵 소재</span>
               <div className={styles.badgeWrap} style={{ marginTop: 8 }}>
-                {OHANG_MATERIALS[deficit].map(m => (
+                {OHANG_MATERIALS[deficit].map((m) => (
                   <span key={m} className={styles.badge}>{m}</span>
                 ))}
               </div>
@@ -291,7 +377,7 @@ export default function PlacePage() {
 
             {seWoon.ohang !== deficit && (
               <div className={styles.card}>
-                <div className={`${styles.row} ${styles.between}`}>
+                <div className={styles.row} style={{ justifyContent: 'space-between', gap: 10, alignItems: 'flex-start', flexWrap: 'wrap' }}>
                   <span className={styles.label}>올해 추가 소품</span>
                   <span className={styles.badgeSoft}>{seWoon.year}년 세운</span>
                 </div>
@@ -299,7 +385,7 @@ export default function PlacePage() {
                   세운 {seWoon.ohang} 기운도 함께 보완하면 좋아요
                 </p>
                 <div className={styles.badgeWrap} style={{ marginTop: 6 }}>
-                  {OHANG_COLORS[seWoon.ohang].slice(0, 2).map(c => (
+                  {OHANG_COLORS[seWoon.ohang].slice(0, 2).map((c) => (
                     <span key={c} className={styles.badge}>{c}</span>
                   ))}
                   <span className={styles.badge}>{OHANG_MATERIALS[seWoon.ohang][0]}</span>
@@ -307,7 +393,7 @@ export default function PlacePage() {
               </div>
             )}
           </div>
-        )}
+        </div>
       </div>
     </Layout>
   );
