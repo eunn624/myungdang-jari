@@ -65,7 +65,7 @@ NAME_RULES = [
     {"siDo": "경기", "siGunGu": "성남시 분당구", "pattern": r"^수내동$", "terrain": "flatland", "terrainTags": ["waterfront"]},
     {"siDo": "경기", "siGunGu": "성남시 분당구", "pattern": r"^야탑동$", "terrain": "flatland"},
     {"siDo": "경기", "siGunGu": "성남시 분당구", "pattern": r"^구미\d?동$", "terrain": "green", "terrainTags": ["waterfront"]},
-    {"siDo": "경기", "siGunGu": "하남시", "pattern": r"^미사동$", "terrain": "waterfront", "terrainTags": ["flatland"]},
+    {"siDo": "경기", "siGunGu": "하남시", "pattern": r"^미사\d?동$", "terrain": "waterfront", "terrainTags": ["flatland"]},
     {"siDo": "경기", "siGunGu": "남양주시", "pattern": r"^다산\d?동$", "terrain": "waterfront", "terrainTags": ["flatland"]},
     {"siDo": "경기", "siGunGu": "김포시", "pattern": r"^구래동$", "terrain": "flatland"},
     {"siDo": "경기", "siGunGu": "용인시 수지구", "pattern": r"^풍덕천동$", "terrain": "waterfront", "terrainTags": ["flatland"]},
@@ -221,6 +221,7 @@ def build_record(
     key = (si_do, si_gun_gu, name)
     override = exact_overrides.get(key)
     normalized_override = normalized_overrides.get((si_do, si_gun_gu, normalize_name(name)))
+    name_rule = find_name_rule(si_do, si_gun_gu, name)
 
     primary, terrain_tags, terrain_note = infer_terrain(si_do, si_gun_gu, name)
     ohang_chars, ohang = infer_ohang(name)
@@ -258,14 +259,23 @@ def build_record(
             if field in override:
                 record[field] = override[field]
     elif normalized_override:
-        for field in ["ohangChars", "ohang", "terrain", "terrainTags", "terrainNote", "manualNote"]:
+        for field in ["ohangChars", "ohang"]:
             if field in normalized_override:
                 record[field] = normalized_override[field]
+        if not name_rule:
+            for field in ["terrain", "terrainTags", "terrainNote"]:
+                if field in normalized_override:
+                    record[field] = normalized_override[field]
 
     if not record.get("terrainTags"):
         record.pop("terrainTags", None)
     if not record.get("ohang"):
         record["ohang"] = []
+    if not override:
+        record["manualNote"] = (
+            "행안부 행정동 전체 목록 기반 자동 생성본. "
+            + ("오행 미확정으로 지형 중심 추천을 사용" if not record["ohang"] else "한자/지형은 후속 검수 필요")
+        )
     if not record.get("manualNote"):
         record.pop("manualNote", None)
     if not record.get("hanjaNote"):

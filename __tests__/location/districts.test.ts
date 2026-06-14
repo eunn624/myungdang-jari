@@ -22,4 +22,41 @@ describe('수도권 전체 행정동 데이터셋', () => {
       expect(districtsData.districts.some((item) => item.code === code)).toBe(true);
     }
   });
+
+  test('대표 오분류 보정 케이스가 기대값으로 정리되어 있다', () => {
+    const gaepo1 = districtsData.districts.find((item) => item.code === '1168066000');
+    const jeongja1Bundang = districtsData.districts.find((item) => item.code === '4113555000');
+    const misa1 = districtsData.districts.find((item) => item.code === '4145061000');
+
+    expect(gaepo1).toMatchObject({
+      name: '개포1동',
+      terrain: 'flatland',
+      ohang: [],
+    });
+    expect(gaepo1?.terrainTags).toEqual(['green']);
+
+    expect(jeongja1Bundang).toMatchObject({
+      name: '정자1동',
+      siGunGu: '성남시 분당구',
+      terrain: 'flatland',
+      ohang: [],
+    });
+    expect(jeongja1Bundang?.terrainTags).toEqual(['waterfront']);
+
+    expect(misa1).toMatchObject({
+      name: '미사1동',
+      terrain: 'waterfront',
+      ohang: [],
+    });
+    expect(misa1?.terrainTags).toEqual(['flatland']);
+  });
+
+  test('오행이 비어 있는 항목은 지형 중심 안내 문구를 사용한다', () => {
+    const emptyOhang = districtsData.districts.find(
+      (item) => item.code === '1168066000',
+    );
+
+    expect(emptyOhang?.ohang).toEqual([]);
+    expect(emptyOhang?.manualNote).toContain('오행 미확정으로 지형 중심 추천을 사용');
+  });
 });
