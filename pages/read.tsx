@@ -16,7 +16,7 @@ export default function ReadPage() {
   const seWoon = report.saju.seWoon;
 
   return (
-    <Layout showTabBar activeTab="read" headerTitle="사주 풀이" showBackButton>
+    <Layout showTabBar activeTab="read" headerTitle="자세한 풀이" showBackButton>
       <div className={styles.screen}>
         <p className={styles.sectionSubtitle}>
           {report.saju.pillars.day.stem}{report.saju.pillars.day.branch} 일주 · {report.profile.name}
@@ -24,7 +24,7 @@ export default function ReadPage() {
 
         {/* 섹션 1: 기질·관계 리딩 */}
         <div className={styles.card}>
-          <span className={styles.badgeFill}>성향 · 관계 리딩</span>
+          <span className={styles.badgeFill}>나의 기본 성향</span>
           <div className={styles.column} style={{ gap: 14, marginTop: 12 }}>
             <p className={styles.bodyText}>{report.longReading[0]}</p>
           </div>
@@ -32,7 +32,7 @@ export default function ReadPage() {
 
         {/* 섹션 2: 공간·지형 리딩 */}
         <div className={styles.card}>
-          <span className={styles.badgeFill}>공간 · 장소 리딩</span>
+          <span className={styles.badgeFill}>어울리는 공간과 장소</span>
           <div className={styles.column} style={{ gap: 14, marginTop: 12 }}>
             <p className={styles.bodyText}>{report.longReading[1]}</p>
           </div>
@@ -40,7 +40,7 @@ export default function ReadPage() {
 
         {/* 섹션 3: 개운 리딩 */}
         <div className={styles.card}>
-          <span className={styles.badgeFill}>개운법 · 생활 루틴</span>
+          <span className={styles.badgeFill}>생활 속 실천 팁</span>
           <div className={styles.column} style={{ gap: 14, marginTop: 12 }}>
             <p className={styles.bodyText}>{report.longReading[2]}</p>
           </div>
@@ -49,7 +49,7 @@ export default function ReadPage() {
         {/* 섹션 4: 개운법 6개 */}
         {ilju && ilju.gaeunMethods.length > 0 && (
           <div className={styles.card}>
-            <span className={styles.label}>실천 개운법 6가지</span>
+            <span className={styles.label}>이렇게 실천해보세요</span>
             <div className={styles.column} style={{ gap: 8, marginTop: 10 }}>
               {ilju.gaeunMethods.map((method, i) => (
                 <div key={i} className={styles.softCard} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
@@ -66,22 +66,22 @@ export default function ReadPage() {
         {/* 섹션 5: 주의 · 좋은 흐름 */}
         <div className={styles.homeGrid}>
           <div className={styles.miniCard}>
-            <span className={styles.label}>⚠ 주의 흐름</span>
+            <span className={styles.label}>조금 더 조심하면 좋은 점</span>
             <p className={styles.miniCardText}>
               {ilju?.caution || report.cautionReading}
             </p>
           </div>
           <div className={styles.miniCard}>
-            <span className={styles.label}>✓ 좋은 흐름</span>
+            <span className={styles.label}>기대해볼 만한 흐름</span>
             <p className={styles.miniCardText}>{report.positiveReading}</p>
           </div>
         </div>
 
         {/* 섹션 6: 이사 · 주거 리딩 */}
         <div className={styles.card}>
-          <span className={styles.badgeFill}>이사 · 주거 리딩</span>
+          <span className={styles.badgeFill}>집과 이사에 대한 흐름</span>
           <p className={styles.caption} style={{ marginTop: 6, marginBottom: 12 }}>
-            사주·신살·대운·세운에서 읽는 이사·집·부동산 흐름
+            사주와 현재 흐름을 바탕으로 주거운을 정리했어요.
           </p>
 
           {/* 신살별 이사 해석 */}
@@ -138,7 +138,7 @@ export default function ReadPage() {
         <div className={styles.column} style={{ gap: 8 }}>
           <div className={`${styles.row} ${styles.between}`}>
             <span className={styles.label}>대운 흐름</span>
-            <span className={styles.caption}>10년 단위</span>
+            <span className={styles.caption}>10년 단위 변화</span>
           </div>
           <div className={styles.card}>
             {daeWoonList.length > 0 ? (
@@ -166,7 +166,7 @@ export default function ReadPage() {
                       ({report.saju.currentDaeWoon.startAge}~{report.saju.currentDaeWoon.endAge}세)
                     </p>
                     <p className={styles.caption} style={{ marginTop: 4 }}>
-                      {report.saju.currentDaeWoon.ohang} 기운이 강하게 흐르는 시기 · 공간에서 이 기운을 활용해보세요
+                      {report.saju.currentDaeWoon.ohang} 기운이 두드러지는 시기예요. 공간에서도 이 흐름을 함께 살려보세요.
                     </p>
                   </div>
                 )}
@@ -183,8 +183,8 @@ export default function ReadPage() {
             <span className={styles.badgeFill}>{seWoon.ganJi.stem}{seWoon.ganJi.branch} · {seWoon.ohang}</span>
           </div>
           <p className={styles.caption} style={{ marginTop: 8 }}>
-            올해는 {seWoon.ganJi.stemKor}{seWoon.ganJi.branchKor}년 · {seWoon.ohang} 기운의 흐름입니다.
-            공간에서 {seWoon.ohang} 기운을 더해주면 세운과 시너지를 만들 수 있어요.
+            올해는 {seWoon.ganJi.stemKor}{seWoon.ganJi.branchKor}년의 흐름이 들어와 있어요.
+            공간에 {seWoon.ohang} 기운을 조금 더해주면 지금의 리듬을 맞추는 데 도움이 됩니다.
           </p>
         </div>
       </div>

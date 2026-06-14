@@ -1,4 +1,9 @@
-/* OngleipParkDahyeon — 주 폰트 (귀여운 톤) */
+/* ─── 폰트 규칙 ────────────────────────────────────────────
+   OngleipParkDahyeon : 히어로 타이틀 / 감성 카드 / 공유 카드만
+   Pretendard          : 본문·데이터·입력·정보형 UI 전체
+   ──────────────────────────────────────────────────────── */
+
+/* OngleipParkDahyeon — 히어로·감성 맥락 전용 */
 @font-face {
   font-family: 'OngleipParkDahyeon';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
@@ -6,5 +11,5 @@
   font-display: swap;
 }
 
-/* Pretendard — 폴백 & 데이터 표시용 */
+/* Pretendard — 베이스 폰트 (모든 정보형 텍스트) */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');

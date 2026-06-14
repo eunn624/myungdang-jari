@@ -20,17 +20,17 @@ export default function SharePage() {
       `추천 동네: ${report.districts.slice(0, 2).map(d => d.district.name).join(', ') || '분석 중'}\n` +
       `침대 방향: ${report.saju.bedDirection}쪽`;
     if (navigator.share) {
-      await navigator.share({ title: '명당자리 — 내 공간 가이드', text });
+      await navigator.share({ title: '명당자리 - 내 공간 가이드', text });
     } else {
       await navigator.clipboard.writeText(text);
-      alert('텍스트가 클립보드에 복사되었습니다.');
+      alert('공유 문구를 복사했어요.');
     }
   };
 
   return (
     <Layout headerTitle="공유 카드" showBackButton backHref="/result">
       <div className={`${styles.screen} ${styles.slideEnter}`}>
-        <p className={styles.caption}>인스타그램·카카오톡으로 보내기 좋은 카드예요.</p>
+        <p className={styles.caption}>가볍게 저장하거나 공유하기 좋은 요약 카드예요.</p>
 
         {/* 카드 1 — 사주 요약 */}
         <div className={styles.shareCard} style={{ borderTop: `4px solid ${accentColor}` }}>
@@ -63,7 +63,7 @@ export default function SharePage() {
           </div>
 
           <p className={styles.footerNote} style={{ textAlign: 'center', marginTop: 10 }}>
-            명당자리 · 오락·참고 목적
+            명당자리 · 재미로 참고하는 공간 가이드
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function SharePage() {
               ))
             ) : (
               <div className={styles.card}>
-                <p className={styles.caption}>사주 정보를 입력하면 추천 동네가 생성됩니다.</p>
+                <p className={styles.caption}>정보를 입력하면 어울리는 지역을 보여드릴게요.</p>
               </div>
             )}
 
@@ -125,11 +125,11 @@ export default function SharePage() {
 
         {/* 공유 버튼 */}
         <button type="button" className={styles.primaryButton} onClick={handleShare}>
-          카드 공유하기
+          이 카드 공유하기
         </button>
 
         <p className={styles.footerNote} style={{ textAlign: 'center' }}>
-          본 카드는 오락·참고 목적이며 효능을 보장하지 않습니다.
+          이 카드는 재미와 참고를 위한 요약 카드예요.
         </p>
       </div>
     </Layout>

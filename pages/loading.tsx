@@ -4,10 +4,10 @@ import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 
 const steps = [
-  '사주팔자를 정리하는 중',
-  '오행의 균형을 읽는 중',
-  '지명과 지형을 맞춰보는 중',
-  '침대 방향 가이드를 준비하는 중',
+  '사주 흐름을 정리하고 있어요',
+  '오행의 균형을 살펴보고 있어요',
+  '어울리는 지역과 환경을 고르고 있어요',
+  '공간 팁을 보기 좋게 준비하고 있어요',
 ];
 
 export default function LoadingScreen() {
@@ -33,19 +33,19 @@ export default function LoadingScreen() {
   }, [router]);
 
   return (
-    <Layout headerTitle="분석 준비" showBackButton backHref="/input">
+    <Layout headerTitle="분석 중" showBackButton backHref="/input">
       <div className={`${styles.onboardingScreen} ${styles.slideEnter}`} style={{ justifyContent: 'center', gap: 18 }}>
         <div className={`${styles.heroPanel} ${styles.heroPanelBlue}`}>
           <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
           <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
           <div className={styles.heroPanelHeader}>
-            <span className={styles.heroPanelLabel}>분석 중</span>
+            <span className={styles.heroPanelLabel}>결과 준비 중</span>
             <span className={styles.heroPanelLabel}>{activeStep + 1} / {steps.length}</span>
           </div>
           <div className={styles.heroDeck}>
             <div className={styles.column} style={{ gap: 10 }}>
-              <h1 className={styles.heroTitle}>당신의 기운을<br />읽고 있어요</h1>
-              <p className={styles.heroDescription}>입력값을 정리하고, 사주 흐름과 공간 가이드를 카드 형태로 준비하는 중이에요.</p>
+              <h1 className={styles.heroTitle}>당신에게 어울리는 흐름을<br />정리하고 있어요</h1>
+              <p className={styles.heroDescription}>사주와 공간 정보를 묶어서 한눈에 보기 쉬운 결과로 정리하는 중이에요.</p>
             </div>
             <div className={styles.visualPlaceholder}></div>
           </div>
@@ -71,8 +71,8 @@ export default function LoadingScreen() {
             <div className={styles.stackCardA}></div>
             <div className={styles.stackCardB}></div>
             <div className={styles.stackCardC}>
-              <span className={styles.badgeFill}>곧 도착할 결과</span>
-              <p className={styles.bodyText} style={{ marginTop: 10 }}>사주원국, 오행 균형, 명당 추천, 개운 루틴을 카드 흐름으로 바로 볼 수 있어요.</p>
+              <span className={styles.badgeFill}>잠시만 기다려주세요</span>
+              <p className={styles.bodyText} style={{ marginTop: 10 }}>사주 원국, 오행 균형, 어울리는 지역, 오늘의 공간 팁까지 곧 바로 보여드릴게요.</p>
             </div>
           </div>
         </div>

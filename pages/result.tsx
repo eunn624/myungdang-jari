@@ -39,13 +39,13 @@ export default function ResultScreen() {
     {
       number: '01',
       tone: `${styles.storyCardBlue}`,
-      title: `${report.profile.name}님의 사주팔자`,
-      body: `${report.formattedBirth} 기준 사주예요. ${report.saju.pillars.year.stem}${report.saju.pillars.year.branch} · ${report.saju.pillars.month.stem}${report.saju.pillars.month.branch} · ${report.saju.pillars.day.stem}${report.saju.pillars.day.branch}${report.saju.pillars.hour ? ` · ${report.saju.pillars.hour.stem}${report.saju.pillars.hour.branch}` : ''}`,
+      title: `${report.profile.name}님의 기본 사주 흐름`,
+      body: `${report.formattedBirth} 기준으로 정리한 사주예요. ${report.saju.pillars.year.stem}${report.saju.pillars.year.branch} · ${report.saju.pillars.month.stem}${report.saju.pillars.month.branch} · ${report.saju.pillars.day.stem}${report.saju.pillars.day.branch}${report.saju.pillars.hour ? ` · ${report.saju.pillars.hour.stem}${report.saju.pillars.hour.branch}` : ''}`,
     },
     {
       number: '02',
       tone: `${styles.storyCardPurple}`,
-      title: `일간 ${report.saju.pillars.day.stem} — 나의 중심`,
+      title: `일간 ${report.saju.pillars.day.stem}, 나의 중심`,
       body: report.summaryDescription,
     },
     {
@@ -58,7 +58,7 @@ export default function ResultScreen() {
     {
       number: '04',
       tone: `${styles.storyCardPeach} ${styles.storyCardDarkText}`,
-      title: '신살 · 길성과 사주관계',
+      title: '관계와 분위기를 읽는 포인트',
       body: report.saju.sinsal.length > 0
         ? report.saju.sinsal.map((s) => `${s.name}(${s.hanja}): ${s.description}`).join('\n\n')
         : '사주에서 주요 신살이 강하게 감지되지는 않았어요. 이 경우에는 오행 분포와 일간 중심으로 읽는 편이 자연스럽습니다.',
@@ -66,7 +66,7 @@ export default function ResultScreen() {
     {
       number: '05',
       tone: `${styles.storyCardPurple}`,
-      title: '대운 · 세운 흐름',
+      title: '지금 흐르고 있는 큰 운의 방향',
       body: report.saju.currentDaeWoon
         ? `현재 ${report.saju.currentDaeWoon.ganJi.stem}${report.saju.currentDaeWoon.ganJi.branch} 대운 (${report.saju.currentDaeWoon.startAge}~${report.saju.currentDaeWoon.endAge}세) · ${report.saju.currentDaeWoon.ohang} 기운의 시기예요.\n\n올해 ${report.saju.seWoon.year}년은 ${report.saju.seWoon.ganJi.stem}${report.saju.seWoon.ganJi.branch} 세운 · ${report.saju.seWoon.ohang} 기운이 흐릅니다.`
         : `올해 ${report.saju.seWoon.year}년은 ${report.saju.seWoon.ganJi.stem}${report.saju.seWoon.ganJi.branch} 세운 · ${report.saju.seWoon.ohang} 기운의 해입니다.`,
@@ -74,37 +74,37 @@ export default function ResultScreen() {
     {
       number: '06',
       tone: `${styles.storyCardBlue}`,
-      title: '참고해볼 지역 · 명당',
+      title: '어울리는 지역과 생활권',
       body: report.districts.length > 0
         ? report.districts.slice(0, 3).map((item) => `${item.district.name} — ${item.district.terrainNote}`).join('\n\n')
-        : '생년월일을 입력하면 사주 기반 추천 생활권을 볼 수 있어요.',
+        : '생년월일을 입력하면 어울리는 생활권을 살펴볼 수 있어요.',
     },
     {
       number: '07',
       tone: `${styles.storyCardMint}`,
-      title: '오늘 바로 할 수 있는 개운',
-      body: `${report.todayMission}\n\n침대 ${report.saju.bedDirection}쪽 · 길방 ${report.saju.gilbang} 방향 공간 정돈\n\n공유 카드를 저장하면 카카오톡·인스타에 바로 보낼 수 있어요.`,
+      title: '오늘 바로 해볼 수 있는 공간 팁',
+      body: `${report.todayMission}\n\n침대는 ${report.saju.bedDirection}쪽을 참고하고, ${report.saju.gilbang} 방향 공간을 가볍게 정돈해보세요.\n\n공유 카드를 저장해두면 카카오톡이나 인스타그램에 바로 나눌 수 있어요.`,
     },
   ];
 
   const card = cards[currentCard];
 
   return (
-    <Layout headerTitle="결과 홈" showBackButton backHref="/input">
+    <Layout headerTitle="결과 보기" showBackButton backHref="/input">
       <div className={`${styles.screen} ${styles.slideEnter}`}>
         <div className={`${styles.heroPanel} ${styles.heroPanelPurple}`}>
           <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
           <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
           <div className={styles.heroPanelHeader}>
             <div className={styles.column} style={{ gap: 4 }}>
-              <span className={styles.heroPanelLabel}>결과 리딩</span>
-              <h1 className={styles.heroTitle}>{report.profile.name}님의<br />공간 사주 카드</h1>
+              <span className={styles.heroPanelLabel}>분석 결과</span>
+              <h1 className={styles.heroTitle}>{report.profile.name}님을 위한<br />공간 요약 카드</h1>
             </div>
             <div className={styles.visualPlaceholderSmall}></div>
           </div>
           <div className={styles.heroDeck}>
             <div className={styles.heroInfoCard}>
-              <span className={styles.badgeFill}>핵심 요약</span>
+              <span className={styles.badgeFill}>가장 먼저 보면 좋은 내용</span>
               <p className={styles.heroInfoBody} style={{ marginTop: 10 }}>{report.summaryDescription}</p>
             </div>
             <div className={styles.heroStats}>
@@ -141,7 +141,7 @@ export default function ResultScreen() {
           <div className={styles.storyShapeA}></div>
           <div className={styles.storyShapeB}></div>
           <div className={styles.storyShapeC}></div>
-          <span className={styles.heroPanelLabel}>{card.number} · 리딩 카드</span>
+          <span className={styles.heroPanelLabel}>{card.number} · 요약 카드</span>
           <h2 className={styles.storyTitle} style={{ marginTop: 14 }}>{card.title}</h2>
           <p className={styles.storyCopy} style={{ whiteSpace: 'pre-line', marginTop: 14 }}>{card.body}</p>
           {card.renderExtra ? <div style={{ marginTop: 16 }}>{card.renderExtra}</div> : null}
@@ -149,8 +149,8 @@ export default function ResultScreen() {
 
         <div className={styles.softCard}>
           <div className={`${styles.row} ${styles.between}`}>
-            <span className={styles.label}>바로 실천하기</span>
-            <span className={styles.badgeFill}>오늘 루틴</span>
+            <span className={styles.label}>오늘 바로 해보기</span>
+            <span className={styles.badgeFill}>오늘의 팁</span>
           </div>
           <p className={styles.bodyText} style={{ marginTop: 10 }}>{report.todayMission}</p>
           <p className={styles.caption} style={{ marginTop: 6 }}>
@@ -166,7 +166,7 @@ export default function ResultScreen() {
           >
             ← 이전
           </button>
-          <span className={styles.caption}>카드 넘기기</span>
+          <span className={styles.caption}>카드 보기</span>
           <button
             type="button"
             className={styles.secondaryButton}
@@ -181,7 +181,7 @@ export default function ResultScreen() {
             홈으로 이동
           </Link>
           <Link href={{ pathname: '/share', query }} className={styles.ghostButton} style={{ minHeight: 58 }}>
-            공유 카드
+            공유 카드 만들기
           </Link>
         </div>
       </div>

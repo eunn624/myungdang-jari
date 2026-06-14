@@ -54,7 +54,7 @@ const DAE_WOON_SPACE_TIP: Record<Ohang, string> = {
   水: '이번 대운은 깊어지고 순환하는 시기. 물성 소품과 조용한 공간이 힘이 됩니다.',
 };
 
-const SPACE_TABS = ['지역 추천', '방위 가이드', '공간별', '비보 소품'] as const;
+const SPACE_TABS = ['지역 추천', '방위 가이드', '공간별', '추천 소품'] as const;
 type SpaceTab = typeof SPACE_TABS[number];
 
 export default function PlacePage() {
@@ -71,7 +71,7 @@ export default function PlacePage() {
     '지역 추천': regionRef,
     '방위 가이드': directionRef,
     공간별: roomRef,
-    '비보 소품': biboRef,
+    '추천 소품': biboRef,
   };
 
   const deficit = report.saju.deficitOhang[0] || report.saju.yongsin;
@@ -126,10 +126,10 @@ export default function PlacePage() {
       <div className={styles.screen}>
         <div className={styles.pageIntroCard}>
           <div className={styles.sectionHeader}>
-            <span className={styles.badge}>공간 리딩</span>
-            <h2 className={styles.sectionTitle}>{deficit} 기운 보완 가이드</h2>
+            <span className={styles.badge}>공간 가이드</span>
+            <h2 className={styles.sectionTitle}>{deficit} 기운을 채우는 공간 팁</h2>
             <p className={styles.sectionSubtitle}>
-              지역 추천, 방위, 공간별 배치, 비보 소품까지 한 흐름으로 이어서 볼 수 있어요.
+              어울리는 지역, 방향, 방별 팁, 소품 추천까지 한 번에 이어서 볼 수 있어요.
             </p>
           </div>
           <div className={styles.statsGrid} style={{ marginTop: 14 }}>
@@ -166,7 +166,7 @@ export default function PlacePage() {
         <div ref={regionRef} className={styles.sectionBlock}>
           <div className={styles.sectionHeader}>
             <h3 className={styles.sectionTitle}>지역 추천</h3>
-            <p className={styles.sectionSubtitle}>{deficit} 기운을 보완할 생활권 후보를 우선순위로 정리했어요.</p>
+            <p className={styles.sectionSubtitle}>{deficit} 기운을 보완하기 좋은 생활권을 먼저 추려봤어요.</p>
           </div>
           <div className={styles.column} style={{ gap: 10 }}>
             {recommended.length > 0 ? recommended.map((item, index) => (
@@ -187,18 +187,18 @@ export default function PlacePage() {
                 <p className={styles.placeReason}>{item.reasons[0]} · {item.reasons[1] || '생활 동선과 자연환경의 순환감이 강한 편입니다.'}</p>
                 {hasYeokma && index === 0 && (
                   <p className={styles.caption} style={{ marginTop: 6, color: '#6b5e56' }}>
-                    역마살 보유 — 교통 접근성 좋은 지역이 더 잘 맞습니다
+                    이동이 많은 흐름이 있어, 교통이 편한 지역이 특히 잘 맞아요.
                   </p>
                 )}
                 {hasDohwa && index === 0 && (
                   <p className={styles.caption} style={{ marginTop: 6, color: '#6b5e56' }}>
-                    도화살 보유 — 문화·상업시설 가까운 지역이 활력에 도움돼요
+                    사람과 활기가 모이는 장소가 가까우면 생활 리듬이 더 살아나요.
                   </p>
                 )}
               </div>
             )) : (
               <div className={styles.softCard}>
-                <p className={styles.caption}>생년월일시를 입력하면 명당을 추천받을 수 있어요.</p>
+                <p className={styles.caption}>정보를 입력하면 어울리는 지역을 추천해드릴게요.</p>
               </div>
             )}
           </div>
@@ -207,13 +207,13 @@ export default function PlacePage() {
         <div ref={directionRef} className={styles.sectionBlock}>
           <div className={styles.sectionHeader}>
             <h3 className={styles.sectionTitle}>방위 가이드</h3>
-            <p className={styles.sectionSubtitle}>침대 방향, 길방, 올해와 대운의 방위 흐름을 같이 봅니다.</p>
+            <p className={styles.sectionSubtitle}>침대 방향부터 올해 공간에서 신경 쓰면 좋은 방향까지 함께 정리했어요.</p>
           </div>
           <div className={styles.column} style={{ gap: 10 }}>
             <div className={styles.card}>
               <span className={styles.label}>침대 머리 방향</span>
               <p className={styles.bodyText} style={{ marginTop: 8 }}>
-                머리는 <strong>{report.saju.bedDirection}쪽</strong>을 참고해보세요. 구조상 어렵다면 그 방향 벽면을 비우고, {OHANG_COLORS[deficit][0]} 계열 소재로 분위기를 맞춰주세요.
+                머리 방향은 <strong>{report.saju.bedDirection}쪽</strong>을 우선 참고해보세요. 구조상 어렵다면 그 방향 벽면을 가볍게 정리하고, {OHANG_COLORS[deficit][0]} 계열 소품으로 분위기를 맞춰보면 좋아요.
               </p>
               <div className={styles.badgeWrap} style={{ marginTop: 10 }}>
                 <span className={styles.badgeFill}>침대 {report.saju.bedDirection}쪽</span>
@@ -225,7 +225,7 @@ export default function PlacePage() {
             <div className={styles.card}>
               <span className={styles.label}>길방 (용신 방위)</span>
               <p className={styles.bodyText} style={{ marginTop: 8 }}>
-                {deficit} 기운이 필요한 분에게 <strong>{OHANG_DIRECTION_KOR[deficit]} ({report.saju.gilbang})</strong>이 길방입니다. 이 방위를 등지고 앉거나, 집중 정돈하면 좋아요.
+                {deficit} 기운이 필요한 분에게는 <strong>{OHANG_DIRECTION_KOR[deficit]} ({report.saju.gilbang})</strong> 방향이 잘 맞아요. 이 방향을 중심으로 책상이나 자주 머무는 자리를 정리해보세요.
               </p>
               <div className={styles.badgeWrap} style={{ marginTop: 10 }}>
                 <span className={styles.badgeFill} style={{ background: OHANG_COLOR[deficit] }}>길방 {OHANG_DIRECTION_KOR[deficit]}</span>
@@ -239,7 +239,7 @@ export default function PlacePage() {
                 <span className={styles.badgeFill}>{seWoon.year}년 세운</span>
               </div>
               <p className={styles.caption} style={{ marginTop: 8 }}>
-                {seWoon.ganJi.stem}{seWoon.ganJi.branch} · {seWoon.ohang} 기운이 강한 해
+                {seWoon.ganJi.stem}{seWoon.ganJi.branch} · {seWoon.ohang} 기운이 두드러지는 해
               </p>
               <div className={styles.softCard} style={{ marginTop: 10 }}>
                 <p className={styles.caption} style={{ color: OHANG_COLOR[seWoon.ohang] }}>
@@ -255,7 +255,7 @@ export default function PlacePage() {
                   <span className={styles.badgeSoft}>{currentDaeWoon.ganJi.stem}{currentDaeWoon.ganJi.branch} 대운</span>
                 </div>
                 <p className={styles.caption} style={{ marginTop: 8 }}>
-                  {currentDaeWoon.startAge}~{currentDaeWoon.endAge}세 · {currentDaeWoon.ohang} 기운의 시기
+                  {currentDaeWoon.startAge}~{currentDaeWoon.endAge}세 · {currentDaeWoon.ohang} 기운이 강하게 들어오는 시기
                 </p>
                 <div className={styles.softCard} style={{ marginTop: 10 }}>
                   <p className={styles.caption}>{DAE_WOON_SPACE_TIP[currentDaeWoon.ohang]}</p>
@@ -268,7 +268,7 @@ export default function PlacePage() {
         <div ref={roomRef} className={styles.sectionBlock}>
           <div className={styles.sectionHeader}>
             <h3 className={styles.sectionTitle}>공간별</h3>
-            <p className={styles.sectionSubtitle}>침실, 거실, 서재, 현관 기준으로 바로 적용할 수 있게 나눴어요.</p>
+            <p className={styles.sectionSubtitle}>방마다 바로 적용할 수 있도록 간단하게 나눠봤어요.</p>
           </div>
           <div className={styles.column} style={{ gap: 10 }}>
             <div className={styles.card}>
@@ -287,7 +287,7 @@ export default function PlacePage() {
             <div className={styles.card}>
               <span className={styles.label}>🪑 거실</span>
               <p className={styles.bodyText} style={{ marginTop: 8 }}>
-                {deficit} 기운 소품으로 균형 잡기
+                {deficit} 기운을 더해 거실 분위기 맞추기
               </p>
               <div className={styles.column} style={{ gap: 4, marginTop: 8 }}>
                 <p className={styles.caption}>• 쿠션·러그: {OHANG_COLORS[deficit][0]}·{OHANG_COLORS[deficit][1]} 톤</p>
@@ -313,7 +313,7 @@ export default function PlacePage() {
             <div className={styles.card}>
               <span className={styles.label}>🚪 현관</span>
               <p className={styles.bodyText} style={{ marginTop: 8 }}>
-                {hasYeokma ? '역마살 — 동선 최소화와 정리가 핵심' : '첫 인상 공간 정돈'}
+                {hasYeokma ? '이동이 잦은 흐름이라 입구 정리가 특히 중요해요.' : '집의 첫인상을 깔끔하게 정리해보세요.'}
               </p>
               <div className={styles.column} style={{ gap: 4, marginTop: 8 }}>
                 {hasYeokma ? (
@@ -338,8 +338,8 @@ export default function PlacePage() {
 
         <div ref={biboRef} className={styles.sectionBlock}>
           <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>비보 소품</h3>
-            <p className={styles.sectionSubtitle}>{deficit} 기운을 생활 안에서 보완할 색상, 소재, 식물 중심 가이드예요.</p>
+            <h3 className={styles.sectionTitle}>추천 소품</h3>
+            <p className={styles.sectionSubtitle}>{deficit} 기운을 일상에서 가볍게 더할 수 있는 색상, 소재, 식물 가이드예요.</p>
           </div>
           <div className={styles.column} style={{ gap: 10 }}>
             {biboItems.map((item) => (
@@ -371,7 +371,7 @@ export default function PlacePage() {
                 ))}
               </div>
               <p className={styles.caption} style={{ marginTop: 8 }}>
-                침구·쿠션·커튼·러그에 {OHANG_COLORS[deficit][0]} 계열을 더하세요
+                침구, 쿠션, 커튼, 러그처럼 면적이 있는 곳에 {OHANG_COLORS[deficit][0]} 계열을 더해보세요.
               </p>
             </div>
 
@@ -383,7 +383,7 @@ export default function PlacePage() {
                 ))}
               </div>
               <p className={styles.caption} style={{ marginTop: 8 }}>
-                가구·소품에 {OHANG_MATERIALS[deficit][0]} 소재를 1개 이상 배치해보세요
+                가구나 소품 중 하나만 골라도 충분해요. {OHANG_MATERIALS[deficit][0]} 소재를 먼저 더해보세요.
               </p>
             </div>
 
@@ -391,7 +391,7 @@ export default function PlacePage() {
               <span className={styles.label}>🌿 식물</span>
               <p className={styles.bodyText} style={{ marginTop: 8 }}>{OHANG_PLANTS[deficit]}</p>
               <p className={styles.caption} style={{ marginTop: 6 }}>
-                {OHANG_DIRECTION_KOR[deficit]}에 배치하면 시너지가 높아요
+                {OHANG_DIRECTION_KOR[deficit]} 방향 가까이에 두면 더 잘 어울려요.
               </p>
             </div>
 
@@ -402,7 +402,7 @@ export default function PlacePage() {
                   <span className={styles.badgeSoft}>{seWoon.year}년 세운</span>
                 </div>
                 <p className={styles.caption} style={{ marginTop: 8 }}>
-                  세운 {seWoon.ohang} 기운도 함께 보완하면 좋아요
+                  올해 들어오는 {seWoon.ohang} 기운도 함께 챙겨보면 좋아요.
                 </p>
                 <div className={styles.badgeWrap} style={{ marginTop: 6 }}>
                   {OHANG_COLORS[seWoon.ohang].slice(0, 2).map((c) => (

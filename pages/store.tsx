@@ -33,17 +33,17 @@ export default function StorePage() {
   }, [activeTab, report.saju.deficitOhang, report.saju.yongsin]);
 
   return (
-    <Layout showTabBar activeTab="store" headerTitle="소품" showBackButton>
+    <Layout showTabBar activeTab="store" headerTitle="추천 소품" showBackButton>
       <div className={styles.screen}>
 
         {/* 헤더 */}
         <div className={styles.softCard}>
-          <span className={styles.badgeSoft}>오행별 개운 소품</span>
+          <span className={styles.badgeSoft}>나와 어울리는 공간 아이템</span>
           <h1 className={styles.sectionTitle} style={{ marginTop: 8 }}>
             {report.profile.name}님의<br />맞춤 공간 소품
           </h1>
           <p className={styles.caption} style={{ marginTop: 4 }}>
-            보완 오행 <strong>{deficit}</strong> · 길방 <strong>{report.saju.gilbang}</strong> 방향 기준 추천
+            보완이 필요한 오행 <strong>{deficit}</strong>과 길방 <strong>{report.saju.gilbang}</strong>을 바탕으로 골랐어요.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function StorePage() {
         <div className={styles.noticeCard}>
           <p className={styles.caption} style={{ color: '#8c7a6e' }}>
             📌 아래 링크는 쿠팡 파트너스·오늘의집 제휴 링크입니다.
-            구매 시 수수료가 발생할 수 있습니다. 추천은 오행 풍수 기준이며 효능을 보장하지 않습니다.
+            구매 시 소정의 수수료가 발생할 수 있어요. 추천은 취향과 공간 연출을 돕는 참고용 가이드입니다.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function StorePage() {
             className={activeTab === 'recommend' ? styles.tabBtnActive : styles.tabBtn}
             onClick={() => setActiveTab('recommend')}
           >
-            ✦ 추천
+            추천
           </button>
           {OHANG_ORDER.map((o) => (
             <button
@@ -90,8 +90,8 @@ export default function StorePage() {
           </div>
         ) : (
           <div className={styles.stackVertical}>
-            <span className={styles.badgeFill}>보완 오행 {deficit} 중심 추천</span>
-            <span className={styles.caption}>사주 기반 맞춤 소품</span>
+            <span className={styles.badgeFill}>{deficit} 기운을 채우는 추천</span>
+            <span className={styles.caption}>지금 공간에 가볍게 더해보기 좋은 아이템</span>
           </div>
         )}
 
@@ -99,7 +99,7 @@ export default function StorePage() {
         <div className={styles.column} style={{ gap: 10 }}>
           {displayItems.length === 0 ? (
             <div className={styles.card}>
-              <p className={styles.bodyText}>사주 정보를 입력하면 맞춤 상품을 추천해드립니다.</p>
+              <p className={styles.bodyText}>정보를 입력하면 어울리는 소품을 보여드릴게요.</p>
             </div>
           ) : (
             displayItems.map((item) => (
@@ -115,24 +115,24 @@ export default function StorePage() {
             className={styles.ghostButton}
             onClick={() => setActiveTab(deficit)}
           >
-            {deficit} 오행 소품 전체 보기
+            {deficit} 관련 소품 더 보기
           </button>
         )}
 
         {/* 개운법 안내 */}
         <div className={styles.softCard}>
-          <p className={styles.label}>소품 배치 가이드</p>
+          <p className={styles.label}>이렇게 놓아보세요</p>
           <div className={styles.column} style={{ gap: 6, marginTop: 8 }}>
-            <p className={styles.caption}>• 해당 오행의 방위(목→동, 화→남, 금→서, 수→북)에 가까운 공간에 배치</p>
-            <p className={styles.caption}>• 눈에 잘 띄는 선반 위·테이블 위에 두어야 기운 인식이 생깁니다</p>
-            <p className={styles.caption}>• 먼지·시듦 없이 관리 — 방치된 소품은 효과가 없습니다</p>
-            <p className={styles.caption}>• 소품 교체는 월운이 바뀌는 시점(매달 초)에 하면 리듬이 맞습니다</p>
+            <p className={styles.caption}>• 해당 오행과 잘 맞는 방향 가까이에 두면 공간의 분위기를 맞추기 좋아요.</p>
+            <p className={styles.caption}>• 자주 보는 선반이나 테이블 위처럼 눈에 잘 띄는 곳이 잘 어울려요.</p>
+            <p className={styles.caption}>• 먼지가 쌓이지 않게 관리하면 공간 전체가 더 정돈돼 보여요.</p>
+            <p className={styles.caption}>• 계절이 바뀌거나 기분 전환이 필요할 때 교체해도 좋아요.</p>
           </div>
         </div>
 
         {/* 면책 고지 */}
         <p className={styles.footerNote} style={{ textAlign: 'center', padding: '8px 0' }}>
-          본 콘텐츠는 오락·참고 목적이며 풍수 효능을 보장하지 않습니다.
+          이 페이지는 재미와 참고를 위한 콘텐츠예요.
         </p>
       </div>
     </Layout>
@@ -154,7 +154,7 @@ function StoreCard({ item, deficit }: { item: StoreItem; deficit: Ohang }) {
           className={styles.badgeFill}
           style={{ background: info.colorHex, marginBottom: 8, display: 'inline-block' }}
         >
-          ✦ 핵심 추천
+          잘 맞는 추천
         </span>
       )}
 
@@ -185,10 +185,10 @@ function StoreCard({ item, deficit }: { item: StoreItem; deficit: Ohang }) {
               style={{ minHeight: 40, fontSize: 13 }}
               onClick={handleClick}
             >
-              {item.source}에서 보기 →
+              {item.source}에서 확인하기 →
             </button>
             <span className={styles.caption} style={{ color: '#b0a098', fontSize: 11 }}>
-              제휴 링크
+              제휴 링크 포함
             </span>
           </div>
         </div>

@@ -37,13 +37,13 @@ export default function MyPage() {
         </div>
 
         <div className={styles.card}>
-          <span className={styles.label}>오늘의 미션</span>
+          <span className={styles.label}>오늘의 한 가지</span>
           <div className={styles.column} style={{ gap: 6, marginTop: 10 }}>
             <span className={styles.bodyText}>
               {missionDone ? '✓ ' : '○ '}{report.todayMission}
             </span>
             <span className={styles.caption} style={{ color: missionDone ? '#5cb85c' : '#8c7a6e' }}>
-              {missionDone ? '오늘 미션 완료!' : '홈 화면에서 완료 체크를 할 수 있어요'}
+              {missionDone ? '오늘 할 일까지 잘 마쳤어요.' : '홈에서 완료 버튼을 누르면 체크돼요.'}
             </span>
           </div>
         </div>
@@ -53,18 +53,18 @@ export default function MyPage() {
             <span>입력 정보 수정</span><span>›</span>
           </Link>
           <Link href={{ pathname: '/share', query }} className={styles.menuItem}>
-            <span>공유 카드 만들기</span><span>›</span>
+            <span>공유 카드 보기</span><span>›</span>
           </Link>
           <Link href={{ pathname: '/store', query }} className={styles.menuItem}>
-            <span>오행 소품 추천 보기</span><span>›</span>
+            <span>추천 소품 보기</span><span>›</span>
           </Link>
           <Link href={{ pathname: '/place', query }} className={styles.menuItem}>
-            <span>명당 · 방위 가이드</span><span>›</span>
+            <span>지역과 방향 가이드</span><span>›</span>
           </Link>
         </div>
 
         <p className={styles.footerNote} style={{ textAlign: 'center' }}>
-          본 앱은 오락·참고 목적이며 풍수 효능을 보장하지 않습니다.
+          이 앱의 내용은 재미와 참고를 위한 안내예요.
         </p>
       </div>
     </Layout>

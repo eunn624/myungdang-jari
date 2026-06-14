@@ -34,7 +34,7 @@ export default function HomePage() {
           <div className={styles.heroPanelHeader}>
             <div className={styles.column} style={{ gap: 4 }}>
               <span className={styles.heroPanelLabel}>{report.formattedToday}</span>
-              <h1 className={styles.heroTitle}>{report.profile.name}님,<br />오늘의 명당 흐름이에요</h1>
+              <h1 className={styles.heroTitle}>{report.profile.name}님,<br />오늘의 공간 흐름을 준비했어요</h1>
             </div>
             <div className={styles.visualPlaceholderSmall}></div>
           </div>
@@ -69,33 +69,33 @@ export default function HomePage() {
 
         <div className={styles.actionGrid}>
           <div className={`${styles.actionCard} ${styles.actionCardYellow}`}>
-            <h2 className={styles.actionTitle}>오늘의 공간 미션</h2>
+            <h2 className={styles.actionTitle}>오늘의 한 가지</h2>
             <p className={styles.actionBody}>{report.todayMission}</p>
           </div>
           <div className={`${styles.actionCard} ${styles.actionCardPurple}`}>
-            <h2 className={styles.actionTitle}>이번달 월운</h2>
+            <h2 className={styles.actionTitle}>이번 달 흐름</h2>
             <p className={styles.actionBody}>{report.monthTip.headline}</p>
           </div>
           <Link href={{ pathname: '/place', query }} className={`${styles.actionCard} ${styles.actionCardBlue}`}>
-            <h2 className={styles.actionTitle}>명당 후보 보기</h2>
+            <h2 className={styles.actionTitle}>어울리는 지역 보기</h2>
             <p className={styles.actionBody}>
               {report.districts.length > 0
                 ? report.districts.slice(0, 2).map((item) => item.district.name).join(', ')
-                : '사주 입력 후 확인'}
+                : '입력 후 확인할 수 있어요'}
             </p>
           </Link>
           <Link href={{ pathname: '/share', query }} className={`${styles.actionCard} ${styles.actionCardMint}`}>
-            <h2 className={styles.actionTitle}>공유 카드 저장</h2>
-            <p className={styles.actionBody}>인스타와 카카오톡으로 보내기 좋은 한 장 카드</p>
+            <h2 className={styles.actionTitle}>공유 카드 만들기</h2>
+            <p className={styles.actionBody}>카카오톡이나 인스타그램에 올리기 좋은 한 장 요약</p>
           </Link>
         </div>
 
         <div className={styles.quickPair}>
           <button type="button" className={styles.secondaryButton} onClick={handleMissionComplete}>
-            {missionDone ? '오늘 미션 완료 ✓' : '미션 완료 체크'}
+            {missionDone ? '오늘 실천 완료 ✓' : '실천했어요'}
           </button>
           <Link href={{ pathname: '/result', query }} className={styles.ghostButton} style={{ minHeight: 46 }}>
-            리딩 카드 다시 보기
+            요약 카드 다시 보기
           </Link>
         </div>
 
@@ -103,21 +103,21 @@ export default function HomePage() {
           <div className={`${styles.storyCard} ${styles.storyCardPurple}`}>
             <div className={styles.storyShapeA}></div>
             <div className={styles.storyShapeB}></div>
-            <h2 className={styles.storyTitle}>오늘의 나를<br />한 줄로 요약하면</h2>
+            <h2 className={styles.storyTitle}>오늘의 나를<br />짧게 표현하면</h2>
             <p className={styles.storyCopy}>{report.summaryDescription}</p>
           </div>
 
           <div className={`${styles.storyCard} ${styles.storyCardMint}`}>
             <div className={styles.storyShapeA}></div>
             <div className={styles.storyShapeC}></div>
-            <h2 className={styles.storyTitle}>이번달 공간 팁</h2>
+            <h2 className={styles.storyTitle}>이번 달 공간 팁</h2>
             <p className={styles.storyCopy}>{report.monthTip.spaceTip}</p>
           </div>
 
           <div className={`${styles.storyCard} ${styles.storyCardPeach} ${styles.storyCardDarkText}`}>
             <div className={styles.storyShapeB}></div>
             <div className={styles.storyShapeC}></div>
-            <h2 className={styles.storyTitle}>오늘 추천 동선</h2>
+            <h2 className={styles.storyTitle}>오늘 잘 맞는 움직임</h2>
             <p className={styles.storyCopy}>{report.todayDayInfo.spaceAction}</p>
           </div>
         </div>
@@ -133,23 +133,23 @@ export default function HomePage() {
           </div>
           <div className={styles.statCard}>
             <strong className={styles.statValue}>{report.monthGanji.stem}{report.monthGanji.branch}</strong>
-            <span className={styles.statLabel}>이번달 월운</span>
+            <span className={styles.statLabel}>이번 달 흐름</span>
           </div>
         </div>
 
         <div className={styles.column} style={{ gap: 10 }}>
-          <span className={styles.label}>빠른 메뉴</span>
+          <span className={styles.label}>바로 보기</span>
           <div className={styles.menuList}>
             <Link href={{ pathname: '/saju', query }} className={styles.menuItem}>
-              <span>사주원국 · 오행 · 대운 보기</span>
+              <span>만세력과 오행 흐름 보기</span>
               <span>→</span>
             </Link>
             <Link href={{ pathname: '/read', query }} className={styles.menuItem}>
-              <span>긴 사주 풀이 읽기</span>
+              <span>자세한 해석 읽기</span>
               <span>→</span>
             </Link>
             <Link href={{ pathname: '/place', query }} className={styles.menuItem}>
-              <span>명당 · 방위 · 공간별 가이드</span>
+              <span>지역 추천과 공간 팁 보기</span>
               <span>→</span>
             </Link>
           </div>
