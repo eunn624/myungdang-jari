@@ -6,7 +6,7 @@ import styles from '../styles/Layout.module.css';
 interface LayoutProps {
   children: ReactNode;
   showTabBar?: boolean;
-  activeTab?: 'home' | 'saju' | 'read' | 'place' | 'my';
+  activeTab?: 'home' | 'saju' | 'read' | 'place' | 'store' | 'my';
 }
 
 export default function Layout({ 
@@ -45,6 +45,10 @@ export default function Layout({
             <Link href={tabHref('/place')} className={`${styles.tab} ${activeTab === 'place' ? styles.active : ''}`}>
               <span className={styles.tabIcon}>向</span>
               <span className={styles.tabLabel}>명당</span>
+            </Link>
+            <Link href={tabHref('/store')} className={`${styles.tab} ${activeTab === 'store' ? styles.active : ''}`}>
+              <span className={styles.tabIcon}>◈</span>
+              <span className={styles.tabLabel}>소품</span>
             </Link>
             <Link href={tabHref('/my')} className={`${styles.tab} ${activeTab === 'my' ? styles.active : ''}`}>
               <span className={styles.tabIcon}>人</span>

@@ -1275,6 +1275,43 @@
   font-weight: 700;
 }
 
+/* ── Store / Notice ── */
+.noticeCard {
+  background: #fdf6ee;
+  border: 1px solid #e8d8c8;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.tabRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tabBtn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #d4c4b0;
+  background: #fff;
+  color: #6b5e56;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tabBtnActive {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #3a3028;
+  background: #3a3028;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .floatingSheet {
   margin-top: -34px;
   position: relative;
