@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
-import FortuneMascot from '../components/FortuneMascot';
 
 const steps = [
   '사주팔자를 정리하는 중',
@@ -34,8 +33,8 @@ export default function LoadingScreen() {
   }, [router]);
 
   return (
-    <Layout>
-      <div className={styles.onboardingScreen} style={{ justifyContent: 'center', gap: 18 }}>
+    <Layout headerTitle="분석 준비" showBackButton backHref="/input">
+      <div className={`${styles.onboardingScreen} ${styles.slideEnter}`} style={{ justifyContent: 'center', gap: 18 }}>
         <div className={`${styles.heroPanel} ${styles.heroPanelBlue}`}>
           <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
           <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
@@ -48,7 +47,7 @@ export default function LoadingScreen() {
               <h1 className={styles.heroTitle}>당신의 기운을<br />읽고 있어요</h1>
               <p className={styles.heroDescription}>입력값을 정리하고, 사주 흐름과 공간 가이드를 카드 형태로 준비하는 중이에요.</p>
             </div>
-            <FortuneMascot size="lg" mood="blue" badge="조금만 기다려요" />
+            <div className={styles.visualPlaceholder}></div>
           </div>
         </div>
 

@@ -77,10 +77,9 @@ export default function SajuPage() {
   ];
 
   return (
-    <Layout showTabBar activeTab="saju">
+    <Layout showTabBar activeTab="saju" headerTitle="사주원국" showBackButton>
       <div className={styles.screen}>
         <div className={`${styles.row} ${styles.between}`}>
-          <h1 className={styles.sectionTitle}>사주원국</h1>
           <span className={styles.badge}>만세력</span>
         </div>
         <p className={styles.sectionSubtitle}>

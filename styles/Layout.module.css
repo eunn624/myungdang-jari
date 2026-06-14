@@ -12,8 +12,10 @@
 }
 
 .phone {
+  position: relative;
   width: min(100%, 392px);
   min-height: 812px;
+  height: min(100vh - 40px, 812px);
   background: rgba(250, 252, 255, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 34px;
@@ -32,7 +34,62 @@
     linear-gradient(180deg, rgba(248,250,255,0.8), rgba(242,246,255,0.96));
 }
 
+.mainWithHeader {
+  padding-top: 76px;
+}
+
+.mainWithTabbar {
+  padding-bottom: 92px;
+}
+
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  min-height: 76px;
+  padding: 18px 16px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(116, 124, 162, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.topbarSide {
+  display: flex;
+  align-items: center;
+}
+
+.topbarTitle {
+  margin: 0;
+  text-align: center;
+  color: #171d3b;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.backButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(116, 124, 162, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #171d3b;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .tabbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-around;
   align-items: center;

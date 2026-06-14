@@ -9,11 +9,11 @@ export default function MyPage() {
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
 
   return (
-    <Layout showTabBar activeTab="my">
+    <Layout showTabBar activeTab="my" headerTitle="마이" showBackButton>
       <div className={styles.screen}>
         <div className={styles.profileCard}>
           <div className={styles.row} style={{ gap: 12 }}>
-            <div className={styles.mascot}>🐱</div>
+            <div className={styles.visualPlaceholderSmall}></div>
             <div className={styles.column} style={{ gap: 4 }}>
               <h1 className={styles.sectionTitle}>{report.profile.name}</h1>
               <span className={styles.sectionSubtitle}>

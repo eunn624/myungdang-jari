@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { createQueryFromProfile, type AppProfile } from '../lib/app-report';
-import FortuneMascot from '../components/FortuneMascot';
 
 interface InputState {
   name: string;
@@ -51,8 +50,8 @@ export default function InputScreen() {
   };
 
   return (
-    <Layout>
-      <form className={styles.screen} onSubmit={handleSubmit}>
+    <Layout headerTitle="정보 입력" showBackButton backHref="/onboarding-1">
+      <form className={`${styles.screen} ${styles.slideEnter}`} onSubmit={handleSubmit}>
         <div className={styles.row} style={{ gap: 8 }}>
           <span className={styles.caption}>입력 단계</span>
         </div>
@@ -61,20 +60,20 @@ export default function InputScreen() {
           <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
           <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
           <div className={styles.heroPanelHeader}>
-            <span className={styles.heroPanelLabel}>3 / 4</span>
+            <span className={styles.heroPanelLabel}>입력 시작</span>
             <span className={styles.heroPanelLabel}>정보 입력</span>
           </div>
           <div className={styles.heroDeck}>
             <div className={styles.column} style={{ gap: 10 }}>
               <h1 className={styles.heroTitle}>이제 내 정보를<br />입력해볼까요?</h1>
-              <p className={styles.heroDescription}>입력 후에는 분석 로딩을 거쳐 결과 카드로 자연스럽게 이어집니다.</p>
+              <p className={styles.heroDescription}>입력 후에는 분석 로딩을 거쳐 결과 홈으로 부드럽게 이어집니다.</p>
               <div className={styles.progressPillRow}>
                 <span className={`${styles.progressPill} ${styles.progressPillActive}`}>온보딩 완료</span>
                 <span className={styles.progressPill}>사주 계산</span>
                 <span className={styles.progressPill}>결과 리딩</span>
               </div>
             </div>
-            <FortuneMascot size="lg" mood="purple" badge="입력 도와줄게요" />
+            <div className={styles.visualPlaceholder}></div>
           </div>
         </div>
 

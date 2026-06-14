@@ -33,7 +33,7 @@ export default function StorePage() {
   }, [activeTab, report.saju.deficitOhang, report.saju.yongsin]);
 
   return (
-    <Layout showTabBar activeTab="store">
+    <Layout showTabBar activeTab="store" headerTitle="소품" showBackButton>
       <div className={styles.screen}>
 
         {/* 헤더 */}
@@ -79,7 +79,7 @@ export default function StorePage() {
 
         {/* 탭 설명 */}
         {activeTab !== 'recommend' ? (
-          <div className={styles.row} style={{ gap: 8, alignItems: 'center' }}>
+          <div className={styles.stackVertical}>
             <span
               className={styles.badgeFill}
               style={{ background: OHANG_STORE_INFO[activeTab].colorHex }}
@@ -89,7 +89,7 @@ export default function StorePage() {
             <span className={styles.caption}>{OHANG_STORE_INFO[activeTab].subtitle}</span>
           </div>
         ) : (
-          <div className={styles.row} style={{ gap: 8 }}>
+          <div className={styles.stackVertical}>
             <span className={styles.badgeFill}>보완 오행 {deficit} 중심 추천</span>
             <span className={styles.caption}>사주 기반 맞춤 소품</span>
           </div>
@@ -158,15 +158,14 @@ function StoreCard({ item, deficit }: { item: StoreItem; deficit: Ohang }) {
         </span>
       )}
 
-      <div className={styles.row} style={{ gap: 10, alignItems: 'flex-start' }}>
+      <div className={styles.stackVertical}>
         {/* 오행 컬러 바 */}
         <div
           style={{
-            width: 4,
-            minHeight: 64,
+            width: '100%',
+            height: 6,
             borderRadius: 4,
             background: info.colorHex,
-            flexShrink: 0,
           }}
         />
 
@@ -179,16 +178,16 @@ function StoreCard({ item, deficit }: { item: StoreItem; deficit: Ohang }) {
           <p className={styles.caption} style={{ color: '#8c7a6e' }}>{item.subtitle}</p>
           <p className={styles.caption} style={{ marginTop: 2 }}>{item.description}</p>
 
-          <div className={styles.row} style={{ gap: 8, marginTop: 6 }}>
+          <div className={styles.stackVertical} style={{ marginTop: 6 }}>
             <button
               type="button"
               className={styles.secondaryButton}
-              style={{ flex: 1, minHeight: 36, fontSize: 13 }}
+              style={{ minHeight: 40, fontSize: 13 }}
               onClick={handleClick}
             >
               {item.source}에서 보기 →
             </button>
-            <span className={styles.caption} style={{ color: '#b0a098', fontSize: 11, alignSelf: 'center' }}>
+            <span className={styles.caption} style={{ color: '#b0a098', fontSize: 11 }}>
               제휴 링크
             </span>
           </div>

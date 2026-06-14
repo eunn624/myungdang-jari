@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
-import FortuneMascot from '../components/FortuneMascot';
 
 function BarRows({ report }: { report: ReturnType<typeof getReportFromQuery> }) {
   const rows = [
@@ -89,8 +88,8 @@ export default function ResultScreen() {
   const card = cards[currentCard];
 
   return (
-    <Layout>
-      <div className={styles.screen}>
+    <Layout headerTitle="결과 홈" showBackButton backHref="/input">
+      <div className={`${styles.screen} ${styles.slideEnter}`}>
         <div className={`${styles.heroPanel} ${styles.heroPanelPurple}`}>
           <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
           <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
@@ -99,7 +98,7 @@ export default function ResultScreen() {
               <span className={styles.heroPanelLabel}>결과 리딩</span>
               <h1 className={styles.heroTitle}>{report.profile.name}님의<br />공간 사주 카드</h1>
             </div>
-            <FortuneMascot size="sm" mood="purple" />
+            <div className={styles.visualPlaceholderSmall}></div>
           </div>
           <div className={styles.heroDeck}>
             <div className={styles.heroInfoCard}>

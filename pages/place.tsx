@@ -72,10 +72,8 @@ export default function PlacePage() {
   const hasMunchang = sinsal.some(s => s.name === '문창귀인');
 
   return (
-    <Layout showTabBar activeTab="place">
+    <Layout showTabBar activeTab="place" headerTitle="명당" showBackButton>
       <div className={styles.screen}>
-        <h1 className={styles.sectionTitle}>명당</h1>
-
         <div className={styles.badgeWrap}>
           {SPACE_TABS.map(tab => (
             <button

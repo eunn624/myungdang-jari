@@ -7,12 +7,18 @@ interface LayoutProps {
   children: ReactNode;
   showTabBar?: boolean;
   activeTab?: 'home' | 'saju' | 'read' | 'place' | 'store' | 'my';
+  headerTitle?: string;
+  showBackButton?: boolean;
+  backHref?: string;
 }
 
 export default function Layout({ 
   children, 
   showTabBar = false,
-  activeTab 
+  activeTab,
+  headerTitle,
+  showBackButton = false,
+  backHref,
 }: LayoutProps) {
   const router = useRouter();
 
@@ -21,10 +27,32 @@ export default function Layout({
     query: router.query,
   });
 
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+      return;
+    }
+    router.push(backHref || '/home');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.phone}>
-        <main className={styles.main}>
+        {headerTitle ? (
+          <header className={styles.topbar}>
+            <div className={styles.topbarSide}>
+              {showBackButton ? (
+                <button type="button" className={styles.backButton} onClick={handleBack}>
+                  ←
+                </button>
+              ) : null}
+            </div>
+            <h1 className={styles.topbarTitle}>{headerTitle}</h1>
+            <div className={styles.topbarSide}></div>
+          </header>
+        ) : null}
+
+        <main className={`${styles.main} ${headerTitle ? styles.mainWithHeader : ''} ${showTabBar ? styles.mainWithTabbar : ''}`}>
           {children}
         </main>
 

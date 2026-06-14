@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
-import FortuneMascot from '../components/FortuneMascot';
 
 export default function HomePage() {
   const router = useRouter();
@@ -37,7 +36,7 @@ export default function HomePage() {
               <span className={styles.heroPanelLabel}>{report.formattedToday}</span>
               <h1 className={styles.heroTitle}>{report.profile.name}님,<br />오늘의 명당 흐름이에요</h1>
             </div>
-            <FortuneMascot size="sm" mood="blue" />
+            <div className={styles.visualPlaceholderSmall}></div>
           </div>
 
           <div className={styles.heroDeck}>

@@ -28,16 +28,15 @@ export default function SharePage() {
   };
 
   return (
-    <Layout>
-      <div className={styles.screen}>
-        <h1 className={styles.sectionTitle}>공유 카드</h1>
+    <Layout headerTitle="공유 카드" showBackButton backHref="/result">
+      <div className={`${styles.screen} ${styles.slideEnter}`}>
         <p className={styles.caption}>인스타그램·카카오톡으로 보내기 좋은 카드예요.</p>
 
         {/* 카드 1 — 사주 요약 */}
         <div className={styles.shareCard} style={{ borderTop: `4px solid ${accentColor}` }}>
           <div className={styles.column} style={{ gap: 10, alignItems: 'center' }}>
             <span className={styles.caption}>{report.formattedToday}</span>
-            <div className={styles.mascot} style={{ fontSize: 36 }}>🐱</div>
+            <div className={styles.visualPlaceholderSmall}></div>
             <h2 className={styles.sectionTitle} style={{ textAlign: 'center', color: accentColor }}>
               {report.summaryTitle}
             </h2>
@@ -47,7 +46,7 @@ export default function SharePage() {
           </div>
 
           <div className={styles.softCard} style={{ marginTop: 12 }}>
-            <div className={styles.statsGrid} style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+            <div className={styles.statsGrid} style={{ gap: 8 }}>
               <div className={styles.statCard}>
                 <strong className={styles.statValue}>{ilju}</strong>
                 <span className={styles.statLabel}>일주</span>

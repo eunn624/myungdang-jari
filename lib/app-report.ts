@@ -1,6 +1,6 @@
 import type { ParsedUrlQuery } from 'querystring';
 import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
-import type { Ohang } from './saju/types';
+import type { Ohang, DaeWoon, SeWoon } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
 import { getIljuContent, type IljuContent } from '../data/ilju-content';
 import { getTodayGanji, getMonthGanji, getDayInfo, getMonthTip, getTodayKey, type DayInfo, type MonthTip } from './saju/daily';
@@ -47,6 +47,8 @@ export interface AppReport {
   todayDayMessage: string;
   monthOhang: Ohang;
   monthSpaceTip: string;
+  daeWoonHomeReading: string;
+  seWoonHomeReading: string;
 }
 
 const OHANG_LABELS: Record<Ohang, string> = {
@@ -483,6 +485,38 @@ function buildMonthSpaceTip(
   return parts.join('\n\n');
 }
 
+// ─────────────────────────────────────────────
+// 이사 · 주거 리딩 (대운 / 세운)
+// ─────────────────────────────────────────────
+
+function buildDaeWoonHomeReading(currentDaeWoon: DaeWoon | null): string {
+  if (!currentDaeWoon) return '생년월일을 입력하면 대운 기반 이사·주거 해석을 볼 수 있습니다.';
+  const dw = currentDaeWoon;
+  const range = `${dw.startAge}~${dw.endAge}세`;
+  const ganjiStr = `${dw.ganJi.stem}${dw.ganJi.branch}`;
+  const map: Record<Ohang, string> = {
+    木: `${ganjiStr}(木) 대운(${range})은 시작과 확장의 기운입니다. 이 시기에는 독립·이사·새 출발이 자연스럽게 따라오는 경우가 많아요. 동쪽 방향으로의 이동이나 동향·동남향 주택이 길한 선택지가 됩니다. 신축 건물이나 리모델링을 처음 시작하기에도 좋은 대운이며, 이 시기에 이사를 결심했다면 흐름에 맞게 움직이는 것이 맞습니다.`,
+    火: `${ganjiStr}(火) 대운(${range})은 활동과 표현의 기운입니다. 사회적 활동이 활발해지면서 입지 좋은 생활권으로 이동하려는 욕구가 강해지는 시기예요. 남향 주택이나 일조량이 풍부한 집이 이 대운과 잘 맞으며, 전세→매매 전환이나 규모 업그레이드를 고려하기 적합한 흐름입니다. 집 안 리모델링·인테리어 개선이 이 기운을 공간으로 끌어오는 방법이에요.`,
+    土: `${ganjiStr}(土) 대운(${range})은 정착과 안정의 기운입니다. 내 집 마련, 주택 매매, 거주지 확정처럼 뿌리를 내리는 결정이 이 대운에 가장 잘 맞습니다. 사주 전체에서 집을 사기 가장 좋은 시기가 土 대운이에요. 오래 살 집, 생애 첫 내 집 마련을 이 시기에 결정하면 안정적인 기반이 됩니다. 평지·구릉 지형의 조용한 주거지가 이 대운의 길한 입지입니다.`,
+    金: `${ganjiStr}(金) 대운(${range})은 정리와 결단의 기운입니다. 집 처분, 이사 결단, 불필요한 공간 축소처럼 기존의 것을 재편하는 흐름이 강하게 옵니다. 다운사이징이나 이사를 통해 삶의 짐을 줄이는 방향이 이 대운에 어울리는 선택이에요. 서쪽 방향이나 서향·북서향 입지가 金 대운과 맞으며, 불필요한 부동산을 정리하는 타이밍으로 활용하기 좋습니다.`,
+    水: `${ganjiStr}(水) 대운(${range})은 순환과 흐름의 기운입니다. 한 곳에 오래 정착하기보다 이동하고 순환하는 주거 패턴이 자연스러운 시기예요. 전세·월세 형태로 유연하게 이동하거나, 수변(한강·지천·저수지 인접) 생활권이 이 대운의 길한 입지입니다. 이사를 고려한다면 충분한 정보 수집과 비교 분석 후 결정하세요. 水 대운에는 흐르는 방향에 몸을 맡기는 것이 거스르는 것보다 훨씬 잘 맞습니다.`,
+  };
+  return map[dw.ohang];
+}
+
+function buildSeWoonHomeReading(seWoon: SeWoon): string {
+  const year = seWoon.year;
+  const ganjiStr = `${seWoon.ganJi.stem}${seWoon.ganJi.branch}`;
+  const map: Record<Ohang, string> = {
+    木: `올해 ${year}년 ${ganjiStr}(木) 세운은 이사·독립·시작의 기운이 강한 해입니다. 새 공간으로 이동하거나 독립을 결심하기 좋은 시점이에요. 이사를 고려 중이라면 상반기 안에 물건을 보기 시작하는 것이 흐름과 맞습니다. 동쪽 방향이나 동향 주택, 녹지 인접 생활권이 올해의 길한 이사 방향입니다.`,
+    火: `올해 ${year}년 ${ganjiStr}(火) 세운은 활동과 변화가 커지는 해입니다. 집에 변화를 주거나(리모델링·인테리어 개선), 생활권을 업그레이드하고 싶은 욕구가 강해지는 시기예요. 남향이나 일조 좋은 집으로의 이사가 올해 길한 방향이며, 집 안 조명을 따뜻하고 밝게 바꾸는 것만으로도 세운 에너지를 공간으로 끌어올 수 있습니다.`,
+    土: `올해 ${year}년 ${ganjiStr}(土) 세운은 정착과 안정의 기운이 강한 해입니다. 주택 매매, 계약 갱신, 장기 거주 결정처럼 뿌리를 내리는 선택이 올해 가장 잘 맞습니다. 집을 살 계획이 있다면 올해 계약을 진행하는 것이 세운과 맞는 타이밍이에요. 평지·중심 생활권의 안정적인 주거지가 올해의 길한 선택입니다.`,
+    金: `올해 ${year}년 ${ganjiStr}(金) 세운은 정리와 결단의 기운이 강한 해입니다. 불필요한 부동산 처분, 이사 결단, 주거 다운사이징처럼 '줄이고 정리하는' 방향이 올해의 자연스러운 흐름입니다. 임대·전세 계약을 재편하기 좋은 타이밍이에요. 서쪽 또는 북서쪽 방향 이동이 올해의 길한 방위입니다.`,
+    水: `올해 ${year}년 ${ganjiStr}(水) 세운은 순환과 이동의 기운이 강한 해입니다. 이사나 거처 변경이 생길 가능성이 높고, 임대·전세 이동이 자연스럽게 따라오는 시기예요. 수변(강·하천·저수지 인접) 생활권이나 북쪽 방향 이동이 올해의 길한 이사 방향입니다. 주거 결정 전 충분한 정보 수집과 전문가 상담을 거치는 것이 좋습니다.`,
+  };
+  return map[seWoon.ohang];
+}
+
 export function getProfileFromQuery(query: ParsedUrlQuery): AppProfile {
   return {
     name: getString(query.name) || '사용자',
@@ -560,6 +594,8 @@ export function buildReport(profile: AppProfile): AppReport {
     todayDayMessage: buildTodayDayMessage(saju, dayInfo, iljuContent ?? null, districts, profile),
     monthOhang: monthInfo.ohang,
     monthSpaceTip: buildMonthSpaceTip(saju, monthInfo, iljuContent ?? null, districts, profile),
+    daeWoonHomeReading: buildDaeWoonHomeReading(saju.currentDaeWoon),
+    seWoonHomeReading: buildSeWoonHomeReading(saju.seWoon),
   };
 }
 
@@ -613,6 +649,8 @@ function getEmptyReport(profile: AppProfile): AppReport {
     todayDayMessage: dayInfo.message,
     monthOhang: monthInfo.ohang,
     monthSpaceTip: monthInfo.spaceTip,
+    daeWoonHomeReading: '생년월일을 입력하면 대운 기반 이사·주거 해석을 볼 수 있습니다.',
+    seWoonHomeReading: '생년월일을 입력하면 세운 기반 이사·주거 해석을 볼 수 있습니다.',
   };
 }
 

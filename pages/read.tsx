@@ -16,9 +16,8 @@ export default function ReadPage() {
   const seWoon = report.saju.seWoon;
 
   return (
-    <Layout showTabBar activeTab="read">
+    <Layout showTabBar activeTab="read" headerTitle="사주 풀이" showBackButton>
       <div className={styles.screen}>
-        <h1 className={styles.sectionTitle}>사주 풀이</h1>
         <p className={styles.sectionSubtitle}>
           {report.saju.pillars.day.stem}{report.saju.pillars.day.branch} 일주 · {report.profile.name}
         </p>
@@ -78,7 +77,64 @@ export default function ReadPage() {
           </div>
         </div>
 
-        {/* 섹션 6: 대운·세운 */}
+        {/* 섹션 6: 이사 · 주거 리딩 */}
+        <div className={styles.card}>
+          <span className={styles.badgeFill}>이사 · 주거 리딩</span>
+          <p className={styles.caption} style={{ marginTop: 6, marginBottom: 12 }}>
+            사주·신살·대운·세운에서 읽는 이사·집·부동산 흐름
+          </p>
+
+          {/* 신살별 이사 해석 */}
+          {report.saju.sinsal.length > 0 && (
+            <div className={styles.column} style={{ gap: 10, marginBottom: 14 }}>
+              {report.saju.sinsal.map((s) => (
+                <div key={s.name} className={styles.softCard}>
+                  <div className={styles.row} style={{ gap: 6, marginBottom: 4 }}>
+                    <span className={styles.badgeSoft}>{s.name}</span>
+                    <span className={styles.caption} style={{ color: '#8c7a6e' }}>{s.hanja} · {s.activePillar}</span>
+                  </div>
+                  <p className={styles.caption}>{s.homeReading}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* 대운 이사 해석 */}
+          {report.saju.currentDaeWoon && (
+            <div className={styles.softCard} style={{ marginBottom: 10 }}>
+              <div className={styles.row} style={{ gap: 6, marginBottom: 4 }}>
+                <span
+                  className={styles.badgeFill}
+                  style={{ background: OHANG_COLOR[report.saju.currentDaeWoon.ohang] }}
+                >
+                  대운 · {report.saju.currentDaeWoon.ganJi.stem}{report.saju.currentDaeWoon.ganJi.branch}
+                </span>
+                <span className={styles.caption} style={{ color: '#8c7a6e' }}>
+                  {report.saju.currentDaeWoon.ohang} · {report.saju.currentDaeWoon.startAge}~{report.saju.currentDaeWoon.endAge}세
+                </span>
+              </div>
+              <p className={styles.caption}>{report.daeWoonHomeReading}</p>
+            </div>
+          )}
+
+          {/* 세운 이사 해석 */}
+          <div className={styles.softCard}>
+            <div className={styles.row} style={{ gap: 6, marginBottom: 4 }}>
+              <span
+                className={styles.badgeFill}
+                style={{ background: OHANG_COLOR[seWoon.ohang] }}
+              >
+                세운 · {seWoon.ganJi.stem}{seWoon.ganJi.branch}
+              </span>
+              <span className={styles.caption} style={{ color: '#8c7a6e' }}>
+                {seWoon.year}년 · {seWoon.ohang}
+              </span>
+            </div>
+            <p className={styles.caption}>{report.seWoonHomeReading}</p>
+          </div>
+        </div>
+
+        {/* 섹션 7: 대운 타임라인 */}
         <div className={styles.column} style={{ gap: 8 }}>
           <div className={`${styles.row} ${styles.between}`}>
             <span className={styles.label}>대운 흐름</span>
@@ -109,7 +165,7 @@ export default function ReadPage() {
                       현재 {report.saju.currentDaeWoon.ganJi.stem}{report.saju.currentDaeWoon.ganJi.branch} 대운
                       ({report.saju.currentDaeWoon.startAge}~{report.saju.currentDaeWoon.endAge}세)
                     </p>
-                    <p className={styles.caption}>
+                    <p className={styles.caption} style={{ marginTop: 4 }}>
                       {report.saju.currentDaeWoon.ohang} 기운이 강하게 흐르는 시기 · 공간에서 이 기운을 활용해보세요
                     </p>
                   </div>

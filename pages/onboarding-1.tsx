@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
-import FortuneMascot from '../components/FortuneMascot';
 
 export default function Onboarding1() {
   return (
     <Layout>
-      <div className={styles.onboardingScreen}>
+      <div className={`${styles.onboardingScreen} ${styles.slideEnter}`}>
         <div className={`${styles.topRow} ${styles.between}`}>
           <span className={styles.appName}>명당자리</span>
           <Link href="/home" className={styles.skip}>건너뛰기</Link>
@@ -19,34 +18,35 @@ export default function Onboarding1() {
             <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
             <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
             <div className={styles.heroPanelHeader}>
-              <span className={styles.heroPanelLabel}>온보딩 1</span>
-              <span className={styles.heroPanelLabel}>공간 리딩</span>
+              <span className={styles.heroPanelLabel}>공간 리딩 앱</span>
+              <span className={styles.heroPanelLabel}>첫 시작</span>
             </div>
             <div className={styles.heroDeck}>
               <div className={styles.heroInfoCard}>
                 <h2 className={styles.heroInfoTitle}>좋은 공간은<br />예쁜 취향만의 문제가 아니에요</h2>
-                <p className={styles.heroInfoBody}>사주 흐름과 생활 감각을 함께 읽어서 나에게 편한 방향을 찾아가요.</p>
+                <p className={styles.heroInfoBody}>사주 흐름과 생활 감각을 함께 읽어서 내가 쉬기 편한 방향, 어울리는 동네, 정리하기 좋은 방위를 찾습니다.</p>
               </div>
-              <FortuneMascot size="lg" mood="blue" badge="오늘의 리딩" />
+              <div className={styles.visualPlaceholder}></div>
             </div>
           </div>
 
           <div className={styles.column} style={{ gap: 12 }}>
-            <h1 className={styles.heroTitle}>조용한 방 안에도<br />나만의 결이 있어요</h1>
+            <h1 className={styles.heroTitle}>나와 잘 맞는 공간을<br />한 번에 읽어드릴게요</h1>
             <p className={styles.bodyText}>
-              생년월일시를 바탕으로 지금의 공간, 침대 방향, 잘 맞는 동네 감각까지 귀엽고 편하게 풀어드릴게요.
+              생년월일시를 바탕으로 사주원국, 오행 균형, 침대 방향, 명당 후보, 긴 해석 카드까지 모바일에서 자연스럽게 이어서 볼 수 있어요.
             </p>
+            <div className={styles.pageIntroCard}>
+              <div className={styles.stackVertical}>
+                <span className={styles.badgeFill}>입력 1회 · 결과 홈 바로 연결</span>
+                <span className={styles.caption}>오락·참고 목적의 라이프스타일 가이드</span>
+                <span className={styles.caption}>행정동 추천 · 지형 가이드 · 공유 카드 포함</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className={styles.dots}>
-          <span className={`${styles.dot} ${styles.dotActive}`}></span>
-          <span className={styles.dot}></span>
-          <span className={styles.dot}></span>
-        </div>
-
-        <Link href="/onboarding-2" className={styles.primaryButton}>
-          나의 공간 흐름 보기
+        <Link href="/input" className={styles.primaryButton}>
+          시작하고 정보 입력하기
         </Link>
       </div>
     </Layout>

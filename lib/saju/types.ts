@@ -39,6 +39,7 @@ export interface SinsalResult {
   activePillar: string;
   description: string;
   spaceTag: string;
+  homeReading: string;
 }
 
 export interface DaeWoon {
