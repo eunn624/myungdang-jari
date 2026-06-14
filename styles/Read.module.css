@@ -1,0 +1,59 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.section {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2420;
+  margin: 0 0 12px 0;
+}
+
+.text {
+  font-size: 14px;
+  color: #8c7a6e;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+  background: #f8f6f2;
+  border-radius: 8px;
+}
+
+.age {
+  min-width: 60px;
+  font-weight: 700;
+  color: #8f7ce0;
+  font-size: 12px;
+}
+
+.disclaimer {
+  background: #fcf3e6;
+  padding: 12px;
+  border-left: 3px solid #e85d3f;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #2c2420;
+  margin: 0;
+  line-height: 1.5;
+}

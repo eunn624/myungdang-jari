@@ -1,0 +1,126 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+}
+
+.cardContainer {
+  perspective: 1000px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emoji {
+  font-size: 64px;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-family: 'OngleipParkDahyeon', serif;
+  color: #2c2420;
+  margin: 0;
+}
+
+.cardContent {
+  font-size: 14px;
+  color: #8c7a6e;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.navButton {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid #e8ddd2;
+  background: white;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #2c2420;
+}
+
+.navButton:hover:not(:disabled) {
+  border-color: #8f7ce0;
+  color: #8f7ce0;
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.indicator {
+  font-size: 12px;
+  color: #8c7a6e;
+  font-weight: 700;
+}
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.buttonPrimary {
+  background: #8f7ce0;
+  color: white;
+}
+
+.buttonPrimary:hover {
+  opacity: 0.9;
+}
+
+.buttonSecondary {
+  background: white;
+  border: 2px solid #e8ddd2;
+  color: #2c2420;
+}
+
+.buttonSecondary:hover {
+  border-color: #8f7ce0;
+  color: #8f7ce0;
+}

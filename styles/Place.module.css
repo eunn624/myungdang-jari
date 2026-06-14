@@ -1,0 +1,110 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.section {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2420;
+  margin: 0 0 12px 0;
+}
+
+.placesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.placeCard {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f6f2;
+  border-radius: 12px;
+  align-items: flex-start;
+}
+
+.rank {
+  min-width: 32px;
+  height: 32px;
+  background: #8f7ce0;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.placeInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.placeName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2c2420;
+  margin: 0;
+}
+
+.gu {
+  font-size: 12px;
+  color: #8c7a6e;
+}
+
+.reason {
+  font-size: 12px;
+  color: #8c7a6e;
+  margin: 4px 0 0 0;
+}
+
+.card {
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.emoji {
+  font-size: 48px;
+}
+
+.direction {
+  font-size: 14px;
+  color: #2c2420;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.shopButton {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #8f7ce0;
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.shopButton:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,109 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2420;
+}
+
+.dateInputs,
+.timeInputs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input {
+  padding: 12px;
+  border: 1.5px solid #e8ddd2;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Pretendard', sans-serif;
+  color: #2c2420;
+  background: white;
+  cursor: pointer;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #8f7ce0;
+  box-shadow: 0 0 0 3px rgba(143, 124, 224, 0.1);
+}
+
+.input:disabled {
+  background: #f8f6f2;
+  color: #b8aea0;
+  cursor: not-allowed;
+}
+
+.dateInputs .input {
+  flex: 1;
+  min-width: 60px;
+}
+
+.timeInputs .input {
+  min-width: 100px;
+}
+
+.separator {
+  color: #8c7a6e;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2c2420;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #8f7ce0;
+}
+
+.note {
+  padding: 12px;
+  background: #fcf3e6;
+  border-left: 3px solid #e85d3f;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #2c2420;
+  line-height: 1.5;
+}
+
+.submitButton {
+  padding: 14px 24px;
+  background: #8f7ce0;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  margin-top: 12px;
+}
+
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+.submitButton:active {
+  opacity: 0.8;
+}

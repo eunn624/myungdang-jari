@@ -1,0 +1,99 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.profile {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: 18px;
+  font-family: 'OngleipParkDahyeon', serif;
+  color: #2c2420;
+  margin: 0 0 8px 0;
+}
+
+.saju {
+  font-size: 14px;
+  color: #8c7a6e;
+  margin: 0;
+  font-family: monospace;
+}
+
+.section {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2420;
+  margin: 0 0 12px 0;
+}
+
+.missionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.missionItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #f8f6f2;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #2c2420;
+}
+
+.checkmark {
+  color: #5cb85c;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  color: #2c2420;
+  text-decoration: none;
+  border-bottom: 1px solid #e8ddd2;
+  transition: background 0.2s ease-in-out;
+}
+
+.menuItem:last-child {
+  border-bottom: none;
+}
+
+.menuItem:hover {
+  background: #f8f6f2;
+}

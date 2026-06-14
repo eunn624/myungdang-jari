@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: calc(100vh - 100px);
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #e8ddd2;
+  border-top-color: #8f7ce0;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.title {
+  font-size: 20px;
+  font-family: 'OngleipParkDahyeon', serif;
+  color: #2c2420;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #8c7a6e;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}

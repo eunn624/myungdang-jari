@@ -1,0 +1,86 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2c2420;
+  margin: 0 0 12px 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  background: #f8f6f2;
+  padding: 8px;
+  text-align: center;
+  font-weight: 700;
+  color: #2c2420;
+  border-bottom: 1px solid #e8ddd2;
+}
+
+.table td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #e8ddd2;
+}
+
+.hanja {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c2420;
+}
+
+.hangul {
+  font-size: 12px;
+  color: #8c7a6e;
+}
+
+.ohangBars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ohangItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ohangLabel {
+  width: 30px;
+  font-weight: 700;
+  color: #2c2420;
+  font-size: 14px;
+}
+
+.bar {
+  flex: 1;
+  height: 24px;
+  border-radius: 4px;
+  transition: width 0.3s ease-in-out;
+}
+
+.ohangValue {
+  width: 50px;
+  text-align: right;
+  font-size: 12px;
+  color: #8c7a6e;
+  font-weight: 700;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>명당자리 — 앱 와이어프레임</title>
+<link rel="stylesheet" href="wireframe.css"/>
+<style>
+  html,body{margin:0;height:100%;background:var(--paper);}
+  #root{height:100vh;}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<template id="__bundler_thumbnail" data-bg-color="#f5f1ed">
+  <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+    <!-- 휴대폰 프레임 -->
+    <rect x="40" y="20" width="120" height="240" rx="8" fill="none" stroke="#999" stroke-width="2"/>
+    <!-- 상단 바 -->
+    <rect x="40" y="20" width="120" height="20" rx="8" fill="#f0ebe5"/>
+    <!-- 온보딩 캐릭터 -->
+    <circle cx="100" cy="80" r="15" fill="#d4a574"/>
+    <circle cx="100" cy="78" r="12" fill="#f5e6d3"/>
+    <!-- 텍스트 라인 -->
+    <line x1="50" y1="110" x2="150" y2="110" stroke="#ccc" stroke-width="2"/>
+    <line x1="50" y1="125" x2="140" y2="125" stroke="#e5ddd3" stroke-width="2"/>
+    <!-- 하단 버튼 -->
+    <rect x="55" y="200" width="90" height="30" rx="6" fill="#8b5a3c"/>
+    <!-- 탭 -->
+    <line x1="40" y1="245" x2="160" y2="245" stroke="#e5ddd3" stroke-width="1"/>
+    <circle cx="50" cy="255" r="4" fill="#999"/>
+    <circle cx="80" cy="255" r="4" fill="#ccc"/>
+    <circle cx="110" cy="255" r="4" fill="#ccc"/>
+    <circle cx="140" cy="255" r="4" fill="#ccc"/>
+  </svg>
+</template>
+
+<body class="wf">
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="screens-flow.jsx"></script>
+<script type="text/babel" src="screens-result.jsx"></script>
+<script type="text/babel" src="screens-tabs.jsx"></script>
+<script type="text/babel" src="screens-share.jsx"></script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+function App(){
+  return (
+    <DesignCanvas>
+      <DCSection id="flow" title="① 시작 플로우" subtitle="온보딩 → 정보 입력 → 분석 로딩">
+        <DCArtboard id="onb1" label="온보딩 1 · 초대" width={300} height={650}><Onb1/></DCArtboard>
+        <DCArtboard id="onb2" label="온보딩 2 · 약속" width={300} height={650}><Onb2/></DCArtboard>
+        <DCArtboard id="onb3" label="온보딩 3 · 개인정보" width={300} height={650}><Onb3/></DCArtboard>
+        <DCArtboard id="input" label="생년월일시 입력" width={300} height={700}><InputScreen/></DCArtboard>
+        <DCArtboard id="loading" label="분석 로딩" width={300} height={650}><LoadingScreen/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="result" title="② 분석 결과 — 3가지 방식" subtitle="7장의 리딩을 어떻게 보여줄까? (이번 탐색의 핵심 비교)">
+        <DCArtboard id="r-swipe" label="A · 카드 스와이프" width={300} height={650}><ResultSwipe/></DCArtboard>
+        <DCArtboard id="r-scroll" label="B · 세로 스크롤" width={300} height={650}><ResultScroll/></DCArtboard>
+        <DCArtboard id="r-index" label="C · 챕터 인덱스" width={300} height={650}><ResultIndex/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="tabs" title="③ 메인 5개 탭" subtitle="홈 · 사주원국 · 풀이 · 명당 · 마이">
+        <DCArtboard id="t-home" label="홈" width={300} height={700}><TabHome/></DCArtboard>
+        <DCArtboard id="t-saju" label="사주원국 (만세력 표)" width={300} height={720}><TabSaju/></DCArtboard>
+        <DCArtboard id="t-read" label="풀이" width={300} height={700}><TabRead/></DCArtboard>
+        <DCArtboard id="t-place" label="명당" width={300} height={720}><TabPlace/></DCArtboard>
+        <DCArtboard id="t-my" label="마이" width={300} height={700}><TabMy/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="share" title="④ 공유 카드 (9:16)" subtitle="A형(귀여운) + C형(명당 정보) 혼합 사용">
+        <DCArtboard id="s-cute" label="A · 귀여운 기본" width={252} height={448}><ShareCute/></DCArtboard>
+        <DCArtboard id="s-mixed" label="A+C · 혼합형" width={252} height={448}><ShareMixed/></DCArtboard>
+        <DCArtboard id="s-place" label="C · 명당 추천" width={252} height={448}><SharePlace/></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
