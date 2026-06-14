@@ -1,65 +1,125 @@
-import React from 'react';
+import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/Saju.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { getReportFromQuery } from '../lib/app-report';
+
+function SajuCell({
+  label,
+  hanja,
+  ko,
+  tone,
+}: {
+  label?: string;
+  hanja?: string;
+  ko?: string;
+  tone?: string;
+}) {
+  return (
+    <div className={`${styles.sajuCell} ${label ? styles.sajuLabelCell : ''} ${tone ? styles[tone] : ''}`}>
+      {label ? (
+        <span>{label}</span>
+      ) : (
+        <>
+          <span className={styles.hanja}>{hanja}</span>
+          <span className={styles.ko}>{ko}</span>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function SajuPage() {
+  const router = useRouter();
+  const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
+  const { year, month, day, hour } = report.saju.pillars;
+
+  const rows = [
+    {
+      label: '천간',
+      cells: [
+        hour ? { hanja: hour.stem, ko: hour.stemKor, tone: 'wood' } : { hanja: '—', ko: '시 모름', tone: '' },
+        { hanja: day.stem, ko: `${day.stemKor} · 일간`, tone: 'fire' },
+        { hanja: month.stem, ko: month.stemKor, tone: 'fire' },
+        { hanja: year.stem, ko: year.stemKor, tone: 'fire' },
+      ],
+    },
+    {
+      label: '지지',
+      cells: [
+        hour ? { hanja: hour.branch, ko: hour.branchKor, tone: 'fire' } : { hanja: '—', ko: '시 모름', tone: '' },
+        { hanja: day.branch, ko: day.branchKor, tone: 'metal' },
+        { hanja: month.branch, ko: month.branchKor, tone: 'fire' },
+        { hanja: year.branch, ko: year.branchKor, tone: 'earth' },
+      ],
+    },
+  ];
+
+  const bars = [
+    ['木', report.saju.ohang.wood, '#5cb85c'],
+    ['火', report.saju.ohang.fire, '#e85d3f'],
+    ['土', report.saju.ohang.earth, '#d4a574'],
+    ['金', report.saju.ohang.metal, '#e8d4a8'],
+    ['水', report.saju.ohang.water, '#4a90e2'],
+  ] as const;
+
   return (
-    <Layout title="사주원국" showTabBar activeTab="saju">
-      <div className={styles.content}>
-        <div className={styles.card}>
-          <h3 className={styles.subtitle}>사주팔자 (四柱八字)</h3>
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                <th>년</th>
-                <th>월</th>
-                <th>일</th>
-                <th>시</th>
-              </tr>
-              <tr>
-                <td className={styles.hanja}>丁丑</td>
-                <td className={styles.hanja}>丙午</td>
-                <td className={styles.hanja}>丁酉</td>
-                <td className={styles.hanja}>乙巳</td>
-              </tr>
-              <tr>
-                <td className={styles.hangul}>정축</td>
-                <td className={styles.hangul}>병오</td>
-                <td className={styles.hangul}>정유</td>
-                <td className={styles.hangul}>을사</td>
-              </tr>
-            </tbody>
-          </table>
+    <Layout showTabBar activeTab="saju">
+      <div className={styles.screen}>
+        <div className={`${styles.row} ${styles.between}`}>
+          <h1 className={styles.sectionTitle}>사주원국</h1>
+          <span className={styles.badge}>만세력</span>
+        </div>
+
+        <p className={styles.sectionSubtitle}>
+          {report.profile.name} · {report.formattedBirth} · 일간 {report.saju.pillars.day.stem}
+        </p>
+
+        <div className={styles.sajuTable}>
+          <div className={styles.sajuRow}>
+            <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}></div>
+            <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>시주</div>
+            <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>일주</div>
+            <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>월주</div>
+            <div className={`${styles.sajuCell} ${styles.sajuLabelCell} ${styles.sajuTopLabel}`}>년주</div>
+          </div>
+          {rows.map((row) => (
+            <div className={styles.sajuRow} key={row.label}>
+              <SajuCell label={row.label} />
+              {row.cells.map((cell, index) => (
+                <SajuCell key={`${row.label}-${index}`} hanja={cell.hanja} ko={cell.ko} tone={cell.tone} />
+              ))}
+            </div>
+          ))}
         </div>
 
         <div className={styles.card}>
-          <h3 className={styles.subtitle}>오행 분석</h3>
-          <div className={styles.ohangBars}>
-            <div className={styles.ohangItem}>
-              <span className={styles.ohangLabel}>火</span>
-              <div className={styles.bar} style={{backgroundColor: '#E85D3F', width: '62.5%'}}></div>
-              <span className={styles.ohangValue}>62.5%</span>
-            </div>
-            <div className={styles.ohangItem}>
-              <span className={styles.ohangLabel}>木</span>
-              <div className={styles.bar} style={{backgroundColor: '#5CB85C', width: '12.5%'}}></div>
-              <span className={styles.ohangValue}>12.5%</span>
-            </div>
-            <div className={styles.ohangItem}>
-              <span className={styles.ohangLabel}>金</span>
-              <div className={styles.bar} style={{backgroundColor: '#E8D4A8', width: '12.5%'}}></div>
-              <span className={styles.ohangValue}>12.5%</span>
-            </div>
-            <div className={styles.ohangItem}>
-              <span className={styles.ohangLabel}>土</span>
-              <div className={styles.bar} style={{backgroundColor: '#D4A574', width: '12.5%'}}></div>
-              <span className={styles.ohangValue}>12.5%</span>
-            </div>
-            <div className={styles.ohangItem}>
-              <span className={styles.ohangLabel}>水</span>
-              <div className={styles.bar} style={{backgroundColor: '#4A90E2', width: '0%'}}></div>
-              <span className={styles.ohangValue}>0%</span>
-            </div>
+          <div className={`${styles.row} ${styles.between}`}>
+            <span className={styles.label}>오행 분포</span>
+            <span className={styles.caption}>
+              {report.saju.deficitOhang[0] || report.saju.yongsin} 보완 필요
+            </span>
+          </div>
+          <div className={styles.bars} style={{ marginTop: 14 }}>
+            {bars.map(([label, value, color]) => (
+              <div key={label} className={styles.barRow}>
+                <span>{label}</span>
+                <div className={styles.barTrack}>
+                  <div className={styles.barFill} style={{ width: `${Math.max(value, 6)}%`, background: color }}></div>
+                </div>
+                <span>{value}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.column} style={{ gap: 8 }}>
+          <span className={styles.label}>신살 · 길성</span>
+          <div className={styles.badgeWrap}>
+            <span className={styles.badgeSoft}>도화살</span>
+            <span className={styles.badge}>반안살</span>
+            <span className={styles.badge}>천을귀인</span>
+            <span className={styles.badge}>문창귀인</span>
           </div>
         </div>
       </div>

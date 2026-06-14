@@ -1,44 +1,51 @@
-import React from 'react';
+import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/Read.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { getReportFromQuery } from '../lib/app-report';
 
 export default function ReadPage() {
+  const router = useRouter();
+  const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
+
   return (
-    <Layout title="풀이" showTabBar activeTab="read">
-      <div className={styles.content}>
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>당신의 기운</h3>
-          <p className={styles.text}>
-            불(火)의 기운이 강하고, 물(水)의 기운이 부족한 사주입니다. 
-            따뜻하고 밝은 성향이지만, 감정의 기복이 클 수 있습니다.
-          </p>
+    <Layout showTabBar activeTab="read">
+      <div className={styles.screen}>
+        <h1 className={styles.sectionTitle}>나는 어떤 사람인가</h1>
+
+        <div className={styles.card}>
+          <span className={styles.badgeFill}>성향 리딩</span>
+          <div className={styles.column} style={{ gap: 14, marginTop: 12 }}>
+            {report.longReading.map((paragraph) => (
+              <p key={paragraph} className={styles.bodyText}>{paragraph}</p>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>이번 달 운세</h3>
-          <p className={styles.text}>
-            활동적인 시기입니다. 새로운 일을 시작하기에 좋은 때이지만, 
-            꼼꼼한 검토를 잊지 마세요.
-          </p>
-        </div>
-
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>대운 흐름</h3>
-          <div className={styles.timeline}>
-            <div className={styles.timelineItem}>
-              <span className={styles.age}>26~35세</span>
-              <span className={styles.text}>木 대운</span>
-            </div>
-            <div className={styles.timelineItem}>
-              <span className={styles.age}>36~45세</span>
-              <span className={styles.text}>火 대운</span>
+        <div className={styles.column} style={{ gap: 8 }}>
+          <span className={styles.label}>대운 · 세운 흐름</span>
+          <div className={styles.card}>
+            <div className={styles.timeline}>
+              {['14', '24', '34', '44'].map((age, index) => (
+                <div key={age} className={styles.timelineNode}>
+                  <span className={`${styles.timelineCircle} ${index === 1 ? styles.timelineCircleActive : ''}`}>{age}</span>
+                  <span className={styles.timelineLabel}>{index === 1 ? '현재' : `${age}세`}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <p className={styles.disclaimer}>
-          💡 이 풀이는 참고 목적이며, 실제 운명을 예측하는 것이 아닙니다.
-        </p>
+        <div className={styles.homeGrid}>
+          <div className={styles.miniCard}>
+            <span className={styles.label}>⚠ 주의 흐름</span>
+            <p className={styles.miniCardText}>{report.cautionReading}</p>
+          </div>
+          <div className={styles.miniCard}>
+            <span className={styles.label}>✓ 좋은 흐름</span>
+            <p className={styles.miniCardText}>{report.positiveReading}</p>
+          </div>
+        </div>
       </div>
     </Layout>
   );

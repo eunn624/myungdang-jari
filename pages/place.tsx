@@ -1,46 +1,59 @@
-import React from 'react';
+import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/Place.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { getReportFromQuery } from '../lib/app-report';
 
 export default function PlacePage() {
-  const places = [
-    { rank: 1, name: '한강로동', gu: '용산구', reason: '水 오행 + 수변 지형' },
-    { rank: 2, name: '금호동', gu: '성동구', reason: '金·水 오행 + 수변' },
-    { rank: 3, name: '옥수동', gu: '성동구', reason: '金·水 오행 + 수변' },
-  ];
+  const router = useRouter();
+  const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
+  const recommended = report.districts.slice(0, 3);
 
   return (
-    <Layout title="명당" showTabBar activeTab="place">
-      <div className={styles.content}>
-        <div className={styles.section}>
-          <h3 className={styles.subtitle}>추천 행정동 TOP 3</h3>
-          <div className={styles.placesList}>
-            {places.map(place => (
-              <div key={place.rank} className={styles.placeCard}>
-                <div className={styles.rank}>{place.rank}</div>
-                <div className={styles.placeInfo}>
-                  <h4 className={styles.placeName}>{place.name}</h4>
-                  <span className={styles.gu}>{place.gu}</span>
-                </div>
-                <p className={styles.reason}>{place.reason}</p>
+    <Layout showTabBar activeTab="place">
+      <div className={styles.screen}>
+        <h1 className={styles.sectionTitle}>명당</h1>
+        <div className={styles.badgeWrap}>
+          <span className={styles.badgeFill}>내 후보</span>
+          <span className={styles.badge}>지형별</span>
+          <span className={styles.badge}>침대 방향</span>
+          <span className={styles.badge}>길방</span>
+        </div>
+
+        <div className={styles.column} style={{ gap: 10 }}>
+          <span className={styles.label}>
+            {report.saju.deficitOhang[0] || report.saju.yongsin}를 보완할 지역
+          </span>
+          {recommended.map((item, index) => (
+            <div key={item.district.code} className={`${styles.placeCard} ${index === 0 ? styles.placeCardStrong : ''}`}>
+              <div className={styles.placeHeader}>
+                <h2 className={styles.placeName}>{index + 1}. {item.district.name}</h2>
+                <span className={index === 0 ? styles.badgeFill : styles.badge}>추천</span>
               </div>
-            ))}
-          </div>
+              <span className={styles.placeMeta}>
+                {item.district.siDo} {item.district.siGunGu} · {item.district.hanja}
+              </span>
+              <div className={styles.badgeWrap}>
+                {item.district.ohang.map((tag) => (
+                  <span key={tag} className={styles.badge}>{tag} 보완</span>
+                ))}
+                <span className={styles.badge}>{item.district.terrainNote}</span>
+              </div>
+              <p className={styles.placeReason}>{item.reasons[0]} · {item.reasons[1] || '수변과 생활 동선의 순환감이 강한 편입니다.'}</p>
+            </div>
+          ))}
         </div>
 
-        <div className={styles.section}>
-          <h3 className={styles.subtitle}>침대 머리 방향</h3>
-          <div className={styles.card}>
-            <div className={styles.emoji}>🛏️</div>
-            <p className={styles.direction}>남쪽 방향으로 머리를 두는 것을 권합니다</p>
+        <div className={styles.card}>
+          <span className={styles.label}>침대 머리 방향</span>
+          <p className={styles.bodyText} style={{ marginTop: 8 }}>
+            머리는 {report.saju.bedDirection}쪽을 참고해볼 수 있어요. 구조상 어렵다면 그 방향 벽면을 비우고, 물성 있는 색이나 소재로 분위기를 맞춰주세요.
+          </p>
+          <div className={styles.badgeWrap} style={{ marginTop: 10 }}>
+            <span className={styles.badgeFill}>길방 {report.saju.gilbang}</span>
+            <span className={styles.badge}>물결 패턴</span>
+            <span className={styles.badge}>차분한 조명</span>
           </div>
-        </div>
-
-        <div className={styles.section}>
-          <h3 className={styles.subtitle}>개운 쇼핑</h3>
-          <a href="#" className={styles.shopButton}>
-            쿠팡에서 추천 상품 보기
-          </a>
         </div>
       </div>
     </Layout>

@@ -1,101 +1,135 @@
-import React, { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/Result.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
+
+function BarRows({ report }: { report: ReturnType<typeof getReportFromQuery> }) {
+  const rows = [
+    { label: '木', value: report.saju.ohang.wood, color: '#5cb85c' },
+    { label: '火', value: report.saju.ohang.fire, color: '#e85d3f' },
+    { label: '土', value: report.saju.ohang.earth, color: '#d4a574' },
+    { label: '金', value: report.saju.ohang.metal, color: '#e8d4a8' },
+    { label: '水', value: report.saju.ohang.water, color: '#4a90e2' },
+  ];
+
+  return (
+    <div className={styles.bars}>
+      {rows.map((row) => (
+        <div key={row.label} className={styles.barRow}>
+          <span>{row.label}</span>
+          <div className={styles.barTrack}>
+            <div className={styles.barFill} style={{ width: `${Math.max(row.value, 6)}%`, background: row.color }}></div>
+          </div>
+          <span>{row.value}%</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function ResultScreen() {
+  const router = useRouter();
+  const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
+  const query = createQueryFromProfile(report.profile);
   const [currentCard, setCurrentCard] = useState(0);
 
   const cards = [
     {
-      title: '사주팔자',
-      content: '丁丑 丙午 丁酉 乙巳',
-      emoji: '⭐'
+      number: '01',
+      title: `${report.profile.name}님의 사주팔자`,
+      body: `${report.formattedBirth} 기준으로 계산한 사주예요. ${report.saju.pillars.year.stem}${report.saju.pillars.year.branch} · ${report.saju.pillars.month.stem}${report.saju.pillars.month.branch} · ${report.saju.pillars.day.stem}${report.saju.pillars.day.branch}${report.saju.pillars.hour ? ` · ${report.saju.pillars.hour.stem}${report.saju.pillars.hour.branch}` : ''}`,
     },
     {
-      title: '오행 분포',
-      content: '火 62.5% | 水 0% | 木 12.5%',
-      emoji: '🔥'
+      number: '02',
+      title: `일간 ${report.saju.pillars.day.stem} — 나의 중심`,
+      body: report.summaryDescription,
     },
     {
-      title: '용신',
-      content: '水를 보충하면 균형이 잡혀요',
-      emoji: '💧'
+      number: '03',
+      title: report.summaryTitle,
+      body: `${report.saju.deficitOhang[0] || report.saju.yongsin} 기운을 생활 공간에서 보완해보면 좋아요.`,
+      renderExtra: <BarRows report={report} />,
     },
     {
-      title: '침대 방향',
-      content: '남쪽으로 머리를 두는 것을 권합니다',
-      emoji: '🛏️'
+      number: '04',
+      title: '신살 · 길성과 사주관계',
+      body: report.sinsal.join(' · '),
     },
     {
-      title: '길방',
-      content: '북쪽 방향의 공간을 마련하세요',
-      emoji: '🧭'
+      number: '05',
+      title: '대운 · 세운 흐름',
+      body: '24세 전후부터 자기 기준이 더 선명해지고, 현재는 생활 리듬과 공간 정리가 결과 차이를 크게 만듭니다.',
     },
     {
-      title: '추천 동네',
-      content: '수변 근접 지역 · 한강로동, 금호동',
-      emoji: '🏘️'
+      number: '06',
+      title: '참고해볼 지역 · 명당',
+      body: report.districts.slice(0, 3).map((item) => item.district.name).join(', '),
     },
     {
-      title: '오늘의 개운',
-      content: '파란색 옷을 입고, 북쪽 창가에서 명상하기',
-      emoji: '✨'
-    }
+      number: '07',
+      title: '개운법 & 공유 카드',
+      body: '오늘의 공간 미션, 침대 방향, 공유 카드까지 한 번에 정리해볼 수 있어요.',
+    },
   ];
 
-  const handleNext = () => {
-    if (currentCard < cards.length - 1) {
-      setCurrentCard(currentCard + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentCard > 0) {
-      setCurrentCard(currentCard - 1);
-    }
-  };
+  const card = cards[currentCard];
 
   return (
     <Layout>
-      <div className={styles.container}>
-        {/* 카드 스와이프 영역 */}
-        <div className={styles.cardContainer}>
-          <div className={styles.card}>
-            <div className={styles.emoji}>{cards[currentCard].emoji}</div>
-            <h3 className={styles.cardTitle}>{cards[currentCard].title}</h3>
-            <p className={styles.cardContent}>{cards[currentCard].content}</p>
+      <div className={styles.screen}>
+        <div className={`${styles.row} ${styles.between}`}>
+          <span className={styles.caption}>{currentCard + 1} / {cards.length}</span>
+          <Link href={{ pathname: '/home', query }} className={styles.caption}>닫기</Link>
+        </div>
+
+        <div className={styles.navDots}>
+          {cards.map((item, index) => (
+            <span key={item.number} className={`${styles.dot} ${index === currentCard ? styles.dotActive : ''}`}></span>
+          ))}
+        </div>
+
+        <div className={styles.resultCard}>
+          <span className={styles.badgeFill}>{card.number} · 리딩</span>
+          <div className={styles.column} style={{ gap: 12, marginTop: 16 }}>
+            <span className={styles.caption}>{report.profile.name} · {report.formattedBirth}</span>
+            <h1 className={styles.resultTitle}>{card.title}</h1>
+            <p className={styles.bodyText}>{card.body}</p>
+            {card.renderExtra}
+            {currentCard === 2 && (
+              <div className={styles.softCard}>
+                <p className={styles.bodyText}>💡 공간에서 {report.saju.deficitOhang[0] || report.saju.yongsin} 기운을 더하면 좋아요</p>
+                <p className={styles.caption}>침대 {report.saju.bedDirection}쪽 · 길방 {report.saju.gilbang} · {report.todayMission}</p>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* 카드 네비게이션 */}
-        <div className={styles.nav}>
+        <div className={styles.resultFooter}>
           <button
-            onClick={handlePrev}
-            disabled={currentCard === 0}
-            className={styles.navButton}
+            type="button"
+            className={styles.ghostButton}
+            onClick={() => setCurrentCard((prev) => Math.max(prev - 1, 0))}
           >
-            ←
+            ← 이전
           </button>
-          <div className={styles.indicator}>
-            {currentCard + 1} / {cards.length}
-          </div>
+          <span className={styles.caption}>옆으로 넘기는 리딩 흐름</span>
           <button
-            onClick={handleNext}
-            disabled={currentCard === cards.length - 1}
-            className={styles.navButton}
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => setCurrentCard((prev) => Math.min(prev + 1, cards.length - 1))}
           >
-            →
+            다음 →
           </button>
         </div>
 
-        {/* CTA */}
-        <div className={styles.ctaGroup}>
-          <Link href="/home" className={styles.buttonPrimary}>
-            홈으로 돌아가기
+        <div className={styles.row} style={{ gap: 8 }}>
+          <Link href={{ pathname: '/home', query }} className={styles.primaryButton} style={{ flex: 1 }}>
+            홈으로 이동
           </Link>
-          <Link href="/share" className={styles.buttonSecondary}>
-            결과 공유하기
+          <Link href={{ pathname: '/share', query }} className={styles.ghostButton} style={{ minWidth: 104, minHeight: 56 }}>
+            공유 카드
           </Link>
         </div>
       </div>

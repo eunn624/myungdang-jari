@@ -1,120 +1,175 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/Input.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { createQueryFromProfile, type AppProfile } from '../lib/app-report';
+
+interface InputState {
+  name: string;
+  gender: AppProfile['gender'];
+  calendar: AppProfile['calendar'];
+  birthDate: string;
+  birthTime: string;
+  unknownTime: boolean;
+}
 
 export default function InputScreen() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    year: '',
-    month: '',
-    day: '',
-    hour: '',
-    unknownHour: false,
+  const [formData, setFormData] = useState<InputState>({
+    name: '',
+    gender: '여성',
+    calendar: '양력',
+    birthDate: '',
+    birthTime: '',
+    unknownTime: false,
   });
+  const [error, setError] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    if (type === 'checkbox') {
-      setFormData(prev => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!formData.birthDate) {
+      setError('생년월일을 입력해 주세요.');
+      return;
     }
-  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 분석 로딩 페이지로 이동
-    router.push('/loading');
+    if (!formData.unknownTime && !formData.birthTime) {
+      setError('출생 시간을 입력하거나 시 모름을 선택해 주세요.');
+      return;
+    }
+
+    setError('');
+    router.push({
+      pathname: '/loading',
+      query: createQueryFromProfile({
+        ...formData,
+        name: formData.name.trim() || '사용자',
+        birthTime: formData.unknownTime ? '00:00' : formData.birthTime,
+      }),
+    });
   };
 
   return (
-    <Layout title="생년월일시 입력">
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>생년월일</label>
-          <div className={styles.dateInputs}>
-            <input
-              type="number"
-              name="year"
-              placeholder="2000"
-              min="1900"
-              max="2024"
-              value={formData.year}
-              onChange={handleChange}
-              required
-              className={styles.input}
-            />
-            <span className={styles.separator}>년</span>
-            <select
-              name="month"
-              value={formData.month}
-              onChange={handleChange}
-              required
-              className={styles.input}
+    <Layout>
+      <form className={styles.screen} onSubmit={handleSubmit}>
+        <div className={styles.row} style={{ gap: 8 }}>
+          <span style={{ fontSize: 18, fontWeight: 700 }}>←</span>
+          <span className={styles.caption}>3 / 4</span>
+        </div>
+
+        <div className={styles.column} style={{ gap: 4 }}>
+          <h1 className={styles.sectionTitle}>기본 정보를 알려주세요</h1>
+          <p className={styles.sectionSubtitle}>한 화면에서 빠르게 입력하고 바로 리딩으로 넘어가요.</p>
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="name">이름 · 닉네임</label>
+          <input
+            id="name"
+            className={styles.input}
+            placeholder="이름 또는 닉네임"
+            value={formData.name}
+            onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
+          />
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <span className={styles.label}>성별</span>
+          <div className={styles.row} style={{ gap: 8 }}>
+            <button
+              type="button"
+              className={`${styles.chipButton} ${formData.gender === '여성' ? styles.chipButtonActive : ''}`}
+              style={{ flex: 1, minHeight: 48 }}
+              onClick={() => setFormData((prev) => ({ ...prev, gender: '여성' }))}
             >
-              <option value="">월</option>
-              {Array.from({length: 12}, (_, i) => i + 1).map(m => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-            <span className={styles.separator}>월</span>
-            <select
-              name="day"
-              value={formData.day}
-              onChange={handleChange}
-              required
-              className={styles.input}
+              여성
+            </button>
+            <button
+              type="button"
+              className={`${styles.chipButton} ${formData.gender === '남성' ? styles.chipButtonActive : ''}`}
+              style={{ flex: 1, minHeight: 48 }}
+              onClick={() => setFormData((prev) => ({ ...prev, gender: '남성' }))}
             >
-              <option value="">일</option>
-              {Array.from({length: 31}, (_, i) => i + 1).map(d => (
-                <option key={d} value={d}>{d}</option>
-              ))}
-            </select>
-            <span className={styles.separator}>일</span>
+              남성
+            </button>
           </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label className={styles.label}>태어난 시간</label>
-          <div className={styles.timeInputs}>
-            <select
-              name="hour"
-              value={formData.hour}
-              onChange={handleChange}
-              disabled={formData.unknownHour}
-              className={styles.input}
+        <div className={styles.fieldGroup}>
+          <span className={styles.label}>양력 / 음력</span>
+          <div className={styles.row} style={{ gap: 8 }}>
+            <button
+              type="button"
+              className={`${styles.chipButton} ${formData.calendar === '양력' ? styles.chipButtonActive : ''}`}
+              style={{ flex: 1, minHeight: 48 }}
+              onClick={() => setFormData((prev) => ({ ...prev, calendar: '양력' }))}
             >
-              <option value="">시</option>
-              {Array.from({length: 24}, (_, i) => i).map(h => (
-                <option key={h} value={h}>{h.toString().padStart(2, '0')}</option>
-              ))}
-            </select>
-            <span className={styles.separator}>시</span>
+              양력
+            </button>
+            <button
+              type="button"
+              className={`${styles.chipButton} ${formData.calendar === '음력' ? styles.chipButtonActive : ''}`}
+              style={{ flex: 1, minHeight: 48 }}
+              onClick={() => setFormData((prev) => ({ ...prev, calendar: '음력' }))}
+            >
+              음력
+            </button>
           </div>
-          <label className={styles.checkbox}>
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="birthDate">생년월일</label>
+          <input
+            id="birthDate"
+            type="date"
+            className={styles.input}
+            value={formData.birthDate}
+            onChange={(event) => {
+              setError('');
+              setFormData((prev) => ({ ...prev, birthDate: event.target.value }));
+            }}
+            required
+          />
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label className={styles.label} htmlFor="birthTime">출생 시간</label>
+          <input
+            id="birthTime"
+            type="time"
+            className={styles.input}
+            value={formData.birthTime}
+            onChange={(event) => {
+              setError('');
+              setFormData((prev) => ({ ...prev, birthTime: event.target.value }));
+            }}
+            disabled={formData.unknownTime}
+          />
+          <label className={styles.checkboxRow}>
             <input
               type="checkbox"
-              name="unknownHour"
-              checked={formData.unknownHour}
-              onChange={handleChange}
+              className={styles.checkbox}
+              checked={formData.unknownTime}
+              onChange={(event) => {
+                setError('');
+                setFormData((prev) => ({
+                  ...prev,
+                  unknownTime: event.target.checked,
+                  birthTime: event.target.checked ? '' : prev.birthTime,
+                }));
+              }}
             />
-            <span>시간을 정확히 모릅니다</span>
+            <span className={styles.label} style={{ fontWeight: 600 }}>시 모름으로 분석하기</span>
           </label>
+          <span className={styles.inputNote}>모르면 3주 기준으로 분석해요</span>
         </div>
 
-        <div className={styles.note}>
-          💡 생년월일시가 정확할수록 분석이 더 정확해져요.
-        </div>
+        <span className={styles.inputNote}>생년월일시는 브라우저에서만 계산됩니다.</span>
+        {error ? <div className={styles.errorText}>{error}</div> : null}
 
-        <button type="submit" className={styles.submitButton}>
-          분석하기
+        <div className={styles.grow}></div>
+        <button type="submit" className={styles.primaryButton}>
+          분석 시작하기
         </button>
       </form>
     </Layout>

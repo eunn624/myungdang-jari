@@ -1,48 +1,44 @@
-import React from 'react';
-import Link from 'next/link';
+import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import Layout from './_layout';
-import styles from '../styles/My.module.css';
+import styles from '../styles/AppFlow.module.css';
+import { getReportFromQuery } from '../lib/app-report';
 
 export default function MyPage() {
-  return (
-    <Layout title="마이" showTabBar activeTab="my">
-      <div className={styles.content}>
-        {/* 프로필 */}
-        <div className={styles.profile}>
-          <div className={styles.avatar}>👤</div>
-          <h3 className={styles.name}>1997년 6월 24일</h3>
-          <p className={styles.saju}>丁丑 丙午 丁酉 乙巳</p>
-        </div>
+  const router = useRouter();
+  const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
 
-        {/* 미션 기록 */}
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>완료한 미션</h3>
-          <div className={styles.missionsList}>
-            <div className={styles.missionItem}>
-              <span className={styles.checkmark}>✓</span>
-              <span>동쪽에 식물 두기</span>
-            </div>
-            <div className={styles.missionItem}>
-              <span className={styles.checkmark}>✓</span>
-              <span>파란색 옷 입기</span>
+  return (
+    <Layout showTabBar activeTab="my">
+      <div className={styles.screen}>
+        <div className={styles.profileCard}>
+          <div className={styles.row} style={{ gap: 12 }}>
+            <div className={styles.mascot}>🐱</div>
+            <div className={styles.column} style={{ gap: 4 }}>
+              <h1 className={styles.sectionTitle}>{report.profile.name}</h1>
+              <span className={styles.sectionSubtitle}>
+                {report.formattedBirth} · {report.profile.gender}
+              </span>
+              <span className={styles.caption}>
+                {report.saju.pillars.year.stem}{report.saju.pillars.year.branch} · {report.saju.pillars.month.stem}{report.saju.pillars.month.branch} · {report.saju.pillars.day.stem}{report.saju.pillars.day.branch}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* 메뉴 */}
+        <div className={styles.card}>
+          <span className={styles.label}>완료한 미션</span>
+          <div className={styles.column} style={{ gap: 8, marginTop: 10 }}>
+            <span className={styles.bodyText}>✓ {report.todayMission}</span>
+            <span className={styles.bodyText}>✓ 파란 포인트 소품 두기</span>
+          </div>
+        </div>
+
         <div className={styles.menuList}>
-          <Link href="#" className={styles.menuItem}>
-            <span>설정</span>
-            <span>→</span>
-          </Link>
-          <Link href="#" className={styles.menuItem}>
-            <span>이용약관</span>
-            <span>→</span>
-          </Link>
-          <Link href="#" className={styles.menuItem}>
-            <span>피드백 보내기</span>
-            <span>→</span>
-          </Link>
+          <div className={styles.menuItem}><span>입력 정보 수정</span><span>›</span></div>
+          <div className={styles.menuItem}><span>저장한 공유 카드</span><span>›</span></div>
+          <div className={styles.menuItem}><span>이용 안내</span><span>›</span></div>
+          <div className={styles.menuItem}><span>피드백 보내기</span><span>›</span></div>
         </div>
       </div>
     </Layout>

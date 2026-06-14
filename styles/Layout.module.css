@@ -1,48 +1,49 @@
 .container {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
-  background: #f8f6f2;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(242, 181, 204, 0.18), transparent 22%),
+    radial-gradient(circle at 80% 25%, rgba(143, 124, 224, 0.08), transparent 24%),
+    linear-gradient(180deg, #f8f6f2, #f5f1ea);
 }
 
-.header {
-  padding: 16px;
-  background: white;
-  border-bottom: 1px solid #e8ddd2;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.title {
-  margin: 0;
-  font-size: 28px;
-  font-family: 'OngleipParkDahyeon', serif;
-  color: #2c2420;
+.phone {
+  width: min(100%, 392px);
+  min-height: 812px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(232, 222, 210, 0.9);
+  border-radius: 34px;
+  box-shadow: 0 20px 50px rgba(44, 36, 32, 0.08);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
   flex: 1;
-  padding: 16px;
   overflow-y: auto;
-  max-width: 100%;
 }
 
 .tabbar {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
-  padding: 8px 0;
-  background: white;
-  border-top: 1px solid #e8ddd2;
-  position: sticky;
-  bottom: 0;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px 12px;
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid #ede4d8;
 }
 
 .tab {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
+  gap: 5px;
+  padding: 6px 4px;
   color: #8c7a6e;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
@@ -50,15 +51,28 @@
 }
 
 .tab:hover,
-.tab.active {
+.active {
   color: #8f7ce0;
 }
 
 .tabIcon {
-  font-size: 24px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  background: #f4efe8;
 }
 
 .tabLabel {
   font-size: 11px;
   font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.active .tabIcon {
+  background: rgba(143, 124, 224, 0.14);
 }
