@@ -44,3 +44,4 @@ MIT
 
 **만든 사람:** Gimseieun  
 **시작 일자:** 2026-06-14
+# Trigger Vercel rebuild
