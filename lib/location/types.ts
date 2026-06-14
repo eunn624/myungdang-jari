@@ -37,6 +37,6 @@ export interface MatchResult {
 export interface MatchOptions {
   deficitOhang: Ohang[];          // 부족 오행 순위 리스트
   terrainPreference?: Terrain;    // 용신 기반 지형 선호
-  siDo?: string;                  // 시도 필터 (옵션)
+  siDo?: string | string[];       // 시도 필터 (옵션)
   topN?: number;                  // 최대 결과 수 (기본 10)
 }

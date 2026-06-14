@@ -58,11 +58,12 @@ export function matchDistricts(options: MatchOptions): MatchResult[] {
   const { deficitOhang, siDo, topN = 10 } = options;
   const terrainPreference = options.terrainPreference
     ?? (deficitOhang[0] ? getTerrainPreferenceByOhang(deficitOhang[0]) : undefined);
+  const siDoList = Array.isArray(siDo) ? siDo : siDo ? [siDo] : undefined;
 
   // 오행 매칭이 하나라도 되거나, 지형 매칭이 되는 동네만 포함
   const results: MatchResult[] = ALL_DISTRICTS
     .filter(d => {
-      if (siDo && d.siDo !== siDo) return false;
+      if (siDoList && !siDoList.includes(d.siDo)) return false;
       const hasOhangMatch = d.ohang.some(o => deficitOhang.includes(o));
       const hasTerrainMatch = terrainPreference && districtHasTerrain(d, terrainPreference);
       return hasOhangMatch || hasTerrainMatch;
