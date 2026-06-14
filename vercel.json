@@ -6,8 +6,5 @@
       "memory": 1024,
       "maxDuration": 30
     }
-  },
-  "env": {
-    "REACT_APP_API_URL": "@react_app_api_url"
   }
 }
