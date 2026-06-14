@@ -1,7 +1,6 @@
 {
-  "buildCommand": "expo build:web",
-  "outputDirectory": "web-build",
-  "framework": "expo",
+  "buildCommand": "expo export -p web",
+  "outputDirectory": "dist",
   "functions": {
     "api/**/*.ts": {
       "memory": 1024,
