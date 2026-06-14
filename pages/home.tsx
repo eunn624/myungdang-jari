@@ -26,8 +26,8 @@ export default function HomePage() {
           <h2 className={styles.sectionTitle} style={{ color: '#8f7ce0', marginTop: 10 }}>{report.dailyEnergyTitle}</h2>
           <p className={styles.bodyText}>{report.dailyEnergyDescription}</p>
           <div className={styles.badgeWrap} style={{ marginTop: 10 }}>
-            <span className={styles.badgeFill}>오늘 컬러 · 코랄</span>
-            <span className={styles.badge}>물 마시기</span>
+            <span className={styles.badgeFill}>오늘 컬러 · 개발 중...</span>
+            <span className={styles.badge}>개발 중...</span>
           </div>
         </div>
 

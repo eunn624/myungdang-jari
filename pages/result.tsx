@@ -60,7 +60,7 @@ export default function ResultScreen() {
     {
       number: '05',
       title: '대운 · 세운 흐름',
-      body: '24세 전후부터 자기 기준이 더 선명해지고, 현재는 생활 리듬과 공간 정리가 결과 차이를 크게 만듭니다.',
+      body: '개발 중...',
     },
     {
       number: '06',
