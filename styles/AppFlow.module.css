@@ -1413,6 +1413,23 @@
   box-shadow: 0 14px 28px rgba(18, 24, 49, 0.08);
 }
 
+.stickySectionTabs {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  margin: -2px 0 2px;
+  padding: 8px 0 10px;
+  background: linear-gradient(180deg, rgba(242,246,255,0.98), rgba(242,246,255,0.88));
+  backdrop-filter: blur(10px);
+}
+
+.sectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-margin-top: 128px;
+}
+
 .slideEnter {
   animation: slideUp 0.55s cubic-bezier(.22, 1, .36, 1);
 }

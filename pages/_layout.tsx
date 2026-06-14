@@ -52,7 +52,7 @@ export default function Layout({
           </header>
         ) : null}
 
-        <main className={`${styles.main} ${headerTitle ? styles.mainWithHeader : ''} ${showTabBar ? styles.mainWithTabbar : ''}`}>
+        <main id="app-main-scroll" className={`${styles.main} ${headerTitle ? styles.mainWithHeader : ''} ${showTabBar ? styles.mainWithTabbar : ''}`}>
           {children}
         </main>
 
