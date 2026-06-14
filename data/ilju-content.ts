@@ -333,7 +333,6 @@ function createIljuContent(index: number): IljuContent {
 }
 
 export const ILJU_CONTENT: IljuContent[] = Array.from({ length: 60 }, (_, index) => createIljuContent(index));
-export { STEM_PROFILES, BRANCH_PROFILES };
 
 export function getIljuContent(dayPillar: { stem: HeavenlyStem; branch: EarthlyBranch }): IljuContent | undefined {
   return ILJU_CONTENT.find(item => item.ganji === `${dayPillar.stem}${dayPillar.branch}`);
