@@ -54,11 +54,9 @@ export function getProfileFromQuery(query: ParsedUrlQuery): AppProfile {
 
 export function getReportFromQuery(query: ParsedUrlQuery): AppReport {
   const profile = getProfileFromQuery(query);
-  
   if (!profile.birthDate) {
     return getEmptyReport(profile);
   }
-  
   return buildReport(profile);
 }
 
@@ -94,9 +92,9 @@ export function buildReport(profile: AppProfile): AppReport {
     summaryTitle: `${dominant} 기운이 먼저 보이고 ${deficit} 보완이 필요한 흐름`,
     summaryDescription: `${profileName}은 ${dayAnimal}처럼 자기 감각이 분명하고 ${tendency}이 살아 있는 편이에요. 다만 사주 안에서 ${deficit}의 여유가 부족하게 보이기 때문에, 생활 공간에서는 차분함과 순환감을 더해주는 선택이 균형에 도움이 됩니다.`,
     longReading: [
-      `${profileName}은 자신의 감각과 기준이 분명한 사람이에요. 한번 마음이 움직이면 집중력이 붙고, 좋아하는 대상이나 일에는 정성을 오래 들이는 편입니다. ${saju.pillars.day.stem}${saju.pillars.day.branch} 일주를 중심으로 보면, 겉으로는 또렷하고 밝아 보여도 실제로는 분위기와 관계의 온도 차를 세심하게 느끼는 편에 가까워요. 그래서 사람보다 공간의 상태에 먼저 영향을 받는 날도 분명히 있습니다.`,
-      `사주의 중심 흐름은 ${dominant} 쪽에 힘이 실려 있고, 보완 포인트는 ${deficit}에 있어요. 그래서 너무 뜨겁고 빠른 환경보다는 숨을 고를 수 있는 여백, 물성이나 바람, 정돈된 동선처럼 순환을 만들어주는 요소가 중요합니다. 지금 결과에서는 ${roomTip} 같은 선택이 특히 잘 맞는 편으로 읽혀요. 공간이 정리되어 있을수록 생각이 맑아지고 감정 기복도 부드러워지는 쪽으로 흘러갑니다.`,
-      `${profileName}에게 잘 맞는 개운 방식은 무언가를 과하게 더하는 것보다, 생활의 결을 조금씩 바꾸는 방식이에요. 침대 방향을 정리하고, 자주 머무는 곳에 ${deficit} 계열 색과 소재를 두고, 산책 동선이나 창가 배치를 손보는 식의 작은 수정이 훨씬 오래 갑니다. 특히 ${saju.bedDirection} 방향 정리, ${districts[0]?.district.name || '수변 동네'} 같은 생활권 참고, ${getTodayMission(deficit)} 같은 루틴은 반복할수록 체감이 잘 오는 편입니다.`,
+      `${profileName}은 자신의 감각과 기준이 분명한 사람이에요. 한번 마음이 움직이면 집중력이 붙고, 좋아하는 대상이나 일에는 정성을 오래 들이는 편입니다. ${saju.pillars.day.stem}${saju.pillars.day.branch} 일주를 중심으로 보면, 겉으로는 또렷하고 밝아 보여도 실제로는 분위기와 관계의 온도 차를 세심하게 느끼는 편에 가까워요.`,
+      `사주의 중심 흐름은 ${dominant} 쪽에 힘이 실려 있고, 보완 포인트는 ${deficit}에 있어요. ${roomTip} 같은 선택이 특히 잘 맞는 편으로 읽혀요. 공간이 정리되어 있을수록 생각이 맑아지고 감정 기복도 부드러워지는 쪽으로 흘러갑니다.`,
+      `${profileName}에게 잘 맞는 개운 방식은 생활의 결을 조금씩 바꾸는 방식이에요. 특히 ${saju.bedDirection} 방향 정리, ${districts[0]?.district.name || '수변 동네'} 같은 생활권 참고, ${getTodayMission(deficit)} 같은 루틴은 반복할수록 체감이 잘 오는 편입니다.`,
     ],
     cautionReading: `${dominant} 기운이 강하게 올라오는 시기에는 서두르거나 감정적으로 결론을 내리기 쉬워요. 중요한 선택은 하루 정도 텀을 두고, 공간의 열감과 소음을 낮춘 뒤 다시 보는 편이 좋습니다.`,
     positiveReading: `${deficit}를 보완하는 생활 습관을 붙이면 집중력과 관계 감각이 동시에 안정되기 쉬워요. 차분한 조명, 정돈된 침실, 물성 있는 소품처럼 작지만 반복 가능한 방식이 특히 잘 맞습니다.`,
@@ -105,22 +103,25 @@ export function buildReport(profile: AppProfile): AppReport {
   };
 }
 
+// 입력값 없을 때 — 타입에 맞는 유효한 값으로 채움
 function getEmptyReport(profile: AppProfile): AppReport {
+  const emptySaju: SajuResult = {
+    pillars: {
+      year: { stem: '甲', branch: '子', stemKor: '-', branchKor: '-' },
+      month: { stem: '甲', branch: '子', stemKor: '-', branchKor: '-' },
+      day: { stem: '甲', branch: '子', stemKor: '-', branchKor: '-' },
+      hour: null,
+    },
+    ohang: { wood: 0, fire: 0, earth: 0, metal: 0, water: 0 },
+    deficitOhang: [],
+    bedDirection: '북',
+    gilbang: '북',
+    yongsin: '木',
+  };
+
   return {
     profile,
-    saju: {
-      pillars: {
-        year: { stem: '개', branch: '발', stemKor: '개발', branchKor: '중' },
-        month: { stem: '.', branch: '.', stemKor: '..', branchKor: '..' },
-        day: { stem: '.', branch: '.', stemKor: '..', branchKor: '..' },
-        hour: null,
-      },
-      ohang: { wood: 0, fire: 0, earth: 0, metal: 0, water: 0 },
-      deficitOhang: [],
-      bedDirection: '북',
-      gilbang: '북',
-      yongsin: '木',
-    },
+    saju: emptySaju,
     districts: [],
     formattedBirth: '생년월일시를 입력하면 분석됩니다',
     formattedToday: formatToday(),
@@ -151,7 +152,6 @@ export function createQueryFromProfile(profile: AppProfile): Record<string, stri
 function getBirthInfo(profile: AppProfile): BirthInfo {
   const [year, month, day] = profile.birthDate.split('-').map(Number);
   const hour = profile.unknownTime ? undefined : Number(profile.birthTime.split(':')[0] || '0');
-
   return { year, month, day, hour };
 }
 
@@ -167,20 +167,48 @@ function getDominantOhang(ohang: SajuResult['ohang']): Ohang {
 }
 
 function getTodayMission(deficit: Ohang): string {
-  switch (deficit) {
-    case '水':
-      return '창가에 물컵이나 작은 화병을 올려두기';
-    case '木':
-      return '동쪽에 식물이나 우드 소품 두기';
-    case '火':
-      return '따뜻한 조명과 붉은 포인트 한 가지 더하기';
-    case '土':
-      return '침실 주변을 비우고 베이지 톤 패브릭 정리하기';
-    case '金':
-      return '금속 프레임이나 화이트 정리 수납 추가하기';
-    default:
-      return '자주 머무는 공간을 차분하게 정리하기';
-  }
+  const map: Record<Ohang, string> = {
+    水: '창가에 물컵이나 작은 화병을 올려두기',
+    木: '동쪽에 식물이나 우드 소품 두기',
+    火: '따뜻한 조명과 붉은 포인트 한 가지 더하기',
+    土: '침실 주변을 비우고 베이지 톤 패브릭 정리하기',
+    金: '금속 프레임이나 화이트 정리 수납 추가하기',
+  };
+  return map[deficit];
+}
+
+function getTendencyLabel(ohang: Ohang): string {
+  const map: Record<Ohang, string> = {
+    木: '성장하려는 기세',
+    火: '표현력과 존재감',
+    土: '안정감과 실무 감각',
+    金: '판단력과 정리력',
+    水: '관찰력과 순환 감각',
+  };
+  return map[ohang];
+}
+
+function getRoomTip(deficit: Ohang): string {
+  const map: Record<Ohang, string> = {
+    木: '식물, 우드 소품, 동쪽 포인트',
+    火: '따뜻한 조명, 붉은 패브릭, 체온감 있는 공간',
+    土: '낮은 채도의 베이지, 비우기, 안정적인 수납',
+    金: '화이트, 메탈 프레임, 직선적인 정리',
+    水: '물성 있는 블루톤, 유리, 차분한 수변 감각',
+  };
+  return map[deficit];
+}
+
+function getDayAnimal(branch: string): string {
+  const map: Record<string, string> = {
+    子: '밤공기를 잘 읽는 쥐', 丑: '천천히 힘을 모으는 소',
+    寅: '시작을 두려워하지 않는 호랑이', 卯: '관계를 부드럽게 여는 토끼',
+    辰: '큰 흐름을 보는 용', 巳: '감각이 빠른 뱀',
+    午: '열기가 선명한 말', 未: '생활 결을 다듬는 양',
+    申: '상황 판단이 빠른 원숭이', 酉: '디테일에 강한 닭',
+    戌: '기준을 지키는 개', 亥: '깊이를 보는 돼지',
+  };
+  return map[branch] || '감각이 분명한 사람';
 }
 
 function formatBirth(profile: AppProfile): string {
@@ -193,58 +221,6 @@ function formatToday(): string {
   const now = new Date();
   const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
   return `${now.getFullYear()} · ${String(now.getMonth() + 1).padStart(2, '0')} · ${String(now.getDate()).padStart(2, '0')} · ${weekdays[now.getDay()]}`;
-}
-
-function getDayAnimal(branch: string): string {
-  const map: Record<string, string> = {
-    子: '밤공기를 잘 읽는 쥐',
-    丑: '천천히 힘을 모으는 소',
-    寅: '시작을 두려워하지 않는 호랑이',
-    卯: '관계를 부드럽게 여는 토끼',
-    辰: '큰 흐름을 보는 용',
-    巳: '감각이 빠른 뱀',
-    午: '열기가 선명한 말',
-    未: '생활 결을 다듬는 양',
-    申: '상황 판단이 빠른 원숭이',
-    酉: '디테일에 강한 닭',
-    戌: '기준을 지키는 개',
-    亥: '깊이를 보는 돼지',
-  };
-  return map[branch] || '감각이 분명한 사람';
-}
-
-function getTendencyLabel(ohang: Ohang): string {
-  switch (ohang) {
-    case '木':
-      return '성장하려는 기세';
-    case '火':
-      return '표현력과 존재감';
-    case '土':
-      return '안정감과 실무 감각';
-    case '金':
-      return '판단력과 정리력';
-    case '水':
-      return '관찰력과 순환 감각';
-    default:
-      return '또렷한 중심감';
-  }
-}
-
-function getRoomTip(deficit: Ohang): string {
-  switch (deficit) {
-    case '木':
-      return '식물, 우드 소품, 동쪽 포인트';
-    case '火':
-      return '따뜻한 조명, 붉은 패브릭, 체온감 있는 공간';
-    case '土':
-      return '낮은 채도의 베이지, 비우기, 안정적인 수납';
-    case '金':
-      return '화이트, 메탈 프레임, 직선적인 정리';
-    case '水':
-      return '물성 있는 블루톤, 유리, 차분한 수변 감각';
-    default:
-      return '정리된 동선과 편안한 휴식 공간';
-  }
 }
 
 function getString(value: string | string[] | undefined): string {
