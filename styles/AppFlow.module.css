@@ -8,9 +8,9 @@
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 28px;
   min-height: 100%;
-  padding: 18px 18px 26px;
+  padding: 20px 20px 36px;
 }
 
 .onboardingScreen {
@@ -747,6 +747,17 @@
   font-size: 12px;
   line-height: 1.5;
   font-family: 'Pretendard', sans-serif;
+}
+
+/* ─── 입력 페이지 진행 헤더 (compact, 겹침 방지) ─────────── */
+.inputProgressHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.80);
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  border-radius: 20px;
 }
 
 /* ─── Progress pills ─────────────────────────────────────── */
