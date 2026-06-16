@@ -1,9 +1,10 @@
 import districtsData from '../../data/districts.json';
 
-describe('수도권 전체 행정동 데이터셋', () => {
-  test('서울·경기만 포함한다', () => {
+describe('전국 행정동 데이터셋', () => {
+  test('모든 광역시도를 포함한다', () => {
     const siDos = new Set(districtsData.districts.map((item) => item.siDo));
-    expect(Array.from(siDos).sort()).toEqual(['경기', '서울']);
+    const expected = ['강원', '경기', '경남', '경북', '광주', '대구', '대전', '부산', '서울', '울산', '인천', '전남', '전북', '제주'];
+    expect(Array.from(siDos).sort()).toEqual(expected);
   });
 
   test('전체 건수가 1000개 이상이다', () => {
