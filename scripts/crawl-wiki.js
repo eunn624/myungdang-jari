@@ -61,48 +61,55 @@ function fetchWikiPage(districtName) {
 function extractInfo(html, districtName) {
   const desc = { name: districtName, keywords: [], summary: '' };
 
-  // 1. 첫 단락 추출 (소개 텍스트)
-  const firstParaMatch = html.match(
-    /<div[^>]*class="wiki-paragraph"[^>]*>[\s\S]*?<\/div>/
-  );
-  if (firstParaMatch) {
-    let text = firstParaMatch[0]
-      .replace(/<[^>]+>/g, ' ')  // HTML 태그 제거
+  // 1. 첫 단락 추출 (소개 텍스트) — 더 광범위한 선택자
+  const contentMatch = html.match(/<article[^>]*>[\s\S]*?<\/article>/);
+  const searchText = contentMatch ? contentMatch[0] : html;
+
+  // 첫 번째 실제 텍스트 콘텐츠 추출
+  const textMatch = searchText.match(/>([^<]{50,300})<\//);
+  if (textMatch) {
+    desc.summary = textMatch[1]
+      .replace(/<[^>]+>/g, '')
       .replace(/&nbsp;/g, ' ')
-      .trim();
-    // 최대 200자
-    desc.summary = text.substring(0, 200).trim();
+      .replace(/&amp;/g, '&')
+      .trim()
+      .substring(0, 200);
   }
 
-  // 2. 특징 키워드 추출 (제목 및 강조 텍스트)
-  const headingMatches = html.match(/<h[2-4][^>]*>([^<]+)<\/h[2-4]>/g);
-  if (headingMatches) {
-    const keywords = new Set();
-    headingMatches.forEach((match) => {
-      const text = match.replace(/<[^>]+>/g, '').trim();
-      if (text.length < 30 && text.length > 2) {
-        keywords.add(text);
-      }
+  // 2. 키워드 추출 — 제목, 강조 텍스트, 텍스트 콘텐츠에서
+  const keywords = new Set();
+
+  // 제목들
+  const headings = searchText.match(/<h[1-6][^>]*>([^<]+)<\/h[1-6]>/g);
+  if (headings) {
+    headings.forEach(h => {
+      const text = h.replace(/<[^>]+>/g, '').trim();
+      if (text && text.length < 30) keywords.add(text);
     });
-    desc.keywords = Array.from(keywords).slice(0, 5);
   }
 
-  // 3. 주소 정보 추출 (편의)
-  if (html.includes('강남') && districtName.includes('강남')) {
-    desc.keywords.push('강남');
-  }
-  if (html.includes('도심') || html.includes('시내')) {
-    desc.keywords.push('도시');
-  }
-  if (html.includes('주거')) {
-    desc.keywords.push('주거');
-  }
-  if (html.includes('상권')) {
-    desc.keywords.push('상권');
-  }
-  if (html.includes('녹지') || html.includes('공원')) {
-    desc.keywords.push('녹지');
-  }
+  // 일반 텍스트에서 키워드 추출
+  const keywordPatterns = {
+    '상권': /상권|쇼핑|거리|거상|백화점|마트|카페|음식점/,
+    '주거': /주거|주택|아파트|villa|주거지|거주/,
+    '도시': /도시|도심|시내|번화|도회/,
+    '녹지': /녹지|공원|숲|산|호수|강|수변|자연/,
+    '학문': /학군|학교|대학|교육|문화|도서관|박물관/,
+    '교통': /교통|역|지하철|차량|버스|도로|동선/,
+    '산업': /산업|공단|공장|기업|회사|사무|금융/,
+  };
+
+  Object.entries(keywordPatterns).forEach(([keyword, pattern]) => {
+    if (pattern.test(searchText)) {
+      keywords.add(keyword);
+    }
+  });
+
+  // 지명 기반 키워드
+  if (searchText.includes('서울')) keywords.add('서울');
+  if (searchText.includes('경기')) keywords.add('경기');
+
+  desc.keywords = Array.from(keywords).slice(0, 6);
 
   return desc;
 }

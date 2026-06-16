@@ -1,6 +1,7 @@
 import type { Ohang, Direction } from '../saju/types';
 import type { District, MatchResult, MatchOptions, Terrain } from './types';
 import districtsData from '../../data/districts.json';
+import descData from '../../data/neighborhood-desc.json';
 import {
   TERRAIN_LABELS,
   districtHasTerrain,
@@ -8,6 +9,8 @@ import {
 } from './terrain';
 
 const ALL_DISTRICTS: District[] = (districtsData as any).districts;
+const DESCRIPTIONS: Record<string, { keywords: string[] }> = (descData as any)
+  .descriptions;
 
 export function getTerrainPreference(yongsin: Ohang): Terrain {
   return getTerrainPreferenceByOhang(yongsin);
@@ -217,8 +220,29 @@ export function scoreDistrict(
     }
   }
 
-  // 한자 확정 신뢰도 (+3점, 모든 축 끝나고)
+  // 한자 확정 신뢰도 (+3점)
   const hanja_bonus = district.hanjaStatus === 'confirmed' ? 3 : 0;
+
+  // 동네 특성 키워드 매칭 (+최대 5점, 보너스)
+  let neighborhood_bonus = 0;
+  const districtDesc = DESCRIPTIONS[district.siGunGu];
+  if (districtDesc?.keywords) {
+    // 신살·귀인 특성과 동네 키워드 매칭
+    const signalKeywords: string[] = [];
+    if (sinsal.includes('도화살')) signalKeywords.push('상권', '거리');
+    if (sinsal.includes('역마살')) signalKeywords.push('교통', '거리', '상권');
+    if (sinsal.includes('화개살')) signalKeywords.push('주거', '자연');
+    if (guiin.includes('천을귀인')) signalKeywords.push('주거', '균형');
+    if (guiin.includes('문창귀인')) signalKeywords.push('학문', '교육', '문화');
+
+    const matchCount = signalKeywords.filter(k =>
+      districtDesc.keywords.some(dk => dk.includes(k) || k.includes(dk))
+    ).length;
+    neighborhood_bonus = Math.min(matchCount, 5);
+    if (matchCount > 0) {
+      reasons.push(`동네 특성 매칭 (+${neighborhood_bonus}점)`);
+    }
+  }
 
   // 총점 계산
   breakdown.total =
@@ -227,7 +251,8 @@ export function scoreDistrict(
     breakdown.sinsal_guiin +
     breakdown.terrain +
     breakdown.vibe +
-    hanja_bonus;
+    hanja_bonus +
+    neighborhood_bonus;
 
   return { score: breakdown.total, breakdown, reasons };
 }
