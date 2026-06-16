@@ -20,6 +20,340 @@
   padding: 20px 18px 26px;
 }
 
+.onboardingRoot {
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(220, 235, 242, 0.9), transparent 24%),
+    radial-gradient(circle at 86% 18%, rgba(221, 233, 221, 0.72), transparent 20%),
+    linear-gradient(180deg, #F7F4EF, #FFFDF9 56%, #F8F3EC);
+}
+
+.onboardingHeader {
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.onboardingLogo {
+  color: #1F2522;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.onboardingContent {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 20px;
+}
+
+.onboardingProgress {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.onboardingProgressDot,
+.onboardingProgressDotActive {
+  height: 8px;
+  border-radius: 999px;
+}
+
+.onboardingProgressDot {
+  width: 8px;
+  background: rgba(31, 37, 34, 0.14);
+}
+
+.onboardingProgressDotActive {
+  width: 24px;
+  background: #1F2522;
+}
+
+.onboardingVisualWrap {
+  height: clamp(220px, 34dvh, 292px);
+  min-height: 220px;
+  max-height: 292px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboardingVisualCard {
+  position: relative;
+  width: min(100%, 318px);
+  height: 100%;
+  min-height: 220px;
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(247, 244, 239, 0.94)),
+    #FFFDF9;
+  border: 1px solid #E9E3DA;
+  box-shadow: 0 18px 34px rgba(31, 37, 34, 0.08);
+  overflow: hidden;
+}
+
+.onboardingWindow {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 62px;
+  height: 52px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(220, 235, 242, 0.95), rgba(202, 224, 235, 0.9));
+  border: 1px solid rgba(62, 111, 143, 0.16);
+}
+
+.onboardingWindow::before,
+.onboardingWindow::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.78);
+}
+
+.onboardingWindow::before {
+  top: 8px;
+  bottom: 8px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.onboardingWindow::after {
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.onboardingPlant {
+  position: absolute;
+  top: 82px;
+  left: 34px;
+  width: 28px;
+  height: 42px;
+  border-radius: 18px 18px 12px 12px;
+  background: linear-gradient(180deg, #DDE9DD, #BFD5BF);
+}
+
+.onboardingPlant::before,
+.onboardingPlant::after {
+  content: '';
+  position: absolute;
+  background: #89A98C;
+  border-radius: 999px 999px 999px 0;
+}
+
+.onboardingPlant::before {
+  width: 16px;
+  height: 22px;
+  top: -10px;
+  left: 4px;
+  transform: rotate(-18deg);
+}
+
+.onboardingPlant::after {
+  width: 14px;
+  height: 20px;
+  top: -6px;
+  right: 2px;
+  transform: scaleX(-1) rotate(-24deg);
+}
+
+.onboardingMapSheet {
+  position: absolute;
+  top: 32px;
+  right: 22px;
+  width: 202px;
+  height: 136px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, #F4FBFD, #EDF5F7);
+  border: 1px solid rgba(62, 111, 143, 0.12);
+  box-shadow: 0 10px 24px rgba(31, 37, 34, 0.08);
+  overflow: hidden;
+}
+
+.onboardingMapTileA,
+.onboardingMapTileB,
+.onboardingMapTileC {
+  position: absolute;
+  border-radius: 22px;
+}
+
+.onboardingMapTileA {
+  inset: 18px auto auto 22px;
+  width: 88px;
+  height: 50px;
+  background: rgba(62, 111, 143, 0.14);
+}
+
+.onboardingMapTileB {
+  inset: 30px 24px auto auto;
+  width: 74px;
+  height: 38px;
+  background: rgba(221, 233, 221, 0.92);
+}
+
+.onboardingMapTileC {
+  inset: auto 18px 16px 20px;
+  width: 150px;
+  height: 34px;
+  background: rgba(158, 192, 211, 0.42);
+}
+
+.onboardingPin {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #3E6F8F;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 8px 16px rgba(62, 111, 143, 0.22);
+}
+
+.onboardingPinOne { top: 28px; right: 42px; }
+.onboardingPinTwo { top: 58px; left: 86px; }
+.onboardingPinThree { bottom: 22px; right: 58px; }
+
+.onboardingRoomCard {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 22px;
+  background: rgba(255, 253, 249, 0.96);
+  border: 1px solid rgba(233, 227, 218, 0.92);
+  box-shadow: 0 10px 24px rgba(31, 37, 34, 0.06);
+}
+
+.onboardingRoomBadge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(62, 111, 143, 0.10);
+  color: #3E6F8F;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.onboardingRoomCard strong {
+  color: #1F2522;
+  font-size: 16px;
+  line-height: 1.2;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.onboardingRoomCard span:last-child {
+  color: #8A8173;
+  font-size: 12px;
+  line-height: 1.4;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.onboardingWave {
+  position: absolute;
+  right: 18px;
+  bottom: 108px;
+  width: 64px;
+  height: 24px;
+  border-bottom: 3px solid rgba(62, 111, 143, 0.36);
+  border-radius: 0 0 999px 999px;
+}
+
+.onboardingWave::before,
+.onboardingWave::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 10px;
+  border-bottom: 3px solid rgba(62, 111, 143, 0.22);
+  border-radius: 0 0 999px 999px;
+}
+
+.onboardingWave::before {
+  width: 40px;
+  left: 8px;
+  bottom: 6px;
+}
+
+.onboardingWave::after {
+  width: 24px;
+  right: 8px;
+  bottom: 12px;
+}
+
+.onboardingCopyBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 2px;
+}
+
+.onboardingTitle {
+  margin: 0;
+  color: #1F2522;
+  font-size: clamp(30px, 5.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.24;
+  letter-spacing: 0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.onboardingSubtitle {
+  margin: 0;
+  color: #6F665A;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.55;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.onboardingFooter {
+  position: sticky;
+  bottom: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 20px calc(18px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(247, 244, 239, 0), rgba(247, 244, 239, 0.76) 20%, #F7F4EF 46%);
+}
+
+.onboardingTrustNote {
+  margin: 0;
+  color: #8A8173;
+  font-size: 12px;
+  line-height: 1.45;
+  font-family: 'Pretendard', sans-serif;
+}
+
 .topRow,
 .row {
   display: flex;
@@ -1017,6 +1351,408 @@
   border-radius: 999px;
   background: rgba(100, 80, 60, 0.10);
   overflow: hidden;
+}
+
+/* ─── Neighborhood-first result landing ─────────────────── */
+.resultLandingScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+  padding: 18px 18px 34px;
+  background:
+    linear-gradient(180deg, rgba(246, 250, 250, 0.82), rgba(255, 250, 242, 0.98) 34%),
+    #fffaf2;
+}
+
+.neighborhoodHero {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 2px 0;
+}
+
+.resultEyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(52, 120, 246, 0.10);
+  color: #2365d9;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.neighborhoodHero h1 {
+  margin: 0;
+  color: #17191f;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.22;
+  letter-spacing: 0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.neighborhoodHero p {
+  margin: 0;
+  color: #656b73;
+  font-size: 13px;
+  line-height: 1.65;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.neighborhoodMapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockMap {
+  position: relative;
+  height: 244px;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #eef6f8;
+  border: 1px solid rgba(52, 120, 246, 0.10);
+  box-shadow: 0 14px 34px rgba(24, 50, 78, 0.10);
+}
+
+.mockMapSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mockMapLabel {
+  fill: #5e7687;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.mapPin {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%) scale(var(--pin-scale, 1));
+  border: 3px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 10px 22px rgba(26, 25, 22, 0.22);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.mapPin::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.mapPinActive {
+  --pin-scale: 1.16;
+  box-shadow: 0 14px 28px rgba(26, 25, 22, 0.28);
+}
+
+.mapPinActive::after {
+  border-color: #fff;
+}
+
+.mapNote {
+  margin: 0;
+  padding: 0 2px;
+  color: #8b929a;
+  font-size: 11px;
+  line-height: 1.45;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.top3Section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top3Header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px;
+}
+
+.top3Header h2,
+.detailNavHeader h2 {
+  margin: 6px 0 0;
+  color: #17191f;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.22;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.top3Meta {
+  color: #8b929a;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.neighborhoodList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.neighborhoodCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(24, 50, 78, 0.08);
+  border-radius: 24px;
+  background: #fff;
+  color: #17191f;
+  text-align: left;
+  box-shadow: 0 10px 28px rgba(24, 50, 78, 0.07);
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.neighborhoodCard:hover {
+  transform: translateY(-1px);
+}
+
+.neighborhoodCardActive {
+  border-color: rgba(52, 120, 246, 0.38);
+  box-shadow: 0 16px 34px rgba(52, 120, 246, 0.14);
+}
+
+.neighborhoodCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #17191f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.elementBadgeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.elementBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.neighborhoodNameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.neighborhoodNameBlock h2 {
+  margin: 0;
+  color: #17191f;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.neighborhoodNameBlock p {
+  margin: 0;
+  color: #737982;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.neighborhoodChipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.neighborhoodChipRow span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #f2f6f8;
+  color: #4e5965;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.neighborhoodReason {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.neighborhoodReason strong {
+  color: #17191f;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.neighborhoodReason p,
+.neighborhoodHint,
+.realityCheck {
+  margin: 0;
+  color: #626a73;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.neighborhoodReason p,
+.neighborhoodHint {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.realityCheck {
+  padding-top: 8px;
+  border-top: 1px solid rgba(24, 50, 78, 0.08);
+  color: #7d858e;
+  font-size: 12px;
+}
+
+.realityCheck strong {
+  color: #363c44;
+}
+
+.neighborhoodEmpty {
+  padding: 18px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(24, 50, 78, 0.08);
+}
+
+.neighborhoodEmpty h2 {
+  margin: 0 0 6px;
+  color: #17191f;
+  font-size: 18px;
+}
+
+.neighborhoodEmpty p {
+  margin: 0;
+  color: #626a73;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.detailNavSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 2px;
+}
+
+.detailNavHeader {
+  padding: 0 2px;
+}
+
+.detailNavHeader p {
+  margin: 5px 0 0;
+  color: #7d858e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.detailNavScroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(136px, 44%);
+  gap: 10px;
+  overflow-x: auto;
+  padding: 0 2px 4px;
+  scroll-snap-type: x mandatory;
+}
+
+.detailNavScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.detailNavCard {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 82px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(24, 50, 78, 0.08);
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(24, 50, 78, 0.06);
+}
+
+.detailNavCard strong {
+  color: #17191f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.detailNavCard span {
+  color: #737982;
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.resultLandingCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 2px;
+}
+
+.resultSecondaryCtas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.resultSecondaryCtas .ghostButton {
+  min-height: 48px;
 }
 
 .barFill {
@@ -2123,5 +2859,52 @@
   .screen,
   .onboardingScreen {
     min-height: 780px;
+  }
+}
+
+@media (max-height: 740px) {
+  .onboardingHeader {
+    height: 56px;
+    padding: 0 18px;
+  }
+
+  .onboardingContent {
+    gap: 10px;
+    padding: 0 18px;
+  }
+
+  .onboardingVisualWrap {
+    height: clamp(204px, 31dvh, 244px);
+    min-height: 204px;
+  }
+
+  .onboardingVisualCard {
+    border-radius: 26px;
+  }
+
+  .onboardingRoomCard {
+    left: 16px;
+    right: 16px;
+    bottom: 22px;
+    padding: 12px 14px;
+  }
+
+  .onboardingTitle {
+    font-size: 28px;
+  }
+
+  .onboardingSubtitle {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .onboardingFooter {
+    gap: 8px;
+    padding: 10px 18px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .onboardingTrustNote {
+    font-size: 11px;
+    line-height: 1.4;
   }
 }

@@ -5,49 +5,55 @@ import styles from '../styles/AppFlow.module.css';
 export default function Onboarding1() {
   return (
     <Layout>
-      <div className={`${styles.onboardingScreen} ${styles.slideEnter}`}>
-        <div className={`${styles.topRow} ${styles.between}`}>
-          <span className={styles.appName}>명당자리</span>
+      <div className={`${styles.onboardingRoot} ${styles.slideEnter}`}>
+        <header className={styles.onboardingHeader}>
+          <span className={styles.onboardingLogo}>명당자리</span>
           <Link href="/home" className={styles.skip}>건너뛰기</Link>
-        </div>
+        </header>
 
-        <div className={styles.heroBlock}>
-          <div className={`${styles.heroPanel} ${styles.heroPanelBlue}`}>
-            <div className={`${styles.heroCloud} ${styles.heroCloudA}`}></div>
-            <div className={`${styles.heroCloud} ${styles.heroCloudB}`}></div>
-            <span className={`${styles.heroSpark} ${styles.heroSparkA}`}>✦</span>
-            <span className={`${styles.heroSpark} ${styles.heroSparkB}`}>✦</span>
-            <div className={styles.heroPanelHeader}>
-              <span className={styles.heroPanelLabel}>내 공간 가이드</span>
-              <span className={styles.heroPanelLabel}>시작하기</span>
-            </div>
-            <div className={styles.heroDeck}>
-              <div className={styles.heroInfoCard}>
-                <h2 className={styles.heroInfoTitle}>나와 잘 맞는 공간은<br />생각보다 분명해요</h2>
-                <p className={styles.heroInfoBody}>생년월일시를 바탕으로 편안한 방향, 어울리는 동네, 머물기 좋은 공간 습관을 차근차근 찾아드릴게요.</p>
+        <section className={styles.onboardingContent}>
+          <div className={styles.onboardingProgress}>
+            <span className={styles.onboardingProgressDotActive}></span>
+            <span className={styles.onboardingProgressDot}></span>
+          </div>
+
+          <div className={styles.onboardingVisualWrap}>
+            <div className={styles.onboardingVisualCard}>
+              <div className={styles.onboardingWindow}></div>
+              <div className={styles.onboardingPlant}></div>
+              <div className={styles.onboardingMapSheet}>
+                <div className={styles.onboardingMapTileA}></div>
+                <div className={styles.onboardingMapTileB}></div>
+                <div className={styles.onboardingMapTileC}></div>
+                <span className={`${styles.onboardingPin} ${styles.onboardingPinOne}`}>1</span>
+                <span className={`${styles.onboardingPin} ${styles.onboardingPinTwo}`}>2</span>
+                <span className={`${styles.onboardingPin} ${styles.onboardingPinThree}`}>3</span>
               </div>
-              <div className={styles.visualPlaceholder}></div>
+              <div className={styles.onboardingRoomCard}>
+                <span className={styles.onboardingRoomBadge}>수도권 후보</span>
+                <strong>나와 잘 맞는 동네</strong>
+                <span>지도 위에서 먼저 찾아볼게요</span>
+              </div>
+              <div className={styles.onboardingWave}></div>
             </div>
           </div>
 
-          <div className={styles.column} style={{ gap: 12 }}>
-            <h1 className={styles.heroTitle}>내게 잘 맞는 공간을<br />한 번에 살펴볼게요</h1>
-            <p className={styles.bodyText}>
-              입력 한 번으로 사주 흐름, 오행 균형, 침대 방향, 어울리는 지역, 긴 해석 카드까지 자연스럽게 이어서 볼 수 있어요.
+          <div className={styles.onboardingCopyBlock}>
+            <h1 className={styles.onboardingTitle}>내 사주에 맞는<br />동네를 찾아볼까요?</h1>
+            <p className={styles.onboardingSubtitle}>
+              오행 흐름과 지형, 지명 힌트를 연결해 수도권 명당 후보를 가볍게 추천해드려요.
             </p>
-            <div className={styles.pageIntroCard}>
-              <div className={styles.stackVertical}>
-                <span className={styles.badgeFill}>입력 한 번으로 바로 확인</span>
-                <span className={styles.caption}>가볍게 참고하는 라이프스타일 가이드예요.</span>
-                <span className={styles.caption}>지역 추천, 공간 팁, 공유 카드까지 한 번에 준비했어요.</span>
-              </div>
-            </div>
           </div>
-        </div>
+        </section>
 
-        <Link href="/input" className={styles.primaryButton}>
-          내 정보 입력하러 가기
-        </Link>
+        <footer className={styles.onboardingFooter}>
+          <p className={styles.onboardingTrustNote}>
+            오락·참고 목적의 공간 가이드예요. 실제 거주 결정에는 예산, 출퇴근, 생활권을 함께 확인해주세요.
+          </p>
+          <Link href="/input" className={styles.primaryButton}>
+            시작하기
+          </Link>
+        </footer>
       </div>
     </Layout>
   );
