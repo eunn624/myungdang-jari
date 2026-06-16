@@ -10,6 +10,8 @@ export interface District {
   hanja: string;
   siDo: string;
   siGunGu: string;
+  emd?: string;  // 읍면동 (동/읍/면)
+  adminLevel?: 'emd' | 'sgg' | 'si' | 'gun';  // 행정 단계 (기본: emd)
   ohangChars: string[];
   ohang: Ohang[];
   terrain: Terrain;
@@ -50,5 +52,6 @@ export interface MatchOptions {
   guiin?: string[];
   gilbang?: Direction;
   siDo?: string | string[];
+  adminLevel?: 'emd' | 'sgg' | 'si' | 'gun' | 'all';  // 필터링 단위
   topN?: number;
 }

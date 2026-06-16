@@ -269,6 +269,26 @@ function isOppositeDirection(dir1: string, dir2: string): boolean {
   );
 }
 
+/**
+ * adminLevel 기반 자동 결정
+ * 서울 → emd, 경기 → sgg, 광역시 → sgg, 기타 → all
+ */
+function getDefaultAdminLevel(siDo: string): 'emd' | 'sgg' | 'si' | 'gun' | 'all' {
+  if (siDo === '서울') return 'emd';
+  if (siDo === '경기') return 'sgg';
+  if (['부산', '대구', '인천', '광주', '대전', '울산'].includes(siDo)) return 'sgg';
+  return 'all';  // 강원, 전남, 전북, 경남, 경북, 제주: 모두 추천
+}
+
+/**
+ * adminLevel 필터 적용
+ */
+function matchesAdminLevel(district: District, targetLevel: 'emd' | 'sgg' | 'si' | 'gun' | 'all'): boolean {
+  if (targetLevel === 'all') return true;
+  const districtLevel = district.adminLevel ?? 'emd';
+  return districtLevel === targetLevel;
+}
+
 export function matchDistricts(options: MatchOptions): MatchResult[] {
   const {
     deficitOhang,
@@ -280,10 +300,19 @@ export function matchDistricts(options: MatchOptions): MatchResult[] {
     sinsal = [],
     guiin = [],
     gilbang,
+    adminLevel: explicitAdminLevel,
   } = options;
   const terrainPreference = options.terrainPreference
     ?? (deficitOhang[0] ? getTerrainPreferenceByOhang(deficitOhang[0]) : undefined);
   const siDoList = Array.isArray(siDo) ? siDo : siDo ? [siDo] : undefined;
+
+  // adminLevel 결정: 명시적 지정 > siDo 기반 자동
+  let adminLevel: 'emd' | 'sgg' | 'si' | 'gun' | 'all' = 'all';
+  if (explicitAdminLevel) {
+    adminLevel = explicitAdminLevel;
+  } else if (siDoList && siDoList.length === 1) {
+    adminLevel = getDefaultAdminLevel(siDoList[0]);
+  }
 
   const scoreOptions: ScoreOptions = {
     deficitOhang,
@@ -296,12 +325,18 @@ export function matchDistricts(options: MatchOptions): MatchResult[] {
     gilbang,
   };
 
-  // 필터링: 오행·지형·분위기·방위 중 하나라도 매칭 가능한 동네
+  // 필터링: 오행·지형·분위기·방위·행정단위 중 하나라도 매칭 가능한 동네
   const allOhang = Array.from(
     new Set([...(yongsin ? [yongsin] : []), ...deficitOhang])
   );
   const candidates = ALL_DISTRICTS.filter(d => {
+    // 1. 시도 필터 (명시된 경우)
     if (siDoList && !siDoList.includes(d.siDo)) return false;
+
+    // 2. 행정단위 필터 (자동 결정)
+    if (!matchesAdminLevel(d, adminLevel)) return false;
+
+    // 3. 사주·지형 매칭
     const hasOhangMatch = d.ohang.some(o => allOhang.includes(o));
     const hasTerrainMatch = terrainPreference && districtHasTerrain(d, terrainPreference);
     const hasVibeMatch = vibePref && d.vibe === vibePref;
