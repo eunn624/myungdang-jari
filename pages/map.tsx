@@ -37,20 +37,20 @@ export default function MapPage() {
 
   return (
     <Layout showTabBar activeTab="place" headerTitle="지도 보기" showBackButton>
-      <div className={styles.doodlePage}>
-        <section className={styles.doodleHeroBlock}>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceHeaderBlock}>
           <div>
-            <h2 className={styles.doodleTitle}>지도 보기</h2>
-            <p className={styles.doodleEyebrow}>{selected.name} 주변 환경을 확인해보세요.</p>
+            <h2 className={styles.referenceTitle}>지도 보기</h2>
+            <p className={styles.referenceSubtitle}>{selected.name} 주변 환경을 확인해보세요.</p>
           </div>
         </section>
 
-        <div className={styles.doodleFilterRow}>
+        <div className={styles.referenceFilterBar}>
           {MAP_FILTERS.map((filter) => (
             <button
               key={filter}
               type="button"
-              className={activeFilter === filter ? styles.doodleChipActive : styles.doodleChip}
+              className={activeFilter === filter ? styles.referenceFilterActive : styles.referenceFilter}
               onClick={() => setActiveFilter(filter)}
             >
               {filter}
@@ -58,13 +58,13 @@ export default function MapPage() {
           ))}
         </div>
 
-        <section className={styles.paperMapCard}>
-          <div className={styles.paperMapCanvas}>
-            <div className={styles.paperMapRiver}></div>
-            <div className={styles.paperMapPark}></div>
-            <span className={styles.paperMapLabel}>{selected.name}</span>
+        <section className={styles.referenceMapShell}>
+          <div className={styles.referenceMapCanvas}>
+            <div className={styles.referenceMapRiver}></div>
+            <div className={styles.referenceMapPark}></div>
+            <span className={styles.referenceMapLabel}>{selected.name}</span>
             <span
-              className={`${styles.paperMapPin} ${styles.paperMapPinActive}`}
+              className={`${styles.referenceMapPin} ${styles.referenceMapPinActive}`}
               style={{ left: selected.pinX, top: selected.pinY }}
             >
               {selected.rank}
@@ -72,7 +72,7 @@ export default function MapPage() {
             {visibleFacilities.slice(0, 5).map((item, index) => (
               <span
                 key={`${item.name}-${index}`}
-                className={`${styles.paperFacilityPin} ${styles[`paperFacilityPin${index + 1}` as keyof typeof styles] || ''}`}
+                className={`${styles.referenceFacilityPin} ${styles[`referenceFacilityPin${index + 1}` as keyof typeof styles] || ''}`}
               >
                 {item.icon}
               </span>
@@ -80,17 +80,17 @@ export default function MapPage() {
           </div>
         </section>
 
-        <section className={styles.doodleReasonPanel}>
-          <h3>주변 {activeFilter === '전체' ? '생활 정보' : activeFilter}</h3>
-          <div className={styles.doodleFacilityList}>
+        <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>주변 {activeFilter === '전체' ? '생활 정보' : activeFilter}</h3>
+          <div className={styles.referenceFacilityList}>
             {visibleFacilities.map((item) => (
-              <div key={`${item.type}-${item.name}`} className={styles.doodleFacilityRow}>
-                <span className={styles.doodleFacilityIcon}>{item.icon}</span>
-                <div className={styles.doodleFacilityMain}>
+              <div key={`${item.type}-${item.name}`} className={styles.referenceFacilityRow}>
+                <span className={styles.referenceFacilityListIcon}>{item.icon}</span>
+                <div className={styles.referenceFacilityMain}>
                   <strong>{item.name}</strong>
                   <span>{item.time}</span>
                 </div>
-                <span className={styles.doodleLocationArrow}>›</span>
+                <span className={styles.referenceRowArrow}>›</span>
               </div>
             ))}
           </div>

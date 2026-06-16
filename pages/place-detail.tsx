@@ -27,24 +27,26 @@ export default function PlaceDetailPage() {
 
   return (
     <Layout showTabBar activeTab="place" headerTitle={`${selected.name} 상세 리포트`} showBackButton>
-      <div className={styles.doodlePage}>
-        <section className={styles.doodleHeroBlock}>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceHeaderBlock}>
           <div>
-            <h2 className={styles.doodleTitle}>{selected.name} 상세 리포트</h2>
-            <p className={styles.doodleEyebrow}>내 사주와 가장 잘 맞는 지역이에요.</p>
+            <h2 className={styles.referenceTitle}>{selected.name} 상세 리포트</h2>
+            <p className={styles.referenceSubtitle}>내 사주와 가장 잘 맞는 지역이에요.</p>
           </div>
-          <div className={styles.doodleScoreStamp}>
-            <span>적합도</span>
-            <strong>{selected.suitability}%</strong>
-          </div>
+          <span className={styles.referenceSpark}>✧</span>
         </section>
 
-        <section className={styles.paperMapCard}>
-          <div className={styles.paperMapCanvas}>
-            <div className={styles.paperMapRiver}></div>
-            <div className={styles.paperMapPark}></div>
+        <section className={styles.referenceDetailScore}>
+          <span>적합도</span>
+          <strong>{selected.suitability}%</strong>
+        </section>
+
+        <section className={styles.referenceMapShell}>
+          <div className={styles.referenceMapCanvas}>
+            <div className={styles.referenceMapRiver}></div>
+            <div className={styles.referenceMapPark}></div>
             <span
-              className={`${styles.paperMapPin} ${styles.paperMapPinActive}`}
+              className={`${styles.referenceMapPin} ${styles.referenceMapPinActive}`}
               style={{ left: selected.pinX, top: selected.pinY }}
             >
               {selected.rank}
@@ -52,12 +54,12 @@ export default function PlaceDetailPage() {
           </div>
         </section>
 
-        <section className={styles.doodleReasonPanel}>
-          <h3>이 지역이 좋은 이유</h3>
-          <div className={styles.doodleReasonList}>
+        <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>이 지역이 좋은 이유</h3>
+          <div className={styles.referenceReasonList}>
             {selected.reasons.slice(0, 3).map((reason) => (
-              <div key={reason} className={styles.doodleReasonItem}>
-                <span>●</span>
+              <div key={reason} className={styles.referenceReasonRow}>
+                <span className={styles.referenceReasonBullet}>●</span>
                 <div>
                   <strong>{reason}</strong>
                   <p>{selected.terrainLabel} 생활권과 연결해 편하게 살펴볼 수 있어요.</p>
@@ -67,24 +69,24 @@ export default function PlaceDetailPage() {
           </div>
         </section>
 
-        <section className={styles.doodleInfoBanner}>
+        <section className={styles.referenceSummaryCard}>
           <strong>한 줄 요약</strong>
           <p>{selected.oneLine}</p>
-          <p>{selected.realityCheck}</p>
+          <span>{selected.realityCheck}</span>
         </section>
 
-        <div className={styles.doodleActionRow}>
+        <div className={styles.referenceButtonRow}>
           <Link
             href={{ pathname: '/map', query: { ...query, districtCode: selected.code } }}
-            className={styles.doodleGhostButton}
+            className={styles.referenceGhostButton}
           >
             지도에서 보기
           </Link>
           <Link
             href={{ pathname: '/place', query }}
-            className={styles.doodlePrimaryButton}
+            className={styles.referencePrimaryButton}
           >
-            추천 지역 다시 보기
+            이 지역 분석 더 보기
           </Link>
         </div>
       </div>

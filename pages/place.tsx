@@ -29,39 +29,39 @@ export default function PlacePage() {
 
   return (
     <Layout showTabBar activeTab="place" headerTitle="추천 지역 더 보기" showBackButton>
-      <div className={styles.doodlePage}>
-        <section className={styles.doodleHeroBlock}>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceHeaderBlock}>
           <div>
-            <p className={styles.doodleEyebrow}>내 사주와 잘 맞는 지역을 더 찾아봤어요.</p>
-            <h2 className={styles.doodleTitle}>추천 지역 더 보기</h2>
+            <h2 className={styles.referenceTitle}>추천 지역 더 보기</h2>
+            <p className={styles.referenceSubtitle}>내 사주에 잘 맞는 지역을 더 찾아봤어요.</p>
           </div>
-          <span className={styles.doodleFloat}>✦</span>
+          <span className={styles.referenceSpark}>✧</span>
         </section>
 
-        <div className={styles.doodleFilterRow}>
+        <div className={styles.referenceFilterBar}>
           {REGION_FILTERS.map((filter) => (
             <button
               key={filter}
               type="button"
-              className={activeFilter === filter ? styles.doodleChipActive : styles.doodleChip}
+              className={activeFilter === filter ? styles.referenceFilterActive : styles.referenceFilter}
               onClick={() => setActiveFilter(filter)}
             >
               {filter}
             </button>
           ))}
-          <span className={styles.doodleFilterIcon}>⌕</span>
+          <span className={styles.referenceFilterIcon}>⌕</span>
         </div>
 
         {highlighted ? (
-          <section className={styles.paperMapCard}>
-            <div className={styles.paperMapCanvas}>
-              <div className={styles.paperMapRiver}></div>
-              <div className={styles.paperMapPark}></div>
+          <section className={styles.referenceMapShell}>
+            <div className={styles.referenceMapCanvas}>
+              <div className={styles.referenceMapRiver}></div>
+              <div className={styles.referenceMapPark}></div>
               {neighborhoods.slice(0, 5).map((item) => (
                 <Link
                   key={item.code}
                   href={{ pathname: '/place-detail', query: { ...query, districtCode: item.code } }}
-                  className={`${styles.paperMapPin} ${item.code === highlighted.code ? styles.paperMapPinActive : ''}`}
+                  className={`${styles.referenceMapPin} ${item.code === highlighted.code ? styles.referenceMapPinActive : ''}`}
                   style={{ left: item.pinX, top: item.pinY }}
                 >
                   {item.rank}
@@ -71,24 +71,27 @@ export default function PlacePage() {
           </section>
         ) : null}
 
-        <section className={styles.doodleListCard}>
+        <section className={styles.referenceListPanel}>
           {neighborhoods.length > 0 ? neighborhoods.slice(0, 5).map((item) => (
             <Link
               key={item.code}
               href={{ pathname: '/place-detail', query: { ...query, districtCode: item.code } }}
-              className={styles.doodleLocationRow}
+              className={styles.referenceListRow}
             >
-              <span className={`${styles.doodleRankBadge} ${styles[`doodleRankBadge${item.rank}` as keyof typeof styles] || ''}`}>
+              <span className={`${styles.referenceRankBadge} ${styles[`referenceRankBadge${item.rank}` as keyof typeof styles] || ''}`}>
                 {item.rank}
               </span>
-              <div className={styles.doodleLocationMain}>
+              <div className={styles.referenceListMain}>
                 <strong>{item.fullLabel}</strong>
-                <span>적합도 {item.suitability}%</span>
+                <span>{item.hanja || item.terrainLabel}</span>
               </div>
-              <span className={styles.doodleLocationArrow}>›</span>
+              <div className={styles.referenceSuitability}>
+                <em>적합도</em>
+                <strong>{item.suitability}%</strong>
+              </div>
             </Link>
           )) : (
-            <div className={styles.doodleInfoBanner}>
+            <div className={styles.referenceNoteCard}>
               <strong>이 필터의 추천 지역은 아직 없어요.</strong>
               <p>다른 권역으로 넓혀서 다시 살펴보면 좋아요.</p>
             </div>
@@ -96,7 +99,7 @@ export default function PlacePage() {
         </section>
 
         {highlighted ? (
-          <section className={styles.doodleInfoBanner}>
+          <section className={styles.referenceInlineSummary}>
             <strong>{highlighted.name}</strong>
             <p>{highlighted.oneLine}</p>
           </section>

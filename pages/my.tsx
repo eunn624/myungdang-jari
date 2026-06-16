@@ -22,19 +22,19 @@ export default function MyPage() {
 
   return (
     <Layout showTabBar activeTab="my" headerTitle="마이" showBackButton>
-      <div className={styles.doodlePage}>
-        <section className={styles.myProfileTop}>
-          <div className={styles.myProfileMark}>☼</div>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceMyHeader}>
+          <div className={styles.referenceMyBadge}>☼</div>
           <div>
-            <h2 className={styles.doodleTitle}>{report.profile.name}님</h2>
-            <p className={styles.doodleEyebrow}>
+            <h2 className={styles.referenceMyName}>{report.profile.name}님</h2>
+            <p className={styles.referenceSubtitle}>
               {report.formattedBirth} / {report.profile.gender}
             </p>
           </div>
-          <button type="button" className={styles.myEditButton}>프로필 편집</button>
+          <button type="button" className={styles.referenceMyEdit}>프로필 편집</button>
         </section>
 
-        <Link href={{ pathname: '/home', query }} className={styles.myReportCard}>
+        <Link href={{ pathname: '/home', query }} className={styles.referenceMyReportCard}>
           <div>
             <strong>내 공간 리포트</strong>
             <p>최근 분석일 {report.formattedToday}</p>
@@ -42,11 +42,11 @@ export default function MyPage() {
           <span>›</span>
         </Link>
 
-        <section className={styles.myMenuPanel}>
+        <section className={styles.referenceMyMenuPanel}>
           {menuItems.map((item) => {
             if (item.href) {
               return (
-                <Link key={item.label} href={item.href} className={styles.myMenuRow}>
+                <Link key={item.label} href={item.href} className={styles.referenceMyMenuRow}>
                   <span>{item.label}</span>
                   <em>›</em>
                 </Link>
@@ -54,7 +54,7 @@ export default function MyPage() {
             }
 
             return (
-              <button key={item.label} type="button" className={styles.myMenuRowButton}>
+              <button key={item.label} type="button" className={styles.referenceMyMenuButton}>
                 <span>{item.label}</span>
                 <div>
                   {item.caption ? <small>{item.caption}</small> : null}

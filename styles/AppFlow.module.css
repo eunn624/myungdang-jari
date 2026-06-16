@@ -4134,3 +4134,776 @@
     justify-items: start;
   }
 }
+
+/* ─── Reference-like subpages ───────────────────────────── */
+.referenceScreen {
+  min-height: 100%;
+  padding: 16px 16px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background:
+    radial-gradient(circle at 12% 7%, rgba(246, 231, 180, 0.18), transparent 18%),
+    radial-gradient(circle at 84% 10%, rgba(199, 221, 243, 0.16), transparent 18%),
+    linear-gradient(180deg, #fcf8f1, #fbf8f3);
+}
+
+.referenceHeaderBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 2px;
+}
+
+.referenceTitle {
+  margin: 0;
+  color: #1e221d;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.22;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceSubtitle {
+  margin: 4px 0 0;
+  color: #92897b;
+  font-size: 12px;
+  line-height: 1.45;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceSpark {
+  color: #8ab0f4;
+  font-size: 24px;
+  line-height: 1;
+  padding: 4px 2px 0 0;
+}
+
+.referenceFilterBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.referenceFilterBar::-webkit-scrollbar {
+  display: none;
+}
+
+.referenceFilter,
+.referenceFilterActive {
+  border: 1px solid rgba(89, 79, 64, 0.08);
+  background: rgba(255,255,255,0.92);
+  border-radius: 999px;
+  height: 32px;
+  padding: 0 13px;
+  white-space: nowrap;
+  color: #8e867a;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+}
+
+.referenceFilterActive {
+  background: #4b7a56;
+  color: #fff;
+}
+
+.referenceFilterIcon {
+  margin-left: auto;
+  color: #b1a79a;
+  font-size: 15px;
+}
+
+.referenceMapShell,
+.referencePanel,
+.referenceListPanel,
+.referenceSummaryCard,
+.referenceCommentCard,
+.referenceHintCard,
+.referenceNoteCard,
+.referenceMyMenuPanel {
+  border-radius: 22px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(85, 73, 55, 0.08);
+  box-shadow: 0 6px 18px rgba(53, 44, 33, 0.05);
+}
+
+.referenceMapShell {
+  padding: 8px;
+}
+
+.referenceMapCanvas {
+  position: relative;
+  min-height: 208px;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(248, 243, 231, 0.94), rgba(244, 239, 228, 0.94)),
+    repeating-linear-gradient(90deg, rgba(214, 204, 190, 0.32) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(0deg, rgba(214, 204, 190, 0.24) 0 1px, transparent 1px 26px);
+}
+
+.referenceMapCanvas::before,
+.referenceMapCanvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.referenceMapCanvas::before {
+  background:
+    linear-gradient(122deg, transparent 18%, rgba(198, 191, 179, 0.36) 18.5%, transparent 19.1%),
+    linear-gradient(56deg, transparent 34%, rgba(198, 191, 179, 0.28) 34.4%, transparent 35%);
+  opacity: 0.9;
+}
+
+.referenceMapRiver {
+  position: absolute;
+  left: 16%;
+  top: -6%;
+  width: 11%;
+  height: 118%;
+  border-radius: 999px;
+  background: rgba(173, 210, 231, 0.82);
+  transform: rotate(10deg);
+}
+
+.referenceMapPark {
+  position: absolute;
+  left: 47%;
+  top: 39%;
+  width: 20%;
+  height: 23%;
+  border-radius: 20px;
+  background: rgba(198, 226, 170, 0.92);
+}
+
+.referenceMapPin,
+.referenceMapPinActive {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+  box-shadow: 0 6px 14px rgba(53, 44, 33, 0.12);
+}
+
+.referenceMapPin {
+  background: #f3db77;
+  color: #5f4a28;
+}
+
+.referenceMapPinActive {
+  background: #f47f96;
+  color: #fff;
+}
+
+.referenceMapLabel {
+  position: absolute;
+  left: 49%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #ef7088;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceFacilityPin {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 10px;
+  box-shadow: 0 5px 12px rgba(53, 44, 33, 0.1);
+}
+
+.referenceFacilityPin1 { left: 16%; top: 22%; background: #64b87e; }
+.referenceFacilityPin2 { left: 72%; top: 24%; background: #f1a85f; }
+.referenceFacilityPin3 { left: 83%; top: 50%; background: #76a3ea; }
+.referenceFacilityPin4 { left: 28%; top: 64%; background: #aa88ea; }
+.referenceFacilityPin5 { left: 66%; top: 70%; background: #f09b59; }
+
+.referenceListPanel {
+  padding: 6px 10px;
+}
+
+.referenceListRow {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.referenceListRow + .referenceListRow {
+  border-top: 1px solid rgba(85, 73, 55, 0.06);
+}
+
+.referenceRankBadge {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: #6a5a4b;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceRankBadge1 { background: #f6d7dd; }
+.referenceRankBadge2 { background: #f5e2a0; }
+.referenceRankBadge3 { background: #cce0f8; }
+.referenceRankBadge4 { background: #dcead0; }
+.referenceRankBadge5 { background: #dddaf3; }
+
+.referenceListMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.referenceListMain strong,
+.referenceListMain span,
+.referenceSuitability em,
+.referenceSuitability strong {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceListMain strong {
+  color: #1e221d;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.referenceListMain span {
+  color: #b0a79b;
+  font-size: 11px;
+}
+
+.referenceSuitability {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.referenceSuitability em {
+  color: #b0a79b;
+  font-style: normal;
+  font-size: 11px;
+}
+
+.referenceSuitability strong {
+  color: #ef7584;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.referenceInlineSummary,
+.referenceSummaryCard,
+.referenceCommentCard,
+.referenceHintCard,
+.referenceNoteCard {
+  padding: 14px 16px;
+}
+
+.referenceInlineSummary strong,
+.referenceInlineSummary p,
+.referenceSummaryCard strong,
+.referenceSummaryCard p,
+.referenceSummaryCard span,
+.referenceCommentCard strong,
+.referenceCommentCard p,
+.referenceHintCard p,
+.referenceNoteCard strong,
+.referenceNoteCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceInlineSummary strong,
+.referenceSummaryCard strong,
+.referenceCommentCard strong,
+.referenceNoteCard strong {
+  color: #1e221d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.referenceInlineSummary p,
+.referenceSummaryCard p,
+.referenceCommentCard p,
+.referenceHintCard p,
+.referenceNoteCard p,
+.referenceReasonRow p {
+  margin: 4px 0 0;
+  color: #746c61;
+  font-size: 12px;
+  line-height: 1.58;
+}
+
+.referenceSummaryCard span {
+  margin-top: 6px;
+  color: #a19789;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.referenceDetailScore {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 2px 0;
+}
+
+.referenceDetailScore span,
+.referenceDetailScore strong {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceDetailScore span {
+  color: #8f877a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.referenceDetailScore strong {
+  color: #1f2522;
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.referencePanel {
+  padding: 14px 16px;
+}
+
+.referencePanelTitle {
+  margin: 0 0 12px;
+  color: #1e221d;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceReasonList,
+.referenceFacilityList,
+.referenceTipsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.referenceReasonRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.referenceReasonBullet {
+  color: #62ab73;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.referenceReasonRow strong,
+.referenceReasonRow p {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceReasonRow strong {
+  display: block;
+  color: #1e221d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.referenceButtonRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.referenceGhostButton,
+.referencePrimaryButton {
+  min-height: 50px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceGhostButton {
+  color: #283444;
+  background: #fff;
+  border: 1px solid rgba(85, 73, 55, 0.12);
+}
+
+.referencePrimaryButton {
+  color: #fff;
+  background: #20324b;
+}
+
+.referenceFacilityRow {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.referenceFacilityListIcon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(224, 240, 229, 0.95);
+  color: #4b7a56;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.referenceFacilityMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.referenceFacilityMain strong,
+.referenceFacilityMain span {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceFacilityMain strong {
+  color: #1e221d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.referenceFacilityMain span {
+  color: #9f9588;
+  font-size: 11px;
+}
+
+.referenceRowArrow {
+  color: #c0b4a7;
+  font-size: 18px;
+}
+
+.referenceOhangList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referenceOhangRow {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 12px;
+}
+
+.referenceOhangRow span,
+.referenceOhangRow strong {
+  color: #1e221d;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceOhangTrack {
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f0ece5;
+}
+
+.referenceOhangFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.referenceCommentCard {
+  position: relative;
+  padding-right: 44px;
+}
+
+.referenceCommentCard span {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  color: #d9b441;
+  font-size: 20px;
+}
+
+.referenceHintCard {
+  background: rgba(239, 248, 232, 0.94);
+  border-color: rgba(105, 171, 115, 0.16);
+}
+
+.referenceHintCard p strong {
+  color: #1e221d;
+}
+
+.referenceEnergySection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.referenceEnergyRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.referenceEnergyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.referenceEnergyCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 237, 181, 0.34);
+  color: #debb4b;
+  font-size: 18px;
+}
+
+.referenceEnergyItem strong {
+  color: #6c6459;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.45;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceTipsStack {
+  gap: 10px;
+}
+
+.referenceTipCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(85, 73, 55, 0.08);
+  box-shadow: 0 5px 14px rgba(53, 44, 33, 0.04);
+}
+
+.referenceTipContent {
+  min-width: 0;
+}
+
+.referenceTipContent strong,
+.referenceTipContent p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceTipContent strong {
+  color: #1e221d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.referenceTipContent p {
+  margin: 6px 0 0;
+  color: #746c61;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.referenceTipVisual {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 241, 228, 0.95);
+  color: #dab54a;
+  font-size: 22px;
+}
+
+.referenceMyHeader {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.referenceMyBadge {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 238, 175, 0.34);
+  color: #e1ba49;
+  font-size: 24px;
+}
+
+.referenceMyName {
+  margin: 0;
+  color: #1e221d;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceMyEdit {
+  border: 0;
+  background: none;
+  color: #a19688;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceMyReportCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #1f334a;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(31, 51, 74, 0.16);
+}
+
+.referenceMyReportCard strong,
+.referenceMyReportCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceMyReportCard strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.referenceMyReportCard p {
+  margin: 6px 0 0;
+  color: rgba(255,255,255,0.78);
+  font-size: 11px;
+}
+
+.referenceMyReportCard span {
+  font-size: 20px;
+}
+
+.referenceMyMenuPanel {
+  padding: 6px 12px;
+}
+
+.referenceMyMenuRow,
+.referenceMyMenuButton {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #1e221d;
+  background: none;
+  border: 0;
+  text-decoration: none;
+  padding: 0;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+}
+
+.referenceMyMenuRow + .referenceMyMenuRow,
+.referenceMyMenuButton + .referenceMyMenuRow,
+.referenceMyMenuRow + .referenceMyMenuButton,
+.referenceMyMenuButton + .referenceMyMenuButton {
+  border-top: 1px solid rgba(85, 73, 55, 0.06);
+}
+
+.referenceMyMenuRow span,
+.referenceMyMenuButton span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.referenceMyMenuRow em,
+.referenceMyMenuButton em {
+  font-size: 18px;
+  font-style: normal;
+  color: #b8ae9f;
+}
+
+.referenceMyMenuButton div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.referenceMyMenuButton small {
+  color: #9c9183;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 380px) {
+  .referenceScreen {
+    padding: 14px 14px 26px;
+  }
+
+  .referenceButtonRow,
+  .referenceEnergyRow,
+  .referenceMyHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .referenceMyHeader {
+    justify-items: start;
+  }
+}
