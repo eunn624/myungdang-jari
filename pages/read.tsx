@@ -52,21 +52,21 @@ export default function ReadPage() {
 
   return (
     <Layout showTabBar activeTab="read" headerTitle="공간 팁" showBackButton>
-      <div className={styles.doodlePage}>
-        <section className={styles.doodleHeroBlock}>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceHeaderBlock}>
           <div>
-            <h2 className={styles.doodleTitle}>공간 꿀팁</h2>
-            <p className={styles.doodleEyebrow}>나에게 좋은 공간을 만드는 작은 행동들이에요.</p>
+            <h2 className={styles.referenceTitle}>공간 꿀팁</h2>
+            <p className={styles.referenceSubtitle}>나에게 좋은 공간을 만드는 작은 행동들이에요.</p>
           </div>
-          <span className={styles.doodleFloat}>✎</span>
+          <span className={styles.referenceSpark}>☼</span>
         </section>
 
-        <div className={styles.doodleFilterRow}>
+        <div className={styles.referenceFilterBar}>
           {TIP_FILTERS.map((filter) => (
             <button
               key={filter}
               type="button"
-              className={activeFilter === filter ? styles.doodleChipActive : styles.doodleChip}
+              className={activeFilter === filter ? styles.referenceFilterActive : styles.referenceFilter}
               onClick={() => setActiveFilter(filter)}
             >
               {filter}
@@ -74,14 +74,14 @@ export default function ReadPage() {
           ))}
         </div>
 
-        <section className={styles.doodleTipsStack}>
+        <section className={styles.referenceTipsStack}>
           {visibleTips.map((tip) => (
-            <article key={tip.title} className={styles.doodleTipCard}>
-              <div className={styles.doodleTipContent}>
+            <article key={tip.title} className={styles.referenceTipCard}>
+              <div className={styles.referenceTipContent}>
                 <strong>{tip.title}</strong>
                 <p>{tip.body}</p>
               </div>
-              <span className={styles.doodleTipVisual}>{tip.doodle}</span>
+              <span className={styles.referenceTipVisual}>{tip.doodle}</span>
             </article>
           ))}
         </section>
