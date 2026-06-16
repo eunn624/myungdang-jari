@@ -83,6 +83,9 @@ export default function PlacePage() {
               </span>
               <div className={styles.referenceListMain}>
                 <strong>{item.fullLabel}</strong>
+                <p className={styles.referenceListLocation}>
+                  {item.directionFromCenter} · {item.nearbyLandmark}
+                </p>
                 <div className={styles.referenceListMeta}>
                   {item.vibeLabel ? (
                     <span className={`${styles.vibeBadge} ${item.vibe ? styles[`vibeBadge_${item.vibe}`] : ''}`}>

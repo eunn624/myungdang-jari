@@ -4406,6 +4406,14 @@
   font-size: 11px;
 }
 
+.referenceListLocation {
+  color: #a89884;
+  font-size: 10px;
+  font-family: 'Pretendard', sans-serif;
+  margin: 2px 0 0 0;
+  line-height: 1.3;
+}
+
 .referenceListMeta {
   display: flex;
   align-items: center;
