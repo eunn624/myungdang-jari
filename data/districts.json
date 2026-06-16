@@ -22026,7 +22026,7 @@
       "ohang": [
         "木"
       ],
-      "terrain": "flatland",
+      "terrain": "green",
       "hanja": "",
       "ohangChars": [
         "木"
@@ -22401,7 +22401,7 @@
       "ohang": [
         "水"
       ],
-      "terrain": "flatland",
+      "terrain": "waterfront",
       "hanja": "",
       "ohangChars": [
         "水"
@@ -22976,7 +22976,7 @@
       "ohang": [
         "火"
       ],
-      "terrain": "flatland",
+      "terrain": "green",
       "hanja": "",
       "ohangChars": [
         "火"
