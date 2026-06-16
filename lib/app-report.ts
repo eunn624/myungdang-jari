@@ -1,5 +1,6 @@
 import type { ParsedUrlQuery } from 'querystring';
 import { analyzeSaju, type BirthInfo, type SajuResult } from './saju';
+import { getVibePref } from './saju/vibe';
 import type { Ohang, DaeWoon, SeWoon } from './saju/types';
 import { getTerrainPreference, matchDistricts } from './location/matcher';
 import { getIljuContent, type IljuContent } from '../data/ilju-content';
@@ -542,10 +543,12 @@ export function buildReport(profile: AppProfile): AppReport {
   const terrainPreference = saju.deficitOhang[0]
     ? getTerrainPreference(saju.deficitOhang[0])
     : undefined;
+  const vibePref = getVibePref(saju);
   const districts = matchDistricts({
     deficitOhang: saju.deficitOhang,
     siDo: ['서울', '경기'],
     terrainPreference,
+    vibePref,
     topN: 5,
   });
 

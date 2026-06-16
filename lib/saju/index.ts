@@ -26,7 +26,8 @@ export function analyzeSaju(
   return { pillars, ohang, deficitOhang, bedDirection, gilbang, yongsin, sinsal, daeWoon, currentDaeWoon, seWoon };
 }
 
-export type { BirthInfo, SajuResult, FourPillars, OhangDistribution, Ohang, SinsalResult, DaeWoon, SeWoon } from './types';
+export type { BirthInfo, SajuResult, FourPillars, OhangDistribution, Ohang, SinsalResult, DaeWoon, SeWoon, VibePref } from './types';
+export { getVibePref, VIBE_LABEL, VIBE_REASON } from './vibe';
 export { getFourPillars } from './manseryeok';
 export { getOhangDistribution, getDeficitOhang, getYongsin } from './ohang';
 export { getBedDirection, getGilbang } from './directions';

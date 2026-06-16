@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
@@ -9,63 +9,61 @@ export default function MyPage() {
   const router = useRouter();
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
   const query = createQueryFromProfile(report.profile);
-  const [missionDone, setMissionDone] = useState(false);
 
-  useEffect(() => {
-    const stored = typeof window !== 'undefined'
-      ? localStorage.getItem(`mission_${report.todayKey}`)
-      : null;
-    setMissionDone(stored === 'true');
-  }, [report.todayKey]);
+  const menuItems = [
+    { label: '입력 정보 수정', href: { pathname: '/input', query } },
+    { label: '분석 기록', caption: '최근 결과 다시 보기' },
+    { label: '핀한 지역', caption: `${Math.min(report.districts.length, 3)}` },
+    { label: '공간 팁 모아보기', href: { pathname: '/read', query } },
+    { label: '알림 설정', caption: '준비 중' },
+    { label: '고객센터', caption: '안내 예정' },
+    { label: '앱 정보', caption: 'v1.0.0' },
+  ];
 
   return (
     <Layout showTabBar activeTab="my" headerTitle="마이" showBackButton>
-      <div className={styles.screen}>
-        <div className={styles.profileCard}>
-          <div className={styles.row} style={{ gap: 12 }}>
-            <div className={styles.visualPlaceholderSmall}></div>
-            <div className={styles.column} style={{ gap: 4 }}>
-              <h1 className={styles.sectionTitle}>{report.profile.name}</h1>
-              <span className={styles.sectionSubtitle}>
-                {report.formattedBirth} · {report.profile.gender}
-              </span>
-              <span className={styles.caption}>
-                {report.saju.pillars.year.stem}{report.saju.pillars.year.branch} · {report.saju.pillars.month.stem}{report.saju.pillars.month.branch} · {report.saju.pillars.day.stem}{report.saju.pillars.day.branch}
-              </span>
-            </div>
+      <div className={styles.referenceScreen}>
+        <section className={styles.referenceMyHeader}>
+          <div className={styles.referenceMyBadge}>☼</div>
+          <div>
+            <h2 className={styles.referenceMyName}>{report.profile.name}님</h2>
+            <p className={styles.referenceSubtitle}>
+              {report.formattedBirth} / {report.profile.gender}
+            </p>
           </div>
-        </div>
+          <button type="button" className={styles.referenceMyEdit}>프로필 편집</button>
+        </section>
 
-        <div className={styles.card}>
-          <span className={styles.label}>오늘의 한 가지</span>
-          <div className={styles.column} style={{ gap: 6, marginTop: 10 }}>
-            <span className={styles.bodyText}>
-              {missionDone ? '✓ ' : '○ '}{report.todayMission}
-            </span>
-            <span className={styles.caption} style={{ color: missionDone ? '#5cb85c' : '#8c7a6e' }}>
-              {missionDone ? '오늘 할 일까지 잘 마쳤어요.' : '홈에서 완료 버튼을 누르면 체크돼요.'}
-            </span>
+        <Link href={{ pathname: '/home', query }} className={styles.referenceMyReportCard}>
+          <div>
+            <strong>내 공간 리포트</strong>
+            <p>최근 분석일 {report.formattedToday}</p>
           </div>
-        </div>
+          <span>›</span>
+        </Link>
 
-        <div className={styles.menuList}>
-          <Link href={{ pathname: '/input', query }} className={styles.menuItem}>
-            <span>입력 정보 수정</span><span>›</span>
-          </Link>
-          <Link href={{ pathname: '/share', query }} className={styles.menuItem}>
-            <span>공유 카드 보기</span><span>›</span>
-          </Link>
-          <Link href={{ pathname: '/store', query }} className={styles.menuItem}>
-            <span>추천 소품 보기</span><span>›</span>
-          </Link>
-          <Link href={{ pathname: '/place', query }} className={styles.menuItem}>
-            <span>지역과 방향 가이드</span><span>›</span>
-          </Link>
-        </div>
+        <section className={styles.referenceMyMenuPanel}>
+          {menuItems.map((item) => {
+            if (item.href) {
+              return (
+                <Link key={item.label} href={item.href} className={styles.referenceMyMenuRow}>
+                  <span>{item.label}</span>
+                  <em>›</em>
+                </Link>
+              );
+            }
 
-        <p className={styles.footerNote} style={{ textAlign: 'center' }}>
-          이 앱의 내용은 재미와 참고를 위한 안내예요.
-        </p>
+            return (
+              <button key={item.label} type="button" className={styles.referenceMyMenuButton}>
+                <span>{item.label}</span>
+                <div>
+                  {item.caption ? <small>{item.caption}</small> : null}
+                  <em>›</em>
+                </div>
+              </button>
+            );
+          })}
+        </section>
       </div>
     </Layout>
   );
