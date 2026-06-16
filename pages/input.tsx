@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
@@ -23,7 +23,62 @@ export default function InputScreen() {
     birthTime: '',
     unknownTime: false,
   });
+  const [dateFields, setDateFields] = useState({ year: '', month: '', day: '' });
+  const [timeFields, setTimeFields] = useState({ hour: '', minute: '' });
   const [error, setError] = useState('');
+
+  const monthRef = useRef<HTMLInputElement>(null);
+  const dayRef = useRef<HTMLInputElement>(null);
+  const minuteRef = useRef<HTMLInputElement>(null);
+
+  function clamp(value: string, max: number): string {
+    const n = parseInt(value, 10);
+    if (isNaN(n) || value === '') return value;
+    return String(Math.min(n, max));
+  }
+
+  function combineBirthDate(year: string, month: string, day: string): string {
+    if (year.length === 4 && month.length >= 1 && day.length >= 1) {
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+    return '';
+  }
+
+  function combineBirthTime(hour: string, minute: string): string {
+    if (hour.length >= 1 && minute.length >= 1) {
+      return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
+    }
+    return '';
+  }
+
+  function handleDateField(field: 'year' | 'month' | 'day', raw: string) {
+    const digits = raw.replace(/\D/g, '');
+    let value = digits;
+    if (field === 'month') value = clamp(digits, 12);
+    if (field === 'day') value = clamp(digits, 31);
+
+    const next = { ...dateFields, [field]: value };
+    setDateFields(next);
+    setError('');
+    setFormData(prev => ({ ...prev, birthDate: combineBirthDate(next.year, next.month, next.day) }));
+
+    if (field === 'year' && value.length === 4) monthRef.current?.focus();
+    if (field === 'month' && value.length === 2) dayRef.current?.focus();
+  }
+
+  function handleTimeField(field: 'hour' | 'minute', raw: string) {
+    const digits = raw.replace(/\D/g, '');
+    let value = digits;
+    if (field === 'hour') value = clamp(digits, 23);
+    if (field === 'minute') value = clamp(digits, 59);
+
+    const next = { ...timeFields, [field]: value };
+    setTimeFields(next);
+    setError('');
+    setFormData(prev => ({ ...prev, birthTime: combineBirthTime(next.hour, next.minute) }));
+
+    if (field === 'hour' && value.length === 2) minuteRef.current?.focus();
+  }
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -125,33 +180,74 @@ export default function InputScreen() {
             </div>
 
             <div className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor="birthDate">생년월일</label>
-              <input
-                id="birthDate"
-                type="date"
-                className={styles.input}
-                value={formData.birthDate}
-                onChange={(event) => {
-                  setError('');
-                  setFormData((prev) => ({ ...prev, birthDate: event.target.value }));
-                }}
-                required
-              />
+              <span className={styles.label}>생년월일</span>
+              <div className={styles.dateRow}>
+                <input
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={4}
+                  placeholder="1990"
+                  className={styles.splitInputYear}
+                  value={dateFields.year}
+                  onChange={e => handleDateField('year', e.target.value)}
+                  aria-label="출생 년도"
+                />
+                <span className={styles.dateSep}>/</span>
+                <input
+                  ref={monthRef}
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={2}
+                  placeholder="06"
+                  className={styles.splitInputMD}
+                  value={dateFields.month}
+                  onChange={e => handleDateField('month', e.target.value)}
+                  aria-label="출생 월"
+                />
+                <span className={styles.dateSep}>/</span>
+                <input
+                  ref={dayRef}
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={2}
+                  placeholder="15"
+                  className={styles.splitInputMD}
+                  value={dateFields.day}
+                  onChange={e => handleDateField('day', e.target.value)}
+                  aria-label="출생 일"
+                />
+              </div>
             </div>
 
             <div className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor="birthTime">출생 시간</label>
-              <input
-                id="birthTime"
-                type="time"
-                className={styles.input}
-                value={formData.birthTime}
-                onChange={(event) => {
-                  setError('');
-                  setFormData((prev) => ({ ...prev, birthTime: event.target.value }));
-                }}
-                disabled={formData.unknownTime}
-              />
+              <span className={styles.label}>출생 시간</span>
+              <div className={styles.timeRow}>
+                <input
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={2}
+                  placeholder="14"
+                  className={styles.splitInputMD}
+                  value={timeFields.hour}
+                  onChange={e => handleTimeField('hour', e.target.value)}
+                  disabled={formData.unknownTime}
+                  aria-label="출생 시"
+                />
+                <span className={styles.dateSep}>시</span>
+                <input
+                  ref={minuteRef}
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={2}
+                  placeholder="30"
+                  className={styles.splitInputMD}
+                  value={timeFields.minute}
+                  onChange={e => handleTimeField('minute', e.target.value)}
+                  disabled={formData.unknownTime}
+                  aria-label="출생 분"
+                />
+                <span className={styles.dateSep}>분</span>
+              </div>
               <label className={styles.checkboxRow}>
                 <input
                   type="checkbox"
@@ -159,10 +255,11 @@ export default function InputScreen() {
                   checked={formData.unknownTime}
                   onChange={(event) => {
                     setError('');
+                    setTimeFields({ hour: '', minute: '' });
                     setFormData((prev) => ({
                       ...prev,
                       unknownTime: event.target.checked,
-                      birthTime: event.target.checked ? '' : prev.birthTime,
+                      birthTime: '',
                     }));
                   }}
                 />
