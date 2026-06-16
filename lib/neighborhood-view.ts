@@ -12,6 +12,24 @@ const PIN_POSITIONS: Array<{ x: string; y: string }> = [
 // 서울 시청 기준점 (지도 계산용)
 const SEOUL_CENTER = { lat: 37.5665, lng: 126.9784 };
 
+// 시도별 중심 좌표 (방위 계산 기준점)
+const SIDO_CENTERS: Record<string, { lat: number; lng: number; label: string }> = {
+  '서울': { lat: 37.5665, lng: 126.9784, label: '서울 도심' },
+  '경기': { lat: 37.5665, lng: 126.9784, label: '서울 도심' },
+  '인천': { lat: 37.5665, lng: 126.9784, label: '서울 도심' },
+  '부산': { lat: 35.1796, lng: 129.0756, label: '부산 시청' },
+  '대구': { lat: 35.8714, lng: 128.6014, label: '대구 시청' },
+  '광주': { lat: 35.1595, lng: 126.8526, label: '광주 시청' },
+  '대전': { lat: 36.3504, lng: 127.3845, label: '대전 시청' },
+  '울산': { lat: 35.5394, lng: 129.3114, label: '울산 시청' },
+  '강원': { lat: 37.8813, lng: 127.7300, label: '강원 도청' },
+  '전남': { lat: 34.8160, lng: 126.4627, label: '전남 도청' },
+  '전북': { lat: 35.7175, lng: 127.1540, label: '전북 도청' },
+  '경남': { lat: 35.2374, lng: 128.6923, label: '경남 도청' },
+  '경북': { lat: 36.4919, lng: 129.1075, label: '경북 도청' },
+  '제주': { lat: 33.5033, lng: 126.5312, label: '제주 시청' },
+};
+
 export type NeighborhoodView = {
   code: string;
   rank: number;
@@ -159,34 +177,42 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
 
     // 위치 인지 개선 데이터
     const baseName = item.district.name.replace(/\d+동$/, '동');
-    let directionFromCenter = '서울·경기 생활권';
+    let directionFromCenter = `${item.district.siDo} 생활권`;
     let pinX = pin.x;
     let pinY = pin.y;
 
     if (item.district.lat && item.district.lng) {
+      const center = SIDO_CENTERS[item.district.siDo] ?? SIDO_CENTERS['서울'];
       const distKm = getDistanceKm(
-        SEOUL_CENTER.lat,
-        SEOUL_CENTER.lng,
+        center.lat,
+        center.lng,
         item.district.lat,
         item.district.lng
       );
       const dirKo = bearingToDirKo(
-        SEOUL_CENTER.lat,
-        SEOUL_CENTER.lng,
+        center.lat,
+        center.lng,
         item.district.lat,
         item.district.lng
       );
-      directionFromCenter = `서울 도심에서 ${dirKo} ${Math.round(distKm)}km`;
+      const distStr = distKm < 3 ? '인근' : `${Math.round(distKm)}km`;
+      directionFromCenter = `${center.label}에서 ${dirKo} ${distStr}`;
 
-      // 좌표 기반 지도 핀 위치 (정규화)
-      // 서울 경계: lat 37.43~37.70, lng 126.76~127.18
+      // 좌표 기반 지도 핀 위치 (정규화, 서울권에서만 정밀)
       const latMin = 37.43, latMax = 37.70;
       const lngMin = 126.76, lngMax = 127.18;
-      pinX = `${((item.district.lng - lngMin) / (lngMax - lngMin)) * 100}%`;
-      pinY = `${((latMax - item.district.lat) / (latMax - latMin)) * 100}%`;
+      if (item.district.siDo === '서울' || item.district.siDo === '경기' || item.district.siDo === '인천') {
+        pinX = `${Math.max(2, Math.min(95, ((item.district.lng - lngMin) / (lngMax - lngMin)) * 100))}%`;
+        pinY = `${Math.max(2, Math.min(95, ((latMax - item.district.lat) / (latMax - latMin)) * 100))}%`;
+      }
     }
 
     const nearbyLandmark = getNearbyLandmark(item.district.siGunGu, item.district.direction);
+
+    // 광역시·도 단위는 siGunGu == name 이므로 레이블 중복 방지
+    const fullLabel = item.district.name === item.district.siGunGu
+      ? `${item.district.siDo} ${item.district.siGunGu}`
+      : `${item.district.siDo} ${item.district.siGunGu} ${item.district.name}`;
 
     return {
       code: item.district.code,
@@ -195,7 +221,7 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
       baseName,
       city: item.district.siDo,
       district: item.district.siGunGu,
-      fullLabel: `${item.district.siDo} ${item.district.siGunGu} ${item.district.name}`,
+      fullLabel,
       hanja: item.district.hanja,
       suitability,
       terrain: item.district.terrain,

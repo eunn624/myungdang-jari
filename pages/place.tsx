@@ -6,15 +6,17 @@ import styles from '../styles/AppFlow.module.css';
 import { createQueryFromProfile, getReportFromQuery } from '../lib/app-report';
 import { getNeighborhoodViews } from '../lib/neighborhood-view';
 
-const REGION_FILTERS = ['전체', '서울', '경기', '인천', '기타'] as const;
+const REGION_FILTERS = [
+  '전체',
+  '서울', '경기', '인천',
+  '부산', '대구', '광주', '대전', '울산',
+  '강원', '전남', '전북', '경남', '경북', '제주',
+] as const;
 type RegionFilter = typeof REGION_FILTERS[number];
 
 function matchesRegion(label: RegionFilter, city: string) {
   if (label === '전체') return true;
-  if (label === '기타') {
-    return !city.includes('서울') && !city.includes('경기') && !city.includes('인천');
-  }
-  return city.includes(label);
+  return city === label;
 }
 
 export default function PlacePage() {
@@ -23,7 +25,7 @@ export default function PlacePage() {
   const query = createQueryFromProfile(report.profile);
   const [activeFilter, setActiveFilter] = useState<RegionFilter>('전체');
 
-  const allNeighborhoods = useMemo(() => getNeighborhoodViews(report), [report]);
+  const allNeighborhoods = useMemo(() => getNeighborhoodViews(report, 30), [report]);
   const neighborhoods = allNeighborhoods.filter((item) => matchesRegion(activeFilter, item.city));
   const highlighted = neighborhoods[0] || allNeighborhoods[0];
 
@@ -38,7 +40,7 @@ export default function PlacePage() {
           <span className={styles.referenceSpark}>✧</span>
         </section>
 
-        <div className={styles.referenceFilterBar}>
+        <div className={styles.referenceFilterScroll}>
           {REGION_FILTERS.map((filter) => (
             <button
               key={filter}
@@ -49,7 +51,6 @@ export default function PlacePage() {
               {filter}
             </button>
           ))}
-          <span className={styles.referenceFilterIcon}>⌕</span>
         </div>
 
         {highlighted ? (

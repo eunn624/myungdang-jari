@@ -4193,6 +4193,20 @@
   display: none;
 }
 
+.referenceFilterScroll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 0 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.referenceFilterScroll::-webkit-scrollbar {
+  display: none;
+}
+
 .referenceFilter,
 .referenceFilterActive {
   border: 1px solid rgba(89, 79, 64, 0.08);

@@ -549,13 +549,12 @@ export function buildReport(profile: AppProfile): AppReport {
     deficitOhang: saju.deficitOhang,
     yongsin: saju.yongsin,
     dominantOhang: dominant,
-    siDo: ['서울', '경기'],
     terrainPreference,
     vibePref,
     sinsal: saju.sinsal.filter(s => s.category === 'sal').map(s => s.name),
     guiin: saju.sinsal.filter(s => s.category === 'guiin').map(s => s.name),
     gilbang: saju.gilbang,
-    topN: 5,
+    topN: 30,
   });
   const deficit = saju.deficitOhang[0] || saju.yongsin;
   const profileName = `${profile.name}님`;
