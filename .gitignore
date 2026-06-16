@@ -22,3 +22,5 @@ yarn-error.log*
 *.swo
 *~
 .claude/settings.local.json
+out/
+tsconfig.tsbuildinfo
