@@ -1755,6 +1755,463 @@
   min-height: 48px;
 }
 
+/* ─── Home dashboard ────────────────────────────────────── */
+.homeDashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+  padding: 18px 18px 30px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 236, 188, 0.32), transparent 20%),
+    radial-gradient(circle at 84% 18%, rgba(212, 234, 245, 0.5), transparent 22%),
+    linear-gradient(180deg, #fbf7f0, #fffdf9 44%, #faf7f1);
+}
+
+.homeReportHero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(249, 244, 235, 0.96));
+  border: 1px solid rgba(233, 227, 218, 0.92);
+  box-shadow: 0 16px 36px rgba(31, 37, 34, 0.08);
+}
+
+.homeReportHeader,
+.homeSectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.homeReportEyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 223, 138, 0.22);
+  color: #8d6e20;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.homeReportHeader h1 {
+  margin: 8px 0 0;
+  color: #1f2522;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.16;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.homeBellButton {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.88);
+  color: #c28b9e;
+  font-size: 26px;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(31, 37, 34, 0.08);
+}
+
+.homeReportSummary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 124px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.homeReportLead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.homeReportLead p {
+  margin: 0;
+  color: #5d635f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.homeReportLead strong {
+  color: #1f2522;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.homeScoreCard {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  padding: 10px 8px;
+  border-radius: 999px;
+  border: 3px solid rgba(62, 111, 143, 0.16);
+  background: rgba(255,255,255,0.9);
+  aspect-ratio: 1 / 1;
+  justify-self: end;
+}
+
+.homeScoreCard span {
+  color: #666e79;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.homeScoreCard strong {
+  color: #1f2522;
+  font-size: 44px;
+  line-height: 0.9;
+  font-weight: 900;
+}
+
+.homeScoreCard em {
+  color: #1f2522;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.featuredNeighborhoodCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.94);
+  box-shadow: 0 14px 30px rgba(31, 37, 34, 0.07);
+}
+
+.featuredNeighborhoodInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featuredBadge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 196, 213, 0.24);
+  color: #a76078;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.featuredNeighborhoodInfo h2 {
+  margin: 0;
+  color: #1f2522;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.featuredNeighborhoodInfo p {
+  margin: 0;
+  color: #73746f;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.featuredScoreRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.featuredScoreRow span {
+  color: #706a63;
+  font-size: 13px;
+}
+
+.featuredScoreRow strong {
+  color: #ef7f99;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.featuredReasonList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.featuredReasonList span {
+  color: #4f5f54;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.featuredMapButton,
+.homeResetButton {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 37, 34, 0.12);
+  background: #fff;
+  color: #1f2522;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(31, 37, 34, 0.05);
+}
+
+.featuredMapPreview {
+  position: relative;
+  min-height: 188px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #f3f1ea, #f8f5ee);
+  border: 1px solid rgba(194, 202, 205, 0.72);
+}
+
+.featuredMapGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgba(167, 181, 190, 0.28) 18% 20%, transparent 20% 42%, rgba(167, 181, 190, 0.22) 42% 44%, transparent 44% 64%, rgba(167, 181, 190, 0.28) 64% 66%, transparent 66%),
+    linear-gradient(180deg, transparent 0 26%, rgba(167, 181, 190, 0.22) 26% 28%, transparent 28% 48%, rgba(167, 181, 190, 0.3) 48% 50%, transparent 50% 72%, rgba(167, 181, 190, 0.24) 72% 74%, transparent 74%);
+}
+
+.featuredMapPark {
+  position: absolute;
+  inset: 54px 34px 28px 38px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #dbead8, #bed8b7);
+  box-shadow: inset 0 0 0 1px rgba(127, 170, 126, 0.26);
+}
+
+.featuredMapPin {
+  position: absolute;
+  top: 72px;
+  left: 84px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ef7f99;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 16px rgba(239, 127, 153, 0.28);
+}
+
+.homeSectionHeader h2 {
+  margin: 0;
+  color: #1f2522;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.homeSectionHeader span {
+  color: #8c877d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.homeTop3Section,
+.homeTipsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.homeTop3Grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.top3NeighborhoodCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 124px;
+  padding: 14px 12px 12px;
+  border-radius: 20px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(31, 37, 34, 0.05);
+}
+
+.top3Rank {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #ffd9e1;
+  color: #a95d71;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.top3NeighborhoodCard strong {
+  color: #1f2522;
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.top3NeighborhoodCard p,
+.top3NeighborhoodCard em {
+  margin: 0;
+  color: #7a766f;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.top3NeighborhoodCard em {
+  margin-top: auto;
+  color: #e97d97;
+  font-weight: 800;
+}
+
+.homeInsightGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.homeInsightCard {
+  padding: 16px;
+  border-radius: 22px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  box-shadow: 0 10px 22px rgba(31, 37, 34, 0.05);
+}
+
+.homeTraitList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.homeTraitItem {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.homeTraitItem span {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(220, 235, 242, 0.54);
+  color: #5d7f91;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.homeTraitItem strong {
+  color: #1f2522;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.homeTraitItem p {
+  margin: 3px 0 0;
+  color: #727069;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.homeOhangList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.homeOhangRow {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.homeOhangRow span {
+  color: #1f2522;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.homeOhangTrack {
+  height: 12px;
+  border-radius: 999px;
+  background: #f0ece5;
+  overflow: hidden;
+}
+
+.homeOhangFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.homeTipsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.homeTipCard {
+  min-height: 108px;
+  padding: 14px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  box-shadow: 0 10px 18px rgba(31, 37, 34, 0.05);
+}
+
+.homeTipCard p {
+  margin: 0;
+  color: #1f2522;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.homeTipCardMint {
+  background: linear-gradient(180deg, #eef7ef, #f8fcf6);
+}
+
+.homeTipCardYellow {
+  background: linear-gradient(180deg, #fff6da, #fffdf2);
+}
+
+.homeTipCardBlue {
+  background: linear-gradient(180deg, #edf5fb, #fafcff);
+}
+
+.homeActionRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 12px;
+}
+
 .barFill {
   height: 100%;
   border-radius: 999px;
@@ -2906,5 +3363,33 @@
   .onboardingTrustNote {
     font-size: 11px;
     line-height: 1.4;
+  }
+}
+
+@media (max-width: 380px) {
+  .homeDashboard {
+    padding: 16px 14px 28px;
+  }
+
+  .homeReportSummary,
+  .featuredNeighborhoodCard,
+  .homeInsightGrid,
+  .homeActionRow {
+    grid-template-columns: 1fr;
+  }
+
+  .homeScoreCard {
+    justify-self: start;
+    width: 112px;
+  }
+
+  .homeTop3Grid,
+  .homeTipsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .top3NeighborhoodCard,
+  .homeTipCard {
+    min-height: auto;
   }
 }
