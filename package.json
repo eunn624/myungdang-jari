@@ -9,7 +9,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build:vibe": "node scripts/build-vibe.js"
+    "build:vibe": "node scripts/build-vibe.js",
+    "build:vibe:heuristic": "node scripts/build-vibe-heuristic.js"
   },
   "keywords": ["사주", "풍수", "개운", "명당"],
   "author": "Gimseieun",
