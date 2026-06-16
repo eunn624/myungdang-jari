@@ -25,6 +25,10 @@ export default function SajuPage() {
   const deficit = report.saju.deficitOhang[0] || report.saju.yongsin;
   const topTerrain = report.districts[0]?.district.terrain;
   const terrainLabel = topTerrain ? TERRAIN_LABELS[topTerrain] : '생활권';
+  const currentDaeWoon = report.saju.currentDaeWoon;
+  const sinsalSummary = report.saju.sinsal.length > 0
+    ? report.saju.sinsal.slice(0, 3).map((item) => item.name).join(' · ')
+    : '현재는 오행 균형과 공간 성향을 중심으로 읽는 편이 자연스러워요.';
 
   const energyCards = [
     { title: `${report.saju.bedDirection}향`, body: '시선이 열리고 햇빛이 부드럽게 드는 방향' },
@@ -87,8 +91,50 @@ export default function SajuPage() {
               <div key={item.title} className={styles.referenceEnergyItem}>
                 <span className={styles.referenceEnergyCircle}>○</span>
                 <strong>{item.title}</strong>
+                <p>{item.body}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>사주 메모</h3>
+          <div className={styles.referenceNoteGrid}>
+            <div className={styles.referenceMiniNote}>
+              <strong>용신</strong>
+              <p>{report.saju.yongsin} 흐름을 채우는 방향이 핵심이에요.</p>
+            </div>
+            <div className={styles.referenceMiniNote}>
+              <strong>길방</strong>
+              <p>{report.saju.gilbang} 방향을 기준으로 자주 머무는 자리를 정리해보세요.</p>
+            </div>
+            <div className={styles.referenceMiniNote}>
+              <strong>신살 요약</strong>
+              <p>{sinsalSummary}</p>
+            </div>
+            <div className={styles.referenceMiniNote}>
+              <strong>공간 힌트</strong>
+              <p>{terrainLabel} 감각이 살아 있는 동네에서 리듬을 잡기 쉬운 편이에요.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>대운 · 세운 메모</h3>
+          <div className={styles.referenceTimelineCard}>
+            {currentDaeWoon ? (
+              <p>
+                지금은 <strong>{currentDaeWoon.ganJi.stem}{currentDaeWoon.ganJi.branch}</strong> 대운
+                ({currentDaeWoon.startAge}~{currentDaeWoon.endAge}세) 구간이에요.
+                {currentDaeWoon.ohang} 기운이 강하게 들어와서 {deficit} 보완과 생활 리듬 정리가 함께 중요해요.
+              </p>
+            ) : (
+              <p>대운 흐름은 입력한 생년월일시를 기준으로 계산돼요.</p>
+            )}
+            <p>
+              올해 세운은 <strong>{report.saju.seWoon.ganJi.stem}{report.saju.seWoon.ganJi.branch}</strong>이고,
+              {report.saju.seWoon.ohang} 기운이 생활 공간에 더 자주 드러날 수 있어요.
+            </p>
           </div>
         </section>
       </div>

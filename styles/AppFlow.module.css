@@ -4752,6 +4752,56 @@
   font-family: 'Pretendard', sans-serif;
 }
 
+.referenceEnergyItem p {
+  margin: 0;
+  color: #9b9184;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceNoteGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.referenceMiniNote {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(251, 247, 239, 0.92);
+  border: 1px solid rgba(85, 73, 55, 0.06);
+}
+
+.referenceMiniNote strong,
+.referenceMiniNote p,
+.referenceTimelineCard p,
+.referenceTimelineCard strong {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceMiniNote strong {
+  display: block;
+  color: #1e221d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.referenceMiniNote p,
+.referenceTimelineCard p {
+  margin: 6px 0 0;
+  color: #746c61;
+  font-size: 12px;
+  line-height: 1.58;
+}
+
+.referenceTimelineCard {
+  padding: 14px 0 2px;
+  border-top: 1px dashed rgba(85, 73, 55, 0.1);
+}
+
 .referenceTipsStack {
   gap: 10px;
 }
@@ -4935,7 +4985,8 @@
 
   .referenceButtonRow,
   .referenceEnergyRow,
-  .referenceMyHeader {
+  .referenceMyHeader,
+  .referenceNoteGrid {
     grid-template-columns: 1fr;
   }
 
