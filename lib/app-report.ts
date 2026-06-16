@@ -544,15 +544,19 @@ export function buildReport(profile: AppProfile): AppReport {
     ? getTerrainPreference(saju.deficitOhang[0])
     : undefined;
   const vibePref = getVibePref(saju);
+  const dominant = getDominantOhang(saju.ohang);
   const districts = matchDistricts({
     deficitOhang: saju.deficitOhang,
+    yongsin: saju.yongsin,
+    dominantOhang: dominant,
     siDo: ['서울', '경기'],
     terrainPreference,
     vibePref,
+    sinsal: saju.sinsal.filter(s => s.category === 'sal').map(s => s.name),
+    guiin: saju.sinsal.filter(s => s.category === 'guiin').map(s => s.name),
+    gilbang: saju.gilbang,
     topN: 5,
   });
-
-  const dominant = getDominantOhang(saju.ohang);
   const deficit = saju.deficitOhang[0] || saju.yongsin;
   const profileName = `${profile.name}님`;
   const dayAnimal = getDayAnimal(saju.pillars.day.branch);

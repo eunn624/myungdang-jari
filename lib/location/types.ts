@@ -1,4 +1,4 @@
-import type { Ohang } from '../saju/types';
+import type { Ohang, Direction } from '../saju/types';
 
 export type Terrain = 'highland' | 'waterfront' | 'flatland' | 'green';
 export type HanjaStatus = 'confirmed' | 'manual_review';
@@ -21,6 +21,9 @@ export interface District {
   vibe?: 'lively' | 'balanced' | 'quiet';
   vibeScore?: number;
   vibeNote?: string;
+  lat?: number;
+  lng?: number;
+  direction?: string;
 }
 
 export interface TerrainClassification {
@@ -38,9 +41,14 @@ export interface MatchResult {
 }
 
 export interface MatchOptions {
-  deficitOhang: Ohang[];          // 부족 오행 순위 리스트
-  terrainPreference?: Terrain;    // 용신 기반 지형 선호
-  vibePref?: 'lively' | 'balanced' | 'quiet';  // 사주 기반 분위기 선호
-  siDo?: string | string[];       // 시도 필터 (옵션)
-  topN?: number;                  // 최대 결과 수 (기본 10)
+  deficitOhang: Ohang[];
+  yongsin?: Ohang;
+  dominantOhang?: Ohang;
+  terrainPreference?: Terrain;
+  vibePref?: 'lively' | 'balanced' | 'quiet';
+  sinsal?: string[];
+  guiin?: string[];
+  gilbang?: Direction;
+  siDo?: string | string[];
+  topN?: number;
 }
