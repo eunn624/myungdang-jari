@@ -1755,6 +1755,463 @@
   min-height: 48px;
 }
 
+/* ─── Home dashboard ────────────────────────────────────── */
+.homeDashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+  padding: 18px 18px 30px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 236, 188, 0.32), transparent 20%),
+    radial-gradient(circle at 84% 18%, rgba(212, 234, 245, 0.5), transparent 22%),
+    linear-gradient(180deg, #fbf7f0, #fffdf9 44%, #faf7f1);
+}
+
+.homeReportHero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(249, 244, 235, 0.96));
+  border: 1px solid rgba(233, 227, 218, 0.92);
+  box-shadow: 0 16px 36px rgba(31, 37, 34, 0.08);
+}
+
+.homeReportHeader,
+.homeSectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.homeReportEyebrow {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 223, 138, 0.22);
+  color: #8d6e20;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.homeReportHeader h1 {
+  margin: 8px 0 0;
+  color: #1f2522;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.16;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.homeBellButton {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.88);
+  color: #c28b9e;
+  font-size: 26px;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(31, 37, 34, 0.08);
+}
+
+.homeReportSummary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 124px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.homeReportLead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.homeReportLead p {
+  margin: 0;
+  color: #5d635f;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.homeReportLead strong {
+  color: #1f2522;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.homeScoreCard {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  padding: 10px 8px;
+  border-radius: 999px;
+  border: 3px solid rgba(62, 111, 143, 0.16);
+  background: rgba(255,255,255,0.9);
+  aspect-ratio: 1 / 1;
+  justify-self: end;
+}
+
+.homeScoreCard span {
+  color: #666e79;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.homeScoreCard strong {
+  color: #1f2522;
+  font-size: 44px;
+  line-height: 0.9;
+  font-weight: 900;
+}
+
+.homeScoreCard em {
+  color: #1f2522;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.featuredNeighborhoodCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.94);
+  box-shadow: 0 14px 30px rgba(31, 37, 34, 0.07);
+}
+
+.featuredNeighborhoodInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featuredBadge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 196, 213, 0.24);
+  color: #a76078;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.featuredNeighborhoodInfo h2 {
+  margin: 0;
+  color: #1f2522;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.featuredNeighborhoodInfo p {
+  margin: 0;
+  color: #73746f;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.featuredScoreRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.featuredScoreRow span {
+  color: #706a63;
+  font-size: 13px;
+}
+
+.featuredScoreRow strong {
+  color: #ef7f99;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.featuredReasonList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.featuredReasonList span {
+  color: #4f5f54;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.featuredMapButton,
+.homeResetButton {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 37, 34, 0.12);
+  background: #fff;
+  color: #1f2522;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(31, 37, 34, 0.05);
+}
+
+.featuredMapPreview {
+  position: relative;
+  min-height: 188px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #f3f1ea, #f8f5ee);
+  border: 1px solid rgba(194, 202, 205, 0.72);
+}
+
+.featuredMapGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgba(167, 181, 190, 0.28) 18% 20%, transparent 20% 42%, rgba(167, 181, 190, 0.22) 42% 44%, transparent 44% 64%, rgba(167, 181, 190, 0.28) 64% 66%, transparent 66%),
+    linear-gradient(180deg, transparent 0 26%, rgba(167, 181, 190, 0.22) 26% 28%, transparent 28% 48%, rgba(167, 181, 190, 0.3) 48% 50%, transparent 50% 72%, rgba(167, 181, 190, 0.24) 72% 74%, transparent 74%);
+}
+
+.featuredMapPark {
+  position: absolute;
+  inset: 54px 34px 28px 38px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #dbead8, #bed8b7);
+  box-shadow: inset 0 0 0 1px rgba(127, 170, 126, 0.26);
+}
+
+.featuredMapPin {
+  position: absolute;
+  top: 72px;
+  left: 84px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ef7f99;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 16px rgba(239, 127, 153, 0.28);
+}
+
+.homeSectionHeader h2 {
+  margin: 0;
+  color: #1f2522;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.homeSectionHeader span {
+  color: #8c877d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.homeTop3Section,
+.homeTipsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.homeTop3Grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.top3NeighborhoodCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 124px;
+  padding: 14px 12px 12px;
+  border-radius: 20px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(31, 37, 34, 0.05);
+}
+
+.top3Rank {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #ffd9e1;
+  color: #a95d71;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.top3NeighborhoodCard strong {
+  color: #1f2522;
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.top3NeighborhoodCard p,
+.top3NeighborhoodCard em {
+  margin: 0;
+  color: #7a766f;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.top3NeighborhoodCard em {
+  margin-top: auto;
+  color: #e97d97;
+  font-weight: 800;
+}
+
+.homeInsightGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.homeInsightCard {
+  padding: 16px;
+  border-radius: 22px;
+  background: #fffdfa;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  box-shadow: 0 10px 22px rgba(31, 37, 34, 0.05);
+}
+
+.homeTraitList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.homeTraitItem {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.homeTraitItem span {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(220, 235, 242, 0.54);
+  color: #5d7f91;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.homeTraitItem strong {
+  color: #1f2522;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.homeTraitItem p {
+  margin: 3px 0 0;
+  color: #727069;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.homeOhangList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.homeOhangRow {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.homeOhangRow span {
+  color: #1f2522;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.homeOhangTrack {
+  height: 12px;
+  border-radius: 999px;
+  background: #f0ece5;
+  overflow: hidden;
+}
+
+.homeOhangFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.homeTipsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.homeTipCard {
+  min-height: 108px;
+  padding: 14px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(233, 227, 218, 0.96);
+  box-shadow: 0 10px 18px rgba(31, 37, 34, 0.05);
+}
+
+.homeTipCard p {
+  margin: 0;
+  color: #1f2522;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.homeTipCardMint {
+  background: linear-gradient(180deg, #eef7ef, #f8fcf6);
+}
+
+.homeTipCardYellow {
+  background: linear-gradient(180deg, #fff6da, #fffdf2);
+}
+
+.homeTipCardBlue {
+  background: linear-gradient(180deg, #edf5fb, #fafcff);
+}
+
+.homeActionRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 12px;
+}
+
 .barFill {
   height: 100%;
   border-radius: 999px;
@@ -2906,5 +3363,774 @@
   .onboardingTrustNote {
     font-size: 11px;
     line-height: 1.4;
+  }
+}
+
+@media (max-width: 380px) {
+  .homeDashboard {
+    padding: 16px 14px 28px;
+  }
+
+  .homeReportSummary,
+  .featuredNeighborhoodCard,
+  .homeInsightGrid,
+  .homeActionRow {
+    grid-template-columns: 1fr;
+  }
+
+  .homeScoreCard {
+    justify-self: start;
+    width: 112px;
+  }
+
+  .homeTop3Grid,
+  .homeTipsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .top3NeighborhoodCard,
+  .homeTipCard {
+    min-height: auto;
+  }
+}
+
+/* ─── Doodle subpages ────────────────────────────────────── */
+.doodlePage {
+  min-height: 100%;
+  padding: 18px 18px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background:
+    radial-gradient(circle at 12% 6%, rgba(248, 229, 170, 0.22), transparent 18%),
+    radial-gradient(circle at 88% 8%, rgba(196, 223, 244, 0.22), transparent 18%),
+    linear-gradient(180deg, #fcf8f1, #fdfbf7);
+}
+
+.doodleHeroBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.doodleTitle {
+  margin: 0;
+  color: #1f2522;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.24;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleEyebrow {
+  margin: 0;
+  color: #8d857b;
+  font-size: 12px;
+  line-height: 1.45;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleFloat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  color: #efc95f;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.doodleScoreStamp {
+  min-width: 88px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(46, 94, 68, 0.14);
+  background: rgba(255,255,255,0.92);
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(38, 34, 30, 0.05);
+}
+
+.doodleScoreStamp span,
+.doodleScoreStamp strong {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleScoreStamp span {
+  color: #8d857b;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.doodleScoreStamp strong {
+  margin-top: 2px;
+  color: #f06d7b;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.doodleFilterRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.doodleFilterRow::-webkit-scrollbar {
+  display: none;
+}
+
+.doodleChip,
+.doodleChipActive {
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.92);
+  color: #8d857b;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.doodleChipActive {
+  background: #477755;
+  color: #fff;
+  border-color: rgba(71, 119, 85, 0.24);
+}
+
+.doodleFilterIcon {
+  margin-left: auto;
+  color: #a89f95;
+  font-size: 16px;
+}
+
+.paperMapCard,
+.doodleListCard,
+.doodleReasonPanel,
+.doodleSummaryCard,
+.doodleInfoBanner,
+.myMenuPanel {
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.97), rgba(252, 249, 243, 0.96));
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  box-shadow: 0 10px 26px rgba(38, 34, 30, 0.06);
+}
+
+.paperMapCard {
+  padding: 10px;
+}
+
+.paperMapCanvas {
+  position: relative;
+  min-height: 210px;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(0deg, rgba(243, 236, 223, 0.82), rgba(247, 243, 234, 0.95)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(235, 228, 216, 0.44) 0,
+      rgba(235, 228, 216, 0.44) 1px,
+      transparent 1px,
+      transparent 34px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(235, 228, 216, 0.34) 0,
+      rgba(235, 228, 216, 0.34) 1px,
+      transparent 1px,
+      transparent 26px
+    );
+}
+
+.paperMapCanvas::before,
+.paperMapCanvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paperMapCanvas::before {
+  background:
+    linear-gradient(140deg, transparent 16%, rgba(204, 198, 186, 0.26) 16.4%, transparent 17.1%),
+    linear-gradient(55deg, transparent 27%, rgba(204, 198, 186, 0.26) 27.4%, transparent 28.1%),
+    linear-gradient(100deg, transparent 62%, rgba(204, 198, 186, 0.22) 62.4%, transparent 63.1%);
+  opacity: 0.8;
+}
+
+.paperMapRiver {
+  position: absolute;
+  left: 9%;
+  top: -4%;
+  width: 18%;
+  height: 120%;
+  background: rgba(164, 208, 228, 0.7);
+  transform: rotate(12deg);
+  border-radius: 60px;
+}
+
+.paperMapPark {
+  position: absolute;
+  left: 46%;
+  top: 35%;
+  width: 22%;
+  height: 24%;
+  border-radius: 26px;
+  background: rgba(196, 225, 175, 0.9);
+}
+
+.paperMapPin,
+.paperMapPinActive {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2d16b;
+  color: #2d2b27;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 8px 16px rgba(50, 44, 35, 0.18);
+}
+
+.paperMapPin {
+  background: #f3d774;
+}
+
+.paperMapPinActive {
+  background: #f17385;
+  color: #fff;
+}
+
+.paperMapPin,
+.paperMapPinActive,
+.paperFacilityPin {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.paperMapPin {
+  color: #2d2b27;
+}
+
+.paperMapPinActive {
+  color: #fff;
+}
+
+.paperMapLabel {
+  position: absolute;
+  left: 48%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #f17385;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+  box-shadow: 0 8px 18px rgba(50, 44, 35, 0.16);
+}
+
+.paperFacilityPin {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+  box-shadow: 0 6px 14px rgba(50, 44, 35, 0.14);
+}
+
+.paperFacilityPin1 { left: 18%; top: 22%; background: #6cbf7d; }
+.paperFacilityPin2 { left: 74%; top: 18%; background: #f0b866; }
+.paperFacilityPin3 { left: 80%; top: 54%; background: #86a8eb; }
+.paperFacilityPin4 { left: 26%; top: 62%; background: #c88de6; }
+.paperFacilityPin5 { left: 64%; top: 72%; background: #ed8e8c; }
+
+.doodleListCard {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doodleLocationRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.doodleLocationRow + .doodleLocationRow {
+  border-top: 1px solid rgba(60, 48, 36, 0.06);
+}
+
+.doodleRankBadge {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  color: #56483e;
+  background: #f5ddd7;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleRankBadge1 { background: #f6d6da; }
+.doodleRankBadge2 { background: #f5e3a9; }
+.doodleRankBadge3 { background: #d4e6f8; }
+.doodleRankBadge4 { background: #dcead4; }
+.doodleRankBadge5 { background: #e3def5; }
+
+.doodleLocationMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.doodleLocationMain strong,
+.doodleLocationMain span,
+.doodleLocationArrow {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleLocationMain strong {
+  color: #1f2522;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.doodleLocationMain span {
+  color: #ef7584;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.doodleLocationArrow {
+  margin-left: auto;
+  color: #c0b4a8;
+  font-size: 18px;
+}
+
+.doodleReasonPanel,
+.doodleSummaryCard,
+.doodleInfoBanner {
+  padding: 16px;
+}
+
+.doodleReasonPanel h3,
+.doodleEnergySection h3 {
+  margin: 0 0 12px;
+  color: #1f2522;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleReasonList,
+.doodleFacilityList,
+.doodleTipsStack,
+.doodleEnergyGrid,
+.doodleOhangList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doodleReasonItem,
+.doodleFacilityRow,
+.doodleTipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.doodleReasonItem span:first-child {
+  margin-top: 3px;
+  color: #69a670;
+  font-size: 13px;
+}
+
+.doodleReasonItem strong,
+.doodleReasonItem p,
+.doodleSummaryCard p,
+.doodleInfoBanner strong,
+.doodleInfoBanner p {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleReasonItem strong,
+.doodleInfoBanner strong {
+  display: block;
+  color: #1f2522;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.doodleReasonItem p,
+.doodleSummaryCard p,
+.doodleInfoBanner p {
+  margin: 4px 0 0;
+  color: #70675e;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.doodleSummaryCard p strong {
+  color: #1f2522;
+}
+
+.doodleActionRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.doodleGhostButton,
+.doodlePrimaryButton {
+  min-height: 52px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.doodleGhostButton {
+  color: #23313a;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(60, 48, 36, 0.12);
+}
+
+.doodlePrimaryButton {
+  color: #fff;
+  background: #20324b;
+  box-shadow: 0 10px 20px rgba(32, 50, 75, 0.18);
+}
+
+.doodleOhangRow {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleOhangRow span,
+.doodleOhangRow strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2522;
+}
+
+.doodleOhangTrack {
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f0ece6;
+}
+
+.doodleOhangFill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.doodleEnergySection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.doodleEnergyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.doodleEnergyCard {
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  box-shadow: 0 8px 18px rgba(38, 34, 30, 0.05);
+}
+
+.doodleEnergyIcon {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 227, 152, 0.28);
+  color: #f0be47;
+}
+
+.doodleEnergyCard strong,
+.doodleEnergyCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleEnergyCard strong {
+  color: #1f2522;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.doodleEnergyCard p {
+  margin: 6px 0 0;
+  color: #736b62;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.doodleTipCard {
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  box-shadow: 0 8px 20px rgba(38, 34, 30, 0.05);
+  justify-content: space-between;
+}
+
+.doodleTipContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doodleTipContent strong,
+.doodleTipContent p {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleTipContent strong {
+  color: #1f2522;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.doodleTipContent p {
+  margin: 0;
+  color: #736b62;
+  font-size: 13px;
+  line-height: 1.58;
+}
+
+.doodleTipVisual {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 237, 224, 0.92);
+  color: #e1b744;
+  font-size: 22px;
+}
+
+.doodleFacilityRow {
+  align-items: center;
+}
+
+.doodleFacilityIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(228, 240, 231, 0.9);
+  color: #477755;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.doodleFacilityMain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.doodleFacilityMain strong,
+.doodleFacilityMain span {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.doodleFacilityMain strong {
+  color: #1f2522;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.doodleFacilityMain span {
+  color: #8d857b;
+  font-size: 12px;
+}
+
+.myProfileTop {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.myProfileMark {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 238, 175, 0.44);
+  color: #e1b744;
+  font-size: 24px;
+}
+
+.myEditButton {
+  border: 0;
+  background: none;
+  color: #9f968a;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+}
+
+.myReportCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 24px;
+  background: #1f334a;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 16px 30px rgba(31, 51, 74, 0.18);
+}
+
+.myReportCard strong,
+.myReportCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.myReportCard strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.myReportCard p {
+  margin: 6px 0 0;
+  color: rgba(255,255,255,0.78);
+  font-size: 12px;
+}
+
+.myReportCard span {
+  font-size: 20px;
+}
+
+.myMenuPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+}
+
+.myMenuRow,
+.myMenuRowButton {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-decoration: none;
+  color: #1f2522;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+}
+
+.myMenuRow + .myMenuRow,
+.myMenuRowButton + .myMenuRow,
+.myMenuRow + .myMenuRowButton,
+.myMenuRowButton + .myMenuRowButton {
+  border-top: 1px solid rgba(60, 48, 36, 0.06);
+}
+
+.myMenuRow span,
+.myMenuRowButton span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.myMenuRow em,
+.myMenuRowButton em {
+  color: #b6ada2;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.myMenuRowButton div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.myMenuRowButton small {
+  color: #9b9286;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 380px) {
+  .doodlePage {
+    padding: 16px 14px 28px;
+  }
+
+  .doodleActionRow,
+  .doodleEnergyGrid,
+  .myProfileTop {
+    grid-template-columns: 1fr;
+  }
+
+  .myProfileTop {
+    justify-items: start;
   }
 }
