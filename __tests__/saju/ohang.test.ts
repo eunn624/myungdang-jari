@@ -63,7 +63,7 @@ describe('부족 오행 도출', () => {
 });
 
 describe('용신 결정', () => {
-  test('부족 오행 중 가장 부족한 것이 용신', () => {
+  test('균형 잡힌 사주: 가장 부족한 오행이 용신', () => {
     const dist = getOhangDistribution(mockPillars);
     const deficits = getDeficitOhang(dist);
     const yongsin = getYongsin(dist);
@@ -74,5 +74,39 @@ describe('용신 결정', () => {
     const dist = getOhangDistribution(mockPillars);
     const yongsin = getYongsin(dist);
     expect(['木','火','土','金','水']).toContain(yongsin);
+  });
+
+  test('火 과다 사주(40%+): 용신은 水 (수극화)', () => {
+    // 丙午·丁午·丙午·丁午 — 火만 가득한 극단적 사주
+    const allFirePillars: FourPillars = {
+      year:  { stem: '丙', branch: '午', stemKor: '병', branchKor: '오' }, // 火 火
+      month: { stem: '丁', branch: '午', stemKor: '정', branchKor: '오' }, // 火 火
+      day:   { stem: '丙', branch: '午', stemKor: '병', branchKor: '오' }, // 火 火
+      hour:  { stem: '丁', branch: '午', stemKor: '정', branchKor: '오' }, // 火 火
+    };
+    const dist = getOhangDistribution(allFirePillars);
+    expect(getYongsin(dist)).toBe('水');
+  });
+
+  test('木 과다 사주(40%+): 용신은 金 (금극목)', () => {
+    const allWoodPillars: FourPillars = {
+      year:  { stem: '甲', branch: '寅', stemKor: '갑', branchKor: '인' }, // 木 木
+      month: { stem: '乙', branch: '卯', stemKor: '을', branchKor: '묘' }, // 木 木
+      day:   { stem: '甲', branch: '寅', stemKor: '갑', branchKor: '인' }, // 木 木
+      hour:  { stem: '乙', branch: '卯', stemKor: '을', branchKor: '묘' }, // 木 木
+    };
+    const dist = getOhangDistribution(allWoodPillars);
+    expect(getYongsin(dist)).toBe('金');
+  });
+
+  test('水 과다 사주(40%+): 용신은 土 (토극수)', () => {
+    const allWaterPillars: FourPillars = {
+      year:  { stem: '壬', branch: '子', stemKor: '임', branchKor: '자' }, // 水 水
+      month: { stem: '癸', branch: '亥', stemKor: '계', branchKor: '해' }, // 水 水
+      day:   { stem: '壬', branch: '子', stemKor: '임', branchKor: '자' }, // 水 水
+      hour:  { stem: '癸', branch: '亥', stemKor: '계', branchKor: '해' }, // 水 水
+    };
+    const dist = getOhangDistribution(allWaterPillars);
+    expect(getYongsin(dist)).toBe('土');
   });
 });
