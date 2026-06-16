@@ -91,7 +91,10 @@ export default function HomePage() {
                   <span key={reason}>• {reason}</span>
                 ))}
               </div>
-              <Link href={{ pathname: '/place', query }} className={styles.featuredMapButton}>
+              <Link
+                href={{ pathname: '/place-detail', query: { ...query, districtCode: featured.district.code } }}
+                className={styles.featuredMapButton}
+              >
                 지도에서 보기
               </Link>
             </div>
@@ -110,7 +113,11 @@ export default function HomePage() {
           </div>
           <div className={styles.homeTop3Grid}>
             {topDistricts.map((item, index) => (
-              <Link key={item.district.code} href={{ pathname: '/place', query }} className={styles.top3NeighborhoodCard}>
+              <Link
+                key={item.district.code}
+                href={{ pathname: '/place-detail', query: { ...query, districtCode: item.district.code } }}
+                className={styles.top3NeighborhoodCard}
+              >
                 <span className={styles.top3Rank}>{index + 1}</span>
                 <strong>{item.district.name}</strong>
                 <p>{item.district.siGunGu}</p>
