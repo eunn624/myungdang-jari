@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "수도권 전체 행정동 DB — 서울·경기 행정동/읍면동 전체 + 오행·지형 속성",
+    "description": "수도권 전체 행정동 DB — 서울·경기 행정동/읍면동 전체 + 오행·지형 속성 + 광역시/도 주요 지역",
     "source": "행정안전부 주민등록 인구통계 CSV(행정동 현황) + 기존 수작업 정제본 병합",
     "referenceUrls": [
       "https://jumin.mois.go.kr/",
@@ -9,7 +9,7 @@
     "version": "2.0.0-capital-full",
     "scope": "서울·경기 전체 행정동/읍면동 자동 생성본",
     "snapshotYearMonth": "2026-05",
-    "totalCount": 1031,
+    "totalCount": 1111,
     "seoulCount": 427,
     "gyeonggiCount": 604,
     "hanjaReviewNeeded": 1011,
@@ -21741,6 +21741,1766 @@
       "lat": 37.5588,
       "lng": 126.9607,
       "direction": "서남"
+    },
+    {
+      "code": "99000000",
+      "siDo": "부산",
+      "siGunGu": "중구",
+      "name": "중구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 중구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000001",
+      "siDo": "부산",
+      "siGunGu": "서구",
+      "name": "서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000002",
+      "siDo": "부산",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000003",
+      "siDo": "부산",
+      "siGunGu": "영도구",
+      "name": "영도구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 영도구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000004",
+      "siDo": "부산",
+      "siGunGu": "부산진구",
+      "name": "부산진구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 부산진구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000005",
+      "siDo": "부산",
+      "siGunGu": "동래구",
+      "name": "동래구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 동래구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000006",
+      "siDo": "부산",
+      "siGunGu": "남구",
+      "name": "남구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 남구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000007",
+      "siDo": "부산",
+      "siGunGu": "북구",
+      "name": "북구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 북구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000008",
+      "siDo": "부산",
+      "siGunGu": "해운대구",
+      "name": "해운대구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 해운대구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000009",
+      "siDo": "부산",
+      "siGunGu": "사하구",
+      "name": "사하구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 사하구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000010",
+      "siDo": "부산",
+      "siGunGu": "금정구",
+      "name": "금정구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 금정구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000011",
+      "siDo": "부산",
+      "siGunGu": "강서구",
+      "name": "강서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 강서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000012",
+      "siDo": "부산",
+      "siGunGu": "연제구",
+      "name": "연제구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 연제구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000013",
+      "siDo": "부산",
+      "siGunGu": "수영구",
+      "name": "수영구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 수영구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000014",
+      "siDo": "부산",
+      "siGunGu": "사상구",
+      "name": "사상구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 사상구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000015",
+      "siDo": "부산",
+      "siGunGu": "기장군",
+      "name": "기장군",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 부산 기장군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000016",
+      "siDo": "대구",
+      "siGunGu": "중구",
+      "name": "중구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 중구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000017",
+      "siDo": "대구",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000018",
+      "siDo": "대구",
+      "siGunGu": "서구",
+      "name": "서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000019",
+      "siDo": "대구",
+      "siGunGu": "남구",
+      "name": "남구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 남구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000020",
+      "siDo": "대구",
+      "siGunGu": "북구",
+      "name": "북구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 북구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000021",
+      "siDo": "대구",
+      "siGunGu": "수성구",
+      "name": "수성구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 수성구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000022",
+      "siDo": "대구",
+      "siGunGu": "달서구",
+      "name": "달서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 달서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000023",
+      "siDo": "대구",
+      "siGunGu": "달성군",
+      "name": "달성군",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대구 달성군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000024",
+      "siDo": "인천",
+      "siGunGu": "중구",
+      "name": "중구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 중구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000025",
+      "siDo": "인천",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000026",
+      "siDo": "인천",
+      "siGunGu": "미추홀구",
+      "name": "미추홀구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 미추홀구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000027",
+      "siDo": "인천",
+      "siGunGu": "연수구",
+      "name": "연수구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 연수구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000028",
+      "siDo": "인천",
+      "siGunGu": "남동구",
+      "name": "남동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 남동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000029",
+      "siDo": "인천",
+      "siGunGu": "부평구",
+      "name": "부평구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 부평구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000030",
+      "siDo": "인천",
+      "siGunGu": "계양구",
+      "name": "계양구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 계양구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000031",
+      "siDo": "인천",
+      "siGunGu": "서구",
+      "name": "서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 인천 서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000032",
+      "siDo": "광주",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 광주 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000033",
+      "siDo": "광주",
+      "siGunGu": "서구",
+      "name": "서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 광주 서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000034",
+      "siDo": "광주",
+      "siGunGu": "남구",
+      "name": "남구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 광주 남구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000035",
+      "siDo": "광주",
+      "siGunGu": "북구",
+      "name": "북구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 광주 북구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000036",
+      "siDo": "광주",
+      "siGunGu": "광산구",
+      "name": "광산구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 광주 광산구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000037",
+      "siDo": "대전",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대전 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000038",
+      "siDo": "대전",
+      "siGunGu": "중구",
+      "name": "중구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대전 중구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000039",
+      "siDo": "대전",
+      "siGunGu": "서구",
+      "name": "서구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대전 서구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000040",
+      "siDo": "대전",
+      "siGunGu": "유성구",
+      "name": "유성구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대전 유성구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000041",
+      "siDo": "대전",
+      "siGunGu": "대덕구",
+      "name": "대덕구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 대전 대덕구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000042",
+      "siDo": "울산",
+      "siGunGu": "중구",
+      "name": "중구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 울산 중구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000043",
+      "siDo": "울산",
+      "siGunGu": "남구",
+      "name": "남구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 울산 남구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000044",
+      "siDo": "울산",
+      "siGunGu": "동구",
+      "name": "동구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 울산 동구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000045",
+      "siDo": "울산",
+      "siGunGu": "북구",
+      "name": "북구",
+      "adminLevel": "sgg",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 울산 북구",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000046",
+      "siDo": "울산",
+      "siGunGu": "울주군",
+      "name": "울주군",
+      "adminLevel": "sgg",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 울산 울주군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000047",
+      "siDo": "강원",
+      "siGunGu": "춘천시",
+      "name": "춘천시",
+      "adminLevel": "si",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 춘천시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000048",
+      "siDo": "강원",
+      "siGunGu": "강릉시",
+      "name": "강릉시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 강릉시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000049",
+      "siDo": "강원",
+      "siGunGu": "원주시",
+      "name": "원주시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 원주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000050",
+      "siDo": "강원",
+      "siGunGu": "속초시",
+      "name": "속초시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 속초시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000051",
+      "siDo": "강원",
+      "siGunGu": "홍천군",
+      "name": "홍천군",
+      "adminLevel": "gun",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 홍천군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000052",
+      "siDo": "강원",
+      "siGunGu": "횡성군",
+      "name": "횡성군",
+      "adminLevel": "gun",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 횡성군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000053",
+      "siDo": "강원",
+      "siGunGu": "평창군",
+      "name": "평창군",
+      "adminLevel": "gun",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 강원 평창군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000054",
+      "siDo": "전남",
+      "siGunGu": "목포시",
+      "name": "목포시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 목포시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000055",
+      "siDo": "전남",
+      "siGunGu": "여수시",
+      "name": "여수시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 여수시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000056",
+      "siDo": "전남",
+      "siGunGu": "순천시",
+      "name": "순천시",
+      "adminLevel": "si",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 순천시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000057",
+      "siDo": "전남",
+      "siGunGu": "광양시",
+      "name": "광양시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 광양시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000058",
+      "siDo": "전남",
+      "siGunGu": "담양군",
+      "name": "담양군",
+      "adminLevel": "gun",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 담양군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000059",
+      "siDo": "전남",
+      "siGunGu": "함평군",
+      "name": "함평군",
+      "adminLevel": "gun",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전남 함평군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000060",
+      "siDo": "전북",
+      "siGunGu": "전주시",
+      "name": "전주시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 전주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000061",
+      "siDo": "전북",
+      "siGunGu": "군산시",
+      "name": "군산시",
+      "adminLevel": "si",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 군산시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000062",
+      "siDo": "전북",
+      "siGunGu": "익산시",
+      "name": "익산시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 익산시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000063",
+      "siDo": "전북",
+      "siGunGu": "정읍시",
+      "name": "정읍시",
+      "adminLevel": "si",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 정읍시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000064",
+      "siDo": "전북",
+      "siGunGu": "남원시",
+      "name": "남원시",
+      "adminLevel": "si",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 남원시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000065",
+      "siDo": "전북",
+      "siGunGu": "완주군",
+      "name": "완주군",
+      "adminLevel": "gun",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 전북 완주군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000066",
+      "siDo": "경남",
+      "siGunGu": "창원시",
+      "name": "창원시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 창원시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000067",
+      "siDo": "경남",
+      "siGunGu": "김해시",
+      "name": "김해시",
+      "adminLevel": "si",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 김해시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000068",
+      "siDo": "경남",
+      "siGunGu": "진주시",
+      "name": "진주시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 진주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000069",
+      "siDo": "경남",
+      "siGunGu": "통영시",
+      "name": "통영시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 통영시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000070",
+      "siDo": "경남",
+      "siGunGu": "거제시",
+      "name": "거제시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 거제시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000071",
+      "siDo": "경남",
+      "siGunGu": "합천군",
+      "name": "합천군",
+      "adminLevel": "gun",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "highland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경남 합천군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000072",
+      "siDo": "경북",
+      "siGunGu": "포항시",
+      "name": "포항시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 포항시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000073",
+      "siDo": "경북",
+      "siGunGu": "경주시",
+      "name": "경주시",
+      "adminLevel": "si",
+      "ohang": [
+        "土"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "土"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 경주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000074",
+      "siDo": "경북",
+      "siGunGu": "구미시",
+      "name": "구미시",
+      "adminLevel": "si",
+      "ohang": [
+        "火"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "火"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 구미시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000075",
+      "siDo": "경북",
+      "siGunGu": "영주시",
+      "name": "영주시",
+      "adminLevel": "si",
+      "ohang": [
+        "木"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "木"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 영주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000076",
+      "siDo": "경북",
+      "siGunGu": "영천시",
+      "name": "영천시",
+      "adminLevel": "si",
+      "ohang": [
+        "金"
+      ],
+      "terrain": "flatland",
+      "hanja": "",
+      "ohangChars": [
+        "金"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 영천시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000077",
+      "siDo": "경북",
+      "siGunGu": "예천군",
+      "name": "예천군",
+      "adminLevel": "gun",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "green",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 경북 예천군",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000078",
+      "siDo": "제주",
+      "siGunGu": "제주시",
+      "name": "제주시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 제주 제주시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
+    },
+    {
+      "code": "99000079",
+      "siDo": "제주",
+      "siGunGu": "서귀포시",
+      "name": "서귀포시",
+      "adminLevel": "si",
+      "ohang": [
+        "水"
+      ],
+      "terrain": "waterfront",
+      "hanja": "",
+      "ohangChars": [
+        "水"
+      ],
+      "terrainTags": [],
+      "terrainNote": "자동 생성: 제주 서귀포시",
+      "hanjaStatus": "manual_review",
+      "manualNote": "전국 확장 데이터",
+      "vibe": "balanced",
+      "vibeScore": 50,
+      "vibeNote": "기본값"
     }
   ]
 }
