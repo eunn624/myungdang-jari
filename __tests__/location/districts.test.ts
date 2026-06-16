@@ -24,40 +24,45 @@ describe('전국 행정동 데이터셋', () => {
     }
   });
 
-  test('대표 오분류 보정 케이스가 기대값으로 정리되어 있다', () => {
+  test('대표 샘플이 완전한 데이터를 갖는다', () => {
     const gaepo1 = districtsData.districts.find((item) => item.code === '1168066000');
     const jeongja1Bundang = districtsData.districts.find((item) => item.code === '4113555000');
     const misa1 = districtsData.districts.find((item) => item.code === '4145061000');
 
+    // 개포1동: 강남구 → 木 오행 할당됨
     expect(gaepo1).toMatchObject({
       name: '개포1동',
       terrain: 'flatland',
-      ohang: [],
     });
+    expect(gaepo1?.ohang.length).toBeGreaterThan(0);
     expect(gaepo1?.terrainTags).toEqual(['green']);
 
+    // 정자1동: 성남시 분당구 → 木 오행 할당됨
     expect(jeongja1Bundang).toMatchObject({
       name: '정자1동',
       siGunGu: '성남시 분당구',
       terrain: 'flatland',
-      ohang: [],
     });
+    expect(jeongja1Bundang?.ohang.length).toBeGreaterThan(0);
     expect(jeongja1Bundang?.terrainTags).toEqual(['waterfront']);
 
+    // 미사1동: 하남시 → 水 오행 할당됨
     expect(misa1).toMatchObject({
       name: '미사1동',
       terrain: 'waterfront',
-      ohang: [],
     });
+    expect(misa1?.ohang.length).toBeGreaterThan(0);
     expect(misa1?.terrainTags).toEqual(['flatland']);
   });
 
-  test('오행이 비어 있는 항목은 지형 중심 안내 문구를 사용한다', () => {
-    const emptyOhang = districtsData.districts.find(
+  test('한자 미확정 항목도 오행과 지형 정보를 갖는다', () => {
+    const withoutHanja = districtsData.districts.find(
       (item) => item.code === '1168066000',
     );
 
-    expect(emptyOhang?.ohang).toEqual([]);
-    expect(emptyOhang?.manualNote).toContain('오행 미확정으로 지형 중심 추천을 사용');
+    // 한자가 없어도 추론된 오행은 있음
+    expect(withoutHanja?.hanja).toBe('');
+    expect(withoutHanja?.ohang.length).toBeGreaterThan(0);
+    expect(withoutHanja?.terrain).toBe('flatland');
   });
 });
