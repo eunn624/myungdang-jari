@@ -21762,7 +21762,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.0977,
+      "lng": 129.031,
+      "direction": "동남"
     },
     {
       "code": "99000001",
@@ -21784,7 +21787,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1169,
+      "lng": 129.0098,
+      "direction": "동남"
     },
     {
       "code": "99000002",
@@ -21806,7 +21812,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1305,
+      "lng": 129.0723,
+      "direction": "동남"
     },
     {
       "code": "99000003",
@@ -21828,7 +21837,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.079,
+      "lng": 128.9888,
+      "direction": "동남"
     },
     {
       "code": "99000004",
@@ -21850,7 +21862,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1604,
+      "lng": 129.0703,
+      "direction": "동남"
     },
     {
       "code": "99000005",
@@ -21872,7 +21887,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1916,
+      "lng": 129.0866,
+      "direction": "동남"
     },
     {
       "code": "99000006",
@@ -21894,7 +21912,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1496,
+      "lng": 129.1007,
+      "direction": "동남"
     },
     {
       "code": "99000007",
@@ -21916,7 +21937,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2258,
+      "lng": 129.0407,
+      "direction": "동남"
     },
     {
       "code": "99000008",
@@ -21938,7 +21962,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1676,
+      "lng": 129.1603,
+      "direction": "동남"
     },
     {
       "code": "99000009",
@@ -21960,7 +21987,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.0926,
+      "lng": 128.981,
+      "direction": "동남"
     },
     {
       "code": "99000010",
@@ -21982,7 +22012,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2689,
+      "lng": 129.1162,
+      "direction": "동남"
     },
     {
       "code": "99000011",
@@ -22004,7 +22037,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2292,
+      "lng": 128.8834,
+      "direction": "동남"
     },
     {
       "code": "99000012",
@@ -22026,7 +22062,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2048,
+      "lng": 129.1249,
+      "direction": "동남"
     },
     {
       "code": "99000013",
@@ -22048,7 +22087,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1789,
+      "lng": 129.1231,
+      "direction": "동남"
     },
     {
       "code": "99000014",
@@ -22070,7 +22112,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1382,
+      "lng": 128.9405,
+      "direction": "동남"
     },
     {
       "code": "99000015",
@@ -22092,7 +22137,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2597,
+      "lng": 129.2147,
+      "direction": "동남"
     },
     {
       "code": "99000016",
@@ -22114,7 +22162,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8719,
+      "lng": 128.5957,
+      "direction": "동남"
     },
     {
       "code": "99000017",
@@ -22136,7 +22187,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8881,
+      "lng": 128.6336,
+      "direction": "동남"
     },
     {
       "code": "99000018",
@@ -22158,7 +22212,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8742,
+      "lng": 128.5694,
+      "direction": "동남"
     },
     {
       "code": "99000019",
@@ -22180,7 +22237,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8472,
+      "lng": 128.5954,
+      "direction": "동남"
     },
     {
       "code": "99000020",
@@ -22202,7 +22262,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8998,
+      "lng": 128.5812,
+      "direction": "동남"
     },
     {
       "code": "99000021",
@@ -22224,7 +22287,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8469,
+      "lng": 128.6409,
+      "direction": "동남"
     },
     {
       "code": "99000022",
@@ -22246,7 +22312,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.8312,
+      "lng": 128.5421,
+      "direction": "동남"
     },
     {
       "code": "99000023",
@@ -22268,7 +22337,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7689,
+      "lng": 128.4523,
+      "direction": "동남"
     },
     {
       "code": "99000024",
@@ -22290,7 +22362,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.2764,
+      "lng": 126.6348,
+      "direction": "서남"
     },
     {
       "code": "99000025",
@@ -22312,7 +22387,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.2442,
+      "lng": 126.6787,
+      "direction": "서남"
     },
     {
       "code": "99000026",
@@ -22334,7 +22412,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.2674,
+      "lng": 126.6347,
+      "direction": "서남"
     },
     {
       "code": "99000027",
@@ -22356,7 +22437,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.3833,
+      "lng": 126.7638,
+      "direction": "서남"
     },
     {
       "code": "99000028",
@@ -22378,7 +22462,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.3946,
+      "lng": 126.7191,
+      "direction": "서남"
     },
     {
       "code": "99000029",
@@ -22400,7 +22487,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.4889,
+      "lng": 126.7267,
+      "direction": "서"
     },
     {
       "code": "99000030",
@@ -22422,7 +22512,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.5444,
+      "lng": 126.6688,
+      "direction": "서"
     },
     {
       "code": "99000031",
@@ -22444,7 +22537,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.3604,
+      "lng": 126.6048,
+      "direction": "서남"
     },
     {
       "code": "99000032",
@@ -22466,7 +22562,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1595,
+      "lng": 126.8526,
+      "direction": "남"
     },
     {
       "code": "99000033",
@@ -22488,7 +22587,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1595,
+      "lng": 126.8526,
+      "direction": "남"
     },
     {
       "code": "99000034",
@@ -22510,7 +22612,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1595,
+      "lng": 126.8526,
+      "direction": "남"
     },
     {
       "code": "99000035",
@@ -22532,7 +22637,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1595,
+      "lng": 126.8526,
+      "direction": "남"
     },
     {
       "code": "99000036",
@@ -22554,7 +22662,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.1595,
+      "lng": 126.8526,
+      "direction": "남"
     },
     {
       "code": "99000037",
@@ -22576,7 +22687,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.3504,
+      "lng": 127.3845,
+      "direction": "남"
     },
     {
       "code": "99000038",
@@ -22598,7 +22712,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.3504,
+      "lng": 127.3845,
+      "direction": "남"
     },
     {
       "code": "99000039",
@@ -22620,7 +22737,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.3504,
+      "lng": 127.3845,
+      "direction": "남"
     },
     {
       "code": "99000040",
@@ -22642,7 +22762,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.3504,
+      "lng": 127.3845,
+      "direction": "남"
     },
     {
       "code": "99000041",
@@ -22664,7 +22787,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.3504,
+      "lng": 127.3845,
+      "direction": "남"
     },
     {
       "code": "99000042",
@@ -22686,7 +22812,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.5394,
+      "lng": 129.3114,
+      "direction": "동남"
     },
     {
       "code": "99000043",
@@ -22708,7 +22837,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.5394,
+      "lng": 129.3114,
+      "direction": "동남"
     },
     {
       "code": "99000044",
@@ -22730,7 +22862,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.5394,
+      "lng": 129.3114,
+      "direction": "동남"
     },
     {
       "code": "99000045",
@@ -22752,7 +22887,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.5394,
+      "lng": 129.3114,
+      "direction": "동남"
     },
     {
       "code": "99000046",
@@ -22774,7 +22912,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.5394,
+      "lng": 129.3114,
+      "direction": "동남"
     },
     {
       "code": "99000047",
@@ -22796,7 +22937,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000048",
@@ -22818,7 +22962,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000049",
@@ -22840,7 +22987,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000050",
@@ -22862,7 +23012,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000051",
@@ -22884,7 +23037,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000052",
@@ -22906,7 +23062,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000053",
@@ -22928,7 +23087,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 37.751,
+      "lng": 128.8761,
+      "direction": "동"
     },
     {
       "code": "99000054",
@@ -22950,7 +23112,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000055",
@@ -22972,7 +23137,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000056",
@@ -22994,7 +23162,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000057",
@@ -23016,7 +23187,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000058",
@@ -23038,7 +23212,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000059",
@@ -23060,7 +23237,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 34.816,
+      "lng": 126.4627,
+      "direction": "남"
     },
     {
       "code": "99000060",
@@ -23082,7 +23262,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000061",
@@ -23104,7 +23287,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000062",
@@ -23126,7 +23312,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000063",
@@ -23148,7 +23337,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000064",
@@ -23170,7 +23362,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000065",
@@ -23192,7 +23387,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.7175,
+      "lng": 127.154,
+      "direction": "남"
     },
     {
       "code": "99000066",
@@ -23214,7 +23412,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000067",
@@ -23236,7 +23437,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000068",
@@ -23258,7 +23462,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000069",
@@ -23280,7 +23487,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000070",
@@ -23302,7 +23512,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000071",
@@ -23324,7 +23537,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 35.2374,
+      "lng": 128.6923,
+      "direction": "동남"
     },
     {
       "code": "99000072",
@@ -23346,7 +23562,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000073",
@@ -23368,7 +23587,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000074",
@@ -23390,7 +23612,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000075",
@@ -23412,7 +23637,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000076",
@@ -23434,7 +23662,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000077",
@@ -23456,7 +23687,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 36.4919,
+      "lng": 129.1075,
+      "direction": "동남"
     },
     {
       "code": "99000078",
@@ -23478,7 +23712,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 33.5033,
+      "lng": 126.5312,
+      "direction": "남"
     },
     {
       "code": "99000079",
@@ -23500,7 +23737,10 @@
       "manualNote": "전국 확장 데이터",
       "vibe": "balanced",
       "vibeScore": 50,
-      "vibeNote": "기본값"
+      "vibeNote": "기본값",
+      "lat": 33.5033,
+      "lng": 126.5312,
+      "direction": "남"
     }
   ]
 }

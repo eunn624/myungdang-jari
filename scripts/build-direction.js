@@ -137,15 +137,23 @@ function main() {
   console.log(`📍 Processing ${districts.length} districts...`);
 
   let processedCount = 0;
+  let skippedCount = 0;
   districts.forEach((d) => {
     if (!d.siGunGu || !d.name) return;
 
-    // 좌표 추정
-    const coord = estimateDistrictCoord(d.siGunGu, d.name);
-    d.lat = parseFloat(coord.lat.toFixed(4));
-    d.lng = parseFloat(coord.lng.toFixed(4));
+    // 좌표 확인: 기존 좌표가 있으면 사용, 없으면 추정
+    let coord;
+    if (d.lat && d.lng) {
+      coord = { lat: d.lat, lng: d.lng };
+      skippedCount++;
+    } else {
+      // 동 단위는 구 좌표에서 추정
+      coord = estimateDistrictCoord(d.siGunGu, d.name);
+      d.lat = parseFloat(coord.lat.toFixed(4));
+      d.lng = parseFloat(coord.lng.toFixed(4));
+    }
 
-    // 방위 계산
+    // 방위 계산 (서울 시청 기준)
     const bearingDegrees = getBearingDegrees(SEOUL_CITY_HALL, coord);
     d.direction = bearingToDirection(bearingDegrees);
 
@@ -156,7 +164,8 @@ function main() {
   const output = data._meta ? { _meta: data._meta, districts } : districts;
   fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
 
-  console.log(`✅ Updated ${processedCount} districts with lat/lng/direction`);
+  console.log(`✅ Recalculated directions for ${processedCount} districts`);
+  console.log(`   (${skippedCount} districts used existing coordinates)`);
   console.log(`📁 Saved to: ${outputPath}`);
 }
 
