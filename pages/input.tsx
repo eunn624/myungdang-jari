@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/router';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
@@ -13,6 +13,18 @@ interface InputState {
   unknownTime: boolean;
 }
 
+const years = Array.from({ length: 91 }, (_, index) => String(2026 - index));
+const months = Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, '0'));
+const days = Array.from({ length: 31 }, (_, index) => String(index + 1).padStart(2, '0'));
+const hours = Array.from({ length: 12 }, (_, index) => String(index + 1).padStart(2, '0'));
+const minutes = ['00', '10', '20', '30', '40', '50'];
+
+function to24Hour(meridiem: string, hour: string) {
+  const parsed = parseInt(hour, 10);
+  if (meridiem === '오전') return parsed === 12 ? '00' : String(parsed).padStart(2, '0');
+  return parsed === 12 ? '12' : String(parsed + 12).padStart(2, '0');
+}
+
 export default function InputScreen() {
   const router = useRouter();
   const [formData, setFormData] = useState<InputState>({
@@ -23,73 +35,35 @@ export default function InputScreen() {
     birthTime: '',
     unknownTime: false,
   });
-  const [dateFields, setDateFields] = useState({ year: '', month: '', day: '' });
-  const [timeFields, setTimeFields] = useState({ hour: '', minute: '' });
+  const [dateFields, setDateFields] = useState({ year: '1990', month: '05', day: '23' });
+  const [timeFields, setTimeFields] = useState({ meridiem: '오전', hour: '09', minute: '30' });
   const [error, setError] = useState('');
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const dayRef = useRef<HTMLInputElement>(null);
-  const minuteRef = useRef<HTMLInputElement>(null);
-
-  function clamp(value: string, max: number): string {
-    const n = parseInt(value, 10);
-    if (isNaN(n) || value === '') return value;
-    return String(Math.min(n, max));
-  }
-
-  function combineBirthDate(year: string, month: string, day: string): string {
-    if (year.length === 4 && month.length >= 1 && day.length >= 1) {
-      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    }
-    return '';
-  }
-
-  function combineBirthTime(hour: string, minute: string): string {
-    if (hour.length >= 1 && minute.length >= 1) {
-      return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
-    }
-    return '';
-  }
-
-  function handleDateField(field: 'year' | 'month' | 'day', raw: string) {
-    const digits = raw.replace(/\D/g, '');
-    let value = digits;
-    if (field === 'month') value = clamp(digits, 12);
-    if (field === 'day') value = clamp(digits, 31);
-
-    const next = { ...dateFields, [field]: value };
+  function updateDate(next: typeof dateFields) {
     setDateFields(next);
+    setFormData((prev) => ({ ...prev, birthDate: `${next.year}-${next.month}-${next.day}` }));
     setError('');
-    setFormData(prev => ({ ...prev, birthDate: combineBirthDate(next.year, next.month, next.day) }));
-
-    if (field === 'year' && value.length === 4) monthRef.current?.focus();
-    if (field === 'month' && value.length === 2) dayRef.current?.focus();
   }
 
-  function handleTimeField(field: 'hour' | 'minute', raw: string) {
-    const digits = raw.replace(/\D/g, '');
-    let value = digits;
-    if (field === 'hour') value = clamp(digits, 23);
-    if (field === 'minute') value = clamp(digits, 59);
-
-    const next = { ...timeFields, [field]: value };
+  function updateTime(next: typeof timeFields) {
     setTimeFields(next);
+    setFormData((prev) => ({
+      ...prev,
+      birthTime: `${to24Hour(next.meridiem, next.hour)}:${next.minute}`,
+    }));
     setError('');
-    setFormData(prev => ({ ...prev, birthTime: combineBirthTime(next.hour, next.minute) }));
-
-    if (field === 'hour' && value.length === 2) minuteRef.current?.focus();
   }
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    if (!formData.birthDate) {
-      setError('생년월일을 입력해 주세요.');
-      return;
-    }
+    const birthDate = formData.birthDate || `${dateFields.year}-${dateFields.month}-${dateFields.day}`;
+    const birthTime = formData.unknownTime
+      ? '00:00'
+      : formData.birthTime || `${to24Hour(timeFields.meridiem, timeFields.hour)}:${timeFields.minute}`;
 
-    if (!formData.unknownTime && !formData.birthTime) {
-      setError('출생 시간을 입력해 주세요. 모르겠다면 시 모름을 선택하면 돼요.');
+    if (!formData.name.trim()) {
+      setError('이름을 입력해 주세요.');
       return;
     }
 
@@ -98,187 +72,145 @@ export default function InputScreen() {
       pathname: '/loading',
       query: createQueryFromProfile({
         ...formData,
-        name: formData.name.trim() || '사용자',
-        birthTime: formData.unknownTime ? '00:00' : formData.birthTime,
+        name: formData.name.trim(),
+        birthDate,
+        birthTime,
       }),
     });
   };
 
   return (
-    <Layout headerTitle="정보 입력" showBackButton backHref="/onboarding-1">
-      <form className={`${styles.screen} ${styles.slideEnter}`} onSubmit={handleSubmit}>
-
-        {/* 진행 상태 표시 — compact, 180px 이하 */}
-        <div className={styles.inputProgressHeader}>
-          <div className={styles.progressPillRow}>
-            <span className={`${styles.progressPill} ${styles.progressPillActive}`}>입력 중</span>
-            <span className={styles.progressPill}>분석 준비</span>
-            <span className={styles.progressPill}>결과 보기</span>
-          </div>
-          <div className={styles.progressTrack}>
-            <div className={styles.progressFill} style={{ width: '25%' }}></div>
-          </div>
-          <p className={styles.caption}>생년월일시를 입력하면 바로 결과를 볼 수 있어요.</p>
+    <Layout>
+      <form className={styles.referenceInputShell} onSubmit={handleSubmit}>
+        <div className={styles.referenceStatusBar}>
+          <span>10:04</span>
+          <span className={styles.referenceDynamicIsland}></span>
+          <span>32</span>
         </div>
 
-        {/* 폼 — 일반 흐름, sticky 없음 */}
-        <div className={styles.formCard}>
-          <div className={styles.column} style={{ gap: 24 }}>
-            <div className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor="name">이름 · 닉네임</label>
+        <header className={styles.referenceInputHeader}>
+          <button type="button" className={styles.referencePlainBack} onClick={() => router.push('/onboarding-1')}>
+            ‹
+          </button>
+          <div>
+            <h1>사주 정보 등록</h1>
+            <span className={styles.referenceUnderlinePink}></span>
+            <p>정확한 분석을 위해<br />사주 정보를 입력해주세요.</p>
+          </div>
+          <div className={styles.referenceInputIllustration}>
+            <span className={styles.referenceFormPaper}></span>
+            <span className={styles.referencePencil}></span>
+            <span className={styles.referenceDoodleStarSmall}>☆</span>
+          </div>
+        </header>
+
+        <section className={styles.referenceInputCard}>
+          <div className={styles.referenceInputField}>
+            <label htmlFor="name">이름 <em>*</em></label>
+            <div className={styles.referenceNameInputWrap}>
               <input
                 id="name"
-                className={styles.input}
-                placeholder="이름 또는 닉네임"
                 value={formData.name}
-                onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
+                onChange={(event) => {
+                  setError('');
+                  setFormData((prev) => ({ ...prev, name: event.target.value }));
+                }}
+                placeholder="이름을 입력해주세요"
               />
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <span className={styles.label}>성별</span>
-              <div className={styles.quickPair}>
-                <button
-                  type="button"
-                  className={`${styles.chipButton} ${formData.gender === '여성' ? styles.chipButtonActive : ''}`}
-                  style={{ minHeight: 48 }}
-                  onClick={() => setFormData((prev) => ({ ...prev, gender: '여성' }))}
-                >
-                  여성
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.chipButton} ${formData.gender === '남성' ? styles.chipButtonActive : ''}`}
-                  style={{ minHeight: 48 }}
-                  onClick={() => setFormData((prev) => ({ ...prev, gender: '남성' }))}
-                >
-                  남성
-                </button>
-              </div>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <span className={styles.label}>양력 / 음력</span>
-              <div className={styles.quickPair}>
-                <button
-                  type="button"
-                  className={`${styles.chipButton} ${formData.calendar === '양력' ? styles.chipButtonActive : ''}`}
-                  style={{ minHeight: 48 }}
-                  onClick={() => setFormData((prev) => ({ ...prev, calendar: '양력' }))}
-                >
-                  양력
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.chipButton} ${formData.calendar === '음력' ? styles.chipButtonActive : ''}`}
-                  style={{ minHeight: 48 }}
-                  onClick={() => setFormData((prev) => ({ ...prev, calendar: '음력' }))}
-                >
-                  음력
-                </button>
-              </div>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <span className={styles.label}>생년월일</span>
-              <div className={styles.dateRow}>
-                <input
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={4}
-                  placeholder="1990"
-                  className={styles.splitInputYear}
-                  value={dateFields.year}
-                  onChange={e => handleDateField('year', e.target.value)}
-                  aria-label="출생 년도"
-                />
-                <span className={styles.dateSep}>/</span>
-                <input
-                  ref={monthRef}
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={2}
-                  placeholder="06"
-                  className={styles.splitInputMD}
-                  value={dateFields.month}
-                  onChange={e => handleDateField('month', e.target.value)}
-                  aria-label="출생 월"
-                />
-                <span className={styles.dateSep}>/</span>
-                <input
-                  ref={dayRef}
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={2}
-                  placeholder="15"
-                  className={styles.splitInputMD}
-                  value={dateFields.day}
-                  onChange={e => handleDateField('day', e.target.value)}
-                  aria-label="출생 일"
-                />
-              </div>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <span className={styles.label}>출생 시간</span>
-              <div className={styles.timeRow}>
-                <input
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={2}
-                  placeholder="14"
-                  className={styles.splitInputMD}
-                  value={timeFields.hour}
-                  onChange={e => handleTimeField('hour', e.target.value)}
-                  disabled={formData.unknownTime}
-                  aria-label="출생 시"
-                />
-                <span className={styles.dateSep}>시</span>
-                <input
-                  ref={minuteRef}
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={2}
-                  placeholder="30"
-                  className={styles.splitInputMD}
-                  value={timeFields.minute}
-                  onChange={e => handleTimeField('minute', e.target.value)}
-                  disabled={formData.unknownTime}
-                  aria-label="출생 분"
-                />
-                <span className={styles.dateSep}>분</span>
-              </div>
-              <label className={styles.checkboxRow}>
-                <input
-                  type="checkbox"
-                  className={styles.checkbox}
-                  checked={formData.unknownTime}
-                  onChange={(event) => {
-                    setError('');
-                    setTimeFields({ hour: '', minute: '' });
-                    setFormData((prev) => ({
-                      ...prev,
-                      unknownTime: event.target.checked,
-                      birthTime: '',
-                    }));
-                  }}
-                />
-                <span className={styles.label} style={{ fontWeight: 700 }}>출생 시간을 몰라요</span>
-              </label>
-              <span className={styles.inputNote}>시간 정보가 없으면 가능한 흐름을 넓게 보고 부드럽게 해석해드려요.</span>
+              <span>♧</span>
             </div>
           </div>
-        </div>
 
-        <div className={styles.softCard}>
-          <p className={styles.bodyText}>입력한 생년월일시는 이 화면 안에서만 계산돼요.</p>
-        </div>
+          <div className={styles.referenceInputField}>
+            <label>생년월일 <em>*</em></label>
+            <span className={styles.referenceCalendarDoodle}></span>
+            <div className={styles.referenceSelectGrid}>
+              <select
+                value={dateFields.year}
+                className={styles.referenceSelect}
+                onChange={(event) => updateDate({ ...dateFields, year: event.target.value })}
+              >
+                {years.map((year) => <option key={year} value={year}>{year}년</option>)}
+              </select>
+              <select
+                value={dateFields.month}
+                className={styles.referenceSelect}
+                onChange={(event) => updateDate({ ...dateFields, month: event.target.value })}
+              >
+                {months.map((month) => <option key={month} value={month}>{month}월</option>)}
+              </select>
+              <select
+                value={dateFields.day}
+                className={styles.referenceSelect}
+                onChange={(event) => updateDate({ ...dateFields, day: event.target.value })}
+              >
+                {days.map((day) => <option key={day} value={day}>{day}일</option>)}
+              </select>
+            </div>
+            <p className={styles.referenceInputHelp}>양력 / 음력은 결과 화면에서 확인 및 변경할 수 있어요.</p>
+          </div>
 
-        {error ? <div className={styles.errorText}>{error}</div> : null}
+          <div className={styles.referenceInputField}>
+            <label>태어난 시간 <em>*</em></label>
+            <span className={styles.referenceClockDoodle}></span>
+            <div className={styles.referenceSelectGrid}>
+              <select
+                value={timeFields.meridiem}
+                className={styles.referenceSelect}
+                disabled={formData.unknownTime}
+                onChange={(event) => updateTime({ ...timeFields, meridiem: event.target.value })}
+              >
+                <option value="오전">오전</option>
+                <option value="오후">오후</option>
+              </select>
+              <select
+                value={timeFields.hour}
+                className={styles.referenceSelect}
+                disabled={formData.unknownTime}
+                onChange={(event) => updateTime({ ...timeFields, hour: event.target.value })}
+              >
+                {hours.map((hour) => <option key={hour} value={hour}>{hour}시</option>)}
+              </select>
+              <select
+                value={timeFields.minute}
+                className={styles.referenceSelect}
+                disabled={formData.unknownTime}
+                onChange={(event) => updateTime({ ...timeFields, minute: event.target.value })}
+              >
+                {minutes.map((minute) => <option key={minute} value={minute}>{minute}분</option>)}
+              </select>
+            </div>
+            <label className={styles.referenceCheckRow}>
+              <input
+                type="checkbox"
+                checked={formData.unknownTime}
+                onChange={(event) => {
+                  setError('');
+                  setFormData((prev) => ({
+                    ...prev,
+                    unknownTime: event.target.checked,
+                    birthTime: event.target.checked ? '' : `${to24Hour(timeFields.meridiem, timeFields.hour)}:${timeFields.minute}`,
+                  }));
+                }}
+              />
+              <span>태어난 시간을 모름</span>
+            </label>
+            <p className={styles.referenceInputHelp}>시간을 모르는 경우, ‘시간 모름’으로 분석됩니다.</p>
+          </div>
 
-        <button type="submit" className={styles.primaryButton}>
-          결과 보러 가기
-        </button>
+          <div className={styles.referenceInputNotice}>
+            <span>♢</span>
+            <p>정확한 시간을 입력할수록 더 정밀한 분석이 가능해요. 모르는 경우 대략적인 시간을 선택해도 괜찮아요.</p>
+            <em>♡</em>
+          </div>
+
+          {error ? <p className={styles.referenceError}>{error}</p> : null}
+
+          <button type="submit" className={styles.referenceLargeButton}>
+            저장하고 분석하기
+            <span>›</span>
+          </button>
+        </section>
       </form>
     </Layout>
   );

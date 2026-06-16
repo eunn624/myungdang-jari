@@ -4994,3 +4994,887 @@
     justify-items: start;
   }
 }
+
+/* ─── Reference onboarding / input / loading ─────────────── */
+.referenceOnboardingShell,
+.referenceInputShell,
+.referenceLoadingShell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(248, 231, 171, 0.14), transparent 18%),
+    radial-gradient(circle at 86% 12%, rgba(202, 226, 244, 0.14), transparent 18%),
+    linear-gradient(180deg, #fffdf8, #fbf7ef);
+}
+
+.referenceOnboardingShell,
+.referenceLoadingShell {
+  height: 100%;
+  overflow: hidden;
+}
+
+.referenceInputShell {
+  overflow: visible;
+  padding-bottom: 28px;
+}
+
+.referenceStatusBar {
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  align-items: center;
+  padding: 10px 20px 0;
+  color: #111512;
+  font-size: 13px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceStatusBar span:first-child {
+  justify-self: start;
+}
+
+.referenceStatusBar span:last-child {
+  justify-self: end;
+  min-width: 28px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #222;
+  color: #fff;
+  font-size: 10px;
+}
+
+.referenceDynamicIsland {
+  justify-self: center;
+  width: 128px;
+  height: 28px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 18px 50%, rgba(240, 98, 60, 0.7), transparent 8px),
+    linear-gradient(90deg, #030303, #070707);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.referenceOnboardingContent {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 54px 32px 0;
+}
+
+.referenceOnboardingCopy h1,
+.referenceInputHeader h1,
+.referenceLoadingHeader h1 {
+  margin: 0;
+  color: #15202a;
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  font-family: var(--font-hero), 'Pretendard', sans-serif;
+}
+
+.referenceOnboardingCopy p,
+.referenceInputHeader p,
+.referenceLoadingHeader p {
+  margin: 24px 0 0;
+  color: #4f5757;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.9;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceUnderline,
+.referenceUnderlinePink,
+.referenceUnderlineBlue {
+  display: block;
+  width: 184px;
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 999px;
+}
+
+.referenceUnderlineYellow {
+  background: #f0d45c;
+}
+
+.referenceUnderlinePink {
+  background: #f47fa0;
+}
+
+.referenceUnderlineBlue {
+  background: #6faee8;
+}
+
+.referenceOnboardingVisualMap,
+.referenceOnboardingVisualCompare,
+.referenceOnboardingVisualTips {
+  position: relative;
+  flex: 1;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.referenceFoldMap,
+.referenceCompareMap,
+.referenceLoadingMap {
+  position: relative;
+  width: 260px;
+  height: 150px;
+  border-radius: 8px;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,0.95) 0 33%, rgba(244, 246, 239, 0.95) 33% 66%, rgba(255,255,255,0.95) 66%),
+    repeating-linear-gradient(90deg, rgba(188, 181, 166, 0.22) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(0deg, rgba(188, 181, 166, 0.18) 0 1px, transparent 1px 24px);
+  border: 1px solid rgba(36, 37, 33, 0.12);
+  box-shadow: 0 12px 22px rgba(60, 49, 32, 0.08);
+  transform: rotate(8deg);
+  overflow: hidden;
+}
+
+.referenceFoldRiver {
+  position: absolute;
+  right: 22px;
+  top: -18px;
+  width: 26px;
+  height: 190px;
+  border-radius: 999px;
+  background: rgba(162, 209, 232, 0.78);
+  transform: rotate(18deg);
+}
+
+.referenceFoldPark {
+  position: absolute;
+  left: 92px;
+  top: 72px;
+  width: 42px;
+  height: 34px;
+  border-radius: 14px;
+  background: rgba(184, 219, 168, 0.8);
+}
+
+.referenceBigPin {
+  position: absolute;
+  left: 116px;
+  top: 28px;
+  width: 58px;
+  height: 72px;
+  border-radius: 999px 999px 999px 0;
+  background: #ef6685;
+  transform: rotate(-45deg);
+  box-shadow: 0 8px 14px rgba(164, 62, 88, 0.24);
+}
+
+.referenceBigPin::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 17px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #fffdf8;
+}
+
+.referenceSmallPin {
+  position: absolute;
+  left: 96px;
+  top: 58px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #ef6685;
+}
+
+.referenceDoodleStar,
+.referenceDoodleBurst,
+.referenceDoodleBulb {
+  position: absolute;
+  color: #f0cf52;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.referenceDoodleStar {
+  left: 4px;
+  bottom: 66px;
+}
+
+.referenceDoodleBurst {
+  right: 12px;
+  top: 18px;
+  color: #ef7fa0;
+}
+
+.referenceDoodleBulb {
+  right: 18px;
+  top: -10px;
+  color: #e9c54b;
+}
+
+.referenceDoodleCloud {
+  position: absolute;
+  right: 2px;
+  top: 76px;
+  width: 44px;
+  height: 24px;
+  border: 3px solid #86c4e6;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.referenceCompareMap {
+  width: 190px;
+  height: 170px;
+  transform: rotate(0);
+  margin-left: -40px;
+}
+
+.referenceCompareCards {
+  position: absolute;
+  right: 2px;
+  top: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.referenceCompareCard,
+.referenceTipPreviewCard {
+  min-width: 176px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(42, 45, 39, 0.12);
+  box-shadow: 0 8px 16px rgba(58, 49, 36, 0.06);
+}
+
+.referenceCompareCard span,
+.referenceTipPreviewCard > span {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #66b77a;
+  color: #fff;
+  font-size: 11px;
+}
+
+.referenceCompareCard strong,
+.referenceCompareCard em,
+.referenceTipPreviewCard strong,
+.referenceTipPreviewCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceCompareCard strong {
+  color: #25302d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.referenceCompareCard em {
+  margin-top: 2px;
+  color: #f0c74e;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.referenceOnboardingVisualTips {
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.referenceTipPreviewCard {
+  min-height: 70px;
+}
+
+.referenceTipPreviewCard:nth-child(2) {
+  background: rgba(246, 252, 242, 0.94);
+}
+
+.referenceTipPreviewCard:nth-child(3) {
+  background: rgba(254, 249, 236, 0.96);
+}
+
+.referenceTipPreviewCard:nth-child(4) {
+  background: rgba(241, 248, 253, 0.94);
+}
+
+.referenceTipPreviewCard strong {
+  color: #25302d;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.referenceTipPreviewCard p {
+  margin: 4px 0 0;
+  color: #5e6662;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.referenceOnboardingFooter {
+  flex-shrink: 0;
+  padding: 0 30px calc(30px + env(safe-area-inset-bottom));
+}
+
+.referenceOnboardingDots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.referenceOnboardingDot,
+.referenceOnboardingDotActive {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #dedbd3;
+}
+
+.referenceOnboardingDotActive {
+  background: #163148;
+}
+
+.referenceLargeButton {
+  width: 100%;
+  min-height: 68px;
+  border: 0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  background: #15314a;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+  box-shadow: 0 12px 22px rgba(21, 49, 74, 0.2);
+  cursor: pointer;
+}
+
+.referenceLargeButton span {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.referenceInputHeader {
+  position: relative;
+  padding: 24px 30px 22px;
+}
+
+.referencePlainBack {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #101922;
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.referenceInputHeader h1 {
+  margin-top: 28px;
+}
+
+.referenceInputIllustration {
+  position: absolute;
+  right: 30px;
+  top: 74px;
+  width: 112px;
+  height: 100px;
+}
+
+.referenceFormPaper {
+  position: absolute;
+  right: 22px;
+  top: 0;
+  width: 74px;
+  height: 86px;
+  border-radius: 10px;
+  border: 2px solid rgba(31, 37, 34, 0.28);
+  background: rgba(255,255,255,0.84);
+  transform: rotate(8deg);
+}
+
+.referenceFormPaper::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(151, 199, 230, 0.64);
+}
+
+.referenceFormPaper::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 14px;
+  bottom: 18px;
+  height: 22px;
+  border-top: 2px solid rgba(31, 37, 34, 0.22);
+  border-bottom: 2px solid rgba(31, 37, 34, 0.22);
+}
+
+.referencePencil {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  width: 18px;
+  height: 78px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #bfe7ab 0 70%, #f3d78f 70%);
+  border: 2px solid rgba(31, 37, 34, 0.24);
+  transform: rotate(34deg);
+}
+
+.referenceDoodleStarSmall {
+  position: absolute;
+  left: 4px;
+  bottom: 16px;
+  color: #f0cd4e;
+  font-size: 26px;
+}
+
+.referenceInputCard {
+  margin: 0 24px 28px;
+  padding: 28px 24px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(57, 50, 38, 0.1);
+  box-shadow: 0 10px 24px rgba(48, 39, 26, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.referenceInputField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referenceInputField label,
+.referenceCheckRow span {
+  color: #151c20;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceInputField label em {
+  color: #ef6c95;
+  font-style: normal;
+}
+
+.referenceCalendarDoodle,
+.referenceClockDoodle {
+  position: absolute;
+  right: 10px;
+  top: -6px;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+}
+
+.referenceCalendarDoodle {
+  border: 2px solid rgba(31, 37, 34, 0.38);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 0 8px, rgba(31,37,34,0.28) 8px 10px, transparent 10px 21px, rgba(31,37,34,0.28) 21px 23px, transparent 23px),
+    linear-gradient(180deg, #fffdf8 0 11px, rgba(247, 217, 225, 0.9) 11px 15px, #fffdf8 15px);
+  transform: rotate(7deg);
+}
+
+.referenceCalendarDoodle::before,
+.referenceCalendarDoodle::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 5px;
+  height: 9px;
+  border-radius: 999px;
+  background: #93a2a5;
+}
+
+.referenceCalendarDoodle::before {
+  left: 7px;
+}
+
+.referenceCalendarDoodle::after {
+  right: 7px;
+}
+
+.referenceClockDoodle {
+  border: 2px solid rgba(36, 83, 112, 0.62);
+  border-radius: 999px;
+  background: radial-gradient(circle, #fffdf8 0 58%, rgba(223, 239, 249, 0.9) 59%);
+  transform: rotate(-8deg);
+}
+
+.referenceClockDoodle::before,
+.referenceClockDoodle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  border-radius: 999px;
+  background: rgba(31, 37, 34, 0.48);
+  transform-origin: bottom center;
+}
+
+.referenceClockDoodle::before {
+  height: 11px;
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.referenceClockDoodle::after {
+  height: 9px;
+  transform: translate(-50%, -100%) rotate(88deg);
+}
+
+.referenceNameInputWrap {
+  position: relative;
+}
+
+.referenceNameInputWrap input {
+  width: 100%;
+  min-height: 66px;
+  border-radius: 12px;
+  border: 1px solid rgba(31, 37, 34, 0.14);
+  background: rgba(255,255,255,0.92);
+  padding: 0 56px 0 16px;
+  color: #151c20;
+  font-size: 16px;
+  font-family: 'Pretendard', sans-serif;
+  outline: none;
+}
+
+.referenceNameInputWrap input:focus,
+.referenceSelect:focus {
+  border-color: rgba(84, 126, 92, 0.44);
+  box-shadow: 0 0 0 4px rgba(84, 126, 92, 0.08);
+}
+
+.referenceNameInputWrap span {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8fc48c;
+  font-size: 28px;
+}
+
+.referenceSelectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.referenceSelect {
+  min-width: 0;
+  height: 62px;
+  border-radius: 12px;
+  border: 1px solid rgba(31, 37, 34, 0.14);
+  background: rgba(255,255,255,0.94);
+  color: #151c20;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+  padding: 0 32px 0 14px;
+  outline: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #17212a 50%),
+    linear-gradient(135deg, #17212a 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.referenceSelect:disabled {
+  color: #b2aa9e;
+  background-color: #f5f1e9;
+}
+
+.referenceInputHelp {
+  margin: 0;
+  color: #a49c92;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceCheckRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.referenceCheckRow input {
+  width: 24px;
+  height: 24px;
+  accent-color: #15314a;
+}
+
+.referenceCheckRow span {
+  font-size: 15px;
+}
+
+.referenceInputNotice {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(236, 211, 118, 0.42);
+  background: rgba(255, 253, 236, 0.86);
+}
+
+.referenceInputNotice span {
+  color: #e7c544;
+  font-size: 30px;
+  text-align: center;
+}
+
+.referenceInputNotice p {
+  margin: 0;
+  color: #4f5757;
+  font-size: 13px;
+  line-height: 1.65;
+  font-weight: 600;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceInputNotice em {
+  color: #ef7fa0;
+  font-size: 26px;
+  font-style: normal;
+}
+
+.referenceError {
+  margin: -8px 0 0;
+  color: #e85d75;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceLoadingShell {
+  padding: 0 30px 28px;
+}
+
+.referenceLoadingHeader {
+  padding-top: 64px;
+}
+
+.referenceLoadingHeader p {
+  margin-top: 20px;
+}
+
+.referenceLoadingVisual {
+  position: relative;
+  min-height: 254px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.referenceLoadingMap {
+  width: 230px;
+  height: 138px;
+  transform: rotate(-5deg);
+}
+
+.referenceLoadingOrbit {
+  position: absolute;
+  inset: 40px 18px auto;
+  height: 176px;
+  animation: referenceFloat 1.6s ease-in-out infinite alternate;
+}
+
+.referenceLoadingOrbit span {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+  box-shadow: 0 8px 16px rgba(48, 39, 26, 0.1);
+}
+
+.referenceLoadingOrbit span:nth-child(1) { left: 8px; top: 72px; background: #7dbd76; }
+.referenceLoadingOrbit span:nth-child(2) { right: 24px; top: 38px; background: #f28d98; }
+.referenceLoadingOrbit span:nth-child(3) { left: 76px; top: 2px; background: #ecc75c; }
+.referenceLoadingOrbit span:nth-child(4) { right: 8px; bottom: 12px; background: #bab5ae; }
+.referenceLoadingOrbit span:nth-child(5) { left: 112px; bottom: 0; background: #87b6e7; }
+
+.referenceLoadingCard {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(57, 50, 38, 0.1);
+  box-shadow: 0 10px 24px rgba(48, 39, 26, 0.06);
+}
+
+.referenceLoadingStep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.referenceLoadingStep + .referenceLoadingStep {
+  margin-top: 12px;
+}
+
+.referenceLoadingStep span {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 37, 34, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9b9489;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.referenceLoadingStepDone {
+  background: #4b7a56 !important;
+  color: #fff !important;
+}
+
+.referenceLoadingStep p {
+  margin: 0;
+  color: #303a37;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceLoadingTrack {
+  height: 9px;
+  margin-top: 18px;
+  border-radius: 999px;
+  background: #ebe6dd;
+  overflow: hidden;
+}
+
+.referenceLoadingFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4b7a56, #87b6e7);
+  transition: width 0.25s ease;
+}
+
+.referenceLoadingNote {
+  margin: 18px 0 0;
+  color: #8f877b;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  font-family: 'Pretendard', sans-serif;
+}
+
+@keyframes referenceFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+@media (max-height: 740px) {
+  .referenceOnboardingContent {
+    padding-top: 28px;
+    gap: 10px;
+  }
+
+  .referenceOnboardingCopy h1,
+  .referenceInputHeader h1,
+  .referenceLoadingHeader h1 {
+    font-size: 25px;
+  }
+
+  .referenceOnboardingVisualMap,
+  .referenceOnboardingVisualCompare,
+  .referenceOnboardingVisualTips {
+    min-height: 220px;
+  }
+
+  .referenceLargeButton {
+    min-height: 58px;
+  }
+
+  .referenceInputCard {
+    gap: 20px;
+    padding: 22px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .referenceOnboardingContent,
+  .referenceInputHeader,
+  .referenceLoadingShell {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .referenceInputCard {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .referenceSelectGrid {
+    gap: 8px;
+  }
+
+  .referenceSelect {
+    font-size: 14px;
+    padding-left: 10px;
+  }
+}
