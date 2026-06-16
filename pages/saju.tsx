@@ -17,7 +17,11 @@ export default function SajuPage() {
   const router = useRouter();
   const report = useMemo(() => getReportFromQuery(router.query), [router.query]);
 
-  const dominant = report.saju.dominantOhang[0];
+  const ohang = report.saju.ohang;
+  const dominantEntry = (['木', '火', '土', '金', '水'] as const)
+    .map(o => ({ o, v: ohang[({ 木: 'wood', 火: 'fire', 土: 'earth', 金: 'metal', 水: 'water' } as const)[o]] }))
+    .sort((a, b) => b.v - a.v)[0];
+  const dominant = dominantEntry?.o ?? report.saju.yongsin;
   const deficit = report.saju.deficitOhang[0] || report.saju.yongsin;
   const topTerrain = report.districts[0]?.district.terrain;
   const terrainLabel = topTerrain ? TERRAIN_LABELS[topTerrain] : '생활권';

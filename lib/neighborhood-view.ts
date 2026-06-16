@@ -20,6 +20,8 @@ export type NeighborhoodView = {
   suitability: number;
   terrain: string;
   terrainLabel: string;
+  vibe?: 'lively' | 'balanced' | 'quiet';
+  vibeLabel?: string;
   tags: string[];
   reasons: string[];
   summary: string;
@@ -65,11 +67,19 @@ function getOneLine(name: string, terrainLabel: string, reasons: string[]) {
   return `${name}은 ${firstReason.replace(/\.$/, '')} 흐름과 연결돼요.`;
 }
 
+const VIBE_LABELS: Record<string, string> = {
+  lively:   '활기찬 상권',
+  balanced: '균형잡힌 동네',
+  quiet:    '조용한 주거',
+};
+
 export function getNeighborhoodViews(report: AppReport, limit = 5): NeighborhoodView[] {
   return report.districts.slice(0, limit).map((item, index) => {
     const terrainLabel = TERRAIN_LABELS[item.district.terrain];
+    const vibeTag = item.district.vibe ? VIBE_LABELS[item.district.vibe] : undefined;
     const tags = [
       ...item.district.ohang.map((ohang) => `${ohang} 보완`),
+      ...(vibeTag ? [vibeTag] : []),
       ...getTerrainTags(terrainLabel, item.reasons),
     ].slice(0, 4);
     const pin = PIN_POSITIONS[index] || PIN_POSITIONS[PIN_POSITIONS.length - 1];
@@ -86,6 +96,8 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
       suitability,
       terrain: item.district.terrain,
       terrainLabel,
+      vibe: item.district.vibe,
+      vibeLabel: vibeTag,
       tags,
       reasons: item.reasons,
       summary: item.reasons.slice(0, 2).join(' · '),

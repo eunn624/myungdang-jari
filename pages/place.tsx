@@ -83,7 +83,14 @@ export default function PlacePage() {
               </span>
               <div className={styles.referenceListMain}>
                 <strong>{item.fullLabel}</strong>
-                <span>{item.hanja || item.terrainLabel}</span>
+                <div className={styles.referenceListMeta}>
+                  {item.vibeLabel ? (
+                    <span className={`${styles.vibeBadge} ${item.vibe ? styles[`vibeBadge_${item.vibe}`] : ''}`}>
+                      {item.vibeLabel}
+                    </span>
+                  ) : null}
+                  <span>{item.terrainLabel}</span>
+                </div>
               </div>
               <div className={styles.referenceSuitability}>
                 <em>적합도</em>

@@ -13,10 +13,17 @@ export function getTerrainPreference(yongsin: Ohang): Terrain {
   return getTerrainPreferenceByOhang(yongsin);
 }
 
+const VIBE_LABEL_KO: Record<string, string> = {
+  lively:   '활기찬 상권',
+  balanced: '균형잡힌 동네',
+  quiet:    '조용한 주거',
+};
+
 export function scoreDistrict(
   district: District,
   deficitOhang: Ohang[],
   terrainPreference?: Terrain,
+  vibePref?: 'lively' | 'balanced' | 'quiet',
 ): { score: number; reasons: string[] } {
   let score = 0;
   const reasons: string[] = [];
@@ -39,6 +46,16 @@ export function scoreDistrict(
     reasons.push(`${TERRAIN_LABELS[terrainPreference]} 지형 부합`);
   }
 
+  // 분위기 매칭
+  if (vibePref && district.vibe) {
+    if (district.vibe === vibePref) {
+      score += 15;
+      reasons.push(`${VIBE_LABEL_KO[vibePref]} 성향 부합`);
+    } else if (vibePref === 'balanced') {
+      score += 5;
+    }
+  }
+
   // 한자 확정 보너스
   if (district.hanjaStatus === 'confirmed') {
     score += 5;
@@ -55,21 +72,22 @@ export function scoreDistrict(
 }
 
 export function matchDistricts(options: MatchOptions): MatchResult[] {
-  const { deficitOhang, siDo, topN = 10 } = options;
+  const { deficitOhang, siDo, topN = 10, vibePref } = options;
   const terrainPreference = options.terrainPreference
     ?? (deficitOhang[0] ? getTerrainPreferenceByOhang(deficitOhang[0]) : undefined);
   const siDoList = Array.isArray(siDo) ? siDo : siDo ? [siDo] : undefined;
 
-  // 오행 매칭이 하나라도 되거나, 지형 매칭이 되는 동네만 포함
+  // 오행·지형·분위기 중 하나라도 매칭되는 동네 포함
   const results: MatchResult[] = ALL_DISTRICTS
     .filter(d => {
       if (siDoList && !siDoList.includes(d.siDo)) return false;
       const hasOhangMatch = d.ohang.some(o => deficitOhang.includes(o));
       const hasTerrainMatch = terrainPreference && districtHasTerrain(d, terrainPreference);
-      return hasOhangMatch || hasTerrainMatch;
+      const hasVibeMatch = vibePref && d.vibe === vibePref;
+      return hasOhangMatch || hasTerrainMatch || hasVibeMatch;
     })
     .map(d => {
-      const { score, reasons } = scoreDistrict(d, deficitOhang, terrainPreference);
+      const { score, reasons } = scoreDistrict(d, deficitOhang, terrainPreference, vibePref);
       return { district: d, score, reasons };
     })
     .filter(r => r.score > 0)

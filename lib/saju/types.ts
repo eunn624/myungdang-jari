@@ -2,6 +2,7 @@ export type HeavenlyStem = '甲'|'乙'|'丙'|'丁'|'戊'|'己'|'庚'|'辛'|'壬'
 export type EarthlyBranch = '子'|'丑'|'寅'|'卯'|'辰'|'巳'|'午'|'未'|'申'|'酉'|'戌'|'亥';
 export type Ohang = '木'|'火'|'土'|'金'|'水';
 export type Direction = '북'|'동북'|'동'|'동남'|'남'|'서남'|'서'|'서북';
+export type VibePref = 'lively' | 'balanced' | 'quiet';
 
 export interface GanJi {
   stem: HeavenlyStem;
