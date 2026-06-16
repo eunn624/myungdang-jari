@@ -82,12 +82,6 @@ export default function InputScreen() {
   return (
     <Layout>
       <form className={styles.referenceInputShell} onSubmit={handleSubmit}>
-        <div className={styles.referenceStatusBar}>
-          <span>10:04</span>
-          <span className={styles.referenceDynamicIsland}></span>
-          <span>32</span>
-        </div>
-
         <header className={styles.referenceInputHeader}>
           <button type="button" className={styles.referencePlainBack} onClick={() => router.push('/onboarding-1')}>
             ‹

@@ -4824,6 +4824,171 @@
   border-top: 1px dashed rgba(85, 73, 55, 0.1);
 }
 
+.referenceLongHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.referenceLongHeader span,
+.referenceLongHeader strong,
+.referenceReadingTitle,
+.referenceReadingLead,
+.referenceReadingStack p,
+.referenceReadingSubBlock strong,
+.referenceMethodList li,
+.referenceEmptyReading strong,
+.referenceEmptyReading p {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceLongHeader span {
+  color: #9e9588;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.referenceLongHeader strong {
+  min-width: 36px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 248, 232, 0.96);
+  color: #3f714b;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.referenceReadingTitle {
+  margin: 0;
+  color: #1e221d;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.referenceReadingTitle small {
+  color: #a3998b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.referenceReadingLead {
+  margin: 7px 0 0;
+  color: #756c61;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.referenceReadingStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.referenceReadingStack p {
+  margin: 0;
+  color: #514b43;
+  font-size: 13px;
+  line-height: 1.85;
+  word-break: keep-all;
+}
+
+.referenceChipCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.referenceChipCloud span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(248, 241, 228, 0.95);
+  border: 1px solid rgba(85, 73, 55, 0.07);
+  color: #73685b;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.referenceReadingSubBlock {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(85, 73, 55, 0.1);
+}
+
+.referenceReadingSubBlock strong {
+  display: block;
+  color: #1e221d;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.referenceMethodList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.referenceMethodList li {
+  position: relative;
+  padding-left: 18px;
+  color: #625a50;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.referenceMethodList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #5fa76f;
+  font-weight: 900;
+}
+
+.referenceSinsalStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.referenceSinsalCard,
+.referenceEmptyReading {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(251, 247, 239, 0.92);
+  border: 1px solid rgba(85, 73, 55, 0.06);
+}
+
+.referenceEmptyReading strong {
+  display: block;
+  color: #1e221d;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.referenceEmptyReading p {
+  margin: 8px 0 0;
+  color: #746c61;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
 .referenceTipsStack {
   gap: 10px;
 }
@@ -5041,47 +5206,6 @@
   padding-bottom: 28px;
 }
 
-.referenceStatusBar {
-  height: 54px;
-  flex-shrink: 0;
-  display: grid;
-  grid-template-columns: 64px 1fr 64px;
-  align-items: center;
-  padding: 10px 20px 0;
-  color: #111512;
-  font-size: 13px;
-  font-weight: 900;
-  font-family: 'Pretendard', sans-serif;
-}
-
-.referenceStatusBar span:first-child {
-  justify-self: start;
-}
-
-.referenceStatusBar span:last-child {
-  justify-self: end;
-  min-width: 28px;
-  height: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: #222;
-  color: #fff;
-  font-size: 10px;
-}
-
-.referenceDynamicIsland {
-  justify-self: center;
-  width: 128px;
-  height: 28px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 18px 50%, rgba(240, 98, 60, 0.7), transparent 8px),
-    linear-gradient(90deg, #030303, #070707);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-}
-
 .referenceOnboardingContent {
   flex: 1;
   min-height: 0;
@@ -5089,7 +5213,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
-  padding: 54px 32px 0;
+  padding: 74px 32px 0;
 }
 
 .referenceOnboardingCopy h1,
@@ -5408,7 +5532,7 @@
 
 .referenceInputHeader {
   position: relative;
-  padding: 24px 30px 22px;
+  padding: 30px 30px 22px;
 }
 
 .referencePlainBack {
@@ -5726,7 +5850,7 @@
 }
 
 .referenceLoadingHeader {
-  padding-top: 64px;
+  padding-top: 84px;
 }
 
 .referenceLoadingHeader p {

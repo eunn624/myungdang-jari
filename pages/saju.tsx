@@ -4,6 +4,7 @@ import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { getReportFromQuery } from '../lib/app-report';
 import { TERRAIN_LABELS } from '../lib/location/terrain';
+import { getSinsalReading, getYongsinReading } from '../data/saju-reading-content';
 
 const OHANG_ROWS = [
   { key: 'wood', label: '목', color: '#88c77c' },
@@ -26,6 +27,12 @@ export default function SajuPage() {
   const topTerrain = report.districts[0]?.district.terrain;
   const terrainLabel = topTerrain ? TERRAIN_LABELS[topTerrain] : '생활권';
   const currentDaeWoon = report.saju.currentDaeWoon;
+  const dayPillar = report.saju.pillars.day;
+  const iljuContent = report.iljuContent;
+  const yongsinReading = getYongsinReading(report.saju.yongsin);
+  const activeSinsalReadings = report.saju.sinsal
+    .map((sinsal) => ({ sinsal, reading: getSinsalReading(sinsal.name) }))
+    .filter((item) => item.reading);
   const sinsalSummary = report.saju.sinsal.length > 0
     ? report.saju.sinsal.slice(0, 3).map((item) => item.name).join(' · ')
     : '현재는 오행 균형과 공간 성향을 중심으로 읽는 편이 자연스러워요.';
@@ -117,6 +124,106 @@ export default function SajuPage() {
               <p>{terrainLabel} 감각이 살아 있는 동네에서 리듬을 잡기 쉬운 편이에요.</p>
             </div>
           </div>
+        </section>
+
+        <section className={styles.referencePanel}>
+          <div className={styles.referenceLongHeader}>
+            <span>일주 풀이</span>
+            <strong>{dayPillar.stem}{dayPillar.branch}</strong>
+          </div>
+          <h3 className={styles.referenceReadingTitle}>
+            {iljuContent ? `${iljuContent.korean} 일주` : `${dayPillar.stem}${dayPillar.branch} 일주`}
+          </h3>
+          <p className={styles.referenceReadingLead}>
+            {iljuContent?.identitySummary || '사주의 중심인 일주를 기준으로 성향과 공간 리듬을 함께 읽어볼게요.'}
+          </p>
+          <div className={styles.referenceReadingStack}>
+            {(iljuContent?.interpretation || report.longReading).map((paragraph, index) => (
+              <p key={`ilju-${index}`}>{paragraph}</p>
+            ))}
+          </div>
+          {iljuContent ? (
+            <div className={styles.referenceChipCloud}>
+              {iljuContent.spaceKeywords.slice(0, 5).map((keyword) => (
+                <span key={keyword}>{keyword}</span>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        <section className={styles.referencePanel}>
+          <div className={styles.referenceLongHeader}>
+            <span>용신 풀이</span>
+            <strong>{report.saju.yongsin}</strong>
+          </div>
+          <h3 className={styles.referenceReadingTitle}>{yongsinReading.title}</h3>
+          <p className={styles.referenceReadingLead}>{yongsinReading.subtitle}</p>
+          <div className={styles.referenceReadingStack}>
+            {yongsinReading.paragraphs.map((paragraph, index) => (
+              <p key={`yongsin-${index}`}>{paragraph}</p>
+            ))}
+          </div>
+          <div className={styles.referenceReadingSubBlock}>
+            <strong>공간 힌트</strong>
+            <div className={styles.referenceChipCloud}>
+              {yongsinReading.spaceHints.map((hint) => (
+                <span key={hint}>{hint}</span>
+              ))}
+            </div>
+          </div>
+          <div className={styles.referenceReadingSubBlock}>
+            <strong>바로 해볼 수 있는 개운법</strong>
+            <ul className={styles.referenceMethodList}>
+              {yongsinReading.gaeunMethods.slice(0, 5).map((method) => (
+                <li key={method}>{method}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.referencePanel}>
+          <div className={styles.referenceLongHeader}>
+            <span>신살 · 길성 풀이</span>
+            <strong>{report.saju.sinsal.length || 0}개</strong>
+          </div>
+          {activeSinsalReadings.length > 0 ? (
+            <div className={styles.referenceSinsalStack}>
+              {activeSinsalReadings.map(({ sinsal, reading }) => (
+                reading ? (
+                  <article key={sinsal.name} className={styles.referenceSinsalCard}>
+                    <h3 className={styles.referenceReadingTitle}>{reading.title} <small>{sinsal.hanja}</small></h3>
+                    <p className={styles.referenceReadingLead}>{reading.subtitle}</p>
+                    <div className={styles.referenceReadingStack}>
+                      {reading.paragraphs.map((paragraph, index) => (
+                        <p key={`${sinsal.name}-${index}`}>{paragraph}</p>
+                      ))}
+                    </div>
+                    <div className={styles.referenceReadingSubBlock}>
+                      <strong>공간 활용</strong>
+                      <div className={styles.referenceChipCloud}>
+                        {reading.spaceHints.map((hint) => (
+                          <span key={hint}>{hint}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <ul className={styles.referenceMethodList}>
+                      {reading.gaeunMethods.slice(0, 4).map((method) => (
+                        <li key={method}>{method}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ) : null
+              ))}
+            </div>
+          ) : (
+            <div className={styles.referenceEmptyReading}>
+              <strong>이번 결과에서는 주요 신살보다 오행 균형이 더 선명해요.</strong>
+              <p>
+                도화살, 역마살, 화개살, 천을귀인, 문창귀인 중 강하게 잡히는 항목이 없을 때는
+                신살을 억지로 붙이기보다 일주와 용신을 중심으로 공간 리딩을 보는 편이 자연스럽습니다.
+              </p>
+            </div>
+          )}
         </section>
 
         <section className={styles.referencePanel}>

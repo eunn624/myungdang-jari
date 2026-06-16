@@ -35,12 +35,6 @@ export default function LoadingScreen() {
   return (
     <Layout>
       <div className={styles.referenceLoadingShell}>
-        <div className={styles.referenceStatusBar}>
-          <span>10:04</span>
-          <span className={styles.referenceDynamicIsland}></span>
-          <span>32</span>
-        </div>
-
         <section className={styles.referenceLoadingHeader}>
           <h1>명당을 찾는 중이에요</h1>
           <span className={styles.referenceUnderlineBlue}></span>

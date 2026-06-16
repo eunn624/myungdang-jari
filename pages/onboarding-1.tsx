@@ -33,12 +33,6 @@ export default function Onboarding1() {
 
   const content = (
     <div className={styles.referenceOnboardingShell}>
-      <div className={styles.referenceStatusBar}>
-        <span>10:04</span>
-        <span className={styles.referenceDynamicIsland}></span>
-        <span>32</span>
-      </div>
-
       <main className={styles.referenceOnboardingContent}>
         <section className={styles.referenceOnboardingCopy}>
           <h1>{slide.title}</h1>
