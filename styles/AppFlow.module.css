@@ -4824,6 +4824,231 @@
   border-top: 1px dashed rgba(85, 73, 55, 0.1);
 }
 
+.sajuPillarGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.sajuPillarCell {
+  min-width: 0;
+  min-height: 92px;
+  border-radius: 18px;
+  background: rgba(251, 247, 239, 0.94);
+  border: 1px solid rgba(85, 73, 55, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.sajuPillarCell span,
+.sajuPillarCell strong,
+.sajuPillarCell small {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.sajuPillarCell span {
+  color: #b0a79b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.sajuPillarCell strong {
+  color: #1e221d;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.sajuPillarCell small {
+  color: #7d7469;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sajuAccordionStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sajuAccordion {
+  border-radius: 18px;
+  background: rgba(251, 247, 239, 0.94);
+  border: 1px solid rgba(85, 73, 55, 0.07);
+  overflow: hidden;
+}
+
+.sajuAccordion summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.sajuAccordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.sajuAccordion summary::after {
+  content: '+';
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #928879;
+  font-size: 16px;
+  font-weight: 900;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.sajuAccordion[open] summary::after {
+  content: '−';
+}
+
+.sajuAccordion summary span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sajuAccordion summary strong,
+.sajuAccordion summary small,
+.sajuAccordion summary em {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.sajuAccordion summary strong {
+  color: #1e221d;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.sajuAccordion summary small {
+  color: #9e9588;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sajuAccordion summary em {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(239, 248, 232, 0.96);
+  color: #4b7a56;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.sajuAccordion > p,
+.sajuAccordion > div {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.sajuAccordion > div:last-child {
+  margin-bottom: 14px;
+}
+
+.sajuFortuneCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sajuFortuneCards article {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(251, 247, 239, 0.94);
+  border: 1px solid rgba(85, 73, 55, 0.06);
+}
+
+.sajuFortuneCards span,
+.sajuFortuneCards strong,
+.sajuFortuneCards small,
+.sajuFortuneCards p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.sajuFortuneCards span {
+  color: #9e9588;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.sajuFortuneCards strong {
+  margin-top: 5px;
+  color: #1e221d;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.sajuFortuneCards small {
+  margin-top: 3px;
+  color: #a79d90;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sajuFortuneCards p {
+  margin: 8px 0 0;
+  color: #625a50;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.readHeroCard {
+  padding: 18px;
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(239, 248, 232, 0.96), rgba(255, 253, 248, 0.96));
+  border: 1px solid rgba(105, 171, 115, 0.14);
+  box-shadow: 0 8px 20px rgba(53, 44, 33, 0.05);
+}
+
+.readHeroCard span,
+.readHeroCard strong,
+.readHeroCard p {
+  display: block;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.readHeroCard > span {
+  color: #4b7a56;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.readHeroCard > strong {
+  margin-top: 8px;
+  color: #1e221d;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.38;
+}
+
+.readHeroCard > p {
+  margin: 8px 0 0;
+  color: #625a50;
+  font-size: 13px;
+  line-height: 1.72;
+}
+
 .referenceLongHeader {
   display: flex;
   align-items: center;

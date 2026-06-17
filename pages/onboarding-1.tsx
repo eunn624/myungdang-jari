@@ -19,7 +19,7 @@ const slides = [
     button: '다음',
   },
   {
-    title: <>공간 팁으로<br />일상을 더 좋아지게</>,
+    title: <>공간 리딩으로<br />일상을 더 좋아지게</>,
     underline: 'Blue',
     body: '공간 에너지를 높이는 맞춤 팁으로 더 편안하고 좋은 일상이 시작돼요.',
     visual: 'tips',

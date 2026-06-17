@@ -68,7 +68,7 @@ export default function Layout({
             </Link>
             <Link href={tabHref('/read')} className={`${styles.tab} ${activeTab === 'read' ? styles.active : ''}`}>
               <span className={styles.tabIcon}>文</span>
-              <span className={styles.tabLabel}>공간 팁</span>
+              <span className={styles.tabLabel}>리딩</span>
             </Link>
             <Link href={tabHref('/place')} className={`${styles.tab} ${activeTab === 'place' ? styles.active : ''}`}>
               <span className={styles.tabIcon}>向</span>

@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Layout from './_layout';
 import styles from '../styles/AppFlow.module.css';
 import { getReportFromQuery } from '../lib/app-report';
 import { TERRAIN_LABELS } from '../lib/location/terrain';
-import { getSinsalReading, getYongsinReading } from '../data/saju-reading-content';
+import { getSinsalReading } from '../data/saju-reading-content';
 
 const OHANG_ROWS = [
   { key: 'wood', label: '목', color: '#88c77c' },
@@ -29,7 +30,6 @@ export default function SajuPage() {
   const currentDaeWoon = report.saju.currentDaeWoon;
   const dayPillar = report.saju.pillars.day;
   const iljuContent = report.iljuContent;
-  const yongsinReading = getYongsinReading(report.saju.yongsin);
   const activeSinsalReadings = report.saju.sinsal
     .map((sinsal) => ({ sinsal, reading: getSinsalReading(sinsal.name) }))
     .filter((item) => item.reading);
@@ -44,13 +44,23 @@ export default function SajuPage() {
     { title: '우드 인테리어', body: '머무는 감각을 가볍게 잡아주는 재질' },
   ];
 
+  const pillars = [
+    { label: '년주', pillar: report.saju.pillars.year },
+    { label: '월주', pillar: report.saju.pillars.month },
+    { label: '일주', pillar: report.saju.pillars.day },
+    { label: '시주', pillar: report.saju.pillars.hour },
+  ];
+
+  const nextDaeWoon = report.saju.daeWoon.find((item) => currentDaeWoon && item.startAge > currentDaeWoon.startAge)
+    || report.saju.daeWoon[0];
+
   return (
-    <Layout showTabBar activeTab="saju" headerTitle="사주 오행 분석" showBackButton>
+    <Layout showTabBar activeTab="saju" headerTitle="사주" showBackButton>
       <div className={styles.referenceScreen}>
         <section className={styles.referenceHeaderBlock}>
           <div>
-            <h2 className={styles.referenceTitle}>사주 오행 분석</h2>
-            <p className={styles.referenceSubtitle}>내 사주의 오행 균형을 확인해보세요.</p>
+            <h2 className={styles.referenceTitle}>사주 데이터 리포트</h2>
+            <p className={styles.referenceSubtitle}>원국, 오행, 신살·길성, 운의 흐름을 확인해보세요.</p>
           </div>
           <span className={styles.referenceSpark}>☼</span>
         </section>
@@ -63,6 +73,33 @@ export default function SajuPage() {
         </section>
 
         <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>사주원국</h3>
+          <div className={styles.sajuPillarGrid}>
+            {pillars.map(({ label, pillar }) => (
+              <div key={label} className={styles.sajuPillarCell}>
+                <span>{label}</span>
+                {pillar ? (
+                  <>
+                    <strong>{pillar.stem}{pillar.branch}</strong>
+                    <small>{pillar.stemKor}{pillar.branchKor}</small>
+                  </>
+                ) : (
+                  <>
+                    <strong>--</strong>
+                    <small>시 모름</small>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+          <p className={styles.referenceReadingLead}>
+            일주는 <strong>{dayPillar.stem}{dayPillar.branch}</strong>
+            {iljuContent ? `, ${iljuContent.korean} 일주로 읽어요.` : ' 중심으로 읽어요.'}
+          </p>
+        </section>
+
+        <section className={styles.referencePanel}>
+          <h3 className={styles.referencePanelTitle}>오행 균형</h3>
           <div className={styles.referenceOhangList}>
             {OHANG_ROWS.map((row) => {
               const value = report.saju.ohang[row.key];
@@ -128,71 +165,22 @@ export default function SajuPage() {
 
         <section className={styles.referencePanel}>
           <div className={styles.referenceLongHeader}>
-            <span>일주 풀이</span>
-            <strong>{dayPillar.stem}{dayPillar.branch}</strong>
-          </div>
-          <h3 className={styles.referenceReadingTitle}>
-            {iljuContent ? `${iljuContent.korean} 일주` : `${dayPillar.stem}${dayPillar.branch} 일주`}
-          </h3>
-          <p className={styles.referenceReadingLead}>
-            {iljuContent?.identitySummary || '사주의 중심인 일주를 기준으로 성향과 공간 리듬을 함께 읽어볼게요.'}
-          </p>
-          <div className={styles.referenceReadingStack}>
-            {(iljuContent?.interpretation || report.longReading).map((paragraph, index) => (
-              <p key={`ilju-${index}`}>{paragraph}</p>
-            ))}
-          </div>
-          {iljuContent ? (
-            <div className={styles.referenceChipCloud}>
-              {iljuContent.spaceKeywords.slice(0, 5).map((keyword) => (
-                <span key={keyword}>{keyword}</span>
-              ))}
-            </div>
-          ) : null}
-        </section>
-
-        <section className={styles.referencePanel}>
-          <div className={styles.referenceLongHeader}>
-            <span>용신 풀이</span>
-            <strong>{report.saju.yongsin}</strong>
-          </div>
-          <h3 className={styles.referenceReadingTitle}>{yongsinReading.title}</h3>
-          <p className={styles.referenceReadingLead}>{yongsinReading.subtitle}</p>
-          <div className={styles.referenceReadingStack}>
-            {yongsinReading.paragraphs.map((paragraph, index) => (
-              <p key={`yongsin-${index}`}>{paragraph}</p>
-            ))}
-          </div>
-          <div className={styles.referenceReadingSubBlock}>
-            <strong>공간 힌트</strong>
-            <div className={styles.referenceChipCloud}>
-              {yongsinReading.spaceHints.map((hint) => (
-                <span key={hint}>{hint}</span>
-              ))}
-            </div>
-          </div>
-          <div className={styles.referenceReadingSubBlock}>
-            <strong>바로 해볼 수 있는 개운법</strong>
-            <ul className={styles.referenceMethodList}>
-              {yongsinReading.gaeunMethods.slice(0, 5).map((method) => (
-                <li key={method}>{method}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className={styles.referencePanel}>
-          <div className={styles.referenceLongHeader}>
-            <span>신살 · 길성 풀이</span>
+            <span>신살 · 길성</span>
             <strong>{report.saju.sinsal.length || 0}개</strong>
           </div>
           {activeSinsalReadings.length > 0 ? (
-            <div className={styles.referenceSinsalStack}>
+            <div className={styles.sajuAccordionStack}>
               {activeSinsalReadings.map(({ sinsal, reading }) => (
                 reading ? (
-                  <article key={sinsal.name} className={styles.referenceSinsalCard}>
-                    <h3 className={styles.referenceReadingTitle}>{reading.title} <small>{sinsal.hanja}</small></h3>
-                    <p className={styles.referenceReadingLead}>{reading.subtitle}</p>
+                  <details key={sinsal.name} className={styles.sajuAccordion}>
+                    <summary>
+                      <span>
+                        <strong>{sinsal.name}</strong>
+                        <small>{sinsal.hanja} · {sinsal.activePillar}</small>
+                      </span>
+                      <em>{sinsal.category === 'guiin' ? '길성' : '신살'}</em>
+                    </summary>
+                    <p className={styles.referenceReadingLead}>{sinsal.description}</p>
                     <div className={styles.referenceReadingStack}>
                       {reading.paragraphs.map((paragraph, index) => (
                         <p key={`${sinsal.name}-${index}`}>{paragraph}</p>
@@ -206,12 +194,7 @@ export default function SajuPage() {
                         ))}
                       </div>
                     </div>
-                    <ul className={styles.referenceMethodList}>
-                      {reading.gaeunMethods.slice(0, 4).map((method) => (
-                        <li key={method}>{method}</li>
-                      ))}
-                    </ul>
-                  </article>
+                  </details>
                 ) : null
               ))}
             </div>
@@ -219,31 +202,55 @@ export default function SajuPage() {
             <div className={styles.referenceEmptyReading}>
               <strong>이번 결과에서는 주요 신살보다 오행 균형이 더 선명해요.</strong>
               <p>
-                도화살, 역마살, 화개살, 천을귀인, 문창귀인 중 강하게 잡히는 항목이 없을 때는
-                신살을 억지로 붙이기보다 일주와 용신을 중심으로 공간 리딩을 보는 편이 자연스럽습니다.
+                12신살과 주요 길성 중 강하게 잡히는 항목이 없을 때는 신살을 억지로 붙이기보다
+                일주와 용신을 중심으로 공간 리딩을 보는 편이 자연스럽습니다.
               </p>
             </div>
           )}
         </section>
 
         <section className={styles.referencePanel}>
-          <h3 className={styles.referencePanelTitle}>대운 · 세운 메모</h3>
-          <div className={styles.referenceTimelineCard}>
+          <h3 className={styles.referencePanelTitle}>대운 · 세운 · 월운</h3>
+          <div className={styles.sajuFortuneCards}>
             {currentDaeWoon ? (
-              <p>
-                지금은 <strong>{currentDaeWoon.ganJi.stem}{currentDaeWoon.ganJi.branch}</strong> 대운
-                ({currentDaeWoon.startAge}~{currentDaeWoon.endAge}세) 구간이에요.
-                {currentDaeWoon.ohang} 기운이 강하게 들어와서 {deficit} 보완과 생활 리듬 정리가 함께 중요해요.
-              </p>
+              <article>
+                <span>현재 대운</span>
+                <strong>{currentDaeWoon.ganJi.stem}{currentDaeWoon.ganJi.branch} · {currentDaeWoon.ohang}</strong>
+                <small>{currentDaeWoon.startAge}세~{currentDaeWoon.endAge}세 구간</small>
+                <p>{report.daeWoonHomeReading}</p>
+              </article>
             ) : (
-              <p>대운 흐름은 입력한 생년월일시를 기준으로 계산돼요.</p>
+              <article>
+                <span>현재 대운</span>
+                <strong>계산 대기</strong>
+                <p>대운 흐름은 입력한 생년월일시를 기준으로 계산돼요.</p>
+              </article>
             )}
-            <p>
-              올해 세운은 <strong>{report.saju.seWoon.ganJi.stem}{report.saju.seWoon.ganJi.branch}</strong>이고,
-              {report.saju.seWoon.ohang} 기운이 생활 공간에 더 자주 드러날 수 있어요.
-            </p>
+            <article>
+              <span>올해 세운</span>
+              <strong>{report.saju.seWoon.year}년 {report.saju.seWoon.ganJi.stem}{report.saju.seWoon.ganJi.branch} · {report.saju.seWoon.ohang}</strong>
+              <p>{report.seWoonHomeReading}</p>
+            </article>
+            <article>
+              <span>이번 달 월운</span>
+              <strong>{report.monthGanji.stem}{report.monthGanji.branch} · {report.monthOhang}</strong>
+              <small>{report.monthTip.headline}</small>
+              <p>{report.monthSpaceTip}</p>
+            </article>
+            {nextDaeWoon ? (
+              <article>
+                <span>다음 대운</span>
+                <strong>{nextDaeWoon.ganJi.stem}{nextDaeWoon.ganJi.branch} · {nextDaeWoon.ohang}</strong>
+                <small>{nextDaeWoon.startAge}세~{nextDaeWoon.endAge}세 구간</small>
+                <p>다음 흐름은 미리 단정하기보다 현재 생활 기반을 정리한 뒤 참고하는 예비 리딩으로 보는 편이 좋아요.</p>
+              </article>
+            ) : null}
           </div>
         </section>
+
+        <Link href={{ pathname: '/read', query: router.query }} className={styles.referencePrimaryButton}>
+          상세 리딩 보기
+        </Link>
       </div>
     </Layout>
   );

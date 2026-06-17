@@ -14,7 +14,7 @@ export default function MyPage() {
     { label: '입력 정보 수정', href: { pathname: '/input', query } },
     { label: '분석 기록', caption: '최근 결과 다시 보기' },
     { label: '핀한 지역', caption: `${Math.min(report.districts.length, 3)}` },
-    { label: '공간 팁 모아보기', href: { pathname: '/read', query } },
+    { label: '상세 리딩 보기', href: { pathname: '/read', query } },
     { label: '알림 설정', caption: '준비 중' },
     { label: '고객센터', caption: '안내 예정' },
     { label: '앱 정보', caption: 'v1.0.0' },
