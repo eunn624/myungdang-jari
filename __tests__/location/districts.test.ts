@@ -7,8 +7,9 @@ describe('전국 행정동 데이터셋', () => {
     expect(Array.from(siDos).sort()).toEqual(expected);
   });
 
-  test('전체 건수가 1000개 이상이다', () => {
-    expect(districtsData.districts.length).toBeGreaterThanOrEqual(1000);
+  test('전체 건수가 구 단위 규모이다 (100~200개)', () => {
+    expect(districtsData.districts.length).toBeGreaterThanOrEqual(100);
+    expect(districtsData.districts.length).toBeLessThanOrEqual(200);
     expect(districtsData._meta.totalCount).toBe(districtsData.districts.length);
   });
 
@@ -18,51 +19,64 @@ describe('전국 행정동 데이터셋', () => {
   });
 
   test('대표 샘플 코드가 존재한다', () => {
-    const sampleCodes = ['1111051500', '4111156000', '4113554500', '4128151000'];
+    // 구 단위 집계 코드: 강남구, 성남시 분당구, 하남시
+    const sampleCodes = ['11680000000', '41135000000', '41450000000'];
     for (const code of sampleCodes) {
       expect(districtsData.districts.some((item) => item.code === code)).toBe(true);
     }
   });
 
   test('대표 샘플이 완전한 데이터를 갖는다', () => {
-    const gaepo1 = districtsData.districts.find((item) => item.code === '1168066000');
-    const jeongja1Bundang = districtsData.districts.find((item) => item.code === '4113555000');
-    const misa1 = districtsData.districts.find((item) => item.code === '4145061000');
+    const gangnam = districtsData.districts.find((item) => item.code === '11680000000');
+    const bundang = districtsData.districts.find((item) => item.code === '41135000000');
+    const hanam = districtsData.districts.find((item) => item.code === '41450000000');
 
-    // 개포1동: 강남구 → 木 오행 할당됨
-    expect(gaepo1).toMatchObject({
-      name: '개포1동',
+    // 강남구: 木 오행 포함 (22개 동 집계)
+    expect(gangnam).toMatchObject({
+      name: '강남구',
+      siDo: '서울',
+      siGunGu: '강남구',
       terrain: 'flatland',
+      adminLevel: 'sgg',
     });
-    expect(gaepo1?.ohang.length).toBeGreaterThan(0);
-    expect(gaepo1?.terrainTags).toEqual(['green']);
+    expect(gangnam?.ohang.length).toBeGreaterThan(0);
+    expect(gangnam?.dongCount).toBeGreaterThan(0);
 
-    // 정자1동: 성남시 분당구 → 木 오행 할당됨
-    expect(jeongja1Bundang).toMatchObject({
-      name: '정자1동',
+    // 성남시 분당구: 木 오행 포함
+    expect(bundang).toMatchObject({
+      name: '성남시 분당구',
       siGunGu: '성남시 분당구',
-      terrain: 'flatland',
+      adminLevel: 'sgg',
     });
-    expect(jeongja1Bundang?.ohang.length).toBeGreaterThan(0);
-    expect(jeongja1Bundang?.terrainTags).toEqual(['waterfront']);
+    expect(bundang?.ohang.length).toBeGreaterThan(0);
 
-    // 미사1동: 하남시 → 水 오행 할당됨
-    expect(misa1).toMatchObject({
-      name: '미사1동',
-      terrain: 'waterfront',
+    // 하남시: 경기 시 단위
+    expect(hanam).toMatchObject({
+      name: '하남시',
+      siDo: '경기',
+      adminLevel: 'sgg',
     });
-    expect(misa1?.ohang.length).toBeGreaterThan(0);
-    expect(misa1?.terrainTags).toEqual(['flatland']);
+    expect(hanam?.ohang.length).toBeGreaterThan(0);
   });
 
-  test('한자 미확정 항목도 오행과 지형 정보를 갖는다', () => {
-    const withoutHanja = districtsData.districts.find(
-      (item) => item.code === '1168066000',
-    );
+  test('서울은 25개 구로 집계되어 있다', () => {
+    const seoulDistricts = districtsData.districts.filter((item) => item.siDo === '서울');
+    expect(seoulDistricts.length).toBe(25);
+    seoulDistricts.forEach((d) => {
+      expect(d.adminLevel).toBe('sgg');
+      expect(d.ohang.length).toBeGreaterThan(0);
+      expect(d.terrain).toBeDefined();
+    });
+  });
 
-    // 한자가 없어도 추론된 오행은 있음
-    expect(withoutHanja?.hanja).toBe('');
-    expect(withoutHanja?.ohang.length).toBeGreaterThan(0);
-    expect(withoutHanja?.terrain).toBe('flatland');
+  test('구 단위 집계 항목은 dongCount와 sampleDongs를 갖는다', () => {
+    const gangnam = districtsData.districts.find((item) => item.siDo === '서울');
+    expect((gangnam as any)?.dongCount).toBeGreaterThan(0);
+    expect(Array.isArray((gangnam as any)?.sampleDongs)).toBe(true);
+  });
+
+  test('오행 집계 결과: 강남구는 木 오행을 포함한다', () => {
+    const gangnam = districtsData.districts.find((item) => item.siGunGu === '강남구' && item.siDo === '서울');
+    expect(gangnam?.ohang).toContain('木');
   });
 });

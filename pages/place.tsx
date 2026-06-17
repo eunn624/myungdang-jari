@@ -111,8 +111,11 @@ export default function PlacePage() {
 
         {highlighted ? (
           <section className={styles.referenceInlineSummary}>
-            <strong>{highlighted.name}</strong>
+            <strong>{highlighted.fullLabel}</strong>
             <p>{highlighted.oneLine}</p>
+            {highlighted.sidoTrait ? (
+              <span>{highlighted.sidoLabel} · {highlighted.sidoTrait}</span>
+            ) : null}
           </section>
         ) : null}
       </div>

@@ -2,6 +2,7 @@ import type { Ohang, Direction } from '../saju/types';
 import type { District, MatchResult, MatchOptions, Terrain } from './types';
 import districtsData from '../../data/districts.json';
 import descData from '../../data/neighborhood-desc.json';
+import sidoProfilesData from '../../data/sido-profiles.json';
 import {
   TERRAIN_LABELS,
   districtHasTerrain,
@@ -11,6 +12,7 @@ import {
 const ALL_DISTRICTS: District[] = (districtsData as any).districts;
 const DESCRIPTIONS: Record<string, { keywords: string[] }> = (descData as any)
   .descriptions;
+const SIDO_PROFILES: Record<string, { ohang: string[] }> = (sidoProfilesData as any).profiles;
 
 export function getTerrainPreference(yongsin: Ohang): Terrain {
   return getTerrainPreferenceByOhang(yongsin);
@@ -64,6 +66,7 @@ interface ScoreBreakdown {
   sinsal_guiin: number;   // C. 신살/귀인
   terrain: number;        // D. 지형
   vibe: number;           // E. 분위기
+  sido_affinity: number;  // F. 시도 오행 친화도 (tiebreaker, 0~3)
   total: number;
 }
 
@@ -77,6 +80,7 @@ export function scoreDistrict(
     sinsal_guiin: 0,
     terrain: 0,
     vibe: 0,
+    sido_affinity: 0,
     total: 0,
   };
   const reasons: string[] = [];
@@ -154,44 +158,63 @@ export function scoreDistrict(
   // C. 신살·귀인 (20점)
   // ──────────────────────────────────────────────
 
-  // 도화살 → lively
-  if (sinsal.includes('도화살') && district.vibe === 'lively') {
-    breakdown.sinsal_guiin += 8;
-    reasons.push('도화살 → 활기찬 채광 상권');
+  // 도화살 → lively (활기찬 상권) / 높은 vibeScore / 물가·평지 번화 상권
+  if (sinsal.includes('도화살')) {
+    if (district.vibe === 'lively') {
+      breakdown.sinsal_guiin += 8;
+      reasons.push('도화살 → 활기찬 상권과 궁합');
+    } else if ((district.vibeScore ?? 50) >= 65) {
+      breakdown.sinsal_guiin += 4;
+      reasons.push('도화살 → 활발한 생활권');
+    } else if (district.terrain === 'waterfront' || district.terrain === 'flatland') {
+      breakdown.sinsal_guiin += 3;
+      reasons.push('도화살 → 물가·평지 번화 상권');
+    }
   }
 
-  // 화개살 → quiet
-  if (sinsal.includes('화개살') && district.vibe === 'quiet') {
-    breakdown.sinsal_guiin += 8;
-    reasons.push('화개살 → 조용한 독립 주거');
+  // 화개살 → quiet (조용한 주거) 또는 자연·녹지
+  if (sinsal.includes('화개살')) {
+    if (district.vibe === 'quiet') {
+      breakdown.sinsal_guiin += 8;
+      reasons.push('화개살 → 조용한 독립 주거');
+    } else if (district.terrain === 'green' || district.terrain === 'highland') {
+      breakdown.sinsal_guiin += 4;
+      reasons.push('화개살 → 자연·녹지 생활권');
+    }
   }
 
-  // 역마살 → 교통 활발 또는 평지
+  // 역마살 → 평지·교통 활발 (vibeScore 기준 완화)
   if (sinsal.includes('역마살')) {
-    if ((district.vibeScore ?? 50) >= 55) {
+    if ((district.vibeScore ?? 50) >= 60) {
       breakdown.sinsal_guiin += 7;
       reasons.push('역마살 → 교통·동선 활발');
     } else if (district.terrain === 'flatland') {
-      breakdown.sinsal_guiin += 4;
+      breakdown.sinsal_guiin += 5;
       reasons.push('역마살 → 평지 이동 동선');
     }
   }
 
-  // 천을귀인 → balanced
-  if (guiin.includes('천을귀인') && district.vibe === 'balanced') {
-    breakdown.sinsal_guiin += 6;
-    reasons.push('천을귀인 → 귀인 만남 생활권');
+  // 천을귀인 → balanced 또는 vibeScore 중간값 (귀인 만남)
+  if (guiin.includes('천을귀인')) {
+    if (district.vibe === 'balanced') {
+      breakdown.sinsal_guiin += 6;
+      reasons.push('천을귀인 → 귀인 만남 생활권');
+    } else if ((district.vibeScore ?? 50) >= 55 && (district.vibeScore ?? 50) <= 75) {
+      breakdown.sinsal_guiin += 3;
+      reasons.push('천을귀인 → 균형잡힌 생활권');
+    }
   }
 
-  // 문창귀인 → 학군 지역 (강남·서초·양천·노원·성남·수원·용인)
+  // 문창귀인 → 학군·문화 인프라 (구 단위 기준으로 확장)
   if (guiin.includes('문창귀인')) {
-    const educationDistricts = new Set([
-      '강남구', '서초구', '양천구', '노원구',
-      '성남시', '수원시', '용인시',
-    ]);
-    if (educationDistricts.has(district.siGunGu)) {
+    const educationKeywords = ['강남', '서초', '양천', '노원', '목동', '성남', '수원', '용인', '분당'];
+    const siGunGuLower = district.siGunGu;
+    if (educationKeywords.some(kw => siGunGuLower.includes(kw))) {
       breakdown.sinsal_guiin += 6;
       reasons.push('문창귀인 → 학군·문화 인프라');
+    } else if (district.vibe === 'balanced' && (district.vibeScore ?? 50) >= 60) {
+      breakdown.sinsal_guiin += 2;
+      reasons.push('문창귀인 → 문화·교육 친화 환경');
     }
   }
 
@@ -244,6 +267,20 @@ export function scoreDistrict(
     }
   }
 
+  // ──────────────────────────────────────────────
+  // F. 시도 오행 친화도 (tiebreaker, +0~3)
+  // ──────────────────────────────────────────────
+  const sidoProfile = SIDO_PROFILES[district.siDo];
+  if (sidoProfile) {
+    if (yongsin && sidoProfile.ohang.includes(yongsin)) {
+      breakdown.sido_affinity = 3;
+    } else if (deficitOhang[0] && sidoProfile.ohang.includes(deficitOhang[0])) {
+      breakdown.sido_affinity = 2;
+    } else if (deficitOhang[1] && sidoProfile.ohang.includes(deficitOhang[1])) {
+      breakdown.sido_affinity = 1;
+    }
+  }
+
   // 총점 계산
   breakdown.total =
     breakdown.direction +
@@ -251,6 +288,7 @@ export function scoreDistrict(
     breakdown.sinsal_guiin +
     breakdown.terrain +
     breakdown.vibe +
+    breakdown.sido_affinity +
     hanja_bonus +
     neighborhood_bonus;
 
@@ -271,12 +309,10 @@ function isOppositeDirection(dir1: string, dir2: string): boolean {
 
 /**
  * adminLevel 기반 자동 결정
- * 서울 → emd, 경기 → sgg, 광역시 → sgg, 기타 → all
+ * 서울/경기/광역시 → sgg, 기타 → all
  */
 function getDefaultAdminLevel(siDo: string): 'emd' | 'sgg' | 'si' | 'gun' | 'all' {
-  if (siDo === '서울') return 'emd';
-  if (siDo === '경기') return 'sgg';
-  if (['부산', '대구', '인천', '광주', '대전', '울산'].includes(siDo)) return 'sgg';
+  if (['서울', '경기', '부산', '대구', '인천', '광주', '대전', '울산'].includes(siDo)) return 'sgg';
   return 'all';  // 강원, 전남, 전북, 경남, 경북, 제주: 모두 추천
 }
 
@@ -353,17 +389,7 @@ export function matchDistricts(options: MatchOptions): MatchResult[] {
     .filter(r => r.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  // 1동/2동 중복 제거 (같은 기본명으로 그룹화 후 최고 점수만 유지)
-  const seenBase = new Set<string>();
-  const deduped = scored.filter(r => {
-    const baseName = r.district.name.replace(/\d+동$/, '동');
-    const key = `${r.district.siGunGu}_${baseName}`;
-    if (seenBase.has(key)) return false;
-    seenBase.add(key);
-    return true;
-  });
-
-  return deduped.slice(0, topN);
+  return scored.slice(0, topN);
 }
 
 export function matchByOhangOnly(ohang: Ohang[]): District[] {

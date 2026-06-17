@@ -1,5 +1,9 @@
 import type { AppReport } from './app-report';
 import { TERRAIN_LABELS } from './location/terrain';
+import sidoProfilesData from '../data/sido-profiles.json';
+
+const SIDO_PROFILES: Record<string, { label: string; trait: string }> =
+  (sidoProfilesData as any).profiles;
 
 const PIN_POSITIONS: Array<{ x: string; y: string }> = [
   { x: '28%', y: '34%' },
@@ -34,7 +38,7 @@ export type NeighborhoodView = {
   code: string;
   rank: number;
   name: string;
-  baseName: string;  // "역삼1동" → "역삼동"
+  baseName: string;
   city: string;
   district: string;
   fullLabel: string;
@@ -49,10 +53,12 @@ export type NeighborhoodView = {
   summary: string;
   oneLine: string;
   realityCheck: string;
-  pinX: string;  // 좌표 또는 사전 정의 위치 "28%", "35%" 등
-  pinY: string;  // 좌표 또는 사전 정의 위치 "34%", "45%" 등
-  directionFromCenter: string;  // "서울 도심에서 동쪽 9km"
-  nearbyLandmark: string;       // "강남역 인근"
+  pinX: string;
+  pinY: string;
+  directionFromCenter: string;
+  nearbyLandmark: string;
+  sidoLabel: string;   // "서울특별시", "부산광역시" 등
+  sidoTrait: string;   // 시도 특성 요약
 };
 
 export type FacilityCategory = '전체' | '교통' | '자연' | '편의시설' | '학교' | '의료';
@@ -65,7 +71,9 @@ export type FacilityItem = {
 };
 
 function getSuitability(score: number) {
-  return Math.max(85, Math.min(97, 70 + Math.round(score / 2)));
+  const MAX_SCORE = 91;  // 이론적 최대 점수 (direction13+ohang26+sinsal14+terrain20+vibe15+sido3)
+  const pct = Math.min(score / MAX_SCORE, 1);
+  return Math.round(60 + pct * 39);
 }
 
 // 두 좌표 간 거리 (km, Haversine)
@@ -176,7 +184,7 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
     const suitability = getSuitability(item.score);
 
     // 위치 인지 개선 데이터
-    const baseName = item.district.name.replace(/\d+동$/, '동');
+    const baseName = item.district.name;
     let directionFromCenter = `${item.district.siDo} 생활권`;
     let pinX = pin.x;
     let pinY = pin.y;
@@ -214,6 +222,10 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
       ? `${item.district.siDo} ${item.district.siGunGu}`
       : `${item.district.siDo} ${item.district.siGunGu} ${item.district.name}`;
 
+    const sidoProfile = SIDO_PROFILES[item.district.siDo];
+    const sidoLabel = sidoProfile?.label ?? item.district.siDo;
+    const sidoTrait = sidoProfile?.trait ?? '';
+
     return {
       code: item.district.code,
       rank: index + 1,
@@ -237,6 +249,8 @@ export function getNeighborhoodViews(report: AppReport, limit = 5): Neighborhood
       pinY,
       directionFromCenter,
       nearbyLandmark,
+      sidoLabel,
+      sidoTrait,
     };
   });
 }
@@ -248,10 +262,15 @@ export function getSelectedNeighborhood(report: AppReport, districtCode?: string
 }
 
 export function getNearbyFacilities(item: NeighborhoodView): FacilityItem[] {
+  // 구/시/군 이름에서 행정 접미사 제거 (예: "강남구"→"강남", "성남시 분당구"→"분당")
+  const placeBase = item.name
+    .split(' ')
+    .pop()!
+    .replace(/(구|시|군|동|읍|면)$/, '');
   const base: FacilityItem[] = [
-    { name: `${item.name.replace(/동$/, '')}역`, type: '교통', icon: '●', time: '도보 8분' },
+    { name: `${placeBase} 일대 지하철역`, type: '교통', icon: '●', time: '도보 8분' },
     { name: `${item.district} 중심상권`, type: '편의시설', icon: '■', time: '차량 5분' },
-    { name: `${item.name.replace(/동$/, '')}공원`, type: '자연', icon: '▲', time: '도보 6분' },
+    { name: `${placeBase} 근린공원`, type: '자연', icon: '▲', time: '도보 6분' },
     { name: `${item.district} 생활권 학교`, type: '학교', icon: '▣', time: '도보 10분' },
     { name: `${item.district} 의료 인프라`, type: '의료', icon: '✚', time: '차량 7분' },
   ];
