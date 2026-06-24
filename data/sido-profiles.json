@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "description": "시도별 오행·지형·분위기 프로파일 (14개 시도)",
+    "version": "1.0.0"
+  },
+  "profiles": {
+    "서울": {
+      "label": "서울특별시",
+      "ohang": ["火", "木"],
+      "terrain": "flatland",
+      "vibe": "lively",
+      "keywords": ["번화가", "문화", "교통 허브"],
+      "trait": "에너지 넘치는 도심, 木·火 기운이 강한 상업 중심지",
+      "lat": 37.5665,
+      "lng": 126.9784
+    },
+    "경기": {
+      "label": "경기도",
+      "ohang": ["木", "土"],
+      "terrain": "flatland",
+      "vibe": "balanced",
+      "keywords": ["신도시", "자연", "베드타운"],
+      "trait": "서울 주변의 넓은 평야와 녹지, 木·土 기운의 안정적 생활권",
+      "lat": 37.4138,
+      "lng": 127.5183
+    },
+    "인천": {
+      "label": "인천광역시",
+      "ohang": ["水", "金"],
+      "terrain": "waterfront",
+      "vibe": "balanced",
+      "keywords": ["항구", "바다", "국제도시"],
+      "trait": "서해안 항구도시, 水·金 기운이 감도는 국제 무역 중심지",
+      "lat": 37.4563,
+      "lng": 126.7052
+    },
+    "부산": {
+      "label": "부산광역시",
+      "ohang": ["水", "火"],
+      "terrain": "waterfront",
+      "vibe": "lively",
+      "keywords": ["해변", "항구", "활력"],
+      "trait": "산과 바다가 어우러진 항구도시, 水·火 기운의 역동적 생활권",
+      "lat": 35.1796,
+      "lng": 129.0756
+    },
+    "대구": {
+      "label": "대구광역시",
+      "ohang": ["火", "土"],
+      "terrain": "flatland",
+      "vibe": "lively",
+      "keywords": ["분지", "상권", "패션"],
+      "trait": "분지 지형의 활기찬 상업도시, 火·土 기운의 강한 생활력",
+      "lat": 35.8714,
+      "lng": 128.6014
+    },
+    "광주": {
+      "label": "광주광역시",
+      "ohang": ["木", "火"],
+      "terrain": "flatland",
+      "vibe": "balanced",
+      "keywords": ["문화", "예술", "민주"],
+      "trait": "예향의 도시, 木·火 기운의 문화·예술 중심지",
+      "lat": 35.1595,
+      "lng": 126.8526
+    },
+    "대전": {
+      "label": "대전광역시",
+      "ohang": ["土", "金"],
+      "terrain": "flatland",
+      "vibe": "balanced",
+      "keywords": ["과학", "교통", "중심"],
+      "trait": "한반도 중심부의 과학도시, 土·金 기운의 안정적 거점",
+      "lat": 36.3504,
+      "lng": 127.3845
+    },
+    "울산": {
+      "label": "울산광역시",
+      "ohang": ["金", "水"],
+      "terrain": "waterfront",
+      "vibe": "lively",
+      "keywords": ["산업", "해안", "중공업"],
+      "trait": "동해안 산업도시, 金·水 기운의 강한 생산력",
+      "lat": 35.5384,
+      "lng": 129.3114
+    },
+    "강원": {
+      "label": "강원특별자치도",
+      "ohang": ["木", "水"],
+      "terrain": "highland",
+      "vibe": "quiet",
+      "keywords": ["산", "청정", "자연"],
+      "trait": "태백산맥의 청정 자연, 木·水 기운의 힐링 명소",
+      "lat": 37.8228,
+      "lng": 128.1555
+    },
+    "전남": {
+      "label": "전라남도",
+      "ohang": ["水", "木"],
+      "terrain": "waterfront",
+      "vibe": "quiet",
+      "keywords": ["남해", "섬", "갯벌"],
+      "trait": "남해안의 풍요로운 바다, 水·木 기운의 자연 친화 생활권",
+      "lat": 34.8679,
+      "lng": 126.9910
+    },
+    "전북": {
+      "label": "전북특별자치도",
+      "ohang": ["土", "木"],
+      "terrain": "flatland",
+      "vibe": "balanced",
+      "keywords": ["평야", "농업", "전통"],
+      "trait": "호남 평야의 풍요, 土·木 기운의 전통 농경 문화",
+      "lat": 35.7175,
+      "lng": 127.1530
+    },
+    "경남": {
+      "label": "경상남도",
+      "ohang": ["金", "木"],
+      "terrain": "highland",
+      "vibe": "balanced",
+      "keywords": ["남해", "산업", "전통"],
+      "trait": "남해안과 내륙 산지의 조화, 金·木 기운의 전통 생활권",
+      "lat": 35.4606,
+      "lng": 128.2132
+    },
+    "경북": {
+      "label": "경상북도",
+      "ohang": ["土", "金"],
+      "terrain": "highland",
+      "vibe": "quiet",
+      "keywords": ["안동", "전통", "산지"],
+      "trait": "유교 문화의 본향, 土·金 기운의 전통과 격식",
+      "lat": 36.4919,
+      "lng": 128.8889
+    },
+    "제주": {
+      "label": "제주특별자치도",
+      "ohang": ["水", "木"],
+      "terrain": "waterfront",
+      "vibe": "quiet",
+      "keywords": ["섬", "화산", "청정"],
+      "trait": "화산섬의 청정 자연, 水·木 기운이 넘치는 힐링 성지",
+      "lat": 33.4996,
+      "lng": 126.5312
+    }
+  }
+}

@@ -30,7 +30,7 @@ export default function PlaceDetailPage() {
       <div className={styles.referenceScreen}>
         <section className={styles.referenceHeaderBlock}>
           <div>
-            <h2 className={styles.referenceTitle}>{selected.name} 상세 리포트</h2>
+            <h2 className={styles.referenceTitle}>{selected.fullLabel}</h2>
             <p className={styles.referenceSubtitle}>내 사주와 가장 잘 맞는 지역이에요.</p>
           </div>
           <span className={styles.referenceSpark}>✧</span>
@@ -40,6 +40,13 @@ export default function PlaceDetailPage() {
           <span>적합도</span>
           <strong>{selected.suitability}%</strong>
         </section>
+
+        {selected.sidoTrait ? (
+          <section className={styles.referenceInlineSummary}>
+            <strong>{selected.sidoLabel}</strong>
+            <p>{selected.sidoTrait}</p>
+          </section>
+        ) : null}
 
         <section className={styles.referenceMapShell}>
           <div className={styles.referenceMapCanvas}>
